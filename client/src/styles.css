@@ -1,0 +1,35 @@
+#app {
+  border: 1px solid black;
+  display: inline-grid;
+  grid-template-columns: auto;
+  /* grid-template-columns: 12em 1fr; <-- can set how each line behaves separately */
+  grid-template-rows: auto;
+  padding: .15em;
+  width: 90%;
+}
+/* nav {
+  display: inline;
+  padding: .15em;
+}
+#search-bar {
+  float: right;
+}
+#product-images{
+  grid-area: image;
+}
+
+#details{
+  grid-area: sidebar;
+}
+
+#description {
+  grid-area: footer;
+}
+#product-overview {
+  display: grid;
+  grid-template-columns: 5% 45% 50%;
+  grid-template-rows: auto;
+  grid-template-areas:
+  "image image sidebar "
+  ". footer footer "
+} */
