@@ -5,17 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-<<<<<<< HEAD
     "build": "webpack --watch",
     "postinstall": "curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install | bash"
-=======
-<<<<<<< HEAD
     "react-dev": "webpack --mode development --watch",
-    "start": "nodemon"
-=======
+    "start": "nodemon",
     "build": "webpack --watch"
->>>>>>> f7e4b2758dd45158cf873aa0a66ceb0b90642754
->>>>>>> main
   },
   "repository": {
     "type": "git",
