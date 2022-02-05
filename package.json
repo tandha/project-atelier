@@ -5,12 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-<<<<<<< HEAD
     "react-dev": "webpack --mode development --watch",
-    "start": "nodemon"
-=======
+    "start": "nodemon",
     "build": "webpack --watch"
->>>>>>> f7e4b2758dd45158cf873aa0a66ceb0b90642754
   },
   "repository": {
     "type": "git",
