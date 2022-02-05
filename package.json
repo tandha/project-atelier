@@ -4,7 +4,8 @@
   "description": "FEC project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --watch"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,14 @@
   "bugs": {
     "url": "https://github.com/rpp33-fec-yellow/project-atelier/issues"
   },
-  "homepage": "https://github.com/rpp33-fec-yellow/project-atelier#readme"
+  "homepage": "https://github.com/rpp33-fec-yellow/project-atelier#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.17.0",
+    "@babel/core": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "babel-loader": "^8.2.3",
+    "webpack": "^5.68.0",
+    "webpack-cli": "^4.9.2"
+  }
 }
