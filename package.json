@@ -5,8 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+<<<<<<< HEAD
     "react-dev": "webpack --mode development --watch",
     "start": "nodemon"
+=======
+    "build": "webpack --watch"
+>>>>>>> f7e4b2758dd45158cf873aa0a66ceb0b90642754
   },
   "repository": {
     "type": "git",
@@ -28,5 +32,14 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "webpack": "^5.68.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.17.0",
+    "@babel/core": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "babel-loader": "^8.2.3",
+    "webpack": "^5.68.0",
+    "webpack-cli": "^4.9.2"
   }
 }
