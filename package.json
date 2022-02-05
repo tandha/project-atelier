@@ -5,7 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+<<<<<<< HEAD
+    "react-dev": "webpack --mode development --watch",
+    "start": "nodemon"
+=======
     "build": "webpack --watch"
+>>>>>>> f7e4b2758dd45158cf873aa0a66ceb0b90642754
   },
   "repository": {
     "type": "git",
@@ -17,6 +22,17 @@
     "url": "https://github.com/rpp33-fec-yellow/project-atelier/issues"
   },
   "homepage": "https://github.com/rpp33-fec-yellow/project-atelier#readme",
+  "dependencies": {
+    "axios": "^0.25.0",
+    "body-parser": "^1.19.1",
+    "express": "^4.17.2",
+    "jest": "^27.4.7",
+    "nodemon": "^2.0.15",
+    "path": "^0.12.7",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "webpack": "^5.68.0"
+  },
   "devDependencies": {
     "@babel/cli": "^7.17.0",
     "@babel/core": "^7.17.0",

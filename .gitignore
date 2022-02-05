@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+node_modules/
+=======
 ### node etc ###
 
 # Logs
@@ -38,3 +41,4 @@ config.js
 .floobit
 .floo
 .flooignore
+>>>>>>> f7e4b2758dd45158cf873aa0a66ceb0b90642754
