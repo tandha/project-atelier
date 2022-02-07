@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-node_modules/
-=======
 ### node etc ###
 
 # Logs
@@ -32,13 +29,14 @@ build/
 node_modules/
 bower_components/
 bundle.js
+bundle.js.map
 bundle.js.LICENSE.txt
 config.js
 .DS_Store
+.vscode
 
 # Floobits
 .floo
 .floobit
 .floo
 .flooignore
->>>>>>> f7e4b2758dd45158cf873aa0a66ceb0b90642754

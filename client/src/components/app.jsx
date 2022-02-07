@@ -8,11 +8,11 @@ import RelatedItemsOutfitCreation from '../components/related_items_outfit_creat
 
 class App extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
 
-    }
+    };
   }
 
 
@@ -20,6 +20,8 @@ class App extends React.Component {
 
 
   render() {
-
+    return <div></div>;
   }
 }
+
+export default App;
