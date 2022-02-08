@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "jest example.test.js",
+    "build": "webpack --watch",
+    "postinstall": "curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install | bash",
     "react-dev": "webpack --mode development --watch",
-    "start": "nodemon",
-    "build": "webpack --watch"
+    "start": "nodemon"
   },
   "repository": {
     "type": "git",
@@ -36,6 +37,7 @@
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "babel-loader": "^8.2.3",
+    "eslint": "^8.8.0",
     "webpack": "^5.68.0",
     "webpack-cli": "^4.9.2"
   }
