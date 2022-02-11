@@ -5,7 +5,6 @@ import ProductOverview from './product_overview/overview.jsx';
 import QuestionsAndAnswers from './questions_and_answers/q&a.jsx';
 import RatingsAndReviews from './ratings_and_reviews/ratings&reviews.jsx';
 import RelatedItemsOutfitCreation from './related_items_outfit_creation/related_items&outfit.jsx';
-import StarRating from './star-rating.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -17,14 +16,11 @@ class App extends React.Component {
   }
 
 
-
-
-
   render() {
     return (
       <div>
-        <ProductOverview starRating={<StarRating />}/>
-        <RatingsAndReviews starRating={<StarRating />}/>
+        <ProductOverview />
+        <RatingsAndReviews />
       </div>
     );
   }
