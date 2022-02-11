@@ -7,12 +7,17 @@ class RatingsAndReview extends React.Component {
     super(props);
 
     this.state = {};
+  }
 
-    this.starRatingComponent = this.props.starRating;
+  componentDidMount() {
+    let dummyRating = 3.5;
+    this.props.updateStarRating(3.5);
   }
 
   render() {
-    return ( <div></div> );
+    return (
+      <div>{this.props.starRating}</div>
+    );
   }
 }
 

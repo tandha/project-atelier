@@ -12,19 +12,22 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-
+      starRating: 0
     };
   }
 
-
-
-
+  updateStarRating(rating) {
+    this.setState({ starRating: rating });
+  }
 
   render() {
     return (
       <div>
-        <ProductOverview starRating={<StarRating />}/>
-        <RatingsAndReviews starRating={<StarRating />}/>
+        <ProductOverview starRating={this.state.starRating}/>
+
+        <RatingsAndReviews
+          starRating={this.state.starRating}
+          updateStarRating={this.updateStarRating.bind(this)}/>
       </div>
     );
   }
