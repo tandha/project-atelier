@@ -4,7 +4,8 @@
   "description": "FEC project",
   "main": "index.js",
   "scripts": {
-    "test": "jest example.test.js",
+    "test": "jest test.js --env=jsdom",
+    "overview-test": "jest client/src/components/product_overview/test/test.js --env=jsdom",
     "build": "webpack --watch",
     "postinstall": "curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install | bash",
     "react-dev": "webpack --mode development --watch",
@@ -36,6 +37,8 @@
     "@babel/core": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
+    "@testing-library/react": "^12.1.2",
+    "babel-jest": "^27.5.1",
     "babel-loader": "^8.2.3",
     "eslint": "^8.8.0",
     "webpack": "^5.68.0",
