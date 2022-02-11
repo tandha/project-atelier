@@ -1,12 +1,16 @@
 import React from 'react';
 import axios from 'axios';
+import Breakdown from './rating-breakdown/breakdown.jsx';
+import List from './reviews-list/list.jsx';
 
 class RatingsAndReview extends React.Component {
 
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      currentFilter: 'all'
+    };
   }
 
   componentDidMount() {
@@ -14,9 +18,18 @@ class RatingsAndReview extends React.Component {
     this.props.updateStarRating(3.5);
   }
 
+  updateFilter(filter) {
+    this.setState({ currentFilter: filter });
+  }
+
   render() {
     return (
-      <div>{this.props.starRating}</div>
+      <div id="ratings-and-reviews">
+        <Breakdown
+          starRating={this.props.starRating}
+          updateFilter={this.updateFilter.bind(this)}/>
+        <List />
+      </div>
     );
   }
 }
