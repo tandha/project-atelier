@@ -25,6 +25,7 @@ class App extends React.Component {
       <div>
         <ProductOverview starRating={<StarRating />}/>
         <RatingsAndReviews starRating={<StarRating />}/>
+        <QuestionsAndAnswers/>
       </div>
     );
   }
