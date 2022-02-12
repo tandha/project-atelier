@@ -55,6 +55,10 @@ class App extends React.Component {
     });
   }
 
+  updateStarRating(rating) {
+    this.setState({ starRating: rating });
+  }
+
   render() {
     return (
       <div>
