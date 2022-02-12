@@ -20,13 +20,13 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getProducts();
+    this.getProduct();
     this.getStyles();
     this.addToMyOutfit('1');
     this.removeFromMyOutfit('1');
   }
 
-  getProducts() {
+  getProduct() {
     this.setState({
       product: product
     });
