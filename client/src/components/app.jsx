@@ -14,7 +14,8 @@ class App extends React.Component {
     this.state = {
       product: {},
       styles: {},
-      myOutfits: []
+      myOutfits: [],
+      starRating: 0
     };
   }
 
@@ -57,8 +58,11 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <ProductOverview />
-        <RatingsAndReviews />
+        <ProductOverview starRating={this.state.starRating}/>
+
+        <RatingsAndReviews
+          starRating={this.state.starRating}
+          updateStarRating={this.updateStarRating.bind(this)}/>
       </div>
     );
   }
