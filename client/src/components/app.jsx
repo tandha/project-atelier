@@ -22,8 +22,8 @@ class App extends React.Component {
   componentDidMount() {
     this.getProduct();
     this.getStyles();
-    this.addToMyOutfit('1');
-    this.removeFromMyOutfit('1');
+    this.addToMyOutfit();
+    this.removeFromMyOutfit();
   }
 
   getProduct() {
@@ -39,19 +39,19 @@ class App extends React.Component {
   }
 
   addToMyOutfit(id) {
+    let myOutfits = this.state.myOutfits;
+    myOutfits.push(id);
     this.setState({
-      myOutfits: this.state.myOutfits.push(id)
+      myOutfits: myOutfits
     });
   }
 
   removeFromMyOutfit(id) {
     let index = this.state.myOutfits.indexOf(id);
-    let copy = this.state.myOutfits;
-    copy.splice(index, 1);
+    let myOutfits = this.state.myOutfits;
+    myOutfits.splice(index, 1);
     this.setState({
-      myOutfits: copy
-    }, () => {
-      console.log(this.state.myOutfits);
+      myOutfits: myOutfits
     });
   }
 
