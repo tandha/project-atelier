@@ -2,6 +2,7 @@ import React from 'react';
 import ImageCarousel from './imagesCarousel.jsx';
 import Information from './information.jsx';
 import StyleSelector from './styleSelector.jsx';
+import Cart from './cart.jsx';
 
 class ProductOverview extends React.Component {
   constructor(props) {
@@ -28,6 +29,7 @@ class ProductOverview extends React.Component {
         <ImageCarousel photos={this.state.selectedStyle.photos}/>
         <Information product={this.props.product} selectedStyle={this.state.selectedStyle} starRating={this.props.starRating}/>
         <StyleSelector changeStyle={this.changeSelectedStyle.bind(this)} name={this.state.selectedStyle.name} styles={this.props.styles}/>
+        <Cart addToMyOutfit={this.props.addToMyOutfit} sku={this.state.selectedStyle.sku}/>
       </div>
     );
   }
