@@ -1,5 +1,5 @@
 import React from 'react';
-import Thumbnails from './thumbnails.jsx';
+import Thumbnails from './imageThumbnails.jsx';
 
 class ImageCarousel extends React.Component {
   constructor(props) {

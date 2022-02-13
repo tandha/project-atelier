@@ -1,5 +1,5 @@
 import React from 'react';
-import Thumbnail from './thumbnail.jsx';
+import Thumbnail from './imageThumbnail.jsx';
 
 const Thumbnails = (props) => {
   return (
