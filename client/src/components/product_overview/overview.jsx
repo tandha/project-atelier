@@ -8,7 +8,7 @@ class ProductOverview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedStyle: this.props.styles.results[0]
+      selectedStyle: this.props.styles.results[0],
     };
   }
 
@@ -29,7 +29,7 @@ class ProductOverview extends React.Component {
         <ImageCarousel photos={this.state.selectedStyle.photos}/>
         <Information product={this.props.product} selectedStyle={this.state.selectedStyle} starRating={this.props.starRating}/>
         <StyleSelector changeStyle={this.changeSelectedStyle.bind(this)} name={this.state.selectedStyle.name} styles={this.props.styles}/>
-        <Cart addToMyOutfit={this.props.addToMyOutfit} skus={this.state.selectedStyle.skus}/>
+        <Cart addToMyOutfit={this.props.addToMyOutfit} selectedStyle={this.state.selectedStyle}/>
       </div>
     );
   }

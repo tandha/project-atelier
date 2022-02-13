@@ -1,27 +1,11 @@
 import React from 'react';
 import Option from './option.jsx';
 
-//Data Shape selectedStyle
-//   'skus': {
-//     '37': {
-//       'quantity': 8,
-//       'size': 'XS'
-//     },
-//     '38': {
-//       'quantity': 16,
-//       'size': 'S'
-//     },
-//     '39': {
-//       'quantity': 17,
-//       'size': 'M'
-//     },
-//   }
-// }
-
 class Cart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      selectedStyle: this.props.selectedStyle,
       availableSizes: [],
       availableQuantities: [],
       selectedSize: 'tbd',
@@ -33,20 +17,29 @@ class Cart extends React.Component {
     this.initializeSizes();
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.selectedStyle !== this.props.selectedStyle) {
+      this.initializeSizes();
+    }
+  }
+
   initializeSizes() {
+    let skus = this.props.selectedStyle.skus;
     let sizes = [];
     let quantities = [];
-    for (let key in this.props.skus) {
-      sizes.push(this.props.skus[key].size);
+    for (let key in skus) {
+      sizes.push(skus[key].size);
     }
     this.setState({ availableSizes: sizes } );
+    return sizes;
   }
 
   determineQuantity() {
+    let skus = this.props.selectedStyle.skus;
     let quantities = [];
-    for (let key in this.props.skus) {
-      if (this.props.skus[key].size === this.state.selectedSize) {
-        for (var i = 0; i <= this.props.skus[key].quantity; i++) {
+    for (let key in skus) {
+      if (skus[key].size === this.state.selectedSize) {
+        for (var i = 1; i <= skus[key].quantity; i++) {
           if (i > 15) {
             return this.initializeQuantities(quantities);
           }
@@ -89,7 +82,7 @@ class Cart extends React.Component {
             <option>Select Size</option>
             {
               this.state.availableSizes.map((size) => {
-                return <Option option={size}/>;
+                return <Option key={size} option={size}/>;
               })
             }
           </select>
@@ -97,7 +90,7 @@ class Cart extends React.Component {
             <option>-</option>
             {
               this.state.availableQuantities.map((qty) => {
-                return <Option option={qty}/>;
+                return <Option key={qty} option={qty}/>;
               })
             }
           </select>

@@ -1,5 +1,5 @@
 import React from 'react';
-import Feature from './feature.jsx';
+import Feature from './featureInformation.jsx';
 
 const Information = (props) => {
   return (
@@ -11,8 +11,6 @@ const Information = (props) => {
       <Feature features={props.product.features}/>
       <div id='original-price'>{props.selectedStyle.original_price}</div>
       <div id='sale-price'>{props.selectedStyle.sale_price}</div>
-
-
     </div>
   );
 };

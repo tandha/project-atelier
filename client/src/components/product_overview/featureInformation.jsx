@@ -5,7 +5,7 @@ const Feature = (props) => {
     <div>
       {props.features.map((feature, i) => {
         let id = 'feature-' + i;
-        return <div id={id} className='features'>{feature.feature}: {feature.value}</div>;
+        return <div key={id} id={id} className='features'>{feature.feature}: {feature.value}</div>;
       })}
     </div>
   );

@@ -78,16 +78,16 @@ module.exports = {
         ],
         'skus': {
           '40': {
-            'quantity': 8,
-            'size': 'XS'
+            'quantity': 4,
+            'size': 'S'
           },
           '41': {
-            'quantity': 16,
-            'size': 'S'
+            'quantity': 9,
+            'size': 'M'
           },
           '42': {
             'quantity': 17,
-            'size': 'M'
+            'size': 'L'
           },
         }
       }
