@@ -29,7 +29,7 @@ module.exports = {
         'photos': [
           {
             'thumbnail_url': 'https://i.ibb.co/XYsPZKR/image-b209c84a-736d-44e8-9e90-a11923094bef-110x110-2x.jpg',
-            'url': 'https://cdn.shopify.com/s/files/1/2325/0327/products/image_b209c84a-736d-44e8-9e90-a11923094bef_1024x1024@2x.jpg?v=1623509962'
+            'url': 'https://cdn.shopify.com/s/files/1/2325/0327/products/image_b209c84a-736d-44e8-9e90-a11923094bef_110x110@2x.jpg?v=1623509962'
           },
           {
             'thumbnail_url': 'https://i.ibb.co/kq7wjYq/image-209a9c7e-bdac-484b-8965-5aaf99d27cfb-110x110-2x.jpg',
