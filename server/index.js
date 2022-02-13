@@ -21,12 +21,12 @@ app.all('/*', (req, res) => {
     method: req.method,
     data: req.body
   })
-    .then((response) => {
-      res.send(response.data);
+    .then((apiResponse) => {
+      res.send(apiResponse.data);
     })
     .catch((err) => {
       console.log(err);
-      res.status(500);
+      res.status(500).send('Something broke!');
     });
 });
 

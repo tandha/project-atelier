@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import Breakdown from './rating-breakdown/breakdown.jsx';
 import List from './reviews-list/list.jsx';
-const url = 'http://127.0.0.1:3000';
 
 class RatingsAndReview extends React.Component {
 
@@ -20,7 +19,8 @@ class RatingsAndReview extends React.Component {
 
     axios({
       method: 'get',
-      url: `${url}/reviews`,
+      baseURL: 'http://127.0.0.1:3000',
+      url: '/reviews',
       params: {
         'page': 1,
         'count': 100000,
