@@ -22,32 +22,51 @@ class Cart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      availableSizes: ['small', 'medium', 'large'],
-      quantity: [1, 2, 3, 4, 5],
-      selectedSize: '',
-      selectedQuantity: 0
+      availableSizes: [],
+      availableQuantities: [],
+      selectedSize: 'tbd',
+      selectedQuantity: 'tbd'
     };
   }
 
-  generateSizeOptions() {
-    //TODO: Pulls the sizes available from the selectedStyle's sku objects
+  componentDidMount() {
+    this.initializeSizes();
   }
 
-  renderSizes() {
-    //TODO: Renders the sizes from this.state.availableSizes as the options to 'select-size'
+  initializeSizes() {
+    let sizes = [];
+    let quantities = [];
+    for (let key in this.props.skus) {
+      sizes.push(this.props.skus[key].size);
+    }
+    this.setState({ availableSizes: sizes } );
+  }
+
+  determineQuantity() {
+    let quantities = [];
+    for (let key in this.props.skus) {
+      if (this.props.skus[key].size === this.state.selectedSize) {
+        for (var i = 0; i <= this.props.skus[key].quantity; i++) {
+          if (i > 15) {
+            return this.initializeQuantities(quantities);
+          }
+          quantities.push(i);
+        }
+      }
+    }
+    this.initializeQuantities(quantities);
+  }
+
+  initializeQuantities(quantities) {
+    this.setState({ availableQuantities: quantities} );
   }
 
   setSizeSelection(e) {
     let selectedSize = e.target.value;
-    this.setState( {selectedSize} );
-  }
-
-  determineQuantity() {
-    //TODO: Pulls the quantity available given the selected Size and adds each number to this.state.quantity
-  }
-
-  renderQuantity() {
-    //TODO: Renders the quantity options from this.state.quantity (up to 15)
+    this.setState( {selectedSize}, () => {
+      //Once a size has been selected quantity can be generated
+      this.determineQuantity();
+    } );
   }
 
   setQuantitySelection(e) {
@@ -56,13 +75,11 @@ class Cart extends React.Component {
   }
 
   addToCart(e) {
+    //TODO: POST the selected size (but not quantity?) to the API
     e.preventDefault();
     console.log('size', this.state.selectedSize, 'qty', this.state.selectedQuantity);
-    //TODO: POST the selected size (but not quantity?) to the API
   }
 
-  //TODO: Dynamically render the options for available sizes
-  //TODO: Dynamically render the options for quantity (up to 15)
   //TODO: Reset form values after submit button
   render() {
     return (
@@ -79,7 +96,7 @@ class Cart extends React.Component {
           <select onChange={this.setQuantitySelection.bind(this)}id='select-quantity'>
             <option>-</option>
             {
-              this.state.quantity.map((qty) => {
+              this.state.availableQuantities.map((qty) => {
                 return <Option option={qty}/>;
               })
             }
