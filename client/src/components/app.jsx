@@ -36,18 +36,14 @@ class App extends React.Component {
   addToMyOutfit(id) {
     let myOutfits = this.state.myOutfits;
     myOutfits.push(id);
-    this.setState({
-      myOutfits: myOutfits
-    });
+    this.setState({ myOutfits: myOutfits });
   }
 
   removeFromMyOutfit(id) {
     let index = this.state.myOutfits.indexOf(id);
     let myOutfits = this.state.myOutfits;
     myOutfits.splice(index, 1);
-    this.setState({
-      myOutfits: myOutfits
-    });
+    this.setState({ myOutfits: myOutfits });
   }
 
   updateStarRating(rating) {

@@ -14,7 +14,7 @@ class ProductOverview extends React.Component {
     return (
       <div>
         <ImageCarousel photos={this.state.selectedStyle.photos}/>
-        <Information product={this.props.product} selectedStyle={this.state.selectedStyle}/>
+        <Information product={this.props.product} selectedStyle={this.state.selectedStyle} starRating={this.props.starRating}/>
       </div>
     );
   }
