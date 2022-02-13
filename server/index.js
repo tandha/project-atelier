@@ -22,7 +22,10 @@ app.all('/*', (req, res) => {
     data: req.body
   })
     .then((apiResponse) => {
-      res.send(apiResponse.data);
+      res.send({
+        data: apiResponse.data,
+        status: apiResponse.status
+      });
     })
     .catch((err) => {
       console.log(err);
