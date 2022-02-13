@@ -53,7 +53,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <ProductOverview product={this.state.product} styles={this.state.styles} starRating={this.state.starRating}/>
+        <ProductOverview product={this.state.product} styles={this.state.styles} starRating={this.state.starRating} addToMyOutfit={this.addToMyOutfit.bind(this)}/>
 
         <RatingsAndReviews
           starRating={this.state.starRating}
