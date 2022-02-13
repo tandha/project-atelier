@@ -1,19 +1,19 @@
 module.exports = {
   product: {
     'id': 1,
-    'name': 'Air Minis 250',
-    'slogan': 'Full court support',
-    'description': 'This optimized air cushion pocket reduces impact but keeps a perfect balance underfoot.',
-    'category': 'Basketball Shoes',
+    'name': 'Kai Onesie',
+    'slogan': 'Bring a bit of aloha with you wherever you go!',
+    'description': 'Made from a blend of Bamboo Viscose and Spandex, this buttery soft onesie is both comfortable and adorable, quickly becoming a family\'s favorite outfit for baby.',
+    'category': 'Baby Clothes',
     'default_price': '0',
     'features': [
       {
-        'feature': 'Sole',
-        'value': 'Rubber'
+        'feature': 'Fabric',
+        'value': '90% Viscose from bamboo, 10% spandex'
       },
       {
-        'feature': 'Material',
-        'value': 'FullControlSkin'
+        'feature': 'Care',
+        'value': 'Machine wash cold (without bleach), tumble dry on low heat'
       },
     ],
   },
@@ -22,8 +22,8 @@ module.exports = {
     'results': [
       {
         'style_id': 1,
-        'name': 'Forest Green & Black',
-        'original_price': '140',
+        'name': 'Blue Camo Onsie',
+        'original_price': '14.99',
         'sale_price': '0',
         'default?': true,
         'photos': [
@@ -57,31 +57,35 @@ module.exports = {
       },
       {
         'style_id': 2,
-        'name': 'Forest Green & Black',
-        'original_price': '140',
+        'name': 'Aloha Onsie',
+        'original_price': '15.99',
         'sale_price': '0',
-        'default?': true,
+        'default?': false,
         'photos': [
           {
-            'thumbnail_url': 'https://i.ibb.co/gFmRxrQ/camo-two-thumbnail-copy.jpg',
-            'url': 'https://oldnavy.gap.com/webcontent/0019/968/946/cn19968946.jpg'
+            'thumbnail_url': 'https://i.ibb.co/XWHywmt/IMG-6166-110x110-2x.jpg',
+            'url': 'https://cdn.shopify.com/s/files/1/2325/0327/products/IMG_6166_110x110@2x.jpg?v=1595912812'
           },
           {
-            'thumbnail_url': 'https://i.ibb.co/gFmRxrQ/camo-two-thumbnail-copy.jpg',
-            'url': 'https://oldnavy.gap.com/webcontent/0019/968/946/cn19968946.jpg'
+            'thumbnail_url': 'https://i.ibb.co/0DwJhVz/Aloha-Onesie1-110x110-2x.jpg',
+            'url': 'https://cdn.shopify.com/s/files/1/2325/0327/products/AlohaOnesie1_110x110@2x.jpg?v=1595912806'
+          },
+          {
+            'thumbnail_url': 'https://i.ibb.co/0DwJhVz/Aloha-Onesie1-110x110-2x.jpg',
+            'url': 'https://cdn.shopify.com/s/files/1/2325/0327/products/IMG_6164_110x110@2x.jpg?v=1595912812'
           }
 
         ],
         'skus': {
-          '37': {
+          '40': {
             'quantity': 8,
             'size': 'XS'
           },
-          '38': {
+          '41': {
             'quantity': 16,
             'size': 'S'
           },
-          '39': {
+          '42': {
             'quantity': 17,
             'size': 'M'
           },
