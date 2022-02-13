@@ -8,7 +8,7 @@
     "build": "webpack --watch",
     "postinstall": "curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install | bash",
     "react-dev": "webpack --mode development --watch",
-    "start": "nodemon"
+    "start": "nodemon server/index.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
   "dependencies": {
     "axios": "^0.25.0",
     "body-parser": "^1.19.1",
+    "cors": "^2.8.5",
     "express": "^4.17.2",
     "jest": "^27.5.0",
     "nodemon": "^2.0.15",
