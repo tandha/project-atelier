@@ -22,7 +22,7 @@ module.exports = {
     'results': [
       {
         'style_id': 1,
-        'name': 'Blue Camo Onsie',
+        'name': 'Blue Camo',
         'original_price': '14.99',
         'sale_price': '0',
         'default?': true,
@@ -57,7 +57,7 @@ module.exports = {
       },
       {
         'style_id': 2,
-        'name': 'Aloha Onsie',
+        'name': 'Aloha',
         'original_price': '15.99',
         'sale_price': '0',
         'default?': false,
