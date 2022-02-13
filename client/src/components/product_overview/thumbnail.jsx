@@ -1,11 +1,9 @@
 import React from 'react';
-import Thumbnails from './Thumbnails.jsx';
 
 const Thumbnail = (props) => {
-
   return (
     <div>
-      <img onClick={props.changePhoto.bind(this)} src={props.thumbnail} id={props.i}></img>
+      <img src={props.thumbnail} onClick={props.changePhoto.bind(this)} id={props.i}></img>
     </div>
   );
 };

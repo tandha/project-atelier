@@ -1,19 +1,13 @@
 import React from 'react';
-import ImageCarousel from './ImageCarousel.jsx';
+import ImageCarousel from './imagesCarousel.jsx';
 import Information from './information.jsx';
 
 class ProductOverview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedStyle: {}
-    };
-  }
-
-  componentDidMount() {
-    this.setState({
       selectedStyle: this.props.styles.results[0]
-    });
+    };
   }
 
   render() {

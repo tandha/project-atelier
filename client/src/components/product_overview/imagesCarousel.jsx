@@ -1,5 +1,5 @@
 import React from 'react';
-import Thumbnails from './thumbnail.jsx';
+import Thumbnails from './thumbnails.jsx';
 
 class ImageCarousel extends React.Component {
   constructor(props) {
@@ -9,15 +9,18 @@ class ImageCarousel extends React.Component {
     };
   }
 
-  changeSelectedPhoto() {
-
+  changeSelectedPhoto(e) {
+    let index = e.target.id;
+    this.setState({
+      mainPhotoIndex: index
+    });
   }
 
   render() {
     return (
       <div>
         <img src={this.props.photos[this.state.mainPhotoIndex].url}></img>
-        <Thumbnails photos={this.props.photos} changePhoto={this.changeSelectedPhotot.bind(this)}/>
+        <Thumbnails photos={this.props.photos} mainIndex={this.state.mainPhotoIndex} changePhoto={this.changeSelectedPhoto.bind(this)}/>
       </div>
     );
   }
