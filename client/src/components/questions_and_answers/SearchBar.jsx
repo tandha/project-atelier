@@ -12,6 +12,6 @@ export default SearchBar;
 
 var myStyles = {
   height: '50px',
-  display: 'inline - grid',
-  width: '90%'
+  display: 'grid',
+  width: '90%',
 };

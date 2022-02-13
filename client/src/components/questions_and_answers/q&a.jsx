@@ -10,7 +10,8 @@ class QuestionsAndAnswers extends React.Component {
 
     this.state = {
       questions: exampleQuestions.results, // an array
-      displayQuestions: []
+      searching: false,
+      searchedQuestions: []
     };
     this.getProductQuestions = this.getProductQuestions.bind(this);
     this.handleSearchBar = this.handleSearchBar.bind(this);
@@ -29,7 +30,7 @@ class QuestionsAndAnswers extends React.Component {
     if (e.target.value.length > 2) {
       this.setState({
         searching: true,
-        displayQuestions: this.handleSearchQuestions(e.target.value)
+        searchedQuestions: this.handleSearchQuestions(e.target.value)
       });
     } else {
       this.setState({ searching: false});
@@ -48,13 +49,23 @@ class QuestionsAndAnswers extends React.Component {
   render() {
     return (
       <div>
+        <b>QUESTIONS & ANSWERS</b>
         <SearchBar handleSearchBar={this.handleSearchBar}/>
-        <QuestionList questions={this.state.questions}/>
-        <button> MORE ANSWERED QUESTIONS </button>
-        <button> ADD A QUESTION + </button>
+        <QuestionList questions={this.state.questions} searching={this.state.searching} searchedQuestions={this.state.searchedQuestions}/>
+        <button style={myStyles}> MORE ANSWERED QUESTIONS </button>
+        <button style={myStyles}> ADD A QUESTION + </button>
       </div>
     );
   }
 }
 
 export default QuestionsAndAnswers;
+
+var myStyles = {
+  background: 'none',
+  height: '50px',
+  color: 'grey',
+  border: '2px solid grey',
+  fontWeight: 'bold',
+  'margin-right': '10px',
+};

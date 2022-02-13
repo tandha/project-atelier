@@ -9,16 +9,19 @@ class QuestionList extends React.Component {
     };
   }
 
-
-
   render() {
+    let displayList = this.props.questions.slice(0, 2);
+    if (this.props.searching) {
+      displayList = this.props.searchedQuestions.slice(0, 2);
+    }
+
     return (
       <div>
-        {this.props.questions.map((question) => (
-          <Question question={question} key={question.question_id}/>
+        {displayList.map((question) => (
+          <Question question={question} answers={question.answers} key={question.question_id}/>
         ))}
-        <div>
-          <button> LOAD MORE ANSWERS </button>
+        <div style={buttonStyle}>
+          <b>LOAD MORE ANSWERS</b>
         </div>
       </div>
     );
@@ -26,3 +29,9 @@ class QuestionList extends React.Component {
 }
 
 export default QuestionList;
+
+var buttonStyle = {
+  fontSize: '12px',
+  display: 'grid',
+  margin: '10px 0px'
+};
