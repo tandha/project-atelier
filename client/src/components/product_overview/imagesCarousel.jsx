@@ -12,7 +12,7 @@ class ImageCarousel extends React.Component {
   changeSelectedPhoto(e) {
     let index = e.target.id;
     this.setState({
-      mainPhotoIndex: index
+      mainPhotoIndex: Number(index)
     });
   }
 
