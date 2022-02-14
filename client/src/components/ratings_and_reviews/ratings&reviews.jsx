@@ -16,6 +16,24 @@ class RatingsAndReview extends React.Component {
   componentDidMount() {
     let dummyRating = 3.5;
     this.props.updateStarRating(3.5);
+
+    axios({
+      method: 'get',
+      baseURL: 'http://127.0.0.1:3000',
+      url: '/reviews',
+      params: {
+        'page': 1,
+        'count': 100000,
+        'sort': 'newest',
+        'product_id': 64621
+      }
+    })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   updateFilter(filter) {
