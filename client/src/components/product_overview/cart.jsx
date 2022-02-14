@@ -14,16 +14,16 @@ class Cart extends React.Component {
   }
 
   componentDidMount() {
-    this.initializeSizes();
+    this.setAvailableSizes();
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.selectedStyle !== this.props.selectedStyle) {
-      this.initializeSizes();
+      this.setAvailableSizes();
     }
   }
 
-  initializeSizes() {
+  setAvailableSizes() {
     let skus = this.props.selectedStyle.skus;
     let sizes = [];
     let quantities = [];
@@ -41,16 +41,16 @@ class Cart extends React.Component {
       if (skus[key].size === this.state.selectedSize) {
         for (var i = 1; i <= skus[key].quantity; i++) {
           if (i > 15) {
-            return this.initializeQuantities(quantities);
+            return this.setAvailableQuantities(quantities);
           }
           quantities.push(i);
         }
       }
     }
-    this.initializeQuantities(quantities);
+    this.setAvailableQuantities(quantities);
   }
 
-  initializeQuantities(quantities) {
+  setAvailableQuantities(quantities) {
     this.setState({ availableQuantities: quantities} );
   }
 
@@ -74,6 +74,7 @@ class Cart extends React.Component {
   }
 
   //TODO: Reset form values after submit button
+  //TODO: Reset form values after different style has been selected
   render() {
     return (
       <div>
