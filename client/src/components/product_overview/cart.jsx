@@ -20,7 +20,12 @@ class Cart extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.selectedStyle !== this.props.selectedStyle) {
       this.setAvailableSizes();
+      this.resetForm();
     }
+  }
+
+  resetForm() {
+    document.getElementById('cart-form').reset();
   }
 
   setAvailableSizes() {
@@ -34,7 +39,7 @@ class Cart extends React.Component {
     return sizes;
   }
 
-  determineQuantity() {
+  determineQuantityFromSelectedSize() {
     let skus = this.props.selectedStyle.skus;
     let quantities = [];
     for (let key in skus) {
@@ -58,7 +63,7 @@ class Cart extends React.Component {
     let selectedSize = e.target.value;
     this.setState( {selectedSize}, () => {
       //Once a size has been selected quantity can be generated
-      this.determineQuantity();
+      this.determineQuantityFromSelectedSize();
     } );
   }
 
@@ -71,14 +76,13 @@ class Cart extends React.Component {
     //TODO: POST the selected size (but not quantity?) to the API
     e.preventDefault();
     console.log('size', this.state.selectedSize, 'qty', this.state.selectedQuantity);
+    this.resetForm();
   }
 
-  //TODO: Reset form values after submit button
-  //TODO: Reset form values after different style has been selected
   render() {
     return (
       <div>
-        <form onSubmit={this.addToCart.bind(this)}>
+        <form id='cart-form' onSubmit={this.addToCart.bind(this)}>
           <select onChange={this.setSizeSelection.bind(this)} id='select-size'>
             <option>Select Size</option>
             {
