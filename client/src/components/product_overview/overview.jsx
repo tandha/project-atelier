@@ -9,6 +9,7 @@ class ProductOverview extends React.Component {
     super(props);
     this.state = {
       selectedStyle: this.props.styles.results[0],
+      mainPhotoIndex: 0
     };
   }
 
@@ -20,13 +21,20 @@ class ProductOverview extends React.Component {
         index = i;
       }
     });
-    this.setState({ selectedStyle: this.props.styles.results[index] });
+    this.setState({ selectedStyle: this.props.styles.results[index], mainPhotoIndex: 0 });
+  }
+
+  changeSelectedPhoto(e) {
+    let index = e.target.id;
+    this.setState({
+      mainPhotoIndex: Number(index)
+    });
   }
 
   render() {
     return (
       <div>
-        <ImageCarousel photos={this.state.selectedStyle.photos}/>
+        <ImageCarousel changePhoto={this.changeSelectedPhoto.bind(this)} mainPhotoIndex={this.state.mainPhotoIndex} photos={this.state.selectedStyle.photos}/>
         <Information product={this.props.product} selectedStyle={this.state.selectedStyle} starRating={this.props.starRating}/>
         <StyleSelector changeStyle={this.changeSelectedStyle.bind(this)} name={this.state.selectedStyle.name} styles={this.props.styles}/>
         <Cart addToMyOutfit={this.props.addToMyOutfit} selectedStyle={this.state.selectedStyle}/>

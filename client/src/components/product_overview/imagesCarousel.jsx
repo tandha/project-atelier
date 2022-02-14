@@ -1,29 +1,14 @@
 import React from 'react';
 import Thumbnails from './imageThumbnails.jsx';
 
-class ImageCarousel extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      mainPhotoIndex: 0
-    };
-  }
+const ImageCarousel = (props) => {
 
-  changeSelectedPhoto(e) {
-    let index = e.target.id;
-    this.setState({
-      mainPhotoIndex: Number(index)
-    });
-  }
-
-  render() {
-    return (
-      <div>
-        <img src={this.props.photos[this.state.mainPhotoIndex].url}></img>
-        <Thumbnails photos={this.props.photos} mainIndex={this.state.mainPhotoIndex} changePhoto={this.changeSelectedPhoto.bind(this)}/>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <img src={props.photos[props.mainPhotoIndex].url}></img>
+      <Thumbnails photos={props.photos} mainIndex={props.mainPhotoIndex} changePhoto={props.changePhoto}/>
+    </div>
+  );
+};
 
 export default ImageCarousel;
