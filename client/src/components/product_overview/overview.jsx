@@ -1,8 +1,8 @@
 import React from 'react';
-import ImageCarousel from './imagesCarousel.jsx';
-import Information from './information.jsx';
-import StyleSelector from './styleSelector.jsx';
-import Cart from './cart.jsx';
+import ImageCarousel from './imageGallery/imagesCarousel.jsx';
+import Information from './productInformation/information.jsx';
+import StyleSelector from './styleSelector/styleSelector.jsx';
+import Cart from './addToCart/cart.jsx';
 
 class ProductOverview extends React.Component {
   constructor(props) {
