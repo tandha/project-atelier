@@ -67,5 +67,5 @@ var myStyles = {
   color: 'grey',
   border: '2px solid grey',
   fontWeight: 'bold',
-  'margin-right': '10px',
+  'marginRight': '10px',
 };

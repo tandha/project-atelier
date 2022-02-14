@@ -63,7 +63,7 @@ class App extends React.Component {
     return (
       <div>
         <ProductOverview starRating={this.state.starRating}/>
-        <QuestionsAndAnswe product={this.state.product}/>
+        <QuestionsAndAnswers product={this.state.product}/>
         <RatingsAndReviews
           starRating={this.state.starRating}
           updateStarRating={this.updateStarRating.bind(this)}/>

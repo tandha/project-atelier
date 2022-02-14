@@ -5,7 +5,7 @@ class Question extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      Qhelped: false,
+      QuestionHelpful: false,
       answersId: Object.keys(this.props.answers) // an array
     };
     this.renderQuestionHelpfulBtn = this.renderQuestionHelpfulBtn.bind(this);
@@ -13,7 +13,7 @@ class Question extends React.Component {
   }
 
   renderQuestionHelpfulBtn() {
-    if (this.state.Qhelped) {
+    if (this.state.QuestionHelpful) {
       return ( <button style={buttonStyle}> Helpful </button> );
     } else {
       return ( <button style={smallStyle} onClick={this.markQuestionHelpful}> Yes </button> );
@@ -21,15 +21,12 @@ class Question extends React.Component {
   }
 
   markQuestionHelpful() {
-    this.setState({ Qhelped: true });
+    this.setState({ QuestionHelpful: true });
     // axios put
   }
 
   render() {
-    const answersArr = [];
-    for (const [key, value] of Object.entries(this.props.answers)) {
-      answersArr.push(value);
-    }
+    const answersArr = Object.values(this.props.answers);
 
     return (
       <div>

@@ -4,7 +4,7 @@ class Answer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      Ahelped: false,
+      AnswerHelpful: false,
       reported: false
     };
     this.renderAnswerHelpfulBtn = this.renderAnswerHelpfulBtn.bind(this);
@@ -14,7 +14,7 @@ class Answer extends React.Component {
   }
 
   renderAnswerHelpfulBtn() {
-    if (this.state.Ahelped) {
+    if (this.state.AnswerHelpful) {
       return ( <button style={buttonStyle}> Helpful </button> );
     } else {
       return ( <button style={smallStyle} onClick={this.markAnswerHelpful}> Yes </button> );
@@ -22,7 +22,7 @@ class Answer extends React.Component {
   }
 
   markAnswerHelpful() {
-    this.setState({ Ahelped: true });
+    this.setState({ AnswerHelpful: true });
     // axios put
   }
 
@@ -40,13 +40,11 @@ class Answer extends React.Component {
   }
 
   render() {
-    const date = new Date(this.props.answer.date.toString());
-    const renderDate = new Intl.DateTimeFormat('en-GB', { dateStyle: 'medium', timeStyle: 'long' }).format(date);
     return (
       <div>
         <div><b>A:</b> {this.props.answer.body} </div>
         <div style={smallStyle}>
-          by {this.props.answer.answerer_name}, {renderDate} | Helpful?
+          by {this.props.answer.answerer_name}, {renderDate(this.props.answer.date.toString())} | Helpful?
           {this.renderAnswerHelpfulBtn()}
           | {this.renderReportBtn()}
         </div>
@@ -56,6 +54,12 @@ class Answer extends React.Component {
 }
 
 export default Answer;
+
+const renderDate = (string) => {
+  const date = new Date(string);
+  const render = new Intl.DateTimeFormat('en-GB', { dateStyle: 'medium', timeStyle: 'long' }).format(date);
+  return render;
+};
 
 var smallStyle = {
   background: 'none',
