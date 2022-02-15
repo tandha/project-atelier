@@ -64,6 +64,8 @@ class App extends React.Component {
       <div>
         <ProductOverview starRating={this.state.starRating}/>
 
+        <RelatedItemsOutfitCreation/>
+
         <RatingsAndReviews
           starRating={this.state.starRating}
           updateStarRating={this.updateStarRating.bind(this)}/>
