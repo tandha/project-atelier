@@ -7,34 +7,32 @@ class RatingsAndReview extends React.Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
-      currentFilter: 'all'
+      currentFilter: 'all',
+      reviews: []
     };
+    this.placeHolderID = 64621;
   }
 
-  componentDidMount() {
-    let dummyRating = 3.5;
-    this.props.updateStarRating(3.5);
+  // Commented out for later use:
 
-    axios({
-      method: 'get',
-      baseURL: 'http://127.0.0.1:3000',
-      url: '/reviews',
-      params: {
-        'page': 1,
-        'count': 100000,
-        'sort': 'newest',
-        'product_id': 64621
-      }
-    })
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
+  // componentDidMount() {
+  //   this.getReviews();
+  // }
+  // getReviews() {
+  //   axios({
+  //     method: 'get',
+  //     baseURL: 'http://127.0.0.1:3000',
+  //     url: '/reviews',
+  //     params: {
+  //       'page': 1,
+  //       'count': 100000,
+  //       'sort': 'newest',
+  //       'product_id': this.placeHolderID
+  //     }
+  //   }).then((response) => this.setState({ reviews: response.data }))
+  //     .catch((err) => console.log(err));
+  // }
 
   updateFilter(filter) {
     this.setState({ currentFilter: filter });
@@ -45,7 +43,9 @@ class RatingsAndReview extends React.Component {
       <div id="ratings-and-reviews">
         <Breakdown
           starRating={this.props.starRating}
-          updateFilter={this.updateFilter.bind(this)}/>
+          updateStarRating={this.props.updateStarRating}
+          updateFilter={this.updateFilter.bind(this)}
+          productID={this.props.productID}/>
         <List />
       </div>
     );
