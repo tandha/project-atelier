@@ -10,25 +10,33 @@ class QuestionList extends React.Component {
   }
 
   render() {
-    let displayList = this.props.questions.slice(0, 2);
+    let sortedQuestions = this.props.questions.sort(sortByHelpfulness);
     if (this.props.searching) {
-      displayList = this.props.searchedQuestions.slice(0, 2);
+      sortedQuestions = this.props.searchedQuestions.sort(sortByHelpfulness);
     }
+    let displayList = sortedQuestions.slice(0, this.props.questionNumbers);
 
     return (
       <div>
         {displayList.map((question) => (
           <Question question={question} answers={question.answers} key={question.question_id}/>
         ))}
-        <div style={buttonStyle}>
-          <b>LOAD MORE ANSWERS</b>
-        </div>
       </div>
     );
   }
 }
 
 export default QuestionList;
+
+const sortByHelpfulness = (a, b) => {
+  if (a.question_helpfulness < b.question_helpfulness) {
+    return 1;
+  } else if (a.question_helpfulness > b.question_helpfulness) {
+    return -1;
+  } else {
+    return 0;
+  }
+};
 
 var buttonStyle = {
   fontSize: '12px',

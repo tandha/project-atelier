@@ -15,9 +15,9 @@ class Answer extends React.Component {
 
   renderAnswerHelpfulBtn() {
     if (this.state.AnswerHelpful) {
-      return ( <button style={buttonStyle}> Helpful </button> );
+      return ( <button style={buttonStyle}> Yes ({this.props.answer.helpfulness}) </button> );
     } else {
-      return ( <button style={smallStyle} onClick={this.markAnswerHelpful}> Yes </button> );
+      return ( <button style={smallStyle} onClick={this.markAnswerHelpful}> Yes ({this.props.answer.helpfulness}) </button> );
     }
   }
 
@@ -42,7 +42,8 @@ class Answer extends React.Component {
   render() {
     return (
       <div>
-        <div><b>A:</b> {this.props.answer.body} </div>
+        <div> {this.props.answer.body} </div>
+        {/* <div> {this.props.answer.photos[0]} </div> */}
         <div style={smallStyle}>
           by {this.props.answer.answerer_name}, {renderDate(this.props.answer.date.toString())} | Helpful?
           {this.renderAnswerHelpfulBtn()}
@@ -58,13 +59,12 @@ export default Answer;
 const renderDate = (string) => {
   const date = new Date(string);
   const render = new Intl.DateTimeFormat('en-GB', { dateStyle: 'medium', timeStyle: 'long' }).format(date);
-  return render;
+  return render.split(',')[0];
 };
 
 var smallStyle = {
   background: 'none',
   border: 'none',
-  padding: '5px',
   fontSize: '12px',
   display: 'inline',
   color: 'grey'
@@ -72,7 +72,7 @@ var smallStyle = {
 
 var buttonStyle = {
   fontWeight: 'bold',
-  'text-decoration': 'underline',
+  textDecoration: 'underline',
   background: 'none',
   border: 'none',
   padding: '5px',
