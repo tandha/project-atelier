@@ -54,7 +54,7 @@ class App extends React.Component {
     return (
       <div>
         <ProductOverview product={this.state.product} styles={this.state.styles} starRating={this.state.starRating} addToMyOutfit={this.addToMyOutfit.bind(this)}/>
-
+        <QuestionsAndAnswers product={this.state.product}/>
         <RatingsAndReviews
           starRating={this.state.starRating}
           updateStarRating={this.updateStarRating.bind(this)}/>
