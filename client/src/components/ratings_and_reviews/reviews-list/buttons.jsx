@@ -10,7 +10,11 @@ const Buttons = (props) => {
 
   };
 
-  return ( <div id='review-list-buttons'></div> );
+  return (
+    <div id='review-list-buttons'>
+      <button onClick={onMoreClick}>More Reviews</button>
+    </div>
+  );
 };
 
 export default Buttons;

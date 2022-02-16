@@ -50,7 +50,8 @@ class List extends React.Component {
   }
 
   updateLength() {
-
+    let newLength = this.state.listLength + 2;
+    this.setState({ listLength: newLength }, () => this.updateDisplayedReviews());
   }
 
   render() {
