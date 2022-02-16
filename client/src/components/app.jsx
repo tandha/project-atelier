@@ -23,7 +23,6 @@ class App extends React.Component {
     this.getProduct(64620);
   }
 
-
   getProduct(id) {
     axios({
       method: 'get',
@@ -45,7 +44,7 @@ class App extends React.Component {
       this.setState({
         styles: res.data.data
       });
-    }).catch((err) => { console.log('An error occured retrieving product data from server', err); });
+    }).catch((err) => { console.log('An error occured retrieving style data from server', err); });
   }
 
   addToMyOutfit(id) {
