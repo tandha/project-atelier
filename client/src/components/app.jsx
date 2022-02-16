@@ -10,49 +10,40 @@ import { product, styles } from '../sampleData/sampleData.js';
 class App extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      product: {},
-      styles: {},
+      product: product,
+      styles: styles,
       myOutfits: [],
       starRating: 0
     };
   }
 
   componentDidMount() {
-    this.getProduct();
     this.getStyles();
+    this.getProduct();
     this.addToMyOutfit();
     this.removeFromMyOutfit();
   }
 
   getProduct() {
-    this.setState({
-      product: product
-    });
+    //TODO: Get request for product
   }
 
   getStyles() {
-    this.setState({
-      styles: styles
-    });
+    //TODO: Get request for styles
   }
 
   addToMyOutfit(id) {
     let myOutfits = this.state.myOutfits;
     myOutfits.push(id);
-    this.setState({
-      myOutfits: myOutfits
-    });
+    this.setState({ myOutfits: myOutfits });
   }
 
   removeFromMyOutfit(id) {
     let index = this.state.myOutfits.indexOf(id);
     let myOutfits = this.state.myOutfits;
     myOutfits.splice(index, 1);
-    this.setState({
-      myOutfits: myOutfits
-    });
+    this.setState({ myOutfits: myOutfits });
   }
 
   updateStarRating(rating) {
@@ -62,7 +53,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <ProductOverview starRating={this.state.starRating}/>
+        <ProductOverview product={this.state.product} styles={this.state.styles} starRating={this.state.starRating} addToMyOutfit={this.addToMyOutfit.bind(this)}/>
         <QuestionsAndAnswers product={this.state.product}/>
         <RatingsAndReviews
           starRating={this.state.starRating}
