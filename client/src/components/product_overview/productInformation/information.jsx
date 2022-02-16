@@ -8,6 +8,7 @@ const Information = (props) => {
       <div id='product-category'>{props.product.category}</div>
       <div id='product-name'>{props.product.name}</div>
       <div id='product-slogan'>{props.product.slogan}</div>
+      <div id='product-description'>{props.product.description}</div>
       <Feature features={props.product.features}/>
       <div id='original-price'>{props.selectedStyle.original_price}</div>
       <div id='sale-price'>{props.selectedStyle.sale_price}</div>

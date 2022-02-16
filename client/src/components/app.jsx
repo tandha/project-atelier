@@ -11,26 +11,37 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      product: product,
-      styles: styles,
+      productIsFetched: false,
+      stylesAreFetched: false,
+      product: {},
+      styles: {},
       myOutfits: [],
       starRating: 0
     };
   }
 
+
   componentDidMount() {
-    this.getStyles();
-    this.getProduct();
-    this.addToMyOutfit();
-    this.removeFromMyOutfit();
+    this.getProduct(64620);
+    this.getStyles(64620);
   }
 
-  getProduct() {
-    //TODO: Get request for product
+  getProduct(id) {
+    axios({
+      method: 'get',
+      url: 'products/' + id,
+    }).then((res) => {
+      this.setState({ product: res.data.data, productIsFetched: true });
+    }).catch((err) => { console.log('An error occured retrieving product data from server', err); });
   }
 
-  getStyles() {
-    //TODO: Get request for styles
+  getStyles(id) {
+    axios({
+      method: 'get',
+      url: 'products/' + id + '/styles',
+    }).then((res) => {
+      this.setState({ styles: res.data.data, stylesAreFetched: true });
+    }).catch((err) => { console.log('An error occured retrieving style data from server', err); });
   }
 
   addToMyOutfit(id) {
@@ -51,6 +62,9 @@ class App extends React.Component {
   }
 
   render() {
+    if (!this.state.productIsFetched || !this.state.stylesAreFetched) {
+      return <div>Loading</div>;
+    }
     return (
       <div>
         <ProductOverview product={this.state.product} styles={this.state.styles} starRating={this.state.starRating} addToMyOutfit={this.addToMyOutfit.bind(this)}/>
