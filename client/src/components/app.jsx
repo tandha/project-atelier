@@ -24,7 +24,7 @@ class App extends React.Component {
   }
 
   getProduct(id) {
-    axios({
+    return axios({
       method: 'get',
       url: 'products/' + id,
     }).then((res) => {
