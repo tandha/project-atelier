@@ -1,3 +1,5 @@
+/************************* Global *************************/
+
 #app {
   border: 1px solid black;
   display: inline-grid;
@@ -33,3 +35,26 @@
   "image image sidebar "
   ". footer footer "
 } */
+
+/******************** Product Overview ********************/
+
+
+
+/****************** Related Items & Outfit ****************/
+
+
+
+/******************* Questions & Answers ******************/
+
+
+
+/********************* Ratings & Reviews *******************/
+
+.review-list-tile-helpful {
+  color: blue;
+}
+
+.review-list-tile-helpful:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
