@@ -20,13 +20,14 @@ class App extends React.Component {
     };
   }
 
+
   componentDidMount() {
     this.getProduct(64620);
     this.getStyles(64620);
   }
 
   getProduct(id) {
-    return axios({
+    axios({
       method: 'get',
       url: 'products/' + id,
     }).then((res) => {
