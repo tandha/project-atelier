@@ -29,9 +29,7 @@ class App extends React.Component {
       url: 'products/' + id,
     }).then((res) => {
       console.log('Success retrieving product data from server');
-      this.setState({
-        product: res.data.data
-      });
+      this.setState({ product: res.data.data });
     }).catch((err) => { console.log('An error occured retrieving product data from server', err); });
   }
 
@@ -40,10 +38,8 @@ class App extends React.Component {
       method: 'get',
       url: 'products/' + id + '/styles',
     }).then((res) => {
-      console.log('Success retrieving style data from server', res.data.data);
-      this.setState({
-        styles: res.data.data
-      });
+      console.log('Success retrieving style data from server');
+      this.setState({ styles: res.data.data });
     }).catch((err) => { console.log('An error occured retrieving style data from server', err); });
   }
 
@@ -65,6 +61,9 @@ class App extends React.Component {
   }
 
   render() {
+    if (this.state.product === product) {
+      return <div>Loading</div>;
+    }
     return (
       <div>
         <ProductOverview product={this.state.product} styles={this.state.styles} starRating={this.state.starRating} addToMyOutfit={this.addToMyOutfit.bind(this)}/>
