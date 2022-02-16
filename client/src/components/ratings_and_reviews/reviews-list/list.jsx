@@ -29,7 +29,7 @@ class List extends React.Component {
       params: {
         'page': 1,
         'count': 100000,
-        'sort': 'newest',
+        'sort': this.state.currentSort,
         'product_id': this.props.productID
       }
     }).then((response) => {
@@ -46,7 +46,7 @@ class List extends React.Component {
   }
 
   updateSort(sort) {
-
+    this.setState({ currentSort: sort }, () => this.getReviews());
   }
 
   updateLength() {
@@ -57,7 +57,7 @@ class List extends React.Component {
   render() {
     return (
       <div id='review-list'>
-        <Sort updateSort={this.updateSort.bind(this)}/>
+        <Sort updateSort={this.updateSort.bind(this)} numReviews={this.state.reviews.length}/>
 
         <div id='review-tiles'>
           {this.state.displayedReviews.map((review, index) => {
