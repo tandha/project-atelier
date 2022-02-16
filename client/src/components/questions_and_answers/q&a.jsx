@@ -34,7 +34,7 @@ class QuestionsAndAnswers extends React.Component {
         count: 100
       }
     }).then((res)=> {
-      console.log(res.data.data.results);
+      // console.log(res.data.data.results);
       this.setState({
         questions: res.data.data.results
       });
