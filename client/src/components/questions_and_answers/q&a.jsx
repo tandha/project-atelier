@@ -57,7 +57,7 @@ class QuestionsAndAnswers extends React.Component {
   handleSearchQuestions(term) {
     const filtered = this.state.questions.filter((question) => {
       const qBody = question.question_body.toLowerCase();
-      return qBody.includes(term);
+      return qBody.includes(term.toLowerCase());
     });
     return filtered;
   }
