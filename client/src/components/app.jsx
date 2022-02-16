@@ -11,16 +11,18 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      product: product,
-      styles: styles,
+      productIsFetched: false,
+      stylesAreFetched: false,
+      product: {},
+      styles: {},
       myOutfits: [],
       starRating: 0
     };
   }
 
   componentDidMount() {
-    this.getStyles(64620);
     this.getProduct(64620);
+    this.getStyles(64620);
   }
 
   getProduct(id) {
@@ -29,7 +31,7 @@ class App extends React.Component {
       url: 'products/' + id,
     }).then((res) => {
       console.log('Success retrieving product data from server');
-      this.setState({ product: res.data.data });
+      this.setState({ product: res.data.data, productIsFetched: true });
     }).catch((err) => { console.log('An error occured retrieving product data from server', err); });
   }
 
@@ -39,7 +41,7 @@ class App extends React.Component {
       url: 'products/' + id + '/styles',
     }).then((res) => {
       console.log('Success retrieving style data from server');
-      this.setState({ styles: res.data.data });
+      this.setState({ styles: res.data.data, stylesAreFetched: true });
     }).catch((err) => { console.log('An error occured retrieving style data from server', err); });
   }
 
@@ -61,7 +63,7 @@ class App extends React.Component {
   }
 
   render() {
-    if (this.state.product === product) {
+    if (!this.state.productIsFetched || !this.state.stylesAreFetched) {
       return <div>Loading</div>;
     }
     return (
