@@ -5,7 +5,7 @@ const ImageCarousel = (props) => {
 
   return (
     <div>
-      <img src={props.photos[props.mainPhotoIndex].url}></img>
+      <img id='main-image' src={props.photos[props.mainPhotoIndex].url}></img>
       <Thumbnails photos={props.photos} mainIndex={props.mainPhotoIndex} changePhoto={props.changePhoto}/>
     </div>
   );
