@@ -1,4 +1,4 @@
-/***************** Global *****************/
+/************************* Global *************************/
 
 #app {
   border: 1px solid black;
@@ -36,19 +36,19 @@
   ". footer footer "
 } */
 
-/***************** Product Overview *****************/
+/******************** Product Overview ********************/
 
 
 
-/***************** Related Items & Outfit *****************/
+/****************** Related Items & Outfit ****************/
 
 
 
-/***************** Questions & Answers *****************/
+/******************* Questions & Answers ******************/
 
 
 
-/***************** Review & Ratings *****************/
+/********************* Review & Ratings *******************/
 
 .review-list-tile-helpful {
   color: blue;
