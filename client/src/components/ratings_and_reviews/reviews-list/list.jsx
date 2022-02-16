@@ -2,6 +2,7 @@ import React from 'react';
 import Sort from './sort.jsx';
 import Tile from './tile.jsx';
 import Buttons from './buttons.jsx';
+import axios from 'axios';
 
 class List extends React.Component {
 
@@ -9,10 +10,39 @@ class List extends React.Component {
     super(props);
 
     this.state = {
+      reviews: [],
+      displayedReviews: [],
       listLength: 2,
       listMaxed: false,
-      currentSort: 'relevant'
+      currentSort: 'relevant',
     };
+  }
+
+  componentDidMount() {
+    this.getReviews();
+  }
+
+  getReviews() {
+    axios({
+      method: 'get',
+      url: '/reviews',
+      params: {
+        'page': 1,
+        'count': 100000,
+        'sort': 'newest',
+        'product_id': this.props.productID
+      }
+    }).then((response) => {
+      this.setState({ reviews: response.data.data.results }, () => {
+        this.updateDisplayedReviews();
+      });
+    })
+      .catch((err) => console.log(err));
+  }
+
+  updateDisplayedReviews() {
+    let displayedReviews = this.state.reviews.slice(0, this.state.listLength);
+    this.setState({ displayedReviews });
   }
 
   updateSort(sort) {
@@ -27,7 +57,13 @@ class List extends React.Component {
     return (
       <div id='review-list'>
         <Sort updateSort={this.updateSort.bind(this)}/>
-        <Tile />
+
+        <div id='review-tiles'>
+          {this.state.displayedReviews.map((review, index) => {
+            return <Tile key={index} review={review} />;
+          })}
+        </div>
+
         <Buttons updateLength={this.updateLength.bind(this)}/>
       </div>)
     ;

@@ -2,7 +2,9 @@ import React from 'react';
 
 const Average = (props) => {
   return (
-    <div id='ratings-breakdown-average'>{props.starRating}</div>
+    <div id='ratings-breakdown-average'>
+      <p>Average Rating: {props.starRating}</p>
+    </div>
   );
 };
 
