@@ -21,8 +21,6 @@ class App extends React.Component {
   componentDidMount() {
     this.getStyles();
     this.getProduct();
-    this.addToMyOutfit();
-    this.removeFromMyOutfit();
   }
 
   getProduct() {
