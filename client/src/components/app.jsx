@@ -19,16 +19,33 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getStyles();
-    this.getProduct();
+    this.getStyles(64620);
+    this.getProduct(64620);
   }
 
-  getProduct() {
-    //TODO: Get request for product
+
+  getProduct(id) {
+    axios({
+      method: 'get',
+      url: 'products/' + id,
+    }).then((res) => {
+      console.log('Success retrieving product data from server');
+      this.setState({
+        product: res.data.data
+      });
+    }).catch((err) => { console.log('An error occured retrieving product data from server', err); });
   }
 
-  getStyles() {
-    //TODO: Get request for styles
+  getStyles(id) {
+    axios({
+      method: 'get',
+      url: 'products/' + id + '/styles',
+    }).then((res) => {
+      console.log('Success retrieving style data from server', res.data.data);
+      this.setState({
+        styles: res.data.data
+      });
+    }).catch((err) => { console.log('An error occured retrieving product data from server', err); });
   }
 
   addToMyOutfit(id) {
