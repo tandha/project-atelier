@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 class Answer extends React.Component {
   constructor(props) {
@@ -15,28 +16,42 @@ class Answer extends React.Component {
 
   renderAnswerHelpfulBtn() {
     if (this.state.AnswerHelpful) {
-      return ( <button role="help" disabled={true} style={buttonStyle}> Yes ({this.props.answer.helpfulness}) </button> );
+      return ( <button role="help" disabled={true} style={buttonStyle}> Yes ({this.props.answer.helpfulness + 1}) </button> );
     } else {
       return ( <button role="help" style={smallStyle} onClick={this.markAnswerHelpful}> Yes ({this.props.answer.helpfulness}) </button> );
     }
   }
 
   markAnswerHelpful() {
-    this.setState({ AnswerHelpful: true });
-    // axios put
+    axios({
+      method: 'put',
+      url: `/qa/answers/${this.props.answer.id}/helpful`,
+      params: {'answer_id': this.props.answer.id}
+    }).then(()=> {
+      this.setState({ AnswerHelpful: true });
+    }).catch((err)=> {
+      console.log('error marking answer helpful', err);
+    });
   }
 
   renderReportBtn() {
     if (this.state.reported) {
-      return ( <button style={buttonStyle}> Reported </button> );
+      return ( <button role="report" disabled={true} style={buttonStyle}> Reported </button> );
     } else {
-      return ( <button style={smallStyle} onClick={this.reportAnswer}> Report </button> );
+      return ( <button role="report" style={smallStyle} onClick={this.reportAnswer}> Report </button> );
     }
   }
 
   reportAnswer() {
-    this.setState({ reported: true });
-    // axios put
+    axios({
+      method: 'put',
+      url: `/qa/answers/${this.props.answer.id}/report`,
+      params: {'answer_id': this.props.answer.id}
+    }).then(()=> {
+      this.setState({ reported: true });
+    }).catch((err)=> {
+      console.log('error reporting answer', err);
+    });
   }
 
   render() {
