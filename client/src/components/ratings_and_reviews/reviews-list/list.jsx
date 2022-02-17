@@ -15,11 +15,21 @@ class List extends React.Component {
       listLength: 2,
       listMaxed: false,
       currentSort: 'relevant',
+      currentFilter: []
     };
   }
 
   componentDidMount() {
     this.getReviews();
+  }
+
+  componentDidUpdate() {
+    if (this.state.currentFilter.length !== this.props.currentFilter.length) {
+      let newFilter = this.props.currentFilter.slice();
+      this.setState({ currentFilter: newFilter }, () => {
+        this.updateDisplayedReviews();
+      });
+    }
   }
 
   getReviews() {
@@ -41,10 +51,26 @@ class List extends React.Component {
   }
 
   updateDisplayedReviews() {
-    let displayedReviews = this.state.reviews.slice(0, this.state.listLength);
+    let displayedReviews = [];
     let listMaxed;
-    displayedReviews.length >= this.state.reviews.length ? listMaxed = true : listMaxed = false;
-    this.setState({ displayedReviews, listMaxed });
+    let currentFilter = this.state.currentFilter;
+    let reviews = this.state.reviews;
+
+    if (currentFilter.length === 0) {
+      displayedReviews = reviews.slice(0, this.state.listLength);
+      displayedReviews.length >= reviews.length ? listMaxed = true : listMaxed = false;
+      this.setState({ displayedReviews, listMaxed });
+
+    } else {
+      reviews.forEach(review => {
+        if (currentFilter.includes(review.rating.toString())) {
+          displayedReviews.push(review);
+        }
+      });
+      displayedReviews = displayedReviews.slice(0, this.state.listLength);
+      displayedReviews.length >= reviews.length ? listMaxed = true : listMaxed = false;
+      this.setState({ displayedReviews, listMaxed });
+    }
   }
 
   updateSort(sort) {

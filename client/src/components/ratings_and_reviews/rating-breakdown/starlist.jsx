@@ -22,9 +22,9 @@ const StarList = (props) => {
       <span>Current filters: {
         props.currentFilter.map((rating, index) => {
           if (index === props.currentFilter.length - 1) {
-            return <span>{rating}</span>;
+            return <span key={index}>{rating}</span>;
           } else {
-            return <span>{rating}, </span>;
+            return <span key={index}>{rating}, </span>;
           }
         })
       }</span><br></br>
