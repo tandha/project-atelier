@@ -42,7 +42,9 @@ class List extends React.Component {
 
   updateDisplayedReviews() {
     let displayedReviews = this.state.reviews.slice(0, this.state.listLength);
-    this.setState({ displayedReviews });
+    let listMaxed;
+    displayedReviews.length >= this.state.reviews.length ? listMaxed = true : listMaxed = false;
+    this.setState({ displayedReviews, listMaxed });
   }
 
   updateSort(sort) {
@@ -50,7 +52,8 @@ class List extends React.Component {
   }
 
   updateLength() {
-
+    let newLength = this.state.listLength + 2;
+    this.setState({ listLength: newLength }, () => this.updateDisplayedReviews());
   }
 
   render() {
@@ -64,7 +67,7 @@ class List extends React.Component {
           })}
         </div>
 
-        <Buttons updateLength={this.updateLength.bind(this)}/>
+        <Buttons updateLength={this.updateLength.bind(this)} listMaxed={this.state.listMaxed}/>
       </div>)
     ;
   }
