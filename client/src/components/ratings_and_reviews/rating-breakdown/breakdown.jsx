@@ -53,7 +53,10 @@ class Breakdown extends React.Component {
     return (
       <div id='ratings-breakdown'>
         <Average starRating={this.props.starRating}/>
-        <StarList updateFilter={this.props.updateFilter}/>
+        <StarList
+          updateFilter={this.props.updateFilter}
+          metaData={this.state.reviewMetaData}
+        />
         <Styles />
       </div>
     );

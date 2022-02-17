@@ -6,7 +6,11 @@ const StarList = (props) => {
     props.updateFilter();
   };
 
-  return ( <div id='ratings-breakdown-starlist'></div> );
+  return (
+    <div id='ratings-breakdown-starlist'>
+
+    </div>
+  );
 };
 
 export default StarList;
