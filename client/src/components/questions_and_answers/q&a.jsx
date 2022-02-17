@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import {exampleQuestions} from './exampleData.js';
 import SearchBar from './SearchBar.jsx';
 import QuestionList from './QuestionList.jsx';
 
