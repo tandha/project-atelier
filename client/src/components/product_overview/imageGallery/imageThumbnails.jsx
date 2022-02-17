@@ -7,7 +7,7 @@ const Thumbnails = (props) => {
       {
         props.photos.map((photo, i) => {
           if (i !== props.mainIndex) {
-            return <Thumbnail key={i} id={i} class='gallery-thumbnail' thumbnail={photo.thumbnail_url} changePhoto={props.changePhoto}/>;
+            return <Thumbnail key={i} i={i} class='gallery-thumbnail' thumbnail={photo.thumbnail_url} changePhoto={props.changePhoto}/>;
           }
         })
       }
