@@ -10,10 +10,9 @@ const { API_URL, API_KEY } = require('./config.js');
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, '/../client/dist')));
+app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.all('/*', (req, res) => {
-
   axios({
     headers: { 'Authorization': API_KEY },
     baseURL: API_URL,
