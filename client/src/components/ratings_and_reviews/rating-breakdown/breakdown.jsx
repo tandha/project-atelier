@@ -10,7 +10,6 @@ class Breakdown extends React.Component {
     this.state = {
       reviewMetaData: {}
     };
-    this.placeHolderID = 64621;
   }
 
   componentDidMount() {
@@ -21,7 +20,7 @@ class Breakdown extends React.Component {
     axios({
       method: 'get',
       url: '/reviews/meta',
-      params: { 'product_id': this.placeHolderID }
+      params: { 'product_id': this.props.productID }
     })
       .then(response => {
         let ratings = response.data.data.ratings;
