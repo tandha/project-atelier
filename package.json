@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest test.js --env=jsdom",
     "overview-test": "jest client/src/components/product_overview/test/test.js --env=jsdom",
+    "related-test": "jest client/src/components/related_items_outfit_creation/testing/test.js --env=jsdom",
     "reviews-test": "jest client/src/components/ratings_and_reviews/test/test.js --env=jsdom",
     "build": "webpack --watch",
     "postinstall": "curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install | bash",
