@@ -81,7 +81,7 @@ class Cart extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id='cart'>
         <form id='cart-form' onSubmit={this.addToCart.bind(this)}>
           <select onChange={this.setSizeSelection.bind(this)} id='select-size'>
             <option>Select Size</option>
