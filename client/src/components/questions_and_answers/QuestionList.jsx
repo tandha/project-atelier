@@ -1,41 +1,30 @@
 import React from 'react';
 import Question from './Question.jsx';
 
-class QuestionList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+const QuestionList = (props) => {
 
-    };
+  let sortedQuestions = props.questions.sort(sortByHelpfulness);
+  if (props.searching) {
+    sortedQuestions = props.searchedQuestions.sort(sortByHelpfulness);
   }
+  let displayList = sortedQuestions.slice(0, props.questionNumbers);
 
-  render() {
-    let sortedQuestions = this.props.questions.sort(sortByHelpfulness);
-    if (this.props.searching) {
-      sortedQuestions = this.props.searchedQuestions.sort(sortByHelpfulness);
-    }
-    let displayList = sortedQuestions.slice(0, this.props.questionNumbers);
-
-    return (
-      <div>
-        {displayList.map((question) => (
-          <Question question={question} answers={question.answers} key={question.question_id}/>
-        ))}
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      {displayList.map((question) => (
+        <Question
+          question={question}
+          key={question.question_id}
+        />
+      ))}
+    </div>
+  );
+};
 
 export default QuestionList;
 
 const sortByHelpfulness = (a, b) => {
-  if (a.question_helpfulness < b.question_helpfulness) {
-    return 1;
-  } else if (a.question_helpfulness > b.question_helpfulness) {
-    return -1;
-  } else {
-    return 0;
-  }
+  return b.question_helpfulness - a.question_helpfulness;
 };
 
 var buttonStyle = {

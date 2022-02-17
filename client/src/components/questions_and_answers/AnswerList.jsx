@@ -1,41 +1,27 @@
 import React from 'react';
 import Answer from './Answer.jsx';
 
-class AnswerList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+const AnswerList = (props) => {
 
-    };
-  }
+  let sortedAnswers = props.answers.sort(sortByHelpfulness);
+  let displayList = sortedAnswers.slice(0, props.answerNumbers);
 
-  render() {
-    let sortedAnswers = this.props.answers.sort(sortByHelpfulness);
-    let displayList = sortedAnswers.slice(0, this.props.answerNumbers);
-
-    return (
-      <div>
-        <div style={{display: 'inline-grid', fontWeight: 'bold'}}> A: </div>
-        <div style={{display: 'inline-grid', marginLeft: '6px'}}>
-          {displayList.map((answer) => (
-            <Answer answer={answer} key={answer.id}/>
-          ))}
-        </div>
+  return (
+    <div>
+      <div style={{display: 'inline-grid', fontWeight: 'bold'}}> A: </div>
+      <div style={{display: 'inline-grid', marginLeft: '6px'}}>
+        {displayList.map((answer) => (
+          <Answer answer={answer} key={answer.id}/>
+        ))}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default AnswerList;
 
 const sortByHelpfulness = (a, b) => {
-  if (a.helpfulness < b.helpfulness) {
-    return 1;
-  } else if (a.helpfulness > b.helpfulness) {
-    return -1;
-  } else {
-    return 0;
-  }
+  return b.helpfulness - a.helpfulness;
 };
 
 var QAstyle = {
