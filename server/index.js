@@ -13,7 +13,6 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.all('/*', (req, res) => {
-
   axios({
     headers: { 'Authorization': API_KEY },
     baseURL: API_URL,

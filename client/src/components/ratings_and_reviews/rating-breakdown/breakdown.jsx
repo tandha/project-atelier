@@ -20,7 +20,6 @@ class Breakdown extends React.Component {
   getReviewMetaData() {
     axios({
       method: 'get',
-      baseURL: 'http://127.0.0.1:3000',
       url: '/reviews/meta',
       params: { 'product_id': this.placeHolderID }
     })

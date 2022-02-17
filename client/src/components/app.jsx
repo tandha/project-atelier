@@ -10,8 +10,9 @@ import { product, styles } from '../sampleData/sampleData.js';
 class App extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
+      productIsFetched: false,
+      stylesAreFetched: false,
       product: {},
       styles: {},
       myOutfits: [],
@@ -19,40 +20,41 @@ class App extends React.Component {
     };
   }
 
+
   componentDidMount() {
-    this.getProduct();
-    this.getStyles();
-    this.addToMyOutfit();
-    this.removeFromMyOutfit();
+    this.getProduct(64620);
+    this.getStyles(64620);
   }
 
-  getProduct() {
-    this.setState({
-      product: product
-    });
+  getProduct(id) {
+    axios({
+      method: 'get',
+      url: 'products/' + id,
+    }).then((res) => {
+      this.setState({ product: res.data.data, productIsFetched: true });
+    }).catch((err) => { console.log('An error occured retrieving product data from server', err); });
   }
 
-  getStyles() {
-    this.setState({
-      styles: styles
-    });
+  getStyles(id) {
+    axios({
+      method: 'get',
+      url: 'products/' + id + '/styles',
+    }).then((res) => {
+      this.setState({ styles: res.data.data, stylesAreFetched: true });
+    }).catch((err) => { console.log('An error occured retrieving style data from server', err); });
   }
 
   addToMyOutfit(id) {
     let myOutfits = this.state.myOutfits;
     myOutfits.push(id);
-    this.setState({
-      myOutfits: myOutfits
-    });
+    this.setState({ myOutfits: myOutfits });
   }
 
   removeFromMyOutfit(id) {
     let index = this.state.myOutfits.indexOf(id);
     let myOutfits = this.state.myOutfits;
     myOutfits.splice(index, 1);
-    this.setState({
-      myOutfits: myOutfits
-    });
+    this.setState({ myOutfits: myOutfits });
   }
 
   updateStarRating(rating) {
@@ -60,12 +62,13 @@ class App extends React.Component {
   }
 
   render() {
+    if (!this.state.productIsFetched || !this.state.stylesAreFetched) {
+      return <div>Loading</div>;
+    }
     return (
       <div>
-        <ProductOverview starRating={this.state.starRating}/>
-
+        <ProductOverview product={this.state.product} styles={this.state.styles} starRating={this.state.starRating} addToMyOutfit={this.addToMyOutfit.bind(this)}/>
         <RelatedItemsOutfitCreation/>
-
         <QuestionsAndAnswers product={this.state.product}/>
         <RatingsAndReviews
           starRating={this.state.starRating}
