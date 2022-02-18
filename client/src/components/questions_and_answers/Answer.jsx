@@ -15,9 +15,9 @@ class Answer extends React.Component {
 
   renderAnswerHelpfulBtn() {
     if (this.state.AnswerHelpful) {
-      return ( <button style={buttonStyle}> Helpful </button> );
+      return ( <button role="help" disabled={true} style={buttonStyle}> Helpful </button> );
     } else {
-      return ( <button style={smallStyle} onClick={this.markAnswerHelpful}> Yes </button> );
+      return ( <button role="help" style={smallStyle} onClick={this.markAnswerHelpful}> Yes </button> );
     }
   }
 
@@ -28,9 +28,9 @@ class Answer extends React.Component {
 
   renderReportBtn() {
     if (this.state.reported) {
-      return ( <button style={buttonStyle}> Reported </button> );
+      return ( <button role="report" disabled={true} style={buttonStyle}> Reported </button> );
     } else {
-      return ( <button style={smallStyle} onClick={this.reportAnswer}> Report </button> );
+      return ( <button role="report" style={smallStyle} onClick={this.reportAnswer}> Report </button> );
     }
   }
 

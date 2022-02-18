@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import {exampleQuestions} from './exampleData.js';
 import SearchBar from './SearchBar.jsx';
 import QuestionList from './QuestionList.jsx';
 
@@ -9,13 +8,16 @@ class QuestionsAndAnswers extends React.Component {
     super(props);
 
     this.state = {
-      questions: exampleQuestions.results, // an array
+      questions: [],
+      questionNumbers: 2,
       searching: false,
       searchedQuestions: []
     };
     this.getProductQuestions = this.getProductQuestions.bind(this);
     this.handleSearchBar = this.handleSearchBar.bind(this);
     this.handleSearchQuestions = this.handleSearchQuestions.bind(this);
+    this.renderMoreQuestionBtn = this.renderMoreQuestionBtn.bind(this);
+    this.clickMoreQuestions = this.clickMoreQuestions.bind(this);
   }
 
   componentDidMount() {
@@ -23,7 +25,21 @@ class QuestionsAndAnswers extends React.Component {
   }
 
   getProductQuestions() {
-    // axios get from API '/questions/:id'
+    axios({
+      method: 'get',
+      url: 'qa/questions',
+      params: {
+        'product_id': 64621, //this.props.product.id
+        count: 100
+      }
+    }).then((res)=> {
+      // console.log(res.data.data.results);
+      this.setState({
+        questions: res.data.data.results
+      });
+    }).catch((err)=> {
+      console.log('error getting questions', err);
+    });
   }
 
   handleSearchBar(e) {
@@ -39,21 +55,39 @@ class QuestionsAndAnswers extends React.Component {
 
   handleSearchQuestions(term) {
     const filtered = this.state.questions.filter((question) => {
-      let qBody = question.question_body.toLowerCase();
-      return qBody.includes(term);
+      const qBody = question.question_body.toLowerCase();
+      return qBody.includes(term.toLowerCase());
     });
     return filtered;
   }
 
+  renderMoreQuestionBtn() {
+    if (this.state.questions.length > 2 && this.state.questionNumbers < this.state.questions.length) {
+      return ( <button style={largeBtnStyle} onClick={this.clickMoreQuestions}> MORE ANSWERED QUESTIONS </button> );
+    }
+  }
+
+  clickMoreQuestions() {
+    if (this.state.questionNumbers < this.state.questions.length) {
+      this.setState({
+        questionNumbers: this.state.questionNumbers + 2
+      });
+    }
+  }
 
   render() {
     return (
       <div>
         <b>QUESTIONS & ANSWERS</b>
         <SearchBar handleSearchBar={this.handleSearchBar}/>
-        <QuestionList questions={this.state.questions} searching={this.state.searching} searchedQuestions={this.state.searchedQuestions}/>
-        <button style={myStyles}> MORE ANSWERED QUESTIONS </button>
-        <button style={myStyles}> ADD A QUESTION + </button>
+        <QuestionList
+          questions={this.state.questions}
+          questionNumbers={this.state.questionNumbers}
+          searching={this.state.searching}
+          searchedQuestions={this.state.searchedQuestions}
+        />
+        {this.renderMoreQuestionBtn()}
+        <button style={largeBtnStyle}> ADD A QUESTION + </button>
       </div>
     );
   }
@@ -61,11 +95,11 @@ class QuestionsAndAnswers extends React.Component {
 
 export default QuestionsAndAnswers;
 
-var myStyles = {
+var largeBtnStyle = {
   background: 'none',
   height: '50px',
   color: 'grey',
-  border: '2px solid grey',
+  border: '1.5px solid grey',
   fontWeight: 'bold',
   'marginRight': '10px',
 };
