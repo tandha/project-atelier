@@ -1,4 +1,5 @@
 import React from 'react';
+import AnswerPhoto from './AnswerPhoto.jsx';
 
 class Answer extends React.Component {
   constructor(props) {
@@ -43,6 +44,11 @@ class Answer extends React.Component {
     return (
       <div>
         <div><b>A:</b> {this.props.answer.body} </div>
+        <div>
+          {this.props.answer.photos.map((photo, index) => (
+            <AnswerPhoto photo={photo} key={index}/>
+          ))}
+        </div>
         <div style={smallStyle}>
           by {this.props.answer.answerer_name}, {renderDate(this.props.answer.date.toString())} | Helpful?
           {this.renderAnswerHelpfulBtn()}
