@@ -1,5 +1,4 @@
 import React from 'react';
-import QuestionsAndAnswers from '../../questions_and_answers/q&a.jsx';
 import Feature from './featureInformation.jsx';
 
 const Information = (props) => {
@@ -19,21 +18,3 @@ const Information = (props) => {
 };
 
 export default Information;
-
-// import React from 'react';
-// import { Link } from 'react-router';
-
-// class List extends React.Component {
-//     render() {
-//         return (
-//             <div>
-//                 <p>Please choose a repository from the list below.</p>
-//                 <ul>
-//                     <li><Link to="/react">React</Link></li>
-//                 </ul>
-//             </div>
-//         );
-//     }
-// }
-
-// export default List;
