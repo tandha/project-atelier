@@ -43,7 +43,7 @@ describe.only('Q&A', () => {
   });
 
   test('render Question component', () => {
-    render(<Question question={props.questions[1]} answers={props.questions[1].answers}/>);
+    render(<Question question={props.questions[1]}/>);
 
     // test on sort by helpfulness
     // test on click helpful event
