@@ -3,7 +3,7 @@ import React from 'react';
 const Thumbnail = (props) => {
   return (
     <div>
-      <img width='100' src={props.thumbnail} id={props.i} onClick={props.changePhoto.bind(this)}></img>
+      <img src={props.thumbnail} id={props.i} class='gallery-thumbnail' onClick={props.changePhoto.bind(this)}></img>
     </div>
   );
 };

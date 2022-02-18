@@ -1,13 +1,13 @@
 /************************* Global *************************/
 
 #app {
-  border: 1px solid black;
+  /* border: 1px solid black;
   display: inline-grid;
-  grid-template-columns: auto;
+  grid-template-columns: auto; */
   /* grid-template-columns: 12em 1fr; <-- can set how each line behaves separately */
-  grid-template-rows: auto;
+  /* grid-template-rows: auto;
   padding: .15em;
-  width: 90%;
+  width: 90%; */
 }
 /* nav {
   display: inline;
@@ -37,8 +37,40 @@
 } */
 
 /******************** Product Overview ********************/
+#overview-container {
+  /* display: flex; */
+}
+#image-gallery {
+  display: block;
+  background-color: black;
+  height: 500px;
+  position: relative;
+  width: 500px;
+}
 
+#main-image{
+  /* left: -50%; */
+  max-height: 500px;
+  max-width: 500px;
+  position: absolute;
+  /* top: -50%; */
+  z-index: 1;
+}
 
+#gallery-thumbnails{
+  position: absolute;
+  z-index: 2;
+}
+
+#gallery-thumbnails div{
+  height:60px;
+  overflow: hidden;
+  width: 60px;
+}
+.gallery-thumbnail{
+  max-height: 100px;
+  max-width: 100px;
+}
 
 /****************** Related Items & Outfit ****************/
 
