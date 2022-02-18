@@ -1,9 +1,10 @@
 /************************* Global *************************/
 
 #app {
-  border: 1px solid black;
+  font-family: Arial, Helvetica, sans-serif;
+  /* border: 1px solid black;
   display: inline-grid;
-  grid-template-columns: auto;
+  grid-template-columns: auto; */
   /* grid-template-columns: 12em 1fr; <-- can set how each line behaves separately */
   /* grid-template-rows: auto; */
   padding: .15em;
@@ -37,9 +38,57 @@
 } */
 
 /******************** Product Overview ********************/
-#overview-container {
-  /* display: flex; */
+.gallery-thumbnail{
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
 }
+
+#overview-container {
+  /* border: 5px solid red; */
+}
+
+#image-gallery {
+  /* border: 5px solid blue; */
+}
+
+#overview-container {
+  /* display: inline-grid; */
+}
+
+#product-information {
+  /* border: 5px solid green; */
+}
+
+#slogan-description-features {
+  /* border: 5px solid purple; */
+}
+
+#selected-styles {
+  /* border: 5px solid orange; */
+}
+#styles-thumbnails-container div{
+  display: flex;
+  flex-wrap: wrap;
+}
+.style-thumbnail-container {
+  height: 70px;
+  margin: 10px;
+  width: 70px;
+}
+
+.style-thumbnail-image {
+  border: 1px solid black;
+  border-radius: 50%;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+#cart {
+  /* border: 5px solid pink; */
+}
+
 #image-gallery {
   display: block;
   background-color: black;
@@ -47,7 +96,6 @@
   position: relative;
   width: 500px;
 }
-
 
 #main-image{
   object-fit: cover;
@@ -58,8 +106,6 @@
 }
 
 #gallery-thumbnails{
-  flex-grow: 2;
-  order: 1;
   position: absolute;
   z-index: 2;
 }
@@ -71,14 +117,46 @@
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.4);
   height:60px;
   margin: 20px;
-  /* overflow: hidden; */
   width: 60px;
 }
-.gallery-thumbnail{
-  object-fit: cover;
-  height: 100%;
+
+#cart {
+  display: inline;
+  /* display: flex;
+  flex-wrap: wrap; */
+}
+select, button {
+  background: none;
+  border: none;
+  font-size: 1em;
+  outline: none;
+  padding-right: none;
+  text-align: left;
   width: 100%;
 }
+
+#select-size, #select-quantity, #add-to-bag {
+  background-color: white;
+  border: 1px solid black;
+  display: inline-block;
+  height: 20px;
+  padding: .75em;
+  margin: .5em;
+  vertical-align: middle;
+  width: 200px;
+}
+
+#add-to-bag button {
+  padding: 0;
+  margin-right: 0;
+  width: 186.2px;
+}
+#add-to-bag:hover button, #add-to-bag:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
 
 /****************** Related Items & Outfit ****************/
 

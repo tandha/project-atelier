@@ -4,8 +4,8 @@
   "description": "FEC project",
   "main": "index.js",
   "scripts": {
-    "test": "jest test.js --env=jsdom",
-    "overview-test": "jest client/src/components/product_overview/test/test.js --env=jsdom --coverage" ,
+    "test": "jest test.js --env=jsdom --coverage",
+    "overview-test": "jest client/src/components/product_overview/test/test.js --env=jsdom --coverage",
     "related-test": "jest client/src/components/related_items_outfit_creation/testing/test.js --env=jsdom",
     "reviews-test": "jest client/src/components/ratings_and_reviews/test/test.js --env=jsdom",
     "build": "webpack --watch",
@@ -33,6 +33,7 @@
     "path": "^0.12.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-icons": "^4.3.1",
     "react-test-renderer": "^17.0.2",
     "webpack": "^5.68.0"
   },

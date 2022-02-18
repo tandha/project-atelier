@@ -83,23 +83,32 @@ class Cart extends React.Component {
     return (
       <div id='cart'>
         <form id='cart-form' onSubmit={this.addToCart.bind(this)}>
-          <select onChange={this.setSizeSelection.bind(this)} id='select-size'>
-            <option>Select Size</option>
-            {
-              this.state.availableSizes.map((size, i) => {
-                return <Option key={i} option={size}/>;
-              })
-            }
-          </select>
-          <select onChange={this.setQuantitySelection.bind(this)}id='select-quantity'>
-            <option>-</option>
-            {
-              this.state.availableQuantities.map((qty) => {
-                return <Option key={qty} option={qty}/>;
-              })
-            }
-          </select>
-          <button>Add To Bag</button>
+          <div id='select-size'>
+            <select onChange={this.setSizeSelection.bind(this)} >
+              <option>SELECT SIZE</option>
+              {
+                this.state.availableSizes.map((size, i) => {
+                  return <Option key={i} option={size}/>;
+                })
+              }
+            </select>
+
+          </div>
+          <div id='select-quantity'>
+            <select onChange={this.setQuantitySelection.bind(this)}>
+              <option>-</option>
+              {
+                this.state.availableQuantities.map((qty) => {
+                  return <Option key={qty} option={qty}/>;
+                })
+              }
+            </select>
+
+          </div>
+          <div id='add-to-bag'>
+            <button>ADD TO BAG</button>
+            <span> + </span>
+          </div>
         </form>
       </div>
     );
