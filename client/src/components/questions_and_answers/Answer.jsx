@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import AnswerPhoto from './AnswerPhoto.jsx';
 
 class Answer extends React.Component {
