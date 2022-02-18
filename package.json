@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest test.js --env=jsdom",
-    "overview-test": "jest client/src/components/product_overview/test/test.js --env=jsdom",
+    "overview-test": "jest client/src/components/product_overview/test/test.js --env=jsdom --coverage" ,
+    "related-test": "jest client/src/components/related_items_outfit_creation/testing/test.js --env=jsdom",
     "QA-test": "jest client/src/components/questions_and_answers/test/test.js --env=jsdom --coverage",
     "reviews-test": "jest client/src/components/ratings_and_reviews/test/test.js --env=jsdom",
     "build": "webpack --watch",
@@ -37,6 +38,7 @@
     "webpack": "^5.68.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.2",
     "@babel/cli": "^7.17.0",
     "@babel/core": "^7.17.0",
     "@babel/preset-env": "^7.16.11",

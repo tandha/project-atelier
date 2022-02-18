@@ -29,7 +29,7 @@ class List extends React.Component {
       params: {
         'page': 1,
         'count': 100000,
-        'sort': 'newest',
+        'sort': this.state.currentSort,
         'product_id': this.props.productID
       }
     }).then((response) => {
@@ -42,21 +42,24 @@ class List extends React.Component {
 
   updateDisplayedReviews() {
     let displayedReviews = this.state.reviews.slice(0, this.state.listLength);
-    this.setState({ displayedReviews });
+    let listMaxed;
+    displayedReviews.length >= this.state.reviews.length ? listMaxed = true : listMaxed = false;
+    this.setState({ displayedReviews, listMaxed });
   }
 
   updateSort(sort) {
-
+    this.setState({ currentSort: sort }, () => this.getReviews());
   }
 
   updateLength() {
-
+    let newLength = this.state.listLength + 2;
+    this.setState({ listLength: newLength }, () => this.updateDisplayedReviews());
   }
 
   render() {
     return (
       <div id='review-list'>
-        <Sort updateSort={this.updateSort.bind(this)}/>
+        <Sort updateSort={this.updateSort.bind(this)} numReviews={this.state.reviews.length}/>
 
         <div id='review-tiles'>
           {this.state.displayedReviews.map((review, index) => {
@@ -64,7 +67,7 @@ class List extends React.Component {
           })}
         </div>
 
-        <Buttons updateLength={this.updateLength.bind(this)}/>
+        <Buttons updateLength={this.updateLength.bind(this)} listMaxed={this.state.listMaxed}/>
       </div>)
     ;
   }
