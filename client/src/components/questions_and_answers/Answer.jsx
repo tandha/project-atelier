@@ -8,10 +8,20 @@ class Answer extends React.Component {
       AnswerHelpful: false,
       reported: false
     };
+
+    this.renderAnswererName = this.renderAnswererName.bind(this);
     this.renderAnswerHelpfulBtn = this.renderAnswerHelpfulBtn.bind(this);
     this.markAnswerHelpful = this.markAnswerHelpful.bind(this);
     this.renderReportBtn = this.renderReportBtn.bind(this);
     this.reportAnswer = this.reportAnswer.bind(this);
+  }
+
+  renderAnswererName() {
+    if (this.props.answer.answerer_name === 'Seller') {
+      return ( <b>{this.props.answer.answerer_name}</b> );
+    } else {
+      return ( <span>{this.props.answer.answerer_name}</span> );
+    }
   }
 
   renderAnswerHelpfulBtn() {
@@ -60,9 +70,8 @@ class Answer extends React.Component {
         <div> {this.props.answer.body} </div>
         {/* <div> {this.props.answer.photos[0]} </div> */}
         <div style={smallStyle}>
-          by {this.props.answer.answerer_name}, {renderDate(this.props.answer.date.toString())} | Helpful?
-          {this.renderAnswerHelpfulBtn()}
-          | {this.renderReportBtn()}
+          by {this.renderAnswererName()}, {renderDate(this.props.answer.date.toString())} | Helpful?
+          {this.renderAnswerHelpfulBtn()} | {this.renderReportBtn()}
         </div>
       </div>
     );

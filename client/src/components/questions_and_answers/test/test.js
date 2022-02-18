@@ -62,10 +62,10 @@ describe.only('Q&A', () => {
     // test on sort by helpfulness
 
     // test on click helpful event
-    // const helpfulBtn = screen.getByRole('help');
-    // expect(helpfulBtn).not.toBeDisabled();
-    // fireEvent.click(helpfulBtn);
-    // expect(helpfulBtn).toBeDisabled();
+    const helpfulBtn = screen.getByRole('help');
+    expect(helpfulBtn).not.toBeDisabled();
+    fireEvent.click(helpfulBtn);
+    expect(helpfulBtn).toBeDisabled();
 
     // test on click report event
   });

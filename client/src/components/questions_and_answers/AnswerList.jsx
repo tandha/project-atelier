@@ -2,9 +2,14 @@ import React from 'react';
 import Answer from './Answer.jsx';
 
 const AnswerList = (props) => {
+  let answerBySeller = [];
+  let answerByOther = [];
+  props.answers.forEach((answer) => {
+    return answer.answerer_name === 'Seller' ? answerBySeller.push(answer) : answerByOther.push(answer);
+  });
 
-  let sortedAnswers = props.answers.sort(sortByHelpfulness);
-  let displayList = sortedAnswers.slice(0, props.answerNumbers);
+  let sortedAnswersByOther = answerByOther.sort(sortByHelpfulness);
+  let displayList = answerBySeller.concat(sortedAnswersByOther).slice(0, props.answerNumbers);
 
   return (
     <div>
