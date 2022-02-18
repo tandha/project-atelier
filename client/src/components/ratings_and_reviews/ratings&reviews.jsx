@@ -9,7 +9,7 @@ class RatingsAndReview extends React.Component {
     this.state = {
       currentFilter: 'all'
     };
-    this.placeHolderID = 64621;
+    this.placeHolderID = 64631;
   }
 
   updateFilter(filter) {
@@ -23,7 +23,7 @@ class RatingsAndReview extends React.Component {
           starRating={this.props.starRating}
           updateStarRating={this.props.updateStarRating}
           updateFilter={this.updateFilter.bind(this)}
-          productID={this.props.productID}
+          productID={this.placeHolderID}
         />
         <List
           productID={this.placeHolderID}
