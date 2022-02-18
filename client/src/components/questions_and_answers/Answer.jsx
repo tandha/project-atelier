@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 class Answer extends React.Component {
   constructor(props) {
@@ -7,23 +8,40 @@ class Answer extends React.Component {
       AnswerHelpful: false,
       reported: false
     };
+
+    this.renderAnswererName = this.renderAnswererName.bind(this);
     this.renderAnswerHelpfulBtn = this.renderAnswerHelpfulBtn.bind(this);
     this.markAnswerHelpful = this.markAnswerHelpful.bind(this);
     this.renderReportBtn = this.renderReportBtn.bind(this);
     this.reportAnswer = this.reportAnswer.bind(this);
   }
 
+  renderAnswererName() {
+    if (this.props.answer.answerer_name === 'Seller') {
+      return ( <b>{this.props.answer.answerer_name}</b> );
+    } else {
+      return ( <span>{this.props.answer.answerer_name}</span> );
+    }
+  }
+
   renderAnswerHelpfulBtn() {
     if (this.state.AnswerHelpful) {
-      return ( <button role="help" disabled={true} style={buttonStyle}> Helpful </button> );
+      return ( <button role="help" disabled={true} style={buttonStyle}> Yes ({this.props.answer.helpfulness + 1}) </button> );
     } else {
-      return ( <button role="help" style={smallStyle} onClick={this.markAnswerHelpful}> Yes </button> );
+      return ( <button role="help" style={smallStyle} onClick={this.markAnswerHelpful}> Yes ({this.props.answer.helpfulness}) </button> );
     }
   }
 
   markAnswerHelpful() {
-    this.setState({ AnswerHelpful: true });
-    // axios put
+    axios({
+      method: 'put',
+      url: `/qa/answers/${this.props.answer.id}/helpful`,
+      params: {'answer_id': this.props.answer.id}
+    }).then(()=> {
+      this.setState({ AnswerHelpful: true });
+    }).catch((err)=> {
+      console.log('error marking answer helpful', err);
+    });
   }
 
   renderReportBtn() {
@@ -35,18 +53,25 @@ class Answer extends React.Component {
   }
 
   reportAnswer() {
-    this.setState({ reported: true });
-    // axios put
+    axios({
+      method: 'put',
+      url: `/qa/answers/${this.props.answer.id}/report`,
+      params: {'answer_id': this.props.answer.id}
+    }).then(()=> {
+      this.setState({ reported: true });
+    }).catch((err)=> {
+      console.log('error reporting answer', err);
+    });
   }
 
   render() {
     return (
       <div>
-        <div><b>A:</b> {this.props.answer.body} </div>
+        <div> {this.props.answer.body} </div>
+        {/* <div> {this.props.answer.photos[0]} </div> */}
         <div style={smallStyle}>
-          by {this.props.answer.answerer_name}, {renderDate(this.props.answer.date.toString())} | Helpful?
-          {this.renderAnswerHelpfulBtn()}
-          | {this.renderReportBtn()}
+          by {this.renderAnswererName()}, {renderDate(this.props.answer.date.toString())} | Helpful?
+          {this.renderAnswerHelpfulBtn()} | {this.renderReportBtn()}
         </div>
       </div>
     );
@@ -58,13 +83,12 @@ export default Answer;
 const renderDate = (string) => {
   const date = new Date(string);
   const render = new Intl.DateTimeFormat('en-GB', { dateStyle: 'medium', timeStyle: 'long' }).format(date);
-  return render;
+  return render.split(',')[0];
 };
 
 var smallStyle = {
   background: 'none',
   border: 'none',
-  padding: '5px',
   fontSize: '12px',
   display: 'inline',
   color: 'grey'
@@ -72,7 +96,7 @@ var smallStyle = {
 
 var buttonStyle = {
   fontWeight: 'bold',
-  'text-decoration': 'underline',
+  textDecoration: 'underline',
   background: 'none',
   border: 'none',
   padding: '5px',
