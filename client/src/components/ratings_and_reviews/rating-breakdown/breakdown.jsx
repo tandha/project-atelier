@@ -58,7 +58,7 @@ class Breakdown extends React.Component {
           updateFilter={this.props.updateFilter}
           currentFilter={this.props.currentFilter}
         />
-        <Styles />
+        <Styles metaData={this.state.reviewMetaData}/>
       </div>
     );
   }
