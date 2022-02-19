@@ -21,7 +21,7 @@ class QuestionsAndAnswers extends React.Component {
     this.renderMoreQuestionBtn = this.renderMoreQuestionBtn.bind(this);
     this.clickMoreQuestions = this.clickMoreQuestions.bind(this);
     this.clickAddQuestion = this.clickAddQuestion.bind(this);
-    this.submitQuestions = this.submitQuestions.bind(this);
+    this.submitQuestion = this.submitQuestion.bind(this);
   }
 
   componentDidMount() {
@@ -78,9 +78,10 @@ class QuestionsAndAnswers extends React.Component {
     this.setState(prevState => ({showQuestionModal: !prevState.showQuestionModal}));
   }
 
-  submitQuestions(e) {
+  submitQuestion(e) {
     e.preventDefault();
     // validate the questions
+
     // axios post method
     // axios({
     //   method: 'post',
@@ -112,7 +113,7 @@ class QuestionsAndAnswers extends React.Component {
         {this.renderMoreQuestionBtn()}
         <button style={largeBtnStyle} onClick={this.clickAddQuestion}> ADD A QUESTION + </button>
         <QuestionModal
-          submitQuestions = {this.submitQuestions}
+          submitQuestions = {this.submitQuestion}
           productName = {this.props.product.name}
           showQuestionModal = {this.state.showQuestionModal}
         />

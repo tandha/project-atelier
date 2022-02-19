@@ -1,13 +1,13 @@
 import React from 'react';
 
-const QuestionModal = (props) => {
-  if (props.showQuestionModal === false) {
+const AnswerModal = (props) => {
+  if (props.showAnswerModal === false) {
     return null;
   }
   return (
     <div>
-      <form onSubmit={props.submitQuestion}>
-        <h2>Ask Your Question</h2>
+      <form onSubmit={props.submitAnswer}>
+        {/* <h2>Ask Your Question</h2>
         <h3>About the {props.productName}</h3>
         <p>Your Question?*</p>
         <textarea name="question" rows="5" cols="100" maxLength="1000"></textarea>
@@ -17,10 +17,10 @@ const QuestionModal = (props) => {
         <p>Your email?*</p>
         <textarea name="email" rows="2" cols="50" placeholder="Why did you like the product or not?" maxLength="60"></textarea>
         <p style={{ color: 'gray' }}>For authentication reasons, you will not be emailed</p>
-        <button type="submit">Submit Question</button>
+        <button type="submit">Submit Question</button> */}
       </form>
     </div>
   );
 };
 
-export default QuestionModal;
+export default AnswerModal;

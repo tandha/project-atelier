@@ -1,5 +1,8 @@
 module.exports.exampleQuestions = {
-  'product_id': '64620',
+  'product': {
+    'id': '64620',
+    'name': 'Morning Joggers'
+  },
   'results': [
     { 'question_id': 563775,
       'question_body': 'Does this product run big or small?',

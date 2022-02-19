@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import AnswerModal from './ModalForm/AnswerModal.jsx';
 import AnswerList from './AnswerList.jsx';
 
 class Question extends React.Component {
@@ -8,12 +9,16 @@ class Question extends React.Component {
     this.state = {
       QuestionHelpful: false,
       answers: Object.values(this.props.question.answers),
-      answerNumbers: 2
+      answerNumbers: 2,
+      showAnswerModal: false
     };
+
     this.renderQuestionHelpfulBtn = this.renderQuestionHelpfulBtn.bind(this);
     this.markQuestionHelpful = this.markQuestionHelpful.bind(this);
     this.renderMoreAnswersBtn = this.renderMoreAnswersBtn.bind(this);
     this.clickMoreAnswers = this.clickMoreAnswers.bind(this);
+    this.clickAddAnswer = this.clickAddAnswer.bind(this);
+    this.submitAnswer = this.submitAnswer.bind(this);
   }
 
   renderQuestionHelpfulBtn() {
@@ -62,6 +67,31 @@ class Question extends React.Component {
     }
   }
 
+  clickAddAnswer() {
+    this.setState(prevState => ({showAnswerModal: !prevState.showAnswerModal}));
+  }
+
+  submitAnswer(e) {
+    e.preventDefault();
+    // validate the questions
+
+    // axios post method
+    // axios({
+    //   method: 'post',
+    //   url: '/qa/answers',
+    //   data: {
+    //     body: e.target[0].value,
+    //     name: e.target[1].value,
+    //     email: e.target[2].value,
+    //     'product_id': 64620 //this.props.product.id
+    //   }
+    // }).then(()=> {
+    //   this.setState({ showQuestionModal: false }, this.getProductQuestions());
+    // }).catch((err)=> {
+    //   console.log('error adding question', err);
+    // });
+  }
+
   render() {
     return (
       <div>
@@ -69,6 +99,11 @@ class Question extends React.Component {
         <div style={smallStyle}>
           Helpful? {this.renderQuestionHelpfulBtn()} | Add Answer
         </div>
+        <AnswerModal
+          submitAnswer = {this.submitAnswer}
+          // productName = {this.props.product.name}
+          showAnswerModal = {this.state.showAnswerModal}
+        />
         <AnswerList
           answers={this.state.answers}
           answerNumbers={this.state.answerNumbers}
