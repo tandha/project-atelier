@@ -5,7 +5,7 @@ const StyleThumbnail = (props) => {
     <div>
       {
         props.styles.results.map((style, i) => {
-          return <img width='50' onClick={props.changeStyle} key={i} id={style.style_id} src={style.photos[0].thumbnail_url}></img>;
+          return <div className='style-thumbnail-container'><img className='style-thumbnail-image' onClick={props.changeStyle} key={i} id={style.style_id} src={style.photos[0].thumbnail_url}></img></div>;
         })
       }
     </div>
