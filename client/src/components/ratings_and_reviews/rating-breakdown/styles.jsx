@@ -14,16 +14,6 @@ const Styles = (props) => {
     });
   }
 
-  // const renderStyles = () => {
-  //   let render = [];
-  //   for (let style in styles) {
-  //     render.push(
-  //       <p>{style}: {styles[style]}</p>
-  //     );
-  //   }
-  //   return render;
-  // };
-
   return (
     <div id='ratings-breakdown-styles'>
       <br></br>
