@@ -27,9 +27,9 @@ class Answer extends React.Component {
 
   renderAnswerHelpfulBtn() {
     if (this.state.AnswerHelpful) {
-      return ( <button role="help" disabled={true} style={buttonStyle}> Yes ({this.props.answer.helpfulness + 1}) </button> );
+      return ( <button role="help" disabled style={buttonStyle}> Yes ({this.props.answer.helpfulness + 1}) </button> );
     } else {
-      return ( <button role="help" style={smallStyle} onClick={this.markAnswerHelpful}> Yes ({this.props.answer.helpfulness}) </button> );
+      return ( <button role="help" style={smallBtnStyle} onClick={this.markAnswerHelpful}> Yes ({this.props.answer.helpfulness}) </button> );
     }
   }
 
@@ -47,9 +47,9 @@ class Answer extends React.Component {
 
   renderReportBtn() {
     if (this.state.reported) {
-      return ( <button role="report" disabled={true} style={buttonStyle}> Reported </button> );
+      return ( <button role="report" disabled style={buttonStyle}> Reported </button> );
     } else {
-      return ( <button role="report" style={smallStyle} onClick={this.reportAnswer}> Report </button> );
+      return ( <button role="report" style={smallBtnStyle} onClick={this.reportAnswer}> Report </button> );
     }
   }
 
@@ -67,8 +67,8 @@ class Answer extends React.Component {
 
   render() {
     return (
-      <div>
-        <div><b>A:</b> {this.props.answer.body} </div>
+      <div style={{width: '150%'}}>
+        <div> {this.props.answer.body} </div>
         <div>
           {this.props.answer.photos.map((photo, index) => (
             <AnswerPhoto photo={photo} key={index}/>
@@ -87,11 +87,21 @@ export default Answer;
 
 const renderDate = (string) => {
   const date = new Date(string);
-  const render = new Intl.DateTimeFormat('en-GB', { dateStyle: 'medium', timeStyle: 'long' }).format(date);
-  return render.split(',')[0];
+  const render = new Intl.DateTimeFormat('en-GB', { dateStyle: 'long' }).format(date);
+  return render;
 };
 
 var smallStyle = {
+  width: '50%',
+  background: 'none',
+  border: 'none',
+  fontSize: '12px',
+  display: 'inline',
+  color: 'grey'
+};
+
+var smallBtnStyle = {
+  width: '12%',
   background: 'none',
   border: 'none',
   fontSize: '12px',
@@ -100,6 +110,7 @@ var smallStyle = {
 };
 
 var buttonStyle = {
+  width: '12%',
   fontWeight: 'bold',
   textDecoration: 'underline',
   background: 'none',

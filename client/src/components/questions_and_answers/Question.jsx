@@ -56,13 +56,9 @@ class Question extends React.Component {
 
   clickMoreAnswers() {
     if (this.state.answerNumbers < this.state.answers.length) {
-      this.setState({
-        answerNumbers: this.state.answers.length
-      });
+      this.setState({ answerNumbers: this.state.answers.length });
     } else {
-      this.setState({
-        answerNumbers: 2
-      });
+      this.setState({ answerNumbers: 2 });
     }
   }
 
@@ -93,20 +89,22 @@ var QAstyle = {
 };
 
 var smallStyle = {
+  width: '10%',
   background: 'none',
   border: 'none',
-  padding: '5px',
+  // padding: '5px',
   fontSize: '12px',
   display: 'inline',
   color: 'grey'
 };
 
 var buttonStyle = {
+  width: '10%',
   fontWeight: 'bold',
   textDecoration: 'underline',
   background: 'none',
   border: 'none',
-  padding: '5px',
+  // padding: '5px',
   fontSize: '12px',
   display: 'inline',
   color: 'grey'

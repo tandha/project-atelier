@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import SearchBar from './SearchBar.jsx';
 import QuestionList from './QuestionList.jsx';
+import QuestionModal from './ModalForm/QuestionModal.jsx';
 
 class QuestionsAndAnswers extends React.Component {
   constructor(props) {
@@ -11,13 +12,16 @@ class QuestionsAndAnswers extends React.Component {
       questions: [],
       questionNumbers: 2,
       searching: false,
-      searchedQuestions: []
+      searchedQuestions: [],
+      showQuestionModal: false
     };
     this.getProductQuestions = this.getProductQuestions.bind(this);
     this.handleSearchBar = this.handleSearchBar.bind(this);
     this.handleSearchQuestions = this.handleSearchQuestions.bind(this);
     this.renderMoreQuestionBtn = this.renderMoreQuestionBtn.bind(this);
     this.clickMoreQuestions = this.clickMoreQuestions.bind(this);
+    this.clickAddQuestion = this.clickAddQuestion.bind(this);
+    this.submitQuestions = this.submitQuestions.bind(this);
   }
 
   componentDidMount() {
@@ -33,9 +37,7 @@ class QuestionsAndAnswers extends React.Component {
         count: 100
       }
     }).then((res)=> {
-      this.setState({
-        questions: res.data.data.results
-      });
+      this.setState({ questions: res.data.data.results });
     }).catch((err)=> {
       console.log('error getting questions', err);
     });
@@ -68,10 +70,32 @@ class QuestionsAndAnswers extends React.Component {
 
   clickMoreQuestions() {
     if (this.state.questionNumbers < this.state.questions.length) {
-      this.setState({
-        questionNumbers: this.state.questionNumbers + 2
-      });
+      this.setState({ questionNumbers: this.state.questionNumbers + 2 });
     }
+  }
+
+  clickAddQuestion() {
+    this.setState(prevState => ({showQuestionModal: !prevState.showQuestionModal}));
+  }
+
+  submitQuestions(e) {
+    e.preventDefault();
+    // validate the questions
+    // axios post method
+    // axios({
+    //   method: 'post',
+    //   url: '/qa/answers',
+    //   data: {
+    //     body: e.target[0].value,
+    //     name: e.target[1].value,
+    //     email: e.target[2].value,
+    //     'product_id': 64620 //this.props.product.id
+    //   }
+    // }).then(()=> {
+    //   this.setState({ showQuestionModal: false }, this.getProductQuestions());
+    // }).catch((err)=> {
+    //   console.log('error adding question', err);
+    // });
   }
 
   render() {
@@ -86,7 +110,12 @@ class QuestionsAndAnswers extends React.Component {
           searchedQuestions={this.state.searchedQuestions}
         />
         {this.renderMoreQuestionBtn()}
-        <button style={largeBtnStyle}> ADD A QUESTION + </button>
+        <button style={largeBtnStyle} onClick={this.clickAddQuestion}> ADD A QUESTION + </button>
+        <QuestionModal
+          submitQuestions = {this.submitQuestions}
+          productName = {this.props.product.name}
+          showQuestionModal = {this.state.showQuestionModal}
+        />
       </div>
     );
   }
@@ -95,10 +124,12 @@ class QuestionsAndAnswers extends React.Component {
 export default QuestionsAndAnswers;
 
 var largeBtnStyle = {
+  width: '40%',
   background: 'none',
   height: '50px',
   color: 'grey',
   border: '1.5px solid grey',
   fontWeight: 'bold',
   'marginRight': '10px',
+  display: 'inline'
 };
