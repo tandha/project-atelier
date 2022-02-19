@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import AnswerPhoto from './AnswerPhoto.jsx';
 
 class Answer extends React.Component {
   constructor(props) {
@@ -67,8 +68,12 @@ class Answer extends React.Component {
   render() {
     return (
       <div>
-        <div> {this.props.answer.body} </div>
-        {/* <div> {this.props.answer.photos[0]} </div> */}
+        <div><b>A:</b> {this.props.answer.body} </div>
+        <div>
+          {this.props.answer.photos.map((photo, index) => (
+            <AnswerPhoto photo={photo} key={index}/>
+          ))}
+        </div>
         <div style={smallStyle}>
           by {this.renderAnswererName()}, {renderDate(this.props.answer.date.toString())} | Helpful?
           {this.renderAnswerHelpfulBtn()} | {this.renderReportBtn()}

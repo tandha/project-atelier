@@ -29,7 +29,7 @@ class QuestionsAndAnswers extends React.Component {
       method: 'get',
       url: 'qa/questions',
       params: {
-        'product_id': 64621, //this.props.product.id
+        'product_id': 64620, //this.props.product.id
         count: 100
       }
     }).then((res)=> {
