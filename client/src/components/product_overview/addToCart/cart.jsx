@@ -5,7 +5,7 @@ class Cart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedStyle: this.props.selectedStyle,
+      // selectedStyle: this.props.selectedStyle,
       availableSizes: [],
       availableQuantities: [],
       selectedSize: 'tbd',
@@ -17,12 +17,12 @@ class Cart extends React.Component {
     this.setAvailableSizes();
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.selectedStyle !== this.props.selectedStyle) {
-      this.setAvailableSizes();
-      this.resetForm();
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.selectedStyle !== this.props.selectedStyle) {
+  //     this.setAvailableSizes();
+  //     this.resetForm();
+  //   }
+  // }
 
   resetForm() {
     document.getElementById('cart-form').reset();
