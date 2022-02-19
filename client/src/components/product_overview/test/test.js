@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import data from '../../../sampleData/sampleData.js';
 import ProductOverview from '../overview.jsx';
 import ImagesCarousel from '../imageGallery/imagesCarousel.jsx';
@@ -18,15 +19,18 @@ describe('Overview Widget Components Render', () => {
       changePhoto: function(e) { return e; }
     };
     render(<ImagesCarousel {...props}/>);
-    //TODO: expect an element with an id of main-image to exist
+    // const image = screen.getByRole('img');
+    const image = screen.getByTestId('main-image');
+    expect(image).toHaveAttribute('src', props.photos[0].url);
   });
+
   test('Renders Thumbnails', () => {
     let props = {
       photos: data.styles.results[0].photos,
       mainPhotoIndex: 0,
       changePhoto: function(e) { return e; }
     };
-    render(<ImagesCarousel {...props}/>);
+    const { container } = render(<ImagesCarousel {...props}/>);
     //TODO: expect x number of children rendered to page
     //TODO: expect selecting a thumbnail to change main image
     //TODO: expect selecting a thumbnail to remove image clicked from thumbnails list
