@@ -34,6 +34,7 @@ bundle.js.LICENSE.txt
 config.js
 .DS_Store
 .vscode
+package-lock.json
 
 # Floobits
 .floo
