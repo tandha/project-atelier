@@ -34,7 +34,7 @@ class ProductOverview extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id='overview-container'>
         <ImageCarousel changePhoto={this.changeSelectedPhoto.bind(this)} mainPhotoIndex={this.state.mainPhotoIndex} photos={this.state.selectedStyle.photos} selectedStyle={this.state.selectedStyle}/>
         <Information product={this.props.product} selectedStyle={this.state.selectedStyle} starRating={this.props.starRating}/>
         <StyleSelector changeStyle={this.changeSelectedStyle.bind(this)} name={this.state.selectedStyle.name} styles={this.props.styles}/>

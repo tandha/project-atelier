@@ -22,8 +22,8 @@ class App extends React.Component {
 
 
   componentDidMount() {
-    this.getProduct(64620);
-    this.getStyles(64620);
+    this.getProduct(64622);
+    this.getStyles(64622);
   }
 
   getProduct(id) {
