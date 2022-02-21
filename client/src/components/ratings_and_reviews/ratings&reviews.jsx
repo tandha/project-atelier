@@ -42,6 +42,7 @@ class RatingsAndReview extends React.Component {
         <List
           productID={this.placeHolderID}
           currentFilter={this.state.currentFilter}
+          product={this.props.product}
         />
       </div>
     );
