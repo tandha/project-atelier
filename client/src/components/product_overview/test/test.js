@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import data from '../../../sampleData/sampleData.js';
 import ProductOverview from '../overview.jsx';
@@ -11,6 +11,8 @@ import StyleThumbnail from '../styleSelector/StyleThumbnail.jsx';
 import Cart from '../addToCart/cart.jsx';
 import Option from '../addToCart/option.jsx';
 
+
+//////////////// Render Tests ////////////////
 describe('Overview Widget Components Render', () => {
   test('Renders Image Gallery', () => {
     let props = {
@@ -27,13 +29,6 @@ describe('Overview Widget Components Render', () => {
     };
     render(<Information {...props}/>);
 
-  });
-  test('Renders Product Features', () => {
-    let props = {
-      features: data.product.features,
-    };
-    render(<FeatureInformation {...props}/>);
-    //TODO: expect x number of elements to exist
   });
   test('Renders Style Selector', () => {
     let props = {
@@ -67,6 +62,7 @@ describe('Overview Widget Components Render', () => {
   });
 });
 
+//////////////// Image Gallery Tests ////////////////
 describe('Image Gallery Component', () => {
   test('Renders Main Image', () => {
     let props = {
@@ -79,7 +75,7 @@ describe('Image Gallery Component', () => {
     expect(image).toHaveAttribute('src', props.photos[0].url);
   });
 
-  test('Renders Correct Number of Thumbnails', () => {
+  test('Renders Correct Number of Image Thumbnails', () => {
     let props = {
       photos: data.styles.results[0].photos,
       mainPhotoIndex: 0,
@@ -93,6 +89,7 @@ describe('Image Gallery Component', () => {
   //TODO: expect selecting a thumbnail to change main image that that thumbnail's corresponding url
 });
 
+//////////////// Product Information Tests ////////////////
 describe('Product Information Component', () => {
   let props = {
     product: {
@@ -100,11 +97,11 @@ describe('Product Information Component', () => {
       slogan: 'Best onsie ever',
       description: 'It is a onsie',
       category: 'Clothes',
-      features: [{feature: 'fabric', value: '100% cotton'}, {feature: 'Care', value: 'Machine Wash'}]
+      features: [{feature: 'Fabric', value: '100% cotton'}, {feature: 'Care', value: 'Machine Wash'}, {feature: 'Warranty', value: 'Lifetime'}, {feature: 'Made In', value: 'USA'}]
     },
     selectedStyle: data.styles.results[0]
   };
-  test('Renders Product Information Properties to the Screen', () => {
+  test('Renders All Product Information Properties to the Screen', () => {
     render(<Information {...props}/>);
     expect(screen.getByText('Kai Onesie')).toBeInTheDocument();
     expect(screen.getByText('Best onsie ever')).toBeInTheDocument();
@@ -119,7 +116,73 @@ describe('Product Information Component', () => {
     });
 
   });
-
+  //TODO: Anchor works
+  //TODO: Renders Price and Sale Price
   //TODO: renders star svgs
   //TODO: add to outfit button works
+});
+
+//////////////// Style Selector Tests ////////////////
+describe('Style Selector Component', () => {
+  let props = {
+    name: 'Some Name',
+    styles: data.styles,
+    changeStyle: function(e) { return e; }
+  };
+  test('Renders The Current Style\'s name', () => {
+    render(<StyleSelector {...props}/>);
+    const name = screen.getByTestId('selected-style-name');
+    expect(name).toHaveTextContent('Some Name');
+
+  });
+  test('Renders The Correct Number of Styles', () => {
+    const { getAllByRole } = render(<StyleSelector {...props}/>);
+    const thumbnailList = getAllByRole('listitem');
+    expect(thumbnailList).toHaveLength(2);
+
+  });
+  //TODO: expect selecting style to change main image //Integration test?
+});
+
+//////////////// Cart Tests ////////////////
+describe('Cart Component', () => {
+  test('Select Size Element Exists', () => {
+    let props = {
+      selectedStyle: data.styles.results[0]
+    };
+    render(<Cart {...props}/>);
+    const select = screen.getByDisplayValue('SELECT SIZE');
+    expect(select).toBeInTheDocument();
+  });
+  test('Select Quantity Element Exists', () => {
+    let props = {
+      selectedStyle: data.styles.results[0]
+    };
+    render(<Cart {...props}/>);
+    const select = screen.getByTestId('select-quantity');
+    expect(select).toBeInTheDocument();
+  });
+  test('When a Size is Selected The Correct Quantity Renders', () => {
+    let props = {
+      selectedStyle: data.styles.results[0]
+    };
+    const { getByTestId, getAllByTestId } = render(<Cart {...props}/>);
+    let selectSize = getByTestId('select-size').querySelector('select');
+    fireEvent.change(selectSize, {target: { value: 'S'}});
+    let options = getAllByTestId('select-option-quantity');
+    expect(options).toHaveLength(15);
+  });
+  test('When Add To Bag is Clicked The Form Should Reset', () => {
+    let props = {
+      selectedStyle: data.styles.results[0]
+    };
+    const { getByText, getByTestId, getAllByTestId } = render(<Cart {...props}/>);
+    let button = getByText('ADD TO BAG');
+    fireEvent.click(button);
+    let selectSize = getByTestId('select-size');
+    let selectQuantity = getByTestId('select-quantity');
+    expect(selectSize.querySelector('select')).toHaveTextContent('SELECT SIZE');
+    expect(selectQuantity.querySelector('select')).toHaveTextContent('-');
+  });
+  //TODO: When a different style is selected, the form should reset //Integration test?
 });
