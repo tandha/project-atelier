@@ -17,7 +17,7 @@ class List extends React.Component {
       listMaxed: false,
       currentSort: 'relevant',
       currentFilter: [],
-      renderModal: true
+      renderModal: false
     };
   }
 
@@ -108,7 +108,9 @@ class List extends React.Component {
           listMaxed={this.state.listMaxed}
           displayModal={this.displayModal.bind(this)}/>
 
-        {this.state.renderModal ? <NewReview product={this.props.product}/> : <div></div>}
+        {this.state.renderModal
+          ? <NewReview product={this.props.product} chars={this.props.chars}/>
+          : <div></div>}
 
       </div>)
     ;

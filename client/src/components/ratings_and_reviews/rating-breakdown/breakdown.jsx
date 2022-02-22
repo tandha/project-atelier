@@ -25,7 +25,9 @@ class Breakdown extends React.Component {
       .then(response => {
         let ratings = response.data.data.ratings;
         this.calculateAverageScore(ratings);
-        this.setState({ reviewMetaData: response.data });
+        this.setState({ reviewMetaData: response.data }, () => {
+          this.props.updateChars(this.state.reviewMetaData.data.characteristics);
+        });
       })
       .catch(err => console.log(err));
   }

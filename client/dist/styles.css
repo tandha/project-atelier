@@ -125,7 +125,7 @@
   /* display: flex;
   flex-wrap: wrap; */
 }
-select, button {
+/* select, button {
   background: none;
   border: none;
   font-size: 1em;
@@ -133,7 +133,7 @@ select, button {
   padding-right: none;
   text-align: left;
   width: 100%;
-}
+} */
 
 #select-size, #select-quantity, #add-to-bag {
   background-color: white;
@@ -191,9 +191,18 @@ select, button {
 
 #new-review-content {
   background-color: #fefefe;
-  margin: 300px auto;
+  margin: 30px auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 500px;
-  height: 500px;
+  width: 550px;
+  height: auto;
+}
+
+#new-review-heading {
+  font-size: 30px;
+}
+
+#note {
+  font-size: 15px;
+  font-style: italic;
 }
