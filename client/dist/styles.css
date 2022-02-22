@@ -161,8 +161,6 @@ select, button {
   cursor: pointer;
 }
 #add-to-myoutfit:hover{
-  background-color: black;
-  color: white;
   cursor: pointer;
 }
 

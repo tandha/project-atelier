@@ -1,6 +1,6 @@
 import React from 'react';
 import Option from './option.jsx';
-import { IoIosStarOutline } from 'react-icons/io';
+import { IoIosStarOutline, IoIosStar} from 'react-icons/io';
 
 
 class Cart extends React.Component {
@@ -10,7 +10,7 @@ class Cart extends React.Component {
       availableSizes: [],
       availableQuantities: [],
       selectedSize: 'tbd',
-      selectedQuantity: 'tbd'
+      selectedQuantity: 'tbd',
     };
   }
 
@@ -74,6 +74,11 @@ class Cart extends React.Component {
     this.setState( {selectedQuantity} );
   }
 
+  handleAddToMyOutfit() {
+    console.log(this.props);
+    this.props.toggleOutfit(this.props.productId);
+  }
+
   addToCart(e) {
     //TODO: POST the selected size (but not quantity?) to the API
     e.preventDefault();
@@ -112,7 +117,11 @@ class Cart extends React.Component {
             <span> + </span>
           </div>
           <div id='add-to-myoutfit'>
-            <span><IoIosStarOutline /></span>
+            {
+              this.props.currentProductInOutfit === false ?
+                <span onClick={this.handleAddToMyOutfit.bind(this)}><IoIosStarOutline /></span> :
+                <span onClick={this.handleAddToMyOutfit.bind(this)}><IoIosStar /></span>
+            }
           </div>
         </form>
       </div>

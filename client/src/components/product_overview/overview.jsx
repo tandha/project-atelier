@@ -38,7 +38,7 @@ class ProductOverview extends React.Component {
         <ImageCarousel changePhoto={this.changeSelectedPhoto.bind(this)} mainPhotoIndex={this.state.mainPhotoIndex} photos={this.state.selectedStyle.photos} selectedStyle={this.state.selectedStyle}/>
         <Information product={this.props.product} selectedStyle={this.state.selectedStyle} starRating={this.props.starRating}/>
         <StyleSelector changeStyle={this.changeSelectedStyle.bind(this)} name={this.state.selectedStyle.name} styles={this.props.styles}/>
-        <Cart addToMyOutfit={this.props.addToMyOutfit} selectedStyle={this.state.selectedStyle}/>
+        <Cart productId={this.props.product.id} toggleOutfit={this.props.toggleOutfit} currentProductInOutfit={this.props.currentProductInOutfit} selectedStyle={this.state.selectedStyle}/>
       </div>
     );
   }

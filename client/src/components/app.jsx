@@ -16,6 +16,7 @@ class App extends React.Component {
       product: {},
       styles: {},
       myOutfits: [],
+      currentProductInOutfit: false,
       starRating: 0
     };
   }
@@ -24,6 +25,7 @@ class App extends React.Component {
   componentDidMount() {
     this.getProduct(64622);
     this.getStyles(64622);
+    this.getOutfits();
   }
 
   getProduct(id) {
@@ -44,17 +46,46 @@ class App extends React.Component {
     }).catch((err) => { console.log('An error occured retrieving style data from server', err); });
   }
 
-  addToMyOutfit(id) {
-    let myOutfits = this.state.myOutfits;
-    myOutfits.push(id);
-    this.setState({ myOutfits: myOutfits });
+  getOutfits(id) {
+    axios({
+      method: 'get',
+      url: 'outfits',
+    }).then((res) => {
+      this.setState({ myOutfits: res.data });
+    }).then(() => {
+      if (!this.state.myOutfits.includes(this.state.product.id)) {
+        this.setState({currentProductInOutfit: false });
+      }
+    }).catch((err) => { console.log('An error occured retrieving outfit data from server', err); });
   }
 
-  removeFromMyOutfit(id) {
-    let index = this.state.myOutfits.indexOf(id);
-    let myOutfits = this.state.myOutfits;
-    myOutfits.splice(index, 1);
-    this.setState({ myOutfits: myOutfits });
+  toggleOutfit(id) {
+    if (!this.state.currentProductInOutfit) {
+      axios({
+        method: 'post',
+        url: 'outfits',
+        data: {
+          id: id
+        }
+      }).then(() => {
+        this.setState({ currentProductInOutfit: true });
+      }).then((res) => {
+        this.getOutfits(id);
+      }).catch((err) => { console.log('An error occured adding outfit data to server', err); });
+
+    } else {
+      axios({
+        method: 'delete',
+        url: 'outfits',
+        data: {
+          id: id
+        }
+      }).then(() => {
+        this.setState({ currentProductInOutfit: false });
+      }).then((res) => {
+        this.getOutfits(id);
+      }).catch((err) => { console.log('An error occured adding outfit data to server', err); });
+    }
   }
 
   updateStarRating(rating) {
@@ -67,7 +98,7 @@ class App extends React.Component {
     }
     return (
       <div>
-        <ProductOverview product={this.state.product} styles={this.state.styles} starRating={this.state.starRating} addToMyOutfit={this.addToMyOutfit.bind(this)}/>
+        <ProductOverview currentProductInOutfit={this.state.currentProductInOutfit} product={this.state.product} styles={this.state.styles} starRating={this.state.starRating} toggleOutfit={this.toggleOutfit.bind(this)}/>
         <RelatedItemsOutfitCreation/>
         <QuestionsAndAnswers product={this.state.product}/>
         <RatingsAndReviews
