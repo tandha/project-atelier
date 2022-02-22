@@ -9,6 +9,21 @@ const NewReview = (props) => {
 
   const onSubmit = (event) => {
     event.preventDefault();
+    let starRating = document.querySelector('input[name="star-rating"]:checked').value;
+    let recommended = document.querySelector('input[name="recommend"]:checked').value;
+    let summary = document.querySelector('input[name="summary"]').value;
+    let body = document.querySelector('textarea[name="body"]').value;
+    let nickname = document.querySelector('input[name="nickname"]').value;
+    let email = document.querySelector('input[name="email"]').value;
+
+    let reviewChars = {};
+
+    chars.forEach(char => {
+      let rating = document.querySelector(`input[name=${char}]:checked`).value;
+      reviewChars[char] = rating;
+    });
+
+    debugger;
   };
 
   const onClose = () => {
@@ -25,29 +40,28 @@ const NewReview = (props) => {
         <span>about the {props.product.name}</span><br></br>
         <br></br>
 
-        <form>
-          <div>
-            <input type='radio' id='1star' name='star-rating'></input>
-            <label> 1 star - "Poor"</label>
-            <br></br>
-            <input type='radio' id='2star' name='star-rating'></input>
-            <label> 2 star - "Fair"</label>
-            <br></br>
-            <input type='radio' id='3star' name='star-rating'></input>
-            <label> 3 star - "Average"</label>
-            <br></br>
-            <input type='radio' id='4star' name='star-rating'></input>
-            <label> 4 star - "Good"</label>
-            <br></br>
-            <input type='radio' id='5star' name='star-rating'></input>
-            <label> 5 star - "Great"</label>
-            <br></br>
-          </div>
+        <form onSubmit={onSubmit}>
+
+          <input type='radio' id='new-review-1star' name='star-rating' value='1' required></input>
+          <label> 1 star - "Poor"</label>
+          <br></br>
+          <input type='radio' id='new-review-2star' name='star-rating' value='2' required></input>
+          <label> 2 star - "Fair"</label>
+          <br></br>
+          <input type='radio' id='new-review-3star' name='star-rating' value='3' required></input>
+          <label> 3 star - "Average"</label>
+          <br></br>
+          <input type='radio' id='new-review-4star' name='star-rating' value='4' required></input>
+          <label> 4 star - "Good"</label>
+          <br></br>
+          <input type='radio' id='new-review-5star' name='star-rating' value='5' required></input>
+          <label> 5 star - "Great"</label>
+          <br></br>
 
           <p>Do you recommend this product?</p>
-          <input type='radio' id='recommended' name='recommend'></input>
+          <input type='radio' value='true' id='new-review-recommended' name='recommend' required></input>
           <label>Yes</label>
-          <input type='radio' id='not-recommended' name='recommend'></input>
+          <input type='radio' value='false' id='new-review-not-recommended' name='recommend' required></input>
           <label>No</label>
           <br></br><br></br>
 
@@ -56,11 +70,11 @@ const NewReview = (props) => {
               return (
                 <div key={index}>
                   <span>{char}</span><br></br>
-                  <input type='radio' id={`${char}1`} name={char}></input>
-                  <input type='radio' id={`${char}2`} name={char}></input>
-                  <input type='radio' id={`${char}3`} name={char}></input>
-                  <input type='radio' id={`${char}4`} name={char}></input>
-                  <input type='radio' id={`${char}5`} name={char}></input>
+                  <input type='radio' className='new-review-chars' id={`new-review-${char}1`} name={char} value='1' required></input>
+                  <input type='radio' className='new-review-chars' id={`new-review-${char}2`} name={char} value='2' required></input>
+                  <input type='radio' className='new-review-chars' id={`new-review-${char}3`} name={char} value='3' required></input>
+                  <input type='radio' className='new-review-chars' id={`new-review-${char}4`} name={char} value='4' required></input>
+                  <input type='radio' className='new-review-chars' id={`new-review-${char}5`} name={char} value='5' required></input>
                   <br></br>
                   &nbsp;<label>1</label>
                   &nbsp;&nbsp;<label>2</label>
@@ -74,28 +88,28 @@ const NewReview = (props) => {
           }
 
           <label>Review summary</label>
-          <input type='text' id='summary' required maxlength='60' size='60' placeholder='Example: Best purchase ever!'></input>
+          <input type='text' id='new-review-summary' name='summary' required={true} maxLength='60' size='60' placeholder='Example: Best purchase ever!'></input>
           <br></br><br></br>
 
           <label>Review body</label>
-          <textarea id='body' rows='10' cols='51' placeholder='Why did you like the product or not?'></textarea>
+          <textarea id='new-review-body' name='body' rows='10' cols='51' placeholder='Why did you like the product or not?' required></textarea>
           <br></br><br></br>
 
           <label>Nickname</label>
-          <input type='text' id='nickname' required maxlength='60' size='60' placeholder='Example: jackson11!'></input>
+          <input type='text' name='nickname' id='new-review-nickname' required maxLength='60' size='60' placeholder='Example: jackson11!'></input>
           <br></br><br></br>
 
           <label>Email</label>
           <br></br>
-          <input type='text' id='email' required maxlength='60' size='60' placeholder='Example: jackson11@email.com'></input>
+          <input type='text' name='email' id='new-review-email' required maxLength='60' size='60' placeholder='Example: jackson11@email.com'></input>
           <br></br>
-          <label id='note'>For authentication reasons, you will not be emailed</label>
+          <label id='new-review-note'>For authentication reasons, you will not be emailed</label>
           <br></br><br></br>
 
-          <button onClick={onSubmit}>Submit</button>
-          <button onClick={onClose}>Close</button>
+          <button>Submit</button>
 
         </form>
+        <button onClick={onClose}>Close</button>
       </div>
     </div>
   );
