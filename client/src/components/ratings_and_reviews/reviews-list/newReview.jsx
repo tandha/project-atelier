@@ -3,12 +3,17 @@ import axios from 'axios';
 
 const NewReview = (props) => {
 
-  const onUploadClick = (event) => {
+  const onUpload = (event) => {
     event.preventDefault();
   };
 
-  const onSubmitClick = (event) => {
+  const onSubmit = (event) => {
     event.preventDefault();
+  };
+
+  const onClose = () => {
+    event.preventDefault();
+    props.hideModal();
   };
 
   let chars = Object.keys(props.chars);
@@ -87,7 +92,8 @@ const NewReview = (props) => {
           <label id='note'>For authentication reasons, you will not be emailed</label>
           <br></br><br></br>
 
-          <button id='new-review-submit'>Submit</button>
+          <button onClick={onSubmit}>Submit</button>
+          <button onClick={onClose}>Close</button>
 
         </form>
       </div>

@@ -109,7 +109,9 @@ class List extends React.Component {
           displayModal={this.displayModal.bind(this)}/>
 
         {this.state.renderModal
-          ? <NewReview product={this.props.product} chars={this.props.chars}/>
+          ? <NewReview product={this.props.product}
+            chars={this.props.chars}
+            hideModal={this.hideModal.bind(this)}/>
           : <div></div>}
 
       </div>)
