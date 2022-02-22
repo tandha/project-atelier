@@ -12,28 +12,13 @@ import Cart from '../addToCart/cart.jsx';
 import Option from '../addToCart/option.jsx';
 
 describe('Overview Widget Components Render', () => {
-  test('Renders Main Image', () => {
+  test('Renders Image Gallery', () => {
     let props = {
       photos: data.styles.results[0].photos,
       mainPhotoIndex: 0,
       changePhoto: function(e) { return e; }
     };
     render(<ImagesCarousel {...props}/>);
-    // const image = screen.getByRole('img');
-    const image = screen.getByTestId('main-image');
-    expect(image).toHaveAttribute('src', props.photos[0].url);
-  });
-
-  test('Renders Thumbnails', () => {
-    let props = {
-      photos: data.styles.results[0].photos,
-      mainPhotoIndex: 0,
-      changePhoto: function(e) { return e; }
-    };
-    const { container } = render(<ImagesCarousel {...props}/>);
-    //TODO: expect x number of children rendered to page
-    //TODO: expect selecting a thumbnail to change main image
-    //TODO: expect selecting a thumbnail to remove image clicked from thumbnails list
   });
   test('Renders Product Information', () => {
     let props = {
@@ -41,7 +26,7 @@ describe('Overview Widget Components Render', () => {
       selectedStyle: data.styles.results[0]
     };
     render(<Information {...props}/>);
-    //TODO: expect an elements with the ids of x to exist
+
   });
   test('Renders Product Features', () => {
     let props = {
@@ -80,4 +65,61 @@ describe('Overview Widget Components Render', () => {
     render(<ProductOverview {...props}/>);
 
   });
+});
+
+describe('Image Gallery Component', () => {
+  test('Renders Main Image', () => {
+    let props = {
+      photos: data.styles.results[0].photos,
+      mainPhotoIndex: 0,
+      changePhoto: function(e) { return e; }
+    };
+    render(<ImagesCarousel {...props}/>);
+    const image = screen.getByTestId('main-image');
+    expect(image).toHaveAttribute('src', props.photos[0].url);
+  });
+
+  test('Renders Correct Number of Thumbnails', () => {
+    let props = {
+      photos: data.styles.results[0].photos,
+      mainPhotoIndex: 0,
+      changePhoto: function(e) { return e; }
+    };
+    const { getAllByRole } = render(<ImagesCarousel {...props}/>);
+    const thumbnailList = getAllByRole('listitem');
+    expect(thumbnailList).toHaveLength(3);
+  });
+  //TODO: expect thumbnails to be images
+  //TODO: expect selecting a thumbnail to change main image that that thumbnail's corresponding url
+});
+
+describe('Product Information Component', () => {
+  let props = {
+    product: {
+      name: 'Kai Onesie',
+      slogan: 'Best onsie ever',
+      description: 'It is a onsie',
+      category: 'Clothes',
+      features: [{feature: 'fabric', value: '100% cotton'}, {feature: 'Care', value: 'Machine Wash'}]
+    },
+    selectedStyle: data.styles.results[0]
+  };
+  test('Renders Product Information Properties to the Screen', () => {
+    render(<Information {...props}/>);
+    expect(screen.getByText('Kai Onesie')).toBeInTheDocument();
+    expect(screen.getByText('Best onsie ever')).toBeInTheDocument();
+    expect(screen.getByText('It is a onsie')).toBeInTheDocument();
+    expect(screen.getByText('Clothes')).toBeInTheDocument();
+  });
+  test('Dynamically Renders Product Features', () => {
+    render(<Information {...props}/>);
+    props.product.features.forEach((feature) => {
+      let formattedFeature = `${feature.feature}: ${feature.value}`;
+      expect(screen.getByText(formattedFeature)).toBeInTheDocument();
+    });
+
+  });
+
+  //TODO: renders star svgs
+  //TODO: add to outfit button works
 });
