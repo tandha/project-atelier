@@ -1,5 +1,7 @@
 import React from 'react';
 import Option from './option.jsx';
+import { IoIosStarOutline } from 'react-icons/io';
+
 
 class Cart extends React.Component {
   constructor(props) {
@@ -108,6 +110,9 @@ class Cart extends React.Component {
           <div id='add-to-bag'>
             <button>ADD TO BAG</button>
             <span> + </span>
+          </div>
+          <div id='add-to-myoutfit'>
+            <span><IoIosStarOutline /></span>
           </div>
         </form>
       </div>
