@@ -67,9 +67,12 @@
 #selected-styles {
   /* border: 5px solid orange; */
 }
-#styles-thumbnails-container div{
+#styles-thumbnails-container ul{
   display: flex;
   flex-wrap: wrap;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 .style-thumbnail-container {
   height: 70px;
