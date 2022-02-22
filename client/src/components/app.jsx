@@ -21,42 +21,50 @@ class App extends React.Component {
     };
   }
 
-
   componentDidMount() {
-    this.getProduct(64622);
-    this.getStyles(64622);
-    this.getOutfits();
+    Promise.all([this.getProduct(64622),
+      this.getStyles(64622),
+      this.getOutfits(64622)])
+      .then((res) => {
+        console.log(res[2].data);
+        this.setState({
+          product: res[0].data.data,
+          productIsFetched: true,
+          stylesAreFetched: true,
+          styles: res[1].data.data,
+          myOutfits: res[2].data
+        });
+      })
+      .then((res) => {
+        //setState for currentProductInOutfit based on preious then block
+        if (this.state.myOutfits.includes(this.state.product.id)) {
+          this.setState({ currentProductInOutfit: true });
+        }
+      })
+      .catch((err) => {
+        console.log('Error Retrieving Data from Server', err);
+      });
   }
 
   getProduct(id) {
-    axios({
+    return axios({
       method: 'get',
       url: 'products/' + id,
-    }).then((res) => {
-      this.setState({ product: res.data.data, productIsFetched: true });
-    }).catch((err) => { console.log('An error occured retrieving product data from server', err); });
+    });
   }
 
   getStyles(id) {
-    axios({
+    return axios({
       method: 'get',
       url: 'products/' + id + '/styles',
-    }).then((res) => {
-      this.setState({ styles: res.data.data, stylesAreFetched: true });
-    }).catch((err) => { console.log('An error occured retrieving style data from server', err); });
+    });
   }
 
   getOutfits(id) {
-    axios({
+    return axios({
       method: 'get',
       url: 'outfits',
-    }).then((res) => {
-      this.setState({ myOutfits: res.data });
-    }).then(() => {
-      if (!this.state.myOutfits.includes(this.state.product.id)) {
-        this.setState({currentProductInOutfit: false });
-      }
-    }).catch((err) => { console.log('An error occured retrieving outfit data from server', err); });
+    });
   }
 
   toggleOutfit(id) {

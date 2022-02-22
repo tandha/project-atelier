@@ -75,7 +75,6 @@ class Cart extends React.Component {
   }
 
   handleAddToMyOutfit() {
-    console.log(this.props);
     this.props.toggleOutfit(this.props.productId);
   }
 

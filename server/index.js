@@ -29,7 +29,6 @@ app.delete('/outfits', (req, res) => {
   let outfit = req.body.id;
   let index = myOutfits.indexOf(outfit);
   myOutfits.splice(index, 1);
-  console.log(myOutfits);
   res.status(201).send(myOutfits);
 });
 
