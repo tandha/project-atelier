@@ -26,7 +26,6 @@ class App extends React.Component {
       this.getStyles(64622),
       this.getOutfits(64622)])
       .then((res) => {
-        console.log(res[2].data);
         this.setState({
           product: res[0].data.data,
           productIsFetched: true,
@@ -36,7 +35,6 @@ class App extends React.Component {
         });
       })
       .then((res) => {
-        //setState for currentProductInOutfit based on preious then block
         if (this.state.myOutfits.includes(this.state.product.id)) {
           this.setState({ currentProductInOutfit: true });
         }
