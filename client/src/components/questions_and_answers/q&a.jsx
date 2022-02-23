@@ -87,21 +87,7 @@ class QuestionsAndAnswers extends React.Component {
     if (!validateEmail(email)) {
       alert('Please enter correct email format!');
     }
-
-    // axios({
-    //   method: 'post',
-    //   url: '/qa/questions',
-    //   data: {
-    //     body: body,
-    //     name: nickname,
-    //     email: email,
-    //     'product_id': this.props.product.id
-    //   }
-    // }).then(()=> {
-    //   this.setState({ showQuestionModal: false }, this.getProductQuestions());
-    // }).catch((err)=> {
-    //   console.log('error adding question', err);
-    // });
+    // to do: axios post request to API
   }
 
   render() {

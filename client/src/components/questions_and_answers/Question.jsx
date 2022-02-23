@@ -72,22 +72,7 @@ class Question extends React.Component {
     if (!validateEmail(email)) {
       alert('Please enter correct email format!');
     }
-
-    // axios({
-    //   method: 'post',
-    //   url: `/qa/questions/${this.props.question.question_id}/answers`,
-    //   params: {'question_id': this.props.question.question_id}
-    //   data: {
-    //     body: body,
-    //     name: nickname,
-    //     email: email,
-    //     photos:[]
-    //   }
-    // }).then(()=> {
-    //   this.setState({ showAnswerModal: false });
-    // }).catch((err)=> {
-    //   console.log('error adding answer', err);
-    // });
+    // to do: axios post request to API
   }
 
   render() {
