@@ -73,7 +73,9 @@ class Question extends React.Component {
 
   submitAnswer(e) {
     e.preventDefault();
-    // validate the questions
+    if (!validateEmail(e.target[2].value)) {
+      alert('Please enter correct email format!');
+    }
 
     // axios({
     //   method: 'post',
@@ -101,6 +103,7 @@ class Question extends React.Component {
           <button style={smallStyle} onClick={this.clickAddAnswer}>Add Answer</button>
         </div>
         <AnswerModal
+          clickAddAnswer = {this.clickAddAnswer}
           submitAnswer = {this.submitAnswer}
           productName = {this.props.productName}
           question = {this.props.question}
@@ -145,4 +148,12 @@ var buttonStyle = {
   fontSize: '12px',
   display: 'inline',
   color: 'grey'
+};
+
+const validateEmail = (email) => {
+  return String(email)
+    .toLowerCase()
+    .match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
 };

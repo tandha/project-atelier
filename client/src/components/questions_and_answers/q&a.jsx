@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import {IoIosAdd} from 'react-icons/io';
 import SearchBar from './SearchBar.jsx';
 import QuestionList from './QuestionList.jsx';
 import QuestionModal from './ModalForm/QuestionModal.jsx';
@@ -33,7 +34,7 @@ class QuestionsAndAnswers extends React.Component {
       method: 'get',
       url: 'qa/questions',
       params: {
-        'product_id': 64622, //this.props.product.id
+        'product_id': this.props.product.id, //64622
         count: 100
       }
     }).then((res)=> {
@@ -80,7 +81,9 @@ class QuestionsAndAnswers extends React.Component {
 
   submitQuestion(e) {
     e.preventDefault();
-    // validate the questions
+    if (!validateEmail(e.target[2].value)) {
+      alert('Please enter correct email format!');
+    }
 
     // axios({
     //   method: 'post',
@@ -111,8 +114,9 @@ class QuestionsAndAnswers extends React.Component {
           productName = {this.props.product.name}
         />
         {this.renderMoreQuestionBtn()}
-        <button style={largeBtnStyle} onClick={this.clickAddQuestion}> ADD A QUESTION + </button>
+        <button style={largeBtnStyle} onClick={this.clickAddQuestion}> ADD A QUESTION <IoIosAdd/> </button>
         <QuestionModal
+          clickAddQuestion = {this.clickAddQuestion}
           submitQuestion = {this.submitQuestion}
           productName = {this.props.product.name}
           showQuestionModal = {this.state.showQuestionModal}
@@ -133,4 +137,12 @@ var largeBtnStyle = {
   fontWeight: 'bold',
   'marginRight': '10px',
   display: 'inline'
+};
+
+const validateEmail = (email) => {
+  return String(email)
+    .toLowerCase()
+    .match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
 };
