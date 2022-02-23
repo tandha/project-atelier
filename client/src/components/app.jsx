@@ -17,7 +17,7 @@ class App extends React.Component {
       styles: {},
       myOutfits: [],
       currentProductInOutfit: false,
-      starRating: 0
+      starRating: 0 //starRating is buggy
     };
   }
 
