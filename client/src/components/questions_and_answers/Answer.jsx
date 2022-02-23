@@ -69,9 +69,11 @@ class Answer extends React.Component {
     return (
       <div id='each-answer'>
         <div id='answer-body'> {this.props.answer.body} </div>
-        {this.props.answer.photos.map((photo, index) => (
-          <AnswerPhoto photo={photo} key={index}/>
-        ))}
+        <div id='photo-box'>
+          {this.props.answer.photos.map((photo, index) => (
+            <AnswerPhoto photo={photo} key={index}/>
+          ))}
+        </div>
         <div id='answer-interaction'>
           by {this.renderAnswererName()}, {renderDate(this.props.answer.date.toString())} | Helpful?
           {this.renderAnswerHelpfulBtn()} | {this.renderReportBtn()}

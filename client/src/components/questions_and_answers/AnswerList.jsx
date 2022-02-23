@@ -14,9 +14,11 @@ const AnswerList = (props) => {
   return (
     <div id='answer-list'>
       <div id='answer-title'> A: </div>
-      {displayList.map((answer) => (
-        <Answer answer={answer} key={answer.id}/>
-      ))}
+      <div id='answer-box'>
+        {displayList.map((answer) => (
+          <Answer answer={answer} key={answer.id}/>
+        ))}
+      </div>
     </div>
   );
 };
