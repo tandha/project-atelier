@@ -21,21 +21,23 @@ class App extends React.Component {
     };
   }
 
+  //promise.allSettled?
   componentDidMount() {
     Promise.all([this.getProduct(64622),
       this.getStyles(64622),
-      this.getOutfits(64622)])
+      this.getOutfits()])
       .then((res) => {
         this.setState({
           product: res[0].data.data,
           productIsFetched: true,
           stylesAreFetched: true,
           styles: res[1].data.data,
-          myOutfits: res[2].data
+          myOutfits: res[2]
         });
       })
       .then((res) => {
-        if (this.state.myOutfits.includes(this.state.product.id)) {
+        console.log('my outfits', this.state.myOutfits, 'product id', this.state.product.id.toString(), 'current product included in myOutfit', this.state.myOutfits.includes(this.state.product.id.toString()));
+        if (this.state.myOutfits.includes(this.state.product.id.toString())) {
           this.setState({ currentProductInOutfit: true });
         }
       })
@@ -58,39 +60,19 @@ class App extends React.Component {
     });
   }
 
-  getOutfits(id) {
-    return axios({
-      method: 'get',
-      url: 'outfits',
-    });
+  getOutfits() {
+    let localStorageOutfits = Object.keys(localStorage);
+    return localStorageOutfits;
   }
 
   toggleOutfit(id) {
+    console.log(this.state.currentProductInOutfit);
     if (!this.state.currentProductInOutfit) {
-      axios({
-        method: 'post',
-        url: 'outfits',
-        data: {
-          id: id
-        }
-      }).then(() => {
-        this.setState({ currentProductInOutfit: true });
-      }).then((res) => {
-        this.getOutfits(id);
-      }).catch((err) => { console.log('An error occured adding outfit data to server', err); });
-
+      localStorage.setItem(id, id);
+      this.setState({ myOutfits: this.getOutfits(), currentProductInOutfit: true });
     } else {
-      axios({
-        method: 'delete',
-        url: 'outfits',
-        data: {
-          id: id
-        }
-      }).then(() => {
-        this.setState({ currentProductInOutfit: false });
-      }).then((res) => {
-        this.getOutfits(id);
-      }).catch((err) => { console.log('An error occured adding outfit data to server', err); });
+      localStorage.removeItem(id, id);
+      this.setState({ myOutfits: this.getOutfits(), currentProductInOutfit: false });
     }
   }
 
