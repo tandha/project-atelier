@@ -224,6 +224,10 @@ select, button {
   height: 100px;
 }
 
+#form-head {
+  display: inline;
+}
+
 #more-question-btn, #add-question-btn {
   height: 50px;
   width:auto;
@@ -264,7 +268,15 @@ select, button {
 
 #close-button {
   font-size: 16px;
-  text-align: right;
+  float: right;
+  background: none;
+  border: none;
+}
+
+#submit-btn {
+  background: none;
+  border: 1.5px solid grey;
+  color:grey;
 }
 
 

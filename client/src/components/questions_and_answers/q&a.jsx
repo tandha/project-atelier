@@ -80,7 +80,7 @@ class QuestionsAndAnswers extends React.Component {
 
   submitQuestion(e) {
     e.preventDefault();
-    var body = document.getElementById('question-body').value;
+    var body = document.getElementById('your-question').value;
     var nickname = document.getElementById('question-nickname').value;
     var email = document.getElementById('question-email').value;
 
