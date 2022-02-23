@@ -169,6 +169,61 @@ select, button {
   font-weight: bold;
 }
 
+#question-body, #answer-title {
+  font-weight: 600;
+  font-size: 16px;
+  display: inline;
+}
+
+#question-interaction, #question-helpful, #add-answer {
+  width:auto;
+  background: none;
+  border: none;
+  font-size: 12px;
+  color: grey;
+  display: inline;
+}
+
+#question-helpful:focus {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+#answer-interaction, #answer-helpful, #answer-report {
+  width:auto;
+  background: none;
+  border: none;
+  font-size: 12px;
+  color: grey;
+  display: inline;
+}
+
+#answer-helpful:focus {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+#load-more-answer, #collapse-answer {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+#answer-photo {
+  height: 100px;
+  display: grid;
+}
+
+#more-question-btn, #add-question-btn {
+  height: 50px;
+  width:auto;
+  border: 1.5px solid grey;
+  background: none;
+  color: grey;
+  font-weight: bold;
+  display: inline;
+  margin-right: 10px;
+}
+
 #new-question-modal, #new-answer-modal {
   position: fixed;
   z-index: 2;

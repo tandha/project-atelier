@@ -8,7 +8,6 @@ import QuestionModal from './ModalForm/QuestionModal.jsx';
 class QuestionsAndAnswers extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       questions: [],
       questionNumbers: 2,
@@ -34,7 +33,7 @@ class QuestionsAndAnswers extends React.Component {
       method: 'get',
       url: 'qa/questions',
       params: {
-        'product_id': this.props.product.id, //64622
+        'product_id': 64624, //this.props.product.id,
         count: 100
       }
     }).then((res)=> {
@@ -65,7 +64,7 @@ class QuestionsAndAnswers extends React.Component {
 
   renderMoreQuestionBtn() {
     if (this.state.questions.length > 2 && this.state.questionNumbers < this.state.questions.length) {
-      return ( <button style={largeBtnStyle} onClick={this.clickMoreQuestions}> MORE ANSWERED QUESTIONS </button> );
+      return ( <button id='more-question-btn' onClick={this.clickMoreQuestions}> MORE ANSWERED QUESTIONS </button> );
     }
   }
 
@@ -80,10 +79,12 @@ class QuestionsAndAnswers extends React.Component {
   }
 
   submitQuestion(e) {
-
-    console.log('email?', document.getElementById('question-email').value, validateEmail(document.getElementById('question-email').value));
     e.preventDefault();
-    if (validateEmail(e.target[2].value) === false) {
+    var body = document.getElementById('question-body').value;
+    var nickname = document.getElementById('question-nickname').value;
+    var email = document.getElementById('question-email').value;
+
+    if (!validateEmail(email)) {
       alert('Please enter correct email format!');
     }
 
@@ -91,10 +92,10 @@ class QuestionsAndAnswers extends React.Component {
     //   method: 'post',
     //   url: '/qa/questions',
     //   data: {
-    //     body: e.target[0].value,
-    //     name: e.target[1].value,
-    //     email: e.target[2].value,
-    //     'product_id': 64620 //this.props.product.id
+    //     body: body,
+    //     name: nickname,
+    //     email: email,
+    //     'product_id': this.props.product.id
     //   }
     // }).then(()=> {
     //   this.setState({ showQuestionModal: false }, this.getProductQuestions());
@@ -105,8 +106,8 @@ class QuestionsAndAnswers extends React.Component {
 
   render() {
     return (
-      <div>
-        <b>QUESTIONS & ANSWERS</b>
+      <div id='QA-container'>
+        <p>QUESTIONS & ANSWERS</p>
         <SearchBar handleSearchBar={this.handleSearchBar}/>
         <QuestionList
           questions={this.state.questions}
@@ -116,7 +117,7 @@ class QuestionsAndAnswers extends React.Component {
           productName = {this.props.product.name}
         />
         {this.renderMoreQuestionBtn()}
-        <button style={largeBtnStyle} onClick={this.clickAddQuestion}> ADD A QUESTION <IoMdAdd/> </button>
+        <button id='add-question-btn' onClick={this.clickAddQuestion}> ADD A QUESTION <IoMdAdd/> </button>
         <QuestionModal
           clickAddQuestion = {this.clickAddQuestion}
           submitQuestion = {this.submitQuestion}
@@ -129,17 +130,6 @@ class QuestionsAndAnswers extends React.Component {
 }
 
 export default QuestionsAndAnswers;
-
-var largeBtnStyle = {
-  width: '40%',
-  background: 'none',
-  height: '50px',
-  color: 'grey',
-  border: '1.5px solid grey',
-  fontWeight: 'bold',
-  'marginRight': '10px',
-  display: 'inline'
-};
 
 var validateEmail = (email) => {
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

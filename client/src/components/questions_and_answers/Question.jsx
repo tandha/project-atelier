@@ -23,9 +23,9 @@ class Question extends React.Component {
 
   renderQuestionHelpfulBtn() {
     if (this.state.QuestionHelpful) {
-      return ( <button style={buttonStyle}> Yes ({this.props.question.question_helpfulness + 1}) </button> );
+      return ( <button id='question-helpful'> Yes ({this.props.question.question_helpfulness + 1}) </button> );
     } else {
-      return ( <button style={smallStyle} onClick={this.markQuestionHelpful}> Yes ({this.props.question.question_helpfulness}) </button> );
+      return ( <button id='question-helpful' onClick={this.markQuestionHelpful}> Yes ({this.props.question.question_helpfulness}) </button> );
     }
   }
 
@@ -44,17 +44,9 @@ class Question extends React.Component {
   renderMoreAnswersBtn() {
     if (this.state.answers.length > 2) {
       if (this.state.answerNumbers < this.state.answers.length) {
-        return (
-          <div style={{display: 'grid', fontSize: '12px', marginLeft: '22px'}} onClick={this.clickMoreAnswers}>
-            <b>LOAD MORE ANSWERS</b>
-          </div>
-        );
+        return ( <div id='load-more-answer' onClick={this.clickMoreAnswers}> LOAD MORE ANSWERS </div> );
       } else {
-        return (
-          <div style={{display: 'grid', fontSize: '12px', marginLeft: '22px'}} onClick={this.clickMoreAnswers}>
-            <b>COLLAPSE ANSWERS</b>
-          </div>
-        );
+        return ( <div id='collapse-answer' onClick={this.clickMoreAnswers}> COLLAPSE ANSWERS </div> );
       }
     }
   }
@@ -73,7 +65,11 @@ class Question extends React.Component {
 
   submitAnswer(e) {
     e.preventDefault();
-    if (!validateEmail(e.target[2].value)) {
+    var body = document.getElementById('answer-body').value;
+    var nickname = document.getElementById('answer-nickname').value;
+    var email = document.getElementById('answer-email').value;
+
+    if (!validateEmail(email)) {
       alert('Please enter correct email format!');
     }
 
@@ -82,9 +78,9 @@ class Question extends React.Component {
     //   url: `/qa/questions/${this.props.question.question_id}/answers`,
     //   params: {'question_id': this.props.question.question_id}
     //   data: {
-    //     body: e.target[0].value,
-    //     name: e.target[1].value,
-    //     email: e.target[2].value,
+    //     body: body,
+    //     name: nickname,
+    //     email: email,
     //     photos:[]
     //   }
     // }).then(()=> {
@@ -96,11 +92,11 @@ class Question extends React.Component {
 
   render() {
     return (
-      <div>
-        <div style={QAstyle}> Q: {this.props.question.question_body} </div>
-        <div style={smallStyle}>
+      <div id='each-question'>
+        <div id='question-body'> Q: {this.props.question.question_body} </div>
+        <div id='question-interaction'>
           Helpful? {this.renderQuestionHelpfulBtn()} |
-          <button style={smallStyle} onClick={this.clickAddAnswer}>Add Answer</button>
+          <button id='add-answer' onClick={this.clickAddAnswer}>Add Answer</button>
         </div>
         <AnswerModal
           clickAddAnswer = {this.clickAddAnswer}
@@ -120,35 +116,6 @@ class Question extends React.Component {
 }
 
 export default Question;
-
-var QAstyle = {
-  fontWeight: '600',
-  fontSize: '16px',
-  display: 'inline-grid',
-  width: '50%'
-};
-
-var smallStyle = {
-  width: '10%',
-  background: 'none',
-  border: 'none',
-  // padding: '5px',
-  fontSize: '12px',
-  display: 'inline',
-  color: 'grey'
-};
-
-var buttonStyle = {
-  width: '10%',
-  fontWeight: 'bold',
-  textDecoration: 'underline',
-  background: 'none',
-  border: 'none',
-  // padding: '5px',
-  fontSize: '12px',
-  display: 'inline',
-  color: 'grey'
-};
 
 const validateEmail = (email) => {
   return String(email)

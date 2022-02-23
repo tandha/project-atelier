@@ -10,7 +10,7 @@ const QuestionList = (props) => {
   let displayList = sortedQuestions.slice(0, props.questionNumbers);
 
   return (
-    <div>
+    <div id='question-list'>
       {displayList.map((question) => (
         <Question
           question={question}
@@ -26,10 +26,4 @@ export default QuestionList;
 
 const sortByHelpfulness = (a, b) => {
   return b.question_helpfulness - a.question_helpfulness;
-};
-
-var buttonStyle = {
-  fontSize: '12px',
-  display: 'grid',
-  margin: '10px 0px'
 };
