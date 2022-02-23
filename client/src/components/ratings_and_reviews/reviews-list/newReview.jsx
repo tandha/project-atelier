@@ -16,14 +16,34 @@ const NewReview = (props) => {
     let nickname = document.querySelector('input[name="nickname"]').value;
     let email = document.querySelector('input[name="email"]').value;
 
+    recommended === 'true' ? recommended = true : recommended = false;
+
     let reviewChars = {};
 
     chars.forEach(char => {
       let rating = document.querySelector(`input[name=${char}]:checked`).value;
-      reviewChars[char] = rating;
+      reviewChars[props.chars[char].id] = parseInt(rating);
     });
 
-    debugger;
+    axios({
+      method: 'post',
+      url: '/reviews',
+      data: {
+        'product_id': props.product.id,
+        'rating': parseInt(starRating),
+        'summary': summary,
+        'body': body,
+        'recommend': recommended,
+        'name': nickname,
+        'email': email,
+        'photos': [],
+        'characteristics': reviewChars
+      }
+    }).then((response) => {
+      props.hideModal();
+      props.getReviews();
+    })
+      .catch(err => console.log(err));
   };
 
   const onClose = () => {
@@ -36,32 +56,53 @@ const NewReview = (props) => {
   return (
     <div id='new-review-modal'>
       <div id='new-review-content'>
+
         <span id='new-review-heading'>Write Your Review</span><br></br>
         <span>about the {props.product.name}</span><br></br>
         <br></br>
 
         <form onSubmit={onSubmit}>
 
-          <input type='radio' id='new-review-1star' name='star-rating' value='1' required></input>
+          <input type='radio' id='new-review-1star'
+            name='star-rating' value='1' required></input>
+
           <label> 1 star - "Poor"</label>
           <br></br>
-          <input type='radio' id='new-review-2star' name='star-rating' value='2' required></input>
+
+          <input type='radio' id='new-review-2star'
+            name='star-rating' value='2' required></input>
+
           <label> 2 star - "Fair"</label>
           <br></br>
-          <input type='radio' id='new-review-3star' name='star-rating' value='3' required></input>
+
+          <input type='radio' id='new-review-3star'
+            name='star-rating' value='3' required></input>
+
           <label> 3 star - "Average"</label>
           <br></br>
-          <input type='radio' id='new-review-4star' name='star-rating' value='4' required></input>
+
+          <input type='radio' id='new-review-4star'
+            name='star-rating' value='4' required></input>
+
           <label> 4 star - "Good"</label>
           <br></br>
-          <input type='radio' id='new-review-5star' name='star-rating' value='5' required></input>
+
+          <input type='radio' id='new-review-5star'
+            name='star-rating' value='5' required></input>
+
           <label> 5 star - "Great"</label>
           <br></br>
 
           <p>Do you recommend this product?</p>
-          <input type='radio' value='true' id='new-review-recommended' name='recommend' required></input>
+
+          <input type='radio' value='true' name='recommend'
+            id='new-review-recommended' required></input>
+
           <label>Yes</label>
-          <input type='radio' value='false' id='new-review-not-recommended' name='recommend' required></input>
+
+          <input type='radio' value='false' name='recommend'
+            id='new-review-not-recommended' required></input>
+
           <label>No</label>
           <br></br><br></br>
 
@@ -70,11 +111,22 @@ const NewReview = (props) => {
               return (
                 <div key={index}>
                   <span>{char}</span><br></br>
-                  <input type='radio' className='new-review-chars' id={`new-review-${char}1`} name={char} value='1' required></input>
-                  <input type='radio' className='new-review-chars' id={`new-review-${char}2`} name={char} value='2' required></input>
-                  <input type='radio' className='new-review-chars' id={`new-review-${char}3`} name={char} value='3' required></input>
-                  <input type='radio' className='new-review-chars' id={`new-review-${char}4`} name={char} value='4' required></input>
-                  <input type='radio' className='new-review-chars' id={`new-review-${char}5`} name={char} value='5' required></input>
+
+                  <input type='radio' className='new-review-chars'
+                    id={`new-review-${char}1`} name={char} value='1' required></input>
+
+                  <input type='radio' className='new-review-chars'
+                    id={`new-review-${char}2`} name={char} value='2' required></input>
+
+                  <input type='radio' className='new-review-chars'
+                    id={`new-review-${char}3`} name={char} value='3' required></input>
+
+                  <input type='radio' className='new-review-chars'
+                    id={`new-review-${char}4`} name={char} value='4' required></input>
+
+                  <input type='radio' className='new-review-chars'
+                    id={`new-review-${char}5`} name={char} value='5' required></input>
+
                   <br></br>
                   &nbsp;<label>1</label>
                   &nbsp;&nbsp;<label>2</label>
@@ -88,22 +140,34 @@ const NewReview = (props) => {
           }
 
           <label>Review summary</label>
-          <input type='text' id='new-review-summary' name='summary' required={true} maxLength='60' size='60' placeholder='Example: Best purchase ever!'></input>
+
+          <input type='text' id='new-review-summary' name='summary' required
+            maxLength='60' size='60' placeholder='Example: Best purchase ever!'></input>
           <br></br><br></br>
 
           <label>Review body</label>
-          <textarea id='new-review-body' name='body' rows='10' cols='51' placeholder='Why did you like the product or not?' required></textarea>
+
+          <textarea id='new-review-body' name='body' rows='10'
+            cols='51' minLength='51' maxLength='1000' required
+            placeholder='Why did you like the product or not?'></textarea>
           <br></br><br></br>
 
           <label>Nickname</label>
-          <input type='text' name='nickname' id='new-review-nickname' required maxLength='60' size='60' placeholder='Example: jackson11!'></input>
+
+          <input type='text' name='nickname' id='new-review-nickname' required
+            maxLength='60' size='60' placeholder='Example: jackson11!'></input>
           <br></br><br></br>
 
           <label>Email</label>
           <br></br>
-          <input type='text' name='email' id='new-review-email' required maxLength='60' size='60' placeholder='Example: jackson11@email.com'></input>
+
+          <input type='email' name='email' id='new-review-email' required
+            maxLength='60' size='60' placeholder='Example: jackson11@email.com'></input>
           <br></br>
-          <label id='new-review-note'>For authentication reasons, you will not be emailed</label>
+
+          <label id='new-review-note'>
+            For authentication reasons, you will not be emailed
+          </label>
           <br></br><br></br>
 
           <button>Submit</button>
