@@ -57,7 +57,6 @@ class Breakdown extends React.Component {
         <StarList
           updateFilter={this.props.updateFilter}
           metaData={this.state.reviewMetaData}
-          updateFilter={this.props.updateFilter}
           currentFilter={this.props.currentFilter}
         />
         <Styles metaData={this.state.reviewMetaData}/>

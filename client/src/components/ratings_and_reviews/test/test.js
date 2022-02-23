@@ -1,9 +1,87 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import List from '../reviews-list/list.jsx';
-import Tile from '../reviews-list/tile.jsx';
-import Average from '../rating-breakdown/average.jsx';
+
+import RatingsAndReview from '../ratings&reviews.jsx';
+
 import Breakdown from '../rating-breakdown/breakdown.jsx';
+import Average from '../rating-breakdown/average.jsx';
+import StarList from '../rating-breakdown/starlist.jsx';
+import Styles from '../rating-breakdown/styles.jsx';
+
+import List from '../reviews-list/list.jsx';
+import Sort from '../reviews-list/sort.jsx';
+import Tile from '../reviews-list/tile.jsx';
+import Buttons from '../reviews-list/buttons.jsx';
+
+describe('Component Renders', () => {
+  test('RatingsAndReview', () => {
+    let props = {
+      starRating: '3.5',
+      updateStarRating: () => {}
+    };
+    render(<RatingsAndReview {...props}/>);
+  });
+  test('Breakdown', () => {
+    let props = {
+      starRating: 3.5,
+      updateStarRating: () => {},
+      updateFilter: () => {},
+      productID: 39482,
+      currentFilter: [1, 2]
+    };
+    render(<Breakdown {...props}/>);
+  });
+  test('Average', () => {
+    let props = {
+      starRating: 3.5
+    };
+    render(<Average {...props}/>);
+  });
+  test('Styles', () => {
+    let props = {
+      metaData: {}
+    };
+    render(<Styles {...props}/>);
+  });
+  test('StarList', () => {
+    let props = {
+      metaData: {},
+      updateFilter: () => {},
+      currentFilter: []
+    };
+    render(<StarList {...props}/>);
+  });
+  test('List', () => {
+    let props = {
+      productID: 32847,
+      currentFilter: []
+    };
+    render(<List {...props}/>);
+  });
+  test('Sort', () => {
+    let props = {
+      updateSort: () => {},
+      numReviews: 6
+    };
+    render(<Sort {...props}/>);
+  });
+  test('Tile', () => {
+    let props = {
+      key: 1,
+      review: {
+        date: '2019-06-23T00:00:00.000Z'
+      }
+    };
+    render(<Tile {...props}/>);
+  });
+  test('Buttons', () => {
+    let props = {
+      updateLength: () => {},
+      listMaxed: false
+    };
+    render(<Buttons {...props}/>);
+  });
+});
 
 describe('Average Score Component', () => {
   test('Component renders passed in score value', () => {
