@@ -125,7 +125,7 @@
   /* display: flex;
   flex-wrap: wrap; */
 }
-/* select, button {
+select, button {
   background: none;
   border: none;
   font-size: 1em;
@@ -133,7 +133,7 @@
   padding-right: none;
   text-align: left;
   width: 100%;
-} */
+}
 
 #select-size, #select-quantity, #add-to-bag {
   background-color: white;
