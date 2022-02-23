@@ -8,10 +8,11 @@ const AnswerModal = (props) => {
   return (
     <div id='new-answer-modal'>
       <div id='new-answer-content'>
-        <form onSubmit={props.submitAnswer}>
-          <button id='close-button' onClick={props.clickAddAnswer}><IoIosCloseCircleOutline/></button>
-          <h2>Submit your Answer</h2>
-          <h3>{props.productName}: {props.question.question_body}</h3>
+        <button id='close-button' onClick={props.clickAddAnswer}><IoIosCloseCircleOutline/></button>
+        <h2>Submit your Answer</h2>
+        <h3>{props.productName}: {props.question.question_body}</h3>
+        <form id='submit-answer-form' onSubmit={props.submitAnswer}>
+          <p id='QA-note'>*mandatory area</p>
           <p>Your Answer?*</p>
           <textarea name="answer" rows="5" cols="50" maxLength="1000" required></textarea>
           <p>What is your nickname?*</p>
@@ -21,7 +22,6 @@ const AnswerModal = (props) => {
           <textarea name="email" rows="2" cols="50" placeholder="jack@email.com" maxLength="60" required></textarea>
           <p id='QA-note'>For authentication reasons, you will not be emailed</p>
           {/* <button>Upload your photo</button> */}
-          <p id='QA-note'>* States for mandatory area</p>
           <button type="submit">Submit Answer</button>
         </form>
       </div>

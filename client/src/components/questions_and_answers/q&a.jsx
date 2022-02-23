@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import {IoIosAdd} from 'react-icons/io';
+import {IoMdAdd} from 'react-icons/io';
 import SearchBar from './SearchBar.jsx';
 import QuestionList from './QuestionList.jsx';
 import QuestionModal from './ModalForm/QuestionModal.jsx';
@@ -80,8 +80,10 @@ class QuestionsAndAnswers extends React.Component {
   }
 
   submitQuestion(e) {
+
+    console.log('email?', document.getElementById('question-email').value, validateEmail(document.getElementById('question-email').value));
     e.preventDefault();
-    if (!validateEmail(e.target[2].value)) {
+    if (validateEmail(e.target[2].value) === false) {
       alert('Please enter correct email format!');
     }
 
@@ -114,7 +116,7 @@ class QuestionsAndAnswers extends React.Component {
           productName = {this.props.product.name}
         />
         {this.renderMoreQuestionBtn()}
-        <button style={largeBtnStyle} onClick={this.clickAddQuestion}> ADD A QUESTION <IoIosAdd/> </button>
+        <button style={largeBtnStyle} onClick={this.clickAddQuestion}> ADD A QUESTION <IoMdAdd/> </button>
         <QuestionModal
           clickAddQuestion = {this.clickAddQuestion}
           submitQuestion = {this.submitQuestion}
@@ -139,10 +141,7 @@ var largeBtnStyle = {
   display: 'inline'
 };
 
-const validateEmail = (email) => {
-  return String(email)
-    .toLowerCase()
-    .match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
+var validateEmail = (email) => {
+  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
 };

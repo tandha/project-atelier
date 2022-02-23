@@ -163,6 +163,12 @@ select, button {
 
 
 /******************* Questions & Answers ******************/
+#search-bar {
+  height: 50px;
+  width: 100%;
+  font-weight: bold;
+}
+
 #new-question-modal, #new-answer-modal {
   position: fixed;
   z-index: 2;
@@ -194,6 +200,7 @@ select, button {
   font-size: 16px;
   text-align: right;
 }
+
 
 /********************* Ratings & Reviews *******************/
 
