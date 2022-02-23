@@ -75,20 +75,20 @@ class Question extends React.Component {
     e.preventDefault();
     // validate the questions
 
-    // axios post method
     // axios({
     //   method: 'post',
-    //   url: '/qa/answers',
+    //   url: `/qa/questions/${this.props.question.question_id}/answers`,
+    //   params: {'question_id': this.props.question.question_id}
     //   data: {
     //     body: e.target[0].value,
     //     name: e.target[1].value,
     //     email: e.target[2].value,
-    //     'product_id': 64620 //this.props.product.id
+    //     photos:[]
     //   }
     // }).then(()=> {
-    //   this.setState({ showQuestionModal: false }, this.getProductQuestions());
+    //   this.setState({ showAnswerModal: false });
     // }).catch((err)=> {
-    //   console.log('error adding question', err);
+    //   console.log('error adding answer', err);
     // });
   }
 
@@ -97,11 +97,13 @@ class Question extends React.Component {
       <div>
         <div style={QAstyle}> Q: {this.props.question.question_body} </div>
         <div style={smallStyle}>
-          Helpful? {this.renderQuestionHelpfulBtn()} | Add Answer
+          Helpful? {this.renderQuestionHelpfulBtn()} |
+          <button style={smallStyle} onClick={this.clickAddAnswer}>Add Answer</button>
         </div>
         <AnswerModal
           submitAnswer = {this.submitAnswer}
-          // productName = {this.props.product.name}
+          productName = {this.props.productName}
+          question = {this.props.question}
           showAnswerModal = {this.state.showAnswerModal}
         />
         <AnswerList

@@ -14,6 +14,7 @@ const QuestionList = (props) => {
       {displayList.map((question) => (
         <Question
           question={question}
+          productName = {props.productName}
           key={question.question_id}
         />
       ))}

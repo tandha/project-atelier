@@ -33,7 +33,7 @@ class QuestionsAndAnswers extends React.Component {
       method: 'get',
       url: 'qa/questions',
       params: {
-        'product_id': 64620, //this.props.product.id
+        'product_id': 64622, //this.props.product.id
         count: 100
       }
     }).then((res)=> {
@@ -82,10 +82,9 @@ class QuestionsAndAnswers extends React.Component {
     e.preventDefault();
     // validate the questions
 
-    // axios post method
     // axios({
     //   method: 'post',
-    //   url: '/qa/answers',
+    //   url: '/qa/questions',
     //   data: {
     //     body: e.target[0].value,
     //     name: e.target[1].value,
@@ -109,11 +108,12 @@ class QuestionsAndAnswers extends React.Component {
           questionNumbers={this.state.questionNumbers}
           searching={this.state.searching}
           searchedQuestions={this.state.searchedQuestions}
+          productName = {this.props.product.name}
         />
         {this.renderMoreQuestionBtn()}
         <button style={largeBtnStyle} onClick={this.clickAddQuestion}> ADD A QUESTION + </button>
         <QuestionModal
-          submitQuestions = {this.submitQuestion}
+          submitQuestion = {this.submitQuestion}
           productName = {this.props.product.name}
           showQuestionModal = {this.state.showQuestionModal}
         />
