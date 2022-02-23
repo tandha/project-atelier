@@ -125,7 +125,9 @@
   /* display: flex;
   flex-wrap: wrap; */
 }
-select, button {
+
+/* Make Not Global */
+#select-size select, #select-quantity select, #add-to-bag button {
   background: none;
   border: none;
   font-size: 1em;

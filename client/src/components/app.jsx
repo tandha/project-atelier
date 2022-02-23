@@ -36,7 +36,6 @@ class App extends React.Component {
         });
       })
       .then((res) => {
-        console.log('my outfits', this.state.myOutfits, 'product id', this.state.product.id.toString(), 'current product included in myOutfit', this.state.myOutfits.includes(this.state.product.id.toString()));
         if (this.state.myOutfits.includes(this.state.product.id.toString())) {
           this.setState({ currentProductInOutfit: true });
         }
