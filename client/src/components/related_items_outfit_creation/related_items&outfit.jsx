@@ -108,12 +108,10 @@ class RelatedItemsAndMyOutfits extends React.Component {
 
   render() {
     return (
-      <div>
-        <div>
-          <RelatedItems toggleOutfit={this.props.toggleOutfit} relatedItems={this.state.relatedItemsData}/>
-        </div>
-        <div>
-          <h4>Your Outfit</h4>
+      <div id='related-items-and-my-outfits'>
+        <span>Related Products</span>
+        <RelatedItems toggleOutfit={this.props.toggleOutfit} relatedItems={this.state.relatedItemsData}/>
+        <div id='my-outfits-container'>
           <MyOutfits />
         </div>
       </div>

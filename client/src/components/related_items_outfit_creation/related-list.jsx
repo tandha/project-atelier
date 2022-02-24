@@ -4,7 +4,7 @@ import RelatedItem from './relatedItem.jsx';
 const RelatedItems = (props) => {
 
   return (
-    <div>
+    <div id='related-items-container'>
       {props.relatedItems.map((item) => {
         return <RelatedItem relatedItem={item}/>;
       })}

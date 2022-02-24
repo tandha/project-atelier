@@ -3,7 +3,9 @@ import React from 'react';
 const MyOutfits = (props) => {
 
   return (
-    <div>Test OutfitList</div>
+    <div className='my-outfit-container'>
+
+    </div>
   );
 
 };

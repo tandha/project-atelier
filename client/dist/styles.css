@@ -126,7 +126,6 @@
   flex-wrap: wrap; */
 }
 
-/* Make Not Global */
 #select-size select, #select-quantity select, #add-to-bag button {
   background: none;
   border: none;
@@ -168,6 +167,41 @@
 
 
 /****************** Related Items & Outfit ****************/
+#related-items-and-my-outfits{
+  margin-top: 2em;
+}
+#related-items-container{
+  margin: .5em;
+  padding: .5em;
+}
+
+#my-outfits-container {
+  margin: .5em;
+  padding: .5em;
+}
+
+.related-item-container {
+  border: 1px solid black;
+  display: inline-block;
+  /* height: 350px; */
+  margin: 10px;
+  width: 200px;
+}
+
+.related-item-image {
+  height: 250px;
+  width: 100%;
+}
+
+.related-item-image img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.related-items-details span{
+  display: block;
+}
 
 
 
