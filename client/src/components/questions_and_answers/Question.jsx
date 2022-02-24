@@ -68,7 +68,6 @@ class Question extends React.Component {
     var body = document.getElementById('answer-body').value;
     var nickname = document.getElementById('answer-nickname').value;
     var email = document.getElementById('answer-email').value;
-
     // to do: axios post request to API
   }
 
