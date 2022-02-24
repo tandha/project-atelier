@@ -12,12 +12,14 @@ import List from '../reviews-list/list.jsx';
 import Sort from '../reviews-list/sort.jsx';
 import Tile from '../reviews-list/tile.jsx';
 import Buttons from '../reviews-list/buttons.jsx';
+import NewReview from '../reviews-list/newReview.jsx';
 
 describe('Component Renders', () => {
   test('RatingsAndReview', () => {
     let props = {
       starRating: '3.5',
-      updateStarRating: () => {}
+      updateStarRating: () => {},
+      product: { id: 5 }
     };
     render(<RatingsAndReview {...props}/>);
   });
@@ -80,6 +82,15 @@ describe('Component Renders', () => {
       listMaxed: false
     };
     render(<Buttons {...props}/>);
+  });
+  test('NewReview', () => {
+    let props = {
+      product: { id: 5, name: 'name' },
+      chars: {},
+      getReviews: () => {},
+      hideModal: () => {}
+    };
+    render(<NewReview {...props}/>);
   });
 });
 

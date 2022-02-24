@@ -7,9 +7,13 @@ class RatingsAndReview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentFilter: []
+      currentFilter: [],
+      chars: {}
     };
-    this.placeHolderID = 64631;
+  }
+
+  updateChars(chars) {
+    this.setState({ chars });
   }
 
   updateFilter(rating) {
@@ -36,12 +40,15 @@ class RatingsAndReview extends React.Component {
           starRating={this.props.starRating}
           updateStarRating={this.props.updateStarRating}
           updateFilter={this.updateFilter.bind(this)}
-          productID={this.placeHolderID}
+          productID={this.props.product.id}
           currentFilter={this.state.currentFilter}
+          updateChars={this.updateChars.bind(this)}
         />
         <List
-          productID={this.placeHolderID}
+          productID={this.props.product.id}
           currentFilter={this.state.currentFilter}
+          product={this.props.product}
+          chars={this.state.chars}
         />
       </div>
     );

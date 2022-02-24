@@ -2,6 +2,7 @@ import React from 'react';
 import Sort from './sort.jsx';
 import Tile from './tile.jsx';
 import Buttons from './buttons.jsx';
+import NewReview from './newReview.jsx';
 import axios from 'axios';
 
 class List extends React.Component {
@@ -15,7 +16,8 @@ class List extends React.Component {
       listLength: 2,
       listMaxed: false,
       currentSort: 'relevant',
-      currentFilter: []
+      currentFilter: [],
+      renderModal: false
     };
   }
 
@@ -82,10 +84,19 @@ class List extends React.Component {
     this.setState({ listLength: newLength }, () => this.updateDisplayedReviews());
   }
 
+  displayModal() {
+    this.setState({ renderModal: true });
+  }
+
+  hideModal() {
+    this.setState({ renderModal: false });
+  }
+
   render() {
     return (
       <div id='review-list'>
-        <Sort updateSort={this.updateSort.bind(this)} numReviews={this.state.reviews.length}/>
+        <Sort updateSort={this.updateSort.bind(this)}
+          numReviews={this.state.reviews.length}/>
 
         <div id='review-tiles'>
           {this.state.displayedReviews.map((review, index) => {
@@ -93,7 +104,17 @@ class List extends React.Component {
           })}
         </div>
 
-        <Buttons updateLength={this.updateLength.bind(this)} listMaxed={this.state.listMaxed}/>
+        <Buttons updateLength={this.updateLength.bind(this)}
+          listMaxed={this.state.listMaxed}
+          displayModal={this.displayModal.bind(this)}/>
+
+        {this.state.renderModal
+          ? <NewReview product={this.props.product}
+            chars={this.props.chars}
+            getReviews={this.getReviews.bind(this)}
+            hideModal={this.hideModal.bind(this)}/>
+          : <div></div>}
+
       </div>)
     ;
   }
