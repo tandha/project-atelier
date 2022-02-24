@@ -186,6 +186,9 @@
   text-align: right;
   width: 100%;
 }
+.remove-from-outfit svg, .related-item-outfit-toggle-button svg, .outfit-details, .related-items-details{
+  padding: .25em;
+}
 
 .related-item-container, .my-outfit-container{
   border: 1px solid black;
