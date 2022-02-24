@@ -8,8 +8,8 @@ const QuestionModal = (props) => {
   return (
     <div id='new-question-modal'>
       <div id='new-question-content'>
-        <h2 id='form-head'>Ask Your Question</h2>
-        <button id='close-button' onClick={props.clickAddQuestion}><IoIosCloseCircleOutline/></button>
+        <h2 id='QA-form-head'>Ask Your Question</h2>
+        <button id='QA-close-btn' onClick={props.clickAddQuestion}><IoIosCloseCircleOutline/></button>
         <h3>About the {props.productName}</h3>
 
         <form id='submit-question-form' onSubmit={props.submitQuestion}>
@@ -23,7 +23,7 @@ const QuestionModal = (props) => {
           <textarea id='question-email' type='email' pattern='.+@email\.com' rows='2' cols='50'
             placeholder='Why did you like the product or not?' maxLength='60' required></textarea>
           <p id='QA-note'>For authentication reasons, you will not be emailed</p>
-          <button id='submit-btn' type='submit'>Submit Question</button>
+          <button id='QA-submit-btn' type='submit'>Submit Question</button>
         </form>
 
       </div>

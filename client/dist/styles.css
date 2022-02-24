@@ -163,10 +163,16 @@ select, button {
 
 
 /******************* Questions & Answers ******************/
-#search-bar {
+#QA-search-bar {
   height: 50px;
   width: 100%;
   font-weight: bold;
+}
+
+#question-list {
+  max-height: 76vh;
+  overflow-y: auto;
+  overscroll-behavior-block: auto;
 }
 
 #question-body, #answer-title {
@@ -193,6 +199,9 @@ select, button {
 #answer-list {
   display: grid;
   grid-template-columns: 24px auto;
+  max-height: 38vh;
+  overflow-y: auto;
+  overscroll-behavior-block: auto;
 }
 
 #answer-interaction, #answer-helpful, #answer-report {
@@ -215,16 +224,17 @@ select, button {
   margin-left: 24px;
 }
 
-#photo-box {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 100px);
+#answer-photo-box {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
 }
 
 #answer-photo {
   height: 100px;
 }
 
-#form-head {
+#QA-form-head {
   display: inline;
 }
 
@@ -266,14 +276,14 @@ select, button {
   color:grey;
 }
 
-#close-button {
+#QA-close-btn {
   font-size: 16px;
   float: right;
   background: none;
   border: none;
 }
 
-#submit-btn {
+#QA-submit-btn {
   background: none;
   border: 1.5px solid grey;
   color:grey;

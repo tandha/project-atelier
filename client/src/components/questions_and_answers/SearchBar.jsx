@@ -3,7 +3,7 @@ import React from 'react';
 const SearchBar = (props)=> {
   return (
     <>
-      <input id='search-bar' placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..." onChange={props.handleSearchBar}></input>
+      <input id='QA-search-bar' placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..." onChange={props.handleSearchBar}></input>
     </>
   );
 };

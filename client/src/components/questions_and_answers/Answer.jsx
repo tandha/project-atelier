@@ -69,7 +69,7 @@ class Answer extends React.Component {
     return (
       <div id='each-answer'>
         <div id='answer-body'> {this.props.answer.body} </div>
-        <div id='photo-box'>
+        <div id='answer-photo-box'>
           {this.props.answer.photos.map((photo, index) => (
             <AnswerPhoto photo={photo} key={index}/>
           ))}
