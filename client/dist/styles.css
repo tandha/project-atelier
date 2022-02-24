@@ -125,7 +125,9 @@
   /* display: flex;
   flex-wrap: wrap; */
 }
-select, button {
+
+/* Make Not Global */
+#select-size select, #select-quantity select, #add-to-bag button {
   background: none;
   border: none;
   font-size: 1em;
@@ -135,7 +137,7 @@ select, button {
   width: 100%;
 }
 
-#select-size, #select-quantity, #add-to-bag {
+#select-size, #select-quantity, #add-to-bag, #add-to-myoutfit{
   background-color: white;
   border: 1px solid black;
   display: inline-block;
@@ -144,6 +146,10 @@ select, button {
   margin: .5em;
   vertical-align: middle;
   width: 200px;
+}
+#add-to-myoutfit{
+  text-align: center;
+  width: 20px;
 }
 
 #add-to-bag button {
@@ -154,6 +160,9 @@ select, button {
 #add-to-bag:hover button, #add-to-bag:hover {
   background-color: black;
   color: white;
+  cursor: pointer;
+}
+#add-to-myoutfit:hover{
   cursor: pointer;
 }
 
