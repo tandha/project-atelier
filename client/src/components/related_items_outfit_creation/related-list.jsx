@@ -5,8 +5,9 @@ const RelatedItems = (props) => {
 
   return (
     <div id='related-items-container'>
-      {props.relatedItems.map((item) => {
-        return <RelatedItem relatedItem={item}/>;
+      {props.relatedItems.map((item, i) => {
+        let key = 'related-item-' + i;
+        return <RelatedItem key={key} starRating={props.starRating} relatedItem={item}/>;
       })}
     </div>
   );

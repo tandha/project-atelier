@@ -19,8 +19,11 @@ class RelatedItemsAndMyOutfits extends React.Component {
       .then((res) => {
         this.setState({ relatedItemsData: res });
       })
-      .then(() => {
-        // generateMyOufitsData()
+      .then((res) => {
+        return this.generateMyOufitsData();
+      })
+      .then((res) => {
+        this.setState({ myOutfitsData: res });
       })
       .catch(() => {
 
@@ -99,21 +102,25 @@ class RelatedItemsAndMyOutfits extends React.Component {
   }
 
   generateMyOufitsData() {
-    //TODO: look through my oufits, for each outfit, collect a axios promise and return Promise.all()
-    console.log(this.props.myOutfits);
+    return this.addProductInfo(this.props.myOutfits)
+      .then((res) => {
+        return res;
+      })
+      .then((res) => {
+        return this.addStyleInfo(res);
+      })
+      .catch(() => {
+
+      });
   }
-
-
-
 
   render() {
     return (
       <div id='related-items-and-my-outfits'>
         <span>Related Products</span>
-        <RelatedItems toggleOutfit={this.props.toggleOutfit} relatedItems={this.state.relatedItemsData}/>
-        <div id='my-outfits-container'>
-          <MyOutfits />
-        </div>
+        <RelatedItems toggleOutfit={this.props.toggleOutfit} relatedItems={this.state.relatedItemsData} starRating={this.props.starRating}/>
+        <span>Your Outfit</span>
+        <MyOutfits myOutfits={this.state.myOutfitsData} starRating={this.props.starRating}/>
       </div>
     );
   }

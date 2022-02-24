@@ -167,6 +167,7 @@
 
 
 /****************** Related Items & Outfit ****************/
+
 #related-items-and-my-outfits{
   margin-top: 2em;
 }
@@ -180,7 +181,13 @@
   padding: .5em;
 }
 
-.related-item-container {
+.remove-from-outfit, .related-item-outfit-toggle-button {
+  display: inline-block;
+  text-align: right;
+  width: 100%;
+}
+
+.related-item-container, .my-outfit-container{
   border: 1px solid black;
   display: inline-block;
   /* height: 350px; */
@@ -188,18 +195,18 @@
   width: 200px;
 }
 
-.related-item-image {
+.related-item-image, .outfit-image{
   height: 250px;
   width: 100%;
 }
 
-.related-item-image img {
+.related-item-image img, .outfit-image img {
   height: 100%;
   object-fit: cover;
   width: 100%;
 }
 
-.related-items-details span{
+.related-items-details span, .outfit-details span{
   display: block;
 }
 
