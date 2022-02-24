@@ -1,11 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 
-let AddInteractionsLogger = (Component) => {
+const AddInteractionsLogger = (Component) => {
 
-  let widgetName = Component.name;
-
-  const handleClick = (event) => {
+  const logInteraction = (event) => {
     let elementName = event.target.localName;
     let id = event.target.id;
     let className = event.target.className;
@@ -17,6 +15,7 @@ let AddInteractionsLogger = (Component) => {
       elementName = `${elementName}.${className}`;
     }
 
+    let widgetName = Component.name;
     let timeClicked = new Date().toJSON();
 
     axios({
@@ -27,22 +26,20 @@ let AddInteractionsLogger = (Component) => {
         widget: widgetName,
         time: timeClicked
       }
-    })
-      .then(() => {
-        console.log(
-          `Interaction logged!\nElement: ${elementName}\nWidget: ${widgetName}\nTime: ${timeClicked}`
-        );
-      })
-      .catch(err => console.log(err));
+    }).then(() => {
+      console.log(`Interaction logged! \nElement: ${elementName} \n` +
+                  `Widget: ${widgetName} \nTime: ${timeClicked}`);
+    }).catch(err => console.log(err));
   };
 
-  return (props) => {
+  const ComponentWithLogger = (props) => {
     return (
-      <div id={`${widgetName}-interaction-wrapper`} onClick={handleClick}>
+      <div onClick={logInteraction}>
         <Component {...props} />
       </div>
     );
   };
+  return ComponentWithLogger;
 };
 
 export default AddInteractionsLogger;
