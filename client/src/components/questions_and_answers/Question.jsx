@@ -69,9 +69,6 @@ class Question extends React.Component {
     var nickname = document.getElementById('answer-nickname').value;
     var email = document.getElementById('answer-email').value;
 
-    if (!validateEmail(email)) {
-      alert('Please enter correct email format!');
-    }
     // to do: axios post request to API
   }
 
@@ -101,11 +98,3 @@ class Question extends React.Component {
 }
 
 export default Question;
-
-const validateEmail = (email) => {
-  return String(email)
-    .toLowerCase()
-    .match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
-};

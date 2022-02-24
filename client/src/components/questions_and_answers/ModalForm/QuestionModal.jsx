@@ -17,11 +17,11 @@ const QuestionModal = (props) => {
           <p>Your Question?*</p>
           <textarea id='your-question' rows='5' cols='50' maxLength='1000' required></textarea>
           <p>What is your nickname?*</p>
-          <textarea id='question-nickname' rows='2' cols='50' placeholder='Example: jackson11!' maxLength='60' required></textarea>
+          <input id='question-nickname' type='text' size='61' placeholder='Example: jackson11!' maxLength='60' required></input>
           <p id='QA-note'>For privacy reasons, do not use your full name or email address</p>
           <p>Your email?*</p>
-          <textarea id='question-email' type='email' pattern='.+@email\.com' rows='2' cols='50'
-            placeholder='Why did you like the product or not?' maxLength='60' required></textarea>
+          <input id='question-email' type='email' size='61'
+            placeholder='Why did you like the product or not?' maxLength='60' required></input>
           <p id='QA-note'>For authentication reasons, you will not be emailed</p>
           <button id='QA-submit-btn' type='submit'>Submit Question</button>
         </form>
