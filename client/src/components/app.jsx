@@ -62,13 +62,16 @@ class App extends React.Component {
   }
 
   toggleOutfit(id) {
-    console.log(this.state.currentProductInOutfit);
     if (!this.state.currentProductInOutfit) {
       localStorage.setItem(id, id);
-      this.setState({ myOutfits: this.getOutfits(), currentProductInOutfit: true });
+      this.setState({ myOutfits: this.getOutfits(), currentProductInOutfit: true }, () => {
+        console.log(this.state.myOutfits);
+      });
     } else {
       localStorage.removeItem(id, id);
-      this.setState({ myOutfits: this.getOutfits(), currentProductInOutfit: false });
+      this.setState({ myOutfits: this.getOutfits(), currentProductInOutfit: false }, () =>{
+        console.log(this.state.myOutfits);
+      });
     }
   }
 

@@ -3,9 +3,13 @@ import { AiOutlineCloseCircle} from 'react-icons/ai';
 
 const MyOutfit = (props) => {
 
+  const handleClick = function() {
+    props.toggleOutfit(props.outfit.id);
+  };
+
   return (
     <div className='my-outfit-container'>
-      <span className='remove-from-outfit'><AiOutlineCloseCircle /></span>
+      <span className='remove-from-outfit' onClick={handleClick}><AiOutlineCloseCircle /></span>
       <div className='outfit-image'>
         <img src={props.outfit.image}></img>
       </div>

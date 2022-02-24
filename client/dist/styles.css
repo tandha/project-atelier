@@ -169,16 +169,24 @@
 /****************** Related Items & Outfit ****************/
 
 #related-items-and-my-outfits{
-  margin-top: 2em;
+  margin-top: 3em;
+  margin-left: 7em;
 }
-#related-items-container{
-  margin: .5em;
-  padding: .5em;
+#related-items-container, #my-outfits-container{
+  margin: .5em, .5em, 0em, .5em;
+  padding: .5em, .5em, 0em, .5em;
 }
 
-#my-outfits-container {
-  margin: .5em;
-  padding: .5em;
+#add-to-outfit{
+  color: darkgray;
+  height:180px;
+  width:100%;
+  margin:0 auto;
+  padding-top: 5em;
+  vertical-align: middle;
+}
+#add-to-outfit:hover {
+  cursor: pointer;
 }
 
 .remove-from-outfit, .related-item-outfit-toggle-button {
@@ -193,9 +201,10 @@
 .related-item-container, .my-outfit-container{
   border: 1px solid black;
   display: inline-block;
-  /* height: 350px; */
-  margin: 10px;
+  height: 360px;
+  margin: 15px 15px 15px 0px;
   width: 200px;
+  text-align: left;
 }
 
 .related-item-image, .outfit-image{
