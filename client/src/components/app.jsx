@@ -6,9 +6,12 @@ import QuestionsAndAnswers from './questions_and_answers/q&a.jsx';
 import RatingsAndReviews from './ratings_and_reviews/ratings&reviews.jsx';
 import RelatedItemsOutfitCreation from './related_items_outfit_creation/related_items&outfit.jsx';
 import { product, styles } from '../sampleData/sampleData.js';
-import InteractionsWrapper from './interactions.jsx';
 
-const WrappedRatingsAndReviews = InteractionsWrapper(RatingsAndReviews);
+import AddInteractionsLogger from './interactions.jsx';
+const ProductOverviewWithLogger = AddInteractionsLogger(ProductOverview);
+const QuestionsAndAnswersWithLogger = AddInteractionsLogger(QuestionsAndAnswers);
+const RelatedItemsOutfitCreationWithLogger = AddInteractionsLogger(RelatedItemsOutfitCreation);
+const RatingsAndReviewsWithLogger = AddInteractionsLogger(RatingsAndReviews);
 
 class App extends React.Component {
   constructor(props) {
@@ -22,7 +25,6 @@ class App extends React.Component {
       starRating: 0
     };
   }
-
 
   componentDidMount() {
     this.getProduct(64622);
@@ -70,10 +72,10 @@ class App extends React.Component {
     }
     return (
       <div>
-        <ProductOverview product={this.state.product} styles={this.state.styles} starRating={this.state.starRating} addToMyOutfit={this.addToMyOutfit.bind(this)}/>
-        <RelatedItemsOutfitCreation/>
-        <QuestionsAndAnswers product={this.state.product}/>
-        <WrappedRatingsAndReviews
+        <ProductOverviewWithLogger product={this.state.product} styles={this.state.styles} starRating={this.state.starRating} addToMyOutfit={this.addToMyOutfit.bind(this)}/>
+        <RelatedItemsOutfitCreationWithLogger/>
+        <QuestionsAndAnswersWithLogger product={this.state.product}/>
+        <RatingsAndReviewsWithLogger
           starRating={this.state.starRating}
           updateStarRating={this.updateStarRating.bind(this)}
           product={this.state.product}/>
