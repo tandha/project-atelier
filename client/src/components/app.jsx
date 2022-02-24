@@ -6,6 +6,9 @@ import QuestionsAndAnswers from './questions_and_answers/q&a.jsx';
 import RatingsAndReviews from './ratings_and_reviews/ratings&reviews.jsx';
 import RelatedItemsOutfitCreation from './related_items_outfit_creation/related_items&outfit.jsx';
 import { product, styles } from '../sampleData/sampleData.js';
+import InteractionsWrapper from './interactions.jsx';
+
+const WrappedRatingsAndReviews = InteractionsWrapper(RatingsAndReviews);
 
 class App extends React.Component {
   constructor(props) {
@@ -70,7 +73,7 @@ class App extends React.Component {
         <ProductOverview product={this.state.product} styles={this.state.styles} starRating={this.state.starRating} addToMyOutfit={this.addToMyOutfit.bind(this)}/>
         <RelatedItemsOutfitCreation/>
         <QuestionsAndAnswers product={this.state.product}/>
-        <RatingsAndReviews
+        <WrappedRatingsAndReviews
           starRating={this.state.starRating}
           updateStarRating={this.updateStarRating.bind(this)}
           product={this.state.product}/>
