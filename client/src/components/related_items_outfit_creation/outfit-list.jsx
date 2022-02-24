@@ -1,6 +1,6 @@
 import React from 'react';
 
-const OutfitList = (props) => {
+const MyOutfits = (props) => {
 
   return (
     <div>Test OutfitList</div>
@@ -8,4 +8,4 @@ const OutfitList = (props) => {
 
 };
 
-export default OutfitList;
+export default MyOutfits;

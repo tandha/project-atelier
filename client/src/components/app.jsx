@@ -4,7 +4,7 @@ import axios from 'axios';
 import ProductOverview from './product_overview/overview.jsx';
 import QuestionsAndAnswers from './questions_and_answers/q&a.jsx';
 import RatingsAndReviews from './ratings_and_reviews/ratings&reviews.jsx';
-import RelatedItemsOutfitCreation from './related_items_outfit_creation/related_items&outfit.jsx';
+import RelatedItemsAndMyOutfits from './related_items_outfit_creation/related_items&outfit.jsx';
 import { product, styles } from '../sampleData/sampleData.js';
 
 class App extends React.Component {
@@ -17,15 +17,12 @@ class App extends React.Component {
       styles: {},
       myOutfits: [],
       currentProductInOutfit: false,
-      starRating: 0 //starRating is buggy
+      starRating: 0
     };
   }
 
-  //promise.allSettled?
   componentDidMount() {
-    Promise.all([this.getProduct(64622),
-      this.getStyles(64622),
-      this.getOutfits()])
+    Promise.all([this.getProduct(64622), this.getStyles(64622), this.getOutfits()])
       .then((res) => {
         this.setState({
           product: res[0].data.data,
@@ -86,7 +83,7 @@ class App extends React.Component {
     return (
       <div>
         <ProductOverview currentProductInOutfit={this.state.currentProductInOutfit} product={this.state.product} styles={this.state.styles} starRating={this.state.starRating} toggleOutfit={this.toggleOutfit.bind(this)}/>
-        <RelatedItemsOutfitCreation/>
+        <RelatedItemsAndMyOutfits product={this.state.product} myOutfits={this.state.myOutfits} toggleOutfit={this.toggleOutfit.bind(this)}/>
         <QuestionsAndAnswers product={this.state.product}/>
         <RatingsAndReviews
           starRating={this.state.starRating}

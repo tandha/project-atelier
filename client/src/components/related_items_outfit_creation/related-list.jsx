@@ -1,11 +1,16 @@
 import React from 'react';
+import RelatedItem from './relatedItem.jsx';
 
-const RelatedList = (props) => {
+const RelatedItems = (props) => {
 
   return (
-    <div>Test RelatedList</div>
+    <div>
+      {props.relatedItems.map((item) => {
+        return <RelatedItem relatedItem={item}/>;
+      })}
+    </div>
   );
 
 };
 
-export default RelatedList;
+export default RelatedItems;
