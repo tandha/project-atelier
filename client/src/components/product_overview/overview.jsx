@@ -32,10 +32,17 @@ class ProductOverview extends React.Component {
     });
   }
 
+  advanceMainPhoto() {
+    this.state.mainPhotoIndex === this.state.photos.length - 1 ? this.setState({ mainPhotoIndex: 0}) : this.setState({ mainPhotoIndex: this.state.mainPhotoIndex + 1});
+  }
+  reverseMainPhoto() {
+    this.state.mainPhotoIndex === 0 ? this.setState({ mainPhotoIndex: this.state.photos.length - 1}) : this.setState({ mainPhotoIndex: this.state.mainPhotoIndex - 1});
+  }
+
   render() {
     return (
       <div id='overview-container'>
-        <ImageCarousel changePhoto={this.changeSelectedPhoto.bind(this)} mainPhotoIndex={this.state.mainPhotoIndex} photos={this.state.selectedStyle.photos} selectedStyle={this.state.selectedStyle}/>
+        <ImageCarousel reverseMainPhoto={this.reverseMainPhoto.bind(this)} advanceMainPhoto={this.advanceMainPhoto.bind(this)} changePhoto={this.changeSelectedPhoto.bind(this)} mainPhotoIndex={this.state.mainPhotoIndex} photos={this.state.selectedStyle.photos} selectedStyle={this.state.selectedStyle}/>
         <Information product={this.props.product} selectedStyle={this.state.selectedStyle} starRating={this.props.starRating}/>
         <StyleSelector changeStyle={this.changeSelectedStyle.bind(this)} name={this.state.selectedStyle.name} styles={this.props.styles}/>
         <Cart productId={this.props.product.id} toggleOutfit={this.props.toggleOutfit} currentProductInOutfit={this.props.currentProductInOutfit} selectedStyle={this.state.selectedStyle}/>
