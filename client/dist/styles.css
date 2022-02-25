@@ -285,6 +285,14 @@
   color:grey;
 }
 
+#QA-preview-container {
+  overflow-y: auto;
+  overscroll-behavior-block: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
 #QA-close-btn {
   font-size: 16px;
   float: right;

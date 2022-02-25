@@ -83,8 +83,21 @@ class QuestionsAndAnswers extends React.Component {
     var body = document.getElementById('your-question').value;
     var nickname = document.getElementById('question-nickname').value;
     var email = document.getElementById('question-email').value;
-    
-    // to do: axios post request to API
+
+    axios({
+      method: 'post',
+      url: '/qa/questions',
+      data: {
+        body: body,
+        name: nickname,
+        email: email,
+        'product_id': this.props.product.id
+      }
+    }).then(()=> {
+      this.setState({ showQuestionModal: false }, this.getProductQuestions());
+    }).catch((err)=> {
+      console.log('error adding question', err);
+    });
   }
 
   render() {

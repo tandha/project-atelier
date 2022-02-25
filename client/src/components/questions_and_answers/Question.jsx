@@ -68,7 +68,24 @@ class Question extends React.Component {
     var body = document.getElementById('answer-body').value;
     var nickname = document.getElementById('answer-nickname').value;
     var email = document.getElementById('answer-email').value;
-    // to do: axios post request to API
+    var imageURL = document.querySelectorAll('#QA-preview');
+    console.log('photo?', imageURL[0].src, imageURL[1].src);
+
+    // axios({
+    //   method: 'post',
+    //   url: `/qa/questions/${this.props.question.question_id}/answers`,
+    //   params: {'question_id': this.props.question.question_id},
+    //   data: {
+    //     body: body,
+    //     name: nickname,
+    //     email: email,
+    //     photos:[]
+    //   }
+    // }).then(()=> {
+    //   this.setState({ showAnswerModal: false });
+    // }).catch((err)=> {
+    //   console.log('error adding answer', err);
+    // });
   }
 
   render() {

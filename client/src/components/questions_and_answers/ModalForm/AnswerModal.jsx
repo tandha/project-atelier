@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import {IoIosCloseCircleOutline} from 'react-icons/io';
 
 const AnswerModal = (props) => {
@@ -23,6 +24,8 @@ const AnswerModal = (props) => {
           <input id='answer-email' type='email' size='61' placeholder='jack@email.com' maxLength='60' required></input>
           <p id='QA-note'>For authentication reasons, you will not be emailed</p>
           <p>Upload your photos</p>
+          <input id='upload-answer-photo' type='file' accept='image/png, image/jpeg' multiple onChange={() => previewFile()}></input>
+          <div id='QA-preview-container'></div>
           <button id='QA-submit-btn' type='submit'>Submit Answer</button>
         </form>
 
@@ -32,3 +35,25 @@ const AnswerModal = (props) => {
 };
 
 export default AnswerModal;
+
+const previewFile = () => {
+  const container = document.querySelector('#QA-preview-container');
+  const file = document.querySelector('#upload-answer-photo').files[0];
+  const reader = new FileReader();
+  const img = new Image();
+
+  reader.addEventListener('load', () => {
+    img.id = 'QA-preview';
+    img.src = reader.result;
+    // img.src = URL.createObjectURL(file);
+    img.height = 100;
+    container.appendChild(img);
+  }, false);
+
+  if (file) {
+    reader.readAsDataURL(file);
+  }
+  if (container.childElementCount >= 4) {
+    document.querySelector('#upload-answer-photo').style.visibility = 'hidden';
+  }
+};
