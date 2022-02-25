@@ -7,6 +7,7 @@ import RelatedItemsOutfitCreation from './related_items_outfit_creation/related_
 import QuestionsAndAnswers from './questions_and_answers/q&a.jsx';
 import RatingsAndReviews from './ratings_and_reviews/ratings&reviews.jsx';
 import AddInteractionsLogger from './interactions.jsx';
+import StarRating from './starRating.jsx';
 const ProductOverviewWithLogger = AddInteractionsLogger(ProductOverview);
 const RelatedItemsOutfitCreationWithLogger = AddInteractionsLogger(RelatedItemsOutfitCreation);
 const QuestionsAndAnswersWithLogger = AddInteractionsLogger(QuestionsAndAnswers);
@@ -94,7 +95,7 @@ class App extends React.Component {
           currentProductInOutfit={this.state.currentProductInOutfit}
           product={this.state.product}
           styles={this.state.styles}
-          starRating={this.state.starRating}
+          starRating={<StarRating />}
           toggleOutfit={this.toggleOutfit.bind(this)}
         />
 
