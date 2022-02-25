@@ -312,7 +312,23 @@
 }
 
 #ratings-breakdown {
+  width: 200px;
+}
 
+.star-bar {
+  width: 100px;
+  height: 10px;
+  border-radius: 2px;
+  border: 0px solid;
+  overflow: hidden;
+  background-color: rgb(219, 219, 219);
+}
+
+.star-bar-fill {
+  height: 100%;
+  color: rgb(255, 251, 251);
+  padding-right: 50px;
+  background-color: rgb(63, 63, 63);
 }
 
 #review-list {

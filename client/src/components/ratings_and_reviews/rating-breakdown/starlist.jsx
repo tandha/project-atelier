@@ -6,17 +6,37 @@ const StarList = (props) => {
     props.updateFilter(event.target.id);
   };
 
+  const calculatePercentage = (ratings) => {
+    let result = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0};
+    let total = 0;
+
+    for (let key in ratings) {
+      total += parseInt(ratings[key]);
+    }
+    for (let key in ratings) {
+      result[key] = ((parseInt(ratings[key]) / total) * 100).toFixed();
+    }
+    return result;
+  };
+
   let ratings = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0};
 
   if (props.metaData.data) {
     for (let key in props.metaData.data.ratings) {
       ratings[key] = props.metaData.data.ratings[key];
     }
+    ratings = calculatePercentage(ratings);
   }
 
   return (
     <div id='ratings-breakdown-starlist'>
-      <span onClick={onStarClick} id='1'>1 Star: {ratings[1]}</span><br></br>
+
+      <span onClick={onStarClick} id='star-list-1'>1 star
+        <div className='star-bar' id={ratings[1]}>
+          <span className='star-bar-fill'></span>
+        </div>
+      </span><br></br>
+
       <span onClick={onStarClick} id='2'>2 Star: {ratings[2]}</span><br></br>
       <span onClick={onStarClick} id='3'>3 Star: {ratings[3]}</span><br></br>
       <span onClick={onStarClick} id='4'>4 Star: {ratings[4]}</span><br></br>
