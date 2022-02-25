@@ -122,6 +122,11 @@
   margin-top: 250px;
   z-index: 3;
 }
+#thumbnail-highlight-bar{
+  background-color: white;
+  height: 5px;
+  width: 60px;
+}
 #image-gallery-left-arrow:hover, #image-gallery-right-arrow:hover{
   cursor: pointer;
 }
