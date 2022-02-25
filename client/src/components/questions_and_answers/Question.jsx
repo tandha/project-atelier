@@ -10,7 +10,7 @@ class Question extends React.Component {
       QuestionHelpful: false,
       answers: Object.values(this.props.question.answers),
       answerNumbers: 2,
-      showAnswerModal: false,
+      showAnswerModal: false
     };
 
     this.renderQuestionHelpfulBtn = this.renderQuestionHelpfulBtn.bind(this);
@@ -18,6 +18,7 @@ class Question extends React.Component {
     this.renderMoreAnswersBtn = this.renderMoreAnswersBtn.bind(this);
     this.clickMoreAnswers = this.clickMoreAnswers.bind(this);
     this.clickAddAnswer = this.clickAddAnswer.bind(this);
+    this.getProductAnswers = this.getProductAnswers.bind(this);
     this.submitAnswer = this.submitAnswer.bind(this);
   }
 
@@ -63,28 +64,48 @@ class Question extends React.Component {
     this.setState(prevState => ({showAnswerModal: !prevState.showAnswerModal}));
   }
 
+  getProductAnswers() {
+    axios({
+      method: 'get',
+      url: `qa/questions/${this.props.question.question_id}/answers`,
+      params: {
+        'question_id': this.props.question.question_id,
+        count: 100
+      }
+    }).then((res)=> {
+      // this.setState({ answers: res.data.data.results });
+    }).catch((err)=> {
+      console.log('error getting answers', err);
+    });
+  }
+
   submitAnswer(e) {
     e.preventDefault();
-    var body = document.getElementById('answer-body').value;
-    var nickname = document.getElementById('answer-nickname').value;
-    var email = document.getElementById('answer-email').value;
-    // var imageURL = document.querySelectorAll('#QA-preview');
-    // console.log('photo?', imageURL[0].src, imageURL[1].src);
+    // let answerbody = document.getElementById('answer-body').value;
+    let answerbody = document.querySelector('textarea[name="answerbody"]').value;
+    let nickname = document.getElementById('answer-nickname').value;
+    let email = document.getElementById('answer-email').value;
+    let images = document.querySelectorAll('#QA-preview');
+
+    let imageURL = [];
+    images.forEach((image) => (
+      imageURL.push(image.getAttribute('src'))
+    ));
+
+    //todo: validate photo
 
     axios({
       method: 'post',
       url: `/qa/questions/${this.props.question.question_id}/answers`,
       params: {'question_id': this.props.question.question_id},
       data: {
-        body: body,
-        name: nickname,
-        email: email,
-        photos:[]
+        'body': answerbody,
+        'name': nickname,
+        'email': email,
+        'photos': imageURL
       }
-    }).then(()=> {
+    }).then((res)=> {
       this.setState({ showAnswerModal: false });
-      // axios request for answers
-      
     }).catch((err)=> {
       console.log('error adding answer', err);
     });
