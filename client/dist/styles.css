@@ -307,6 +307,18 @@
 
 /********************* Ratings & Reviews *******************/
 
+#ratings-and-reviews {
+  display: flex;
+}
+
+#ratings-breakdown {
+
+}
+
+#review-list {
+
+}
+
 .review-list-tile-helpful {
   color: blue;
 }

@@ -16,12 +16,13 @@ const StarList = (props) => {
 
   return (
     <div id='ratings-breakdown-starlist'>
-      <span onClick={onStarClick} id='1'>1 Star: {ratings[1]} reviews</span><br></br>
-      <span onClick={onStarClick} id='2'>2 Star: {ratings[2]} reviews</span><br></br>
-      <span onClick={onStarClick} id='3'>3 Star: {ratings[3]} reviews</span><br></br>
-      <span onClick={onStarClick} id='4'>4 Star: {ratings[4]} reviews</span><br></br>
-      <span onClick={onStarClick} id='5'>5 Star: {ratings[5]} reviews</span><br></br>
-      <span>Current filters: {
+      <span onClick={onStarClick} id='1'>1 Star: {ratings[1]}</span><br></br>
+      <span onClick={onStarClick} id='2'>2 Star: {ratings[2]}</span><br></br>
+      <span onClick={onStarClick} id='3'>3 Star: {ratings[3]}</span><br></br>
+      <span onClick={onStarClick} id='4'>4 Star: {ratings[4]}</span><br></br>
+      <span onClick={onStarClick} id='5'>5 Star: {ratings[5]}</span><br></br>
+      <br></br>
+      <span>Filters: <br></br> {
         props.currentFilter.map((rating, index) => {
           if (index === props.currentFilter.length - 1) {
             return <span key={index}>{rating}</span>;
@@ -32,7 +33,7 @@ const StarList = (props) => {
       }</span><br></br>
       {
         props.currentFilter.length > 0
-          ? <span onClick={onStarClick} id='0'>Remove all filters</span>
+          ? <span onClick={onStarClick} id='0'>Remove</span>
           : <span></span>
       }
     </div>
