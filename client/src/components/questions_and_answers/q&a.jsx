@@ -80,9 +80,9 @@ class QuestionsAndAnswers extends React.Component {
 
   submitQuestion(e) {
     e.preventDefault();
-    let body = document.getElementById('your-question').value;
-    let nickname = document.getElementById('question-nickname').value;
-    let email = document.getElementById('question-email').value;
+    let body = e.target[0].value;
+    let nickname = e.target[1].value;
+    let email = e.target[2].value;
 
     axios({
       method: 'post',
@@ -111,7 +111,6 @@ class QuestionsAndAnswers extends React.Component {
           searching={this.state.searching}
           searchedQuestions={this.state.searchedQuestions}
           productName = {this.props.product.name}
-
         />
         {this.renderMoreQuestionBtn()}
         <button id='add-question-btn' onClick={this.clickAddQuestion}> ADD A QUESTION <IoMdAdd/> </button>

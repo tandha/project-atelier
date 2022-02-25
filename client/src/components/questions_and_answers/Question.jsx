@@ -81,17 +81,15 @@ class Question extends React.Component {
 
   submitAnswer(e) {
     e.preventDefault();
-    // let answerbody = document.getElementById('answer-body').value;
-    let answerbody = document.querySelector('textarea[name="answerbody"]').value;
-    let nickname = document.getElementById('answer-nickname').value;
-    let email = document.getElementById('answer-email').value;
+    let answerbody = e.target[0].value;
+    let nickname = e.target[1].value;
+    let email = e.target[2].value;
     let images = document.querySelectorAll('#QA-preview');
 
     let imageURL = [];
     images.forEach((image) => (
       imageURL.push(image.getAttribute('src'))
     ));
-
     //todo: validate photo
 
     axios({
