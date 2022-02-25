@@ -123,12 +123,34 @@
   margin-top: 250px;
   z-index: 3;
 }
+
+#thumbnail-gallery-up-arrow{
+  color: red;
+  position: absolute;
+  margin-left: 43px;
+  margin-top: 15px;
+  z-index: 4;
+}
+
+#thumbnail-gallery-down-arrow{
+  color: red;
+  position: absolute;
+  margin-left: 43px;
+  margin-top: 437px;
+  z-index: 4;
+}
+
 #thumbnail-highlight-bar{
   background-color: white;
   height: 5px;
   width: 60px;
 }
-#image-gallery-left-arrow:hover, #image-gallery-right-arrow:hover{
+#image-gallery-left-arrow:hover,
+#image-gallery-right-arrow:hover,
+#thumbnail-highlight-bar:hover,
+#thumbnail-gallery-down-arrow:hover,
+#thumbnail-gallery-up-arrow:hover,
+#gallery-thumbnails li:hover{
   cursor: pointer;
 }
 
@@ -136,6 +158,7 @@
   z-index: 2;
   list-style-type: none;
   padding: 0;
+  padding-top: 1em;
   position: absolute;
   margin: 0;
 }
@@ -157,7 +180,9 @@
 }
 
 /* Make Not Global */
-#select-size select, #select-quantity select, #add-to-bag button {
+#select-size select,
+#select-quantity select,
+#add-to-bag button {
   background: none;
   border: none;
   font-size: 1em;
@@ -167,7 +192,10 @@
   width: 100%;
 }
 
-#select-size, #select-quantity, #add-to-bag, #add-to-myoutfit{
+#select-size,
+#select-quantity,
+#add-to-bag,
+#add-to-myoutfit{
   background-color: white;
   border: 1px solid black;
   display: inline-block;
@@ -187,7 +215,8 @@
   margin-right: 0;
   width: 186.2px;
 }
-#add-to-bag:hover button, #add-to-bag:hover {
+#add-to-bag:hover button,
+#add-to-bag:hover {
   background-color: black;
   color: white;
   cursor: pointer;
