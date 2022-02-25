@@ -3,13 +3,13 @@ import Thumbnail from './imageThumbnail.jsx';
 
 const Thumbnails = (props) => {
   return (
-    <div id='gallery-thumbnails'>
+    <ul id='gallery-thumbnails'>
       {
         props.photos.map((photo, i) => {
           return <Thumbnail key={i} i={i} thumbnail={photo.thumbnail_url} changePhoto={props.changePhoto}/>;
         })
       }
-    </div>
+    </ul>
   );
 };
 
