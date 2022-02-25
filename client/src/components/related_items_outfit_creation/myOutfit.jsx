@@ -1,5 +1,5 @@
 import React from 'react';
-import { AiOutlineCloseCircle} from 'react-icons/ai';
+import { IoIosCloseCircleOutline} from 'react-icons/io';
 
 const MyOutfit = (props) => {
 
@@ -9,7 +9,7 @@ const MyOutfit = (props) => {
 
   return (
     <div className='my-outfit-container'>
-      <span className='remove-from-outfit' onClick={handleClick}><AiOutlineCloseCircle /></span>
+      <span className='remove-from-outfit' onClick={handleClick}><IoIosCloseCircleOutline /></span>
       <div className='outfit-image'>
         <img src={props.outfit.image}></img>
       </div>
