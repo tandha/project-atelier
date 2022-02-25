@@ -91,10 +91,10 @@ class App extends React.Component {
     }
     return (
       <div>
-        <ProductOverview currentProductInOutfit={this.state.currentProductInOutfit} product={this.state.product} styles={this.state.styles} starRating={this.state.starRating} toggleOutfit={this.toggleOutfit.bind(this)}/>
-        <RelatedItemsOutfitCreation/>
-        <QuestionsAndAnswers product={this.state.product}/>
-        <RatingsAndReviews
+        <ProductOverviewWithLogger currentProductInOutfit={this.state.currentProductInOutfit} product={this.state.product} styles={this.state.styles} starRating={this.state.starRating} toggleOutfit={this.toggleOutfit.bind(this)}/>
+        <RelatedItemsOutfitCreationWithLogger/>
+        <QuestionsAndAnswersWithLogger product={this.state.product}/>
+        <RatingsAndReviewsWithLogger
           starRating={this.state.starRating}
           updateStarRating={this.updateStarRating.bind(this)}
           product={this.state.product}/>
