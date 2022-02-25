@@ -17,7 +17,7 @@ class ProductOverview extends React.Component {
   }
 
   componentDidMount() {
-    this.advanceVisibleThumbnails(1);
+    this.advanceVisibleThumbnails();
   }
 
   changeSelectedStyle(e) {
@@ -28,7 +28,11 @@ class ProductOverview extends React.Component {
         index = i;
       }
     });
-    this.setState({ selectedStyle: this.props.styles.results[index]});
+    this.setState({
+      selectedStyle: this.props.styles.results[index],
+      thumbnailIndex: 0}, () => {
+      this.advanceVisibleThumbnails();
+    });
   }
 
   changeSelectedPhoto(e) {
@@ -55,7 +59,6 @@ class ProductOverview extends React.Component {
   reverseVisibleThumbnails(num) {
     let copyState = this.state.selectedStyle.photos.slice(0);
     let visibleThumbnails = copyState.splice(this.state.thumbnailIndex - 2, 5);
-    console.log(visibleThumbnails);
     this.setState({ thumbnailSlice: visibleThumbnails, thumbnailIndex: this.state.thumbnailIndex - 1 });
   }
 
