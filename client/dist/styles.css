@@ -128,7 +128,7 @@
   color: red;
   position: absolute;
   margin-left: 43px;
-  margin-top: 15px;
+  margin-top: 10px;
   z-index: 4;
 }
 
@@ -142,7 +142,7 @@
 
 #thumbnail-highlight-bar{
   background-color: white;
-  height: 5px;
+  height: 3px;
   width: 60px;
 }
 #image-gallery-left-arrow:hover,

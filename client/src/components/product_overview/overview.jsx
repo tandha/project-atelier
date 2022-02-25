@@ -10,19 +10,22 @@ class ProductOverview extends React.Component {
     this.state = {
       selectedStyle: this.props.styles.results[0],
       mainPhotoIndex: 0,
+      thumbnailIndex: 0,
       photos: this.props.styles.results[0].photos,
       thumbnailSlice: []
     };
   }
 
   componentDidMount() {
-    this.setState({ thumbnailSlice: this.updateVisibleThumbnails(0)});
+    this.updateVisibleThumbnails(1);
   }
 
+  //when the slice gets to the end ie. the last index of visibleThumbnails is equal to the
   updateVisibleThumbnails(num) {
     let copyState = this.state.selectedStyle.photos.slice(0);
-    let visibleThumbnails = copyState.splice(this.state.mainPhotoIndex + 1, 5);
-    return visibleThumbnails;
+    let visibleThumbnails = copyState.splice(this.state.thumbnailIndex, 5);
+    console.log(visibleThumbnails);
+    this.setState({ thumbnailSlice: visibleThumbnails, thumbnailIndex: this.state.thumbnailIndex + num });
   }
 
   changeSelectedStyle(e) {
@@ -55,10 +58,32 @@ class ProductOverview extends React.Component {
     return (
       this.state.thumbnailSlice.length > 0 &&
       <div id='overview-container'>
-        <ImageCarousel reverseMainPhoto={this.reverseMainPhoto.bind(this)} advanceMainPhoto={this.advanceMainPhoto.bind(this)} changePhoto={this.changeSelectedPhoto.bind(this)} mainPhotoIndex={this.state.mainPhotoIndex} photos={this.state.thumbnailSlice} selectedStyle={this.state.selectedStyle}/>
-        <Information product={this.props.product} selectedStyle={this.state.selectedStyle} starRating={this.props.starRating}/>
-        <StyleSelector changeStyle={this.changeSelectedStyle.bind(this)} name={this.state.selectedStyle.name} styles={this.props.styles}/>
-        <Cart productId={this.props.product.id} toggleOutfit={this.props.toggleOutfit} currentProductInOutfit={this.props.currentProductInOutfit} selectedStyle={this.state.selectedStyle}/>
+        <ImageCarousel
+          advanceMainPhoto={this.advanceMainPhoto.bind(this)}
+          changePhoto={this.changeSelectedPhoto.bind(this)}
+          updateVisibleThumbnails={this.updateVisibleThumbnails.bind(this)}
+          reverseMainPhoto={this.reverseMainPhoto.bind(this)}
+          mainPhotoIndex={this.state.mainPhotoIndex}
+          photos={this.state.selectedStyle.photos}
+          selectedStyle={this.state.selectedStyle}
+          thumbnailPhotos={this.state.thumbnailSlice}
+        />
+        <Information
+          product={this.props.product}
+          selectedStyle={this.state.selectedStyle}
+          starRating={this.props.starRating}
+        />
+        <StyleSelector
+          changeStyle={this.changeSelectedStyle.bind(this)}
+          name={this.state.selectedStyle.name}
+          styles={this.props.styles}
+        />
+        <Cart
+          currentProductInOutfit={this.props.currentProductInOutfit}
+          productId={this.props.product.id}
+          selectedStyle={this.state.selectedStyle}
+          toggleOutfit={this.props.toggleOutfit}
+        />
       </div>
     );
   }

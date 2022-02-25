@@ -23,8 +23,8 @@ class App extends React.Component {
 
   //promise.allSettled?
   componentDidMount() {
-    Promise.all([this.getProduct(64622),
-      this.getStyles(64622),
+    Promise.all([this.getProduct(64624),
+      this.getStyles(64624),
       this.getOutfits()])
       .then((res) => {
         this.setState({
