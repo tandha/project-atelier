@@ -31,7 +31,7 @@ const AddInteractionsLogger = (Component) => {
 
   const ComponentWithLogger = (props) => {
     return (
-      <div onClick={logInteraction}>
+      <div id={Component.name.toLowerCase() + '-logger'}onClick={logInteraction}>
         <Component {...props} />
       </div>
     );

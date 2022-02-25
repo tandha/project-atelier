@@ -89,7 +89,7 @@ class App extends React.Component {
       return <div>Loading</div>;
     }
     return (
-      <div>
+      <React.Fragment>
         <ProductOverviewWithLogger
           currentProductInOutfit={this.state.currentProductInOutfit}
           product={this.state.product}
@@ -107,7 +107,7 @@ class App extends React.Component {
           updateStarRating={this.updateStarRating.bind(this)}
           product={this.state.product}
         />
-      </div>
+      </React.Fragment>
     );
   }
 }
