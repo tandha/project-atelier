@@ -22,7 +22,7 @@ class ProductOverview extends React.Component {
         index = i;
       }
     });
-    this.setState({ selectedStyle: this.props.styles.results[index], mainPhotoIndex: 0 });
+    this.setState({ selectedStyle: this.props.styles.results[index]});
   }
 
   changeSelectedPhoto(e) {
