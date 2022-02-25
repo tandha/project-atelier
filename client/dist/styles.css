@@ -108,6 +108,24 @@
   z-index: 1;
 }
 
+#image-gallery-left-arrow{
+  color: red;
+  position: absolute;
+  margin-left: 100px;
+  margin-top: 250px;
+  z-index: 3;
+}
+#image-gallery-right-arrow{
+  color: red;
+  position: absolute;
+  margin-left: 450px;
+  margin-top: 250px;
+  z-index: 3;
+}
+#image-gallery-left-arrow:hover, #image-gallery-right-arrow:hover{
+  cursor: pointer;
+}
+
 #gallery-thumbnails{
   z-index: 2;
   list-style-type: none;
