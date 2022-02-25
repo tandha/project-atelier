@@ -17,15 +17,7 @@ class ProductOverview extends React.Component {
   }
 
   componentDidMount() {
-    this.updateVisibleThumbnails(1);
-  }
-
-  //when the slice gets to the end ie. the last index of visibleThumbnails is equal to the
-  updateVisibleThumbnails(num) {
-    let copyState = this.state.selectedStyle.photos.slice(0);
-    let visibleThumbnails = copyState.splice(this.state.thumbnailIndex, 5);
-    console.log(visibleThumbnails);
-    this.setState({ thumbnailSlice: visibleThumbnails, thumbnailIndex: this.state.thumbnailIndex + num });
+    this.advanceVisibleThumbnails(1);
   }
 
   changeSelectedStyle(e) {
@@ -54,6 +46,19 @@ class ProductOverview extends React.Component {
     this.state.mainPhotoIndex === 0 ? this.setState({ mainPhotoIndex: this.state.photos.length - 1}) : this.setState({ mainPhotoIndex: this.state.mainPhotoIndex - 1});
   }
 
+  advanceVisibleThumbnails() {
+    let copyState = this.state.selectedStyle.photos.slice(0);
+    let visibleThumbnails = copyState.splice(this.state.thumbnailIndex, 5);
+    this.setState({ thumbnailSlice: visibleThumbnails, thumbnailIndex: this.state.thumbnailIndex + 1 });
+  }
+
+  reverseVisibleThumbnails(num) {
+    let copyState = this.state.selectedStyle.photos.slice(0);
+    let visibleThumbnails = copyState.splice(this.state.thumbnailIndex - 2, 5);
+    console.log(visibleThumbnails);
+    this.setState({ thumbnailSlice: visibleThumbnails, thumbnailIndex: this.state.thumbnailIndex - 1 });
+  }
+
   render() {
     return (
       this.state.thumbnailSlice.length > 0 &&
@@ -61,7 +66,8 @@ class ProductOverview extends React.Component {
         <ImageCarousel
           advanceMainPhoto={this.advanceMainPhoto.bind(this)}
           changePhoto={this.changeSelectedPhoto.bind(this)}
-          updateVisibleThumbnails={this.updateVisibleThumbnails.bind(this)}
+          advanceThumbnails={this.advanceVisibleThumbnails.bind(this)}
+          reverseThumbnails={this.reverseVisibleThumbnails.bind(this)}
           reverseMainPhoto={this.reverseMainPhoto.bind(this)}
           mainPhotoIndex={this.state.mainPhotoIndex}
           photos={this.state.selectedStyle.photos}

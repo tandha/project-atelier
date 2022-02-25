@@ -6,10 +6,10 @@ import { IoMdArrowBack, IoMdArrowForward, IoIosArrowDown, IoIosArrowUp } from 'r
 const ImageCarousel = (props) => {
 //TODO: Handle down arrow disappear when on last image
   const handleDownArrow = (e) => {
-    props.updateVisibleThumbnails(1);
+    props.advanceThumbnails();
   };
   const handleUpArrow = (e) => {
-    props.updateVisibleThumbnails(-1);
+    props.reverseThumbnails();
   };
   return (
     <div id='image-gallery'>
@@ -23,7 +23,7 @@ const ImageCarousel = (props) => {
         changePhoto={props.changePhoto}/>
       {props.thumbnailPhotos[0].url !== props.photos[props.mainPhotoIndex].url && <IoIosArrowUp onClick={handleUpArrow.bind(this)} id='thumbnail-gallery-up-arrow'/>}
       {
-        props.thumbnailPhotos.length === 5 && <IoIosArrowDown onClick={handleDownArrow.bind(this)} id='thumbnail-gallery-down-arrow'/>
+        props.thumbnailPhotos[props.thumbnailPhotos.length - 1] !== props.photos[props.photos.length - 1] && <IoIosArrowDown onClick={handleDownArrow.bind(this)} id='thumbnail-gallery-down-arrow'/>
       }
 
 
