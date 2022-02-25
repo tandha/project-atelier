@@ -26,9 +26,6 @@ const AddInteractionsLogger = (Component) => {
         widget: widgetName,
         time: timeClicked
       }
-    }).then(() => {
-      console.log(`Interaction logged! \nElement: ${elementName} \n` +
-                  `Widget: ${widgetName} \nTime: ${timeClicked}`);
     }).catch(err => console.log(err));
   };
 
