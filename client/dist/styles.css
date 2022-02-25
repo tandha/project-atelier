@@ -37,6 +37,33 @@
   ". footer footer "
 } */
 
+
+.star-rating-container {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+}
+
+.star-rating-star {
+  width: 18px;
+  margin-right: 2px;
+  display: flex;
+  color: grey;
+}
+.star-rating-star:last-of-type {
+  margin-right: 0;
+}
+
+.star-rating-overlay {
+  background-color: white;
+  opacity: 0.7;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
 /******************** Product Overview ********************/
 .gallery-thumbnail{
   object-fit: cover;
