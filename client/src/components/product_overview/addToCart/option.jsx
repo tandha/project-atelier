@@ -2,7 +2,7 @@ import React from 'react';
 
 const Option = (props) => {
   return (
-    <option>{props.option}</option>
+    <option data-testid={`select-option-${props.type}`}>{props.option}</option>
   );
 };
 

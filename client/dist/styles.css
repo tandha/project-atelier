@@ -67,9 +67,12 @@
 #selected-styles {
   /* border: 5px solid orange; */
 }
-#styles-thumbnails-container div{
+#styles-thumbnails-container ul{
   display: flex;
   flex-wrap: wrap;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 .style-thumbnail-container {
   height: 70px;
@@ -106,11 +109,14 @@
 }
 
 #gallery-thumbnails{
-  position: absolute;
   z-index: 2;
+  list-style-type: none;
+  padding: 0;
+  position: absolute;
+  margin: 0;
 }
 
-#gallery-thumbnails div{
+#gallery-thumbnails li{
   border: 1px solid #999;
   border-radius: 2px;
   -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.4);

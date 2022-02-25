@@ -2,9 +2,9 @@ import React from 'react';
 
 const Thumbnail = (props) => {
   return (
-    <div>
+    <li>
       <img src={props.thumbnail} id={props.i} className='gallery-thumbnail' onClick={props.changePhoto.bind(this)}></img>
-    </div>
+    </li>
   );
 };
 
