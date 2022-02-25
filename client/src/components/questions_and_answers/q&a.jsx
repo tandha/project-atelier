@@ -106,11 +106,12 @@ class QuestionsAndAnswers extends React.Component {
         <p>QUESTIONS & ANSWERS</p>
         <SearchBar handleSearchBar={this.handleSearchBar}/>
         <QuestionList
-          questions={this.state.questions}
-          questionNumbers={this.state.questionNumbers}
-          searching={this.state.searching}
-          searchedQuestions={this.state.searchedQuestions}
+          questions = {this.state.questions}
+          questionNumbers = {this.state.questionNumbers}
+          searching = {this.state.searching}
+          searchedQuestions = {this.state.searchedQuestions}
           productName = {this.props.product.name}
+          getProductQuestions = {this.getProductQuestions}
         />
         {this.renderMoreQuestionBtn()}
         <button id='add-question-btn' onClick={this.clickAddQuestion}> ADD A QUESTION <IoMdAdd/> </button>

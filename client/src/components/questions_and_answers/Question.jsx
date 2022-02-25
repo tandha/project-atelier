@@ -18,7 +18,6 @@ class Question extends React.Component {
     this.renderMoreAnswersBtn = this.renderMoreAnswersBtn.bind(this);
     this.clickMoreAnswers = this.clickMoreAnswers.bind(this);
     this.clickAddAnswer = this.clickAddAnswer.bind(this);
-    this.getProductAnswers = this.getProductAnswers.bind(this);
     this.submitAnswer = this.submitAnswer.bind(this);
   }
 
@@ -64,21 +63,6 @@ class Question extends React.Component {
     this.setState(prevState => ({showAnswerModal: !prevState.showAnswerModal}));
   }
 
-  getProductAnswers() {
-    axios({
-      method: 'get',
-      url: `qa/questions/${this.props.question.question_id}/answers`,
-      params: {
-        'question_id': this.props.question.question_id,
-        count: 100
-      }
-    }).then((res)=> {
-      // this.setState({ answers: res.data.data.results });
-    }).catch((err)=> {
-      console.log('error getting answers', err);
-    });
-  }
-
   submitAnswer(e) {
     e.preventDefault();
     let answerbody = e.target[0].value;
@@ -103,7 +87,7 @@ class Question extends React.Component {
         'photos': imageURL
       }
     }).then((res)=> {
-      this.setState({ showAnswerModal: false });
+      this.setState({ showAnswerModal: false }, this.props.getProductQuestions());
     }).catch((err)=> {
       console.log('error adding answer', err);
     });
