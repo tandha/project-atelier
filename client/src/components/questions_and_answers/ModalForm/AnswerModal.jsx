@@ -12,7 +12,6 @@ const AnswerModal = (props) => {
         <h2 id='QA-form-head'>Submit your Answer</h2>
         <button id='QA-close-btn' onClick={props.clickAddAnswer}><IoIosCloseCircleOutline/></button>
         <h3>{props.productName}: {props.question.question_body}</h3>
-
         <form id='submit-answer-form' onSubmit={props.submitAnswer}>
           <p id='QA-note'>*mandatory area</p>
           <p>Your Answer?*</p>
@@ -43,9 +42,10 @@ const previewFile = () => {
   const img = new Image();
 
   reader.addEventListener('load', () => {
+    // todo: axios request to imgBB
+
     img.id = 'QA-preview';
     img.src = reader.result;
-    // img.src = URL.createObjectURL(file);
     img.height = 100;
     container.appendChild(img);
   }, false);

@@ -10,7 +10,7 @@ class Question extends React.Component {
       QuestionHelpful: false,
       answers: Object.values(this.props.question.answers),
       answerNumbers: 2,
-      showAnswerModal: false
+      showAnswerModal: false,
     };
 
     this.renderQuestionHelpfulBtn = this.renderQuestionHelpfulBtn.bind(this);
@@ -68,24 +68,26 @@ class Question extends React.Component {
     var body = document.getElementById('answer-body').value;
     var nickname = document.getElementById('answer-nickname').value;
     var email = document.getElementById('answer-email').value;
-    var imageURL = document.querySelectorAll('#QA-preview');
-    console.log('photo?', imageURL[0].src, imageURL[1].src);
+    // var imageURL = document.querySelectorAll('#QA-preview');
+    // console.log('photo?', imageURL[0].src, imageURL[1].src);
 
-    // axios({
-    //   method: 'post',
-    //   url: `/qa/questions/${this.props.question.question_id}/answers`,
-    //   params: {'question_id': this.props.question.question_id},
-    //   data: {
-    //     body: body,
-    //     name: nickname,
-    //     email: email,
-    //     photos:[]
-    //   }
-    // }).then(()=> {
-    //   this.setState({ showAnswerModal: false });
-    // }).catch((err)=> {
-    //   console.log('error adding answer', err);
-    // });
+    axios({
+      method: 'post',
+      url: `/qa/questions/${this.props.question.question_id}/answers`,
+      params: {'question_id': this.props.question.question_id},
+      data: {
+        body: body,
+        name: nickname,
+        email: email,
+        photos:[]
+      }
+    }).then(()=> {
+      this.setState({ showAnswerModal: false });
+      // axios request for answers
+      
+    }).catch((err)=> {
+      console.log('error adding answer', err);
+    });
   }
 
   render() {
