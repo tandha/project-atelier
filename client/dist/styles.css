@@ -101,6 +101,7 @@
 }
 
 #main-image{
+  cursor: zoom-in;
   object-fit: cover;
   position: absolute;
   height: 100%;
