@@ -19,10 +19,11 @@ class App extends React.Component {
       currentProductInOutfit: false,
       starRating: 0
     };
+    this.initialId = 64624;
   }
 
   componentDidMount() {
-    Promise.all([this.getProduct(64622), this.getStyles(64622), this.getOutfits()])
+    Promise.all([this.getProduct(this.initialId), this.getStyles(this.initialId), this.getOutfits()])
       .then((res) => {
         this.setState({
           product: res[0].data.data,
@@ -58,6 +59,7 @@ class App extends React.Component {
 
   getOutfits() {
     let localStorageOutfits = Object.keys(localStorage);
+    console.log(localStorageOutfits);
     return localStorageOutfits;
   }
 

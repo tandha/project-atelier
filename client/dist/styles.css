@@ -94,6 +94,7 @@
   background-color: black;
   height: 500px;
   position: relative;
+  overflow: scroll;
   width: 500px;
 }
 
@@ -205,6 +206,7 @@
   margin: 15px 15px 15px 0px;
   width: 200px;
   text-align: left;
+  vertical-align: middle;
 }
 
 .related-item-image, .outfit-image{
