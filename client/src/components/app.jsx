@@ -6,6 +6,7 @@ import QuestionsAndAnswers from './questions_and_answers/q&a.jsx';
 import RatingsAndReviews from './ratings_and_reviews/ratings&reviews.jsx';
 import RelatedItemsOutfitCreation from './related_items_outfit_creation/related_items&outfit.jsx';
 import { product, styles } from '../sampleData/sampleData.js';
+import StarRating from './starRating.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -85,7 +86,7 @@ class App extends React.Component {
     }
     return (
       <div>
-        <ProductOverview currentProductInOutfit={this.state.currentProductInOutfit} product={this.state.product} styles={this.state.styles} starRating={this.state.starRating} toggleOutfit={this.toggleOutfit.bind(this)}/>
+        <ProductOverview currentProductInOutfit={this.state.currentProductInOutfit} product={this.state.product} styles={this.state.styles} starRating={<StarRating value={this.state.starRating}/>} toggleOutfit={this.toggleOutfit.bind(this)}/>
         <RelatedItemsOutfitCreation/>
         <QuestionsAndAnswers product={this.state.product}/>
         <RatingsAndReviews
