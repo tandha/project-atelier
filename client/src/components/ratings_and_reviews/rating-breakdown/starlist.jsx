@@ -9,7 +9,9 @@ const StarList = (props) => {
   let ratings = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0};
 
   if (props.metaData.data) {
-    ratings = props.metaData.data.ratings;
+    for (let key in props.metaData.data.ratings) {
+      ratings[key] = props.metaData.data.ratings[key];
+    }
   }
 
   return (

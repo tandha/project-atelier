@@ -2,13 +2,8 @@ import React from 'react';
 
 const AnswerPhoto = (props) => {
   return (
-    <img src={props.photo} style={imgStyle}/>
+    <img id='answer-photo' src={props.photo}/>
   );
 };
 
 export default AnswerPhoto;
-
-const imgStyle = {
-  height: '100px',
-  display: 'inline-grid'
-};

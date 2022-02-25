@@ -8,7 +8,7 @@
     "overview-test": "jest client/src/components/product_overview/test/test.js --env=jsdom --coverage",
     "related-test": "jest client/src/components/related_items_outfit_creation/testing/test.js --env=jsdom",
     "QA-test": "jest client/src/components/questions_and_answers/test/test.js --env=jsdom --coverage",
-    "reviews-test": "jest client/src/components/ratings_and_reviews/test/test.js --env=jsdom",
+    "reviews-test": "jest client/src/components/ratings_and_reviews/test/test.js --env=jsdom --coverage",
     "build": "webpack --watch",
     "postinstall": "curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install | bash",
     "react-dev": "webpack --mode development --watch",

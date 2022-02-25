@@ -27,9 +27,9 @@ class Answer extends React.Component {
 
   renderAnswerHelpfulBtn() {
     if (this.state.AnswerHelpful) {
-      return ( <button role="help" disabled={true} style={buttonStyle}> Yes ({this.props.answer.helpfulness + 1}) </button> );
+      return ( <button id='answer-helpful' role="help" disabled > Yes ({this.props.answer.helpfulness + 1}) </button> );
     } else {
-      return ( <button role="help" style={smallStyle} onClick={this.markAnswerHelpful}> Yes ({this.props.answer.helpfulness}) </button> );
+      return ( <button id='answer-helpful' role="help" onClick={this.markAnswerHelpful}> Yes ({this.props.answer.helpfulness}) </button> );
     }
   }
 
@@ -47,9 +47,9 @@ class Answer extends React.Component {
 
   renderReportBtn() {
     if (this.state.reported) {
-      return ( <button role="report" disabled={true} style={buttonStyle}> Reported </button> );
+      return ( <button id='answer-report' role="report" disabled> Reported </button> );
     } else {
-      return ( <button role="report" style={smallStyle} onClick={this.reportAnswer}> Report </button> );
+      return ( <button id='answer-report' role="report" onClick={this.reportAnswer}> Report </button> );
     }
   }
 
@@ -67,14 +67,14 @@ class Answer extends React.Component {
 
   render() {
     return (
-      <div>
-        <div><b>A:</b> {this.props.answer.body} </div>
-        <div>
+      <div id='each-answer'>
+        <div id='answer-body'> {this.props.answer.body} </div>
+        <div id='answer-photo-box'>
           {this.props.answer.photos.map((photo, index) => (
             <AnswerPhoto photo={photo} key={index}/>
           ))}
         </div>
-        <div style={smallStyle}>
+        <div id='answer-interaction'>
           by {this.renderAnswererName()}, {renderDate(this.props.answer.date.toString())} | Helpful?
           {this.renderAnswerHelpfulBtn()} | {this.renderReportBtn()}
         </div>
@@ -87,25 +87,6 @@ export default Answer;
 
 const renderDate = (string) => {
   const date = new Date(string);
-  const render = new Intl.DateTimeFormat('en-GB', { dateStyle: 'medium', timeStyle: 'long' }).format(date);
-  return render.split(',')[0];
-};
-
-var smallStyle = {
-  background: 'none',
-  border: 'none',
-  fontSize: '12px',
-  display: 'inline',
-  color: 'grey'
-};
-
-var buttonStyle = {
-  fontWeight: 'bold',
-  textDecoration: 'underline',
-  background: 'none',
-  border: 'none',
-  padding: '5px',
-  fontSize: '12px',
-  display: 'inline',
-  color: 'grey'
+  const render = new Intl.DateTimeFormat('en-GB', { dateStyle: 'long' }).format(date);
+  return render;
 };
