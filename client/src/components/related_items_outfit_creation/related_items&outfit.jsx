@@ -25,8 +25,8 @@ class RelatedItemsAndMyOutfits extends React.Component {
       .then((res) => {
         this.setState({ myOutfitsData: res });
       })
-      .catch(() => {
-
+      .catch((err) => {
+        console.log('Error Generating Related Items or Outfits Data', err);
       });
   }
 
@@ -109,8 +109,8 @@ class RelatedItemsAndMyOutfits extends React.Component {
       .then((res) => {
         return this.addStyleInfo(res);
       })
-      .catch(() => {
-
+      .catch((err) => {
+        console.log('Error Generating My Outfits Data', err);
       });
   }
 

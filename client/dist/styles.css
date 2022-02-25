@@ -186,9 +186,6 @@
   padding-top: 5em;
   vertical-align: middle;
 }
-#add-to-outfit:hover {
-  cursor: pointer;
-}
 
 .remove-from-outfit, .related-item-outfit-toggle-button {
   display: inline-block;
@@ -198,6 +195,11 @@
 .remove-from-outfit svg, .related-item-outfit-toggle-button svg, .outfit-details, .related-items-details{
   padding: .25em;
 }
+
+#add-to-outfit:hover, .related-item-outfit-toggle-button svg:hover, .related-item-container img:hover, .related-items-details:hover, .remove-from-outfit svg:hover, .my-outfit-container img:hover,  .outfit-details:hover{
+  cursor: pointer;
+}
+
 
 .related-item-container, .my-outfit-container{
   border: 1px solid black;
