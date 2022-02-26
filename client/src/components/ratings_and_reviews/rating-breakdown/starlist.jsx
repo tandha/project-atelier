@@ -35,13 +35,11 @@ const StarList = (props) => {
       {percentages.map((percent, index) => {
         let num = index + 1;
         return (
-          <React.Fragment key={index}>
-            <span onClick={onStarClick}>{num} stars
-              <div className='star-bar'>
-                <span className='star-bar-fill' style={{width: percent}}></span>
-              </div>
-            </span>
-          </React.Fragment>
+          <span key={index} id={num.toString()} onClick={onStarClick}>{num} stars
+            <div className='star-bar'>
+              <span className='star-bar-fill' style={{width: percent}}></span>
+            </div>
+          </span>
         );
       })}
 
