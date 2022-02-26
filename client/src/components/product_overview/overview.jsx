@@ -89,6 +89,7 @@ class ProductOverview extends React.Component {
           advanceThumbnails={this.advanceVisibleThumbnails.bind(this)}
           reverseThumbnails={this.reverseVisibleThumbnails.bind(this)}
           reverseMainPhoto={this.reverseMainPhoto.bind(this)}
+          findImageId={this.findImageId.bind(this)}
           mainPhotoIndex={this.state.mainPhotoIndex}
           mainPhoto={this.state.mainPhoto}
           photos={this.state.selectedStyle.photos}
