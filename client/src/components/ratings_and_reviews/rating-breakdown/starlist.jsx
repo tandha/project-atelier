@@ -66,12 +66,6 @@ const StarList = (props) => {
       </span>
       <br></br>
 
-      {/* <span onClick={onStarClick} id='2'>2 Star: {ratings[2]}</span><br></br>
-      <span onClick={onStarClick} id='3'>3 Star: {ratings[3]}</span><br></br>
-      <span onClick={onStarClick} id='4'>4 Star: {ratings[4]}</span><br></br>
-      <span onClick={onStarClick} id='5'>5 Star: {ratings[5]}</span><br></br>
-      <br></br> */}
-
       <span>Filters: <br></br> {
         props.currentFilter.map((rating, index) => {
           if (index === props.currentFilter.length - 1) {
