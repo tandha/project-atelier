@@ -334,6 +334,82 @@
 
 /********************* Ratings & Reviews *******************/
 
+#ratings-and-reviews {
+  margin-top: 25px;
+  display: flex;
+  font-size: 19px;
+}
+
+#ratings-breakdown {
+  margin-top: 14px;
+  width: 200px;
+  font-size: 19px;
+}
+
+#ratings-breakdown-average {
+  display: flex;
+  font-size: 35px;
+}
+
+#average-stars {
+  margin-left: 13px;
+}
+
+#ratings-breakdown-starlist {
+  display: flex;
+}
+
+#stars-left {
+  align-self: flex-start;
+}
+
+#stars-right {
+  align-self: flex-start;
+  margin-top: 7px;
+  margin-left: 5px;
+}
+
+.star-label {
+  text-decoration: underline;
+}
+
+.star-label:hover {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.star-bar {
+  width: 100px;
+  height: 11px;
+  border-radius: 2px;
+  border: 0px solid;
+  overflow: hidden;
+  background-color: rgb(230, 230, 230);
+  margin-bottom: 11px;
+}
+
+.star-bar-fill {
+  height: 11px;
+  background-color: gray;
+}
+
+.remove-filter {
+  text-decoration: underline;
+}
+
+.remove-filter:hover {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+#stars-filter {
+  height: 50px;
+}
+
+#review-list {
+  width: 500px;
+}
+
 .review-list-tile-helpful {
   color: blue;
 }

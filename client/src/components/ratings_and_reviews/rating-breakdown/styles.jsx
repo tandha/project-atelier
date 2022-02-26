@@ -17,8 +17,6 @@ const Styles = (props) => {
   return (
     <div id='ratings-breakdown-styles'>
       <br></br>
-      Ratings Breakdown:
-      <br></br>
       {
         styleKeys.map((style, index) => {
           return (

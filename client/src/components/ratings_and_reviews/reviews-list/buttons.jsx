@@ -19,8 +19,7 @@ const Buttons = (props) => {
   } else {
     return (
       <div id='review-list-buttons'>
-        <button onClick={onMoreClick}>More Reviews</button>
-        <br></br><br></br>
+        <button onClick={onMoreClick}>More Reviews</button>&nbsp;&nbsp;
         <button onClick={onAddReviewClick}>Add A Review</button>
       </div>
     );
