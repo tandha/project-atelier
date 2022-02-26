@@ -19,7 +19,6 @@ class ProductOverview extends React.Component {
 
   componentDidMount() {
     this.advanceVisibleThumbnails();
-    // this.setState({ mainPhoto: this.state.selectedStyle.photos.url});
   }
 
   changeSelectedStyle(e) {
@@ -32,7 +31,6 @@ class ProductOverview extends React.Component {
     });
     this.setState({
       selectedStyle: this.props.styles.results[index],
-      mainPhotoIndex: 0,
       thumbnailIndex: 0}, () => {
       this.advanceVisibleThumbnails();
     });
@@ -66,6 +64,7 @@ class ProductOverview extends React.Component {
   reverseMainPhoto() {
     this.state.mainPhotoIndex === 0 ? this.setState({ mainPhotoIndex: this.state.photos.length - 1}) : this.setState({ mainPhotoIndex: this.state.mainPhotoIndex - 1});
   }
+
 
   advanceVisibleThumbnails() {
     let copyState = this.state.selectedStyle.photos.slice(0);

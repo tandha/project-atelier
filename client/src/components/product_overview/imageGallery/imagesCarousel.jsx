@@ -1,12 +1,12 @@
 // import React from 'react';
 import React, { useState, useEffect } from 'react';
 import Thumbnails from './imageThumbnails.jsx';
-import { IoMdArrowBack, IoMdArrowForward, IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import { IoMdArrowBack, IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from 'react-icons/bs';
 
 const ImageCarousel = (props) => {
 
   const handleLeftArrow = (e) => {
-    // TODO: If the main id matches the LAST item in the slice, reverse thumbnails, then reverse main photo
     let mainId = props.findImageId(props.photos[props.mainPhotoIndex].url);
     let thumbnailId = props.findImageId(props.thumbnailPhotos[0].url);
     if (mainId === thumbnailId) {
@@ -16,7 +16,6 @@ const ImageCarousel = (props) => {
   };
 
   const handleRightArrow = () => {
-    // TODO: If the main id matches the LAST item in the slice, advance thumbnails, then advance main photo
     let mainId = props.findImageId(props.photos[props.mainPhotoIndex].url);
     let thumbnailId = props.findImageId(props.thumbnailPhotos[props.thumbnailPhotos.length - 1].url);
     if (mainId === thumbnailId) {
@@ -35,9 +34,9 @@ const ImageCarousel = (props) => {
   return (
     <div id='image-gallery'>
       {props.mainPhotoIndex !== 0 &&
-      <IoMdArrowBack id='image-gallery-left-arrow' onClick={handleLeftArrow.bind(this)}/>}
+      <BsArrowLeftCircleFill id='image-gallery-left-arrow' onClick={handleLeftArrow.bind(this)}/>}
       {props.mainPhotoIndex !== props.photos.length - 1 &&
-      <IoMdArrowForward id='image-gallery-right-arrow' onClick={handleRightArrow.bind(this)} />}
+      <BsArrowRightCircleFill id='image-gallery-right-arrow' onClick={handleRightArrow.bind(this)} />}
 
       <img data-testid="main-image" id='main-image' src={props.photos[props.mainPhotoIndex].url}></img>
       <Thumbnails
