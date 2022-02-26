@@ -6,7 +6,7 @@ const Thumbnails = (props) => {
     <ul id='gallery-thumbnails'>
       {
         props.photos.map((photo, i) => {
-          return <Thumbnail key={i} i={i} mainIndex={props.mainIndex} thumbnail={photo.thumbnail_url} changePhoto={props.changePhoto}/>;
+          return <Thumbnail key={i} i={i} mainPhotoUrl={props.mainPhotoUrl} mainIndex={props.mainIndex} thumbnail={photo.thumbnail_url} changePhoto={props.changePhoto} />;
         })
       }
     </ul>

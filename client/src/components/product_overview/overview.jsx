@@ -10,6 +10,7 @@ class ProductOverview extends React.Component {
     this.state = {
       selectedStyle: this.props.styles.results[0],
       mainPhotoIndex: 0,
+      mainPhoto: this.props.styles.results[0].photos[0],
       thumbnailIndex: 0,
       photos: this.props.styles.results[0].photos,
       thumbnailSlice: []
@@ -18,6 +19,7 @@ class ProductOverview extends React.Component {
 
   componentDidMount() {
     this.advanceVisibleThumbnails();
+    // this.setState({ mainPhoto: this.state.selectedStyle.photos.url});
   }
 
   changeSelectedStyle(e) {
@@ -30,16 +32,31 @@ class ProductOverview extends React.Component {
     });
     this.setState({
       selectedStyle: this.props.styles.results[index],
+      mainPhotoIndex: 0,
       thumbnailIndex: 0}, () => {
       this.advanceVisibleThumbnails();
     });
   }
 
   changeSelectedPhoto(e) {
-    let index = e.target.id;
+    let index;
+    let srcId = this.findImageId(e.target.src);
+    this.state.selectedStyle.photos.forEach((image, i) => {
+      let imgId = this.findImageId(image.url);
+      if (imgId === srcId) {
+        index = i;
+        return;
+      }
+    });
     this.setState({
       mainPhotoIndex: Number(index)
     });
+  }
+
+  findImageId(img) {
+    let start = img.indexOf('-');
+    let end = img.indexOf('?') + 1;
+    return img.slice(start, end);
   }
 
   advanceMainPhoto() {
@@ -73,6 +90,7 @@ class ProductOverview extends React.Component {
           reverseThumbnails={this.reverseVisibleThumbnails.bind(this)}
           reverseMainPhoto={this.reverseMainPhoto.bind(this)}
           mainPhotoIndex={this.state.mainPhotoIndex}
+          mainPhoto={this.state.mainPhoto}
           photos={this.state.selectedStyle.photos}
           selectedStyle={this.state.selectedStyle}
           thumbnailPhotos={this.state.thumbnailSlice}

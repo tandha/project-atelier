@@ -5,7 +5,7 @@ const Thumbnail = (props) => {
     <li>
       <img src={props.thumbnail} id={props.i} className='gallery-thumbnail' onClick={props.changePhoto.bind(this)}></img>
       {
-        props.mainIndex === props.i && <div id='thumbnail-highlight-bar'></div>
+        props.mainPhotoUrl === props.thumbnail && <div id='thumbnail-highlight-bar'></div>
       }
     </li>
   );

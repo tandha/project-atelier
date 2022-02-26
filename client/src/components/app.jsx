@@ -27,7 +27,6 @@ class App extends React.Component {
     };
   }
 
-  //promise.allSettled?
   componentDidMount() {
     Promise.all([this.getProduct(64624),
       this.getStyles(64624),
@@ -95,7 +94,7 @@ class App extends React.Component {
           currentProductInOutfit={this.state.currentProductInOutfit}
           product={this.state.product}
           styles={this.state.styles}
-          starRating={<StarRating />}
+          starRating={<StarRating value={this.state.starRating}/>}
           toggleOutfit={this.toggleOutfit.bind(this)}
         />
 
