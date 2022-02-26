@@ -341,6 +341,7 @@
 
 #ratings-breakdown {
   width: 200px;
+  font-size: 19px;
 }
 
 #ratings-breakdown-starlist {
@@ -349,8 +350,6 @@
 
 #stars-left {
   align-self: flex-start;
-  text-decoration: underline;
-  font-size: 19px;
 }
 
 #stars-right {
@@ -360,6 +359,12 @@
 }
 
 .star-label {
+  text-decoration: underline;
+}
+
+.star-label:hover {
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .star-bar {
@@ -377,8 +382,21 @@
   background-color: rgb(63, 63, 63);
 }
 
-#review-list {
+.remove-filter {
+  text-decoration: underline;
+}
 
+.remove-filter:hover {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+#stars-filter {
+  height: 50px;
+}
+
+#review-list {
+  width: 500px;
 }
 
 .review-list-tile-helpful {

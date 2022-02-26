@@ -33,11 +33,11 @@ const StarList = (props) => {
     <React.Fragment>
       <div id='ratings-breakdown-starlist'>
         <div id='stars-left'>
-          <div className='star-label'>1 stars</div>
-          <div className='star-label'>2 stars</div>
-          <div className='star-label'>3 stars</div>
-          <div className='star-label'>4 stars</div>
-          <div className='star-label'>5 stars</div>
+          <div className='star-label' id={'1-star-bar'} onClick={onStarClick}>1 stars</div>
+          <div className='star-label' id={'2-star-bar'} onClick={onStarClick}>2 stars</div>
+          <div className='star-label' id={'3-star-bar'} onClick={onStarClick}>3 stars</div>
+          <div className='star-label' id={'4-star-bar'} onClick={onStarClick}>4 stars</div>
+          <div className='star-label' id={'5-star-bar'} onClick={onStarClick}>5 stars</div>
         </div>
 
         <div id='stars-right'>
@@ -45,7 +45,7 @@ const StarList = (props) => {
             let num = index + 1;
             return (
               <React.Fragment key={index}>
-                <div className='star-bar' id={`${num.toString()}-star`} onClick={onStarClick}>
+                <div className='star-bar' id={`${num.toString()}-star-bar`}>
                   <div className='star-bar-fill' style={{width: percent}}></div>
                 </div>
               </React.Fragment>
@@ -55,7 +55,7 @@ const StarList = (props) => {
       </div>
 
       <div id='stars-filter'>
-        <span>Filters: <br></br> {
+        <span>Filters: {
           props.currentFilter.map((rating, index) => {
             if (index === props.currentFilter.length - 1) {
               return <span key={index}>{rating}</span>;
@@ -67,7 +67,7 @@ const StarList = (props) => {
 
         {
           props.currentFilter.length > 0
-            ? <span onClick={onStarClick} id='0'>Remove</span>
+            ? <span onClick={onStarClick} id='0-star-bar' className='remove-filter'>Remove</span>
             : <span></span>
         }
       </div>
