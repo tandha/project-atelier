@@ -3,7 +3,7 @@ import React from 'react';
 const StarList = (props) => {
 
   const onStarClick = (event) => {
-    props.updateFilter(event.target.id);
+    props.updateFilter(event.target.id.substring(0, 1));
   };
 
   const calculatePercentage = (ratings) => {
@@ -30,35 +30,48 @@ const StarList = (props) => {
   }
 
   return (
-    <div id='ratings-breakdown-starlist'>
+    <React.Fragment>
+      <div id='ratings-breakdown-starlist'>
+        <div id='stars-left'>
+          <div className='star-label'>1 stars</div>
+          <div className='star-label'>2 stars</div>
+          <div className='star-label'>3 stars</div>
+          <div className='star-label'>4 stars</div>
+          <div className='star-label'>5 stars</div>
+        </div>
 
-      {percentages.map((percent, index) => {
-        let num = index + 1;
-        return (
-          <span key={index} id={num.toString()} onClick={onStarClick}>{num} stars
-            <div className='star-bar'>
-              <span className='star-bar-fill' style={{width: percent}}></span>
-            </div>
-          </span>
-        );
-      })}
+        <div id='stars-right'>
+          {percentages.map((percent, index) => {
+            let num = index + 1;
+            return (
+              <React.Fragment key={index}>
+                <div className='star-bar' id={`${num.toString()}-star`} onClick={onStarClick}>
+                  <div className='star-bar-fill' style={{width: percent}}></div>
+                </div>
+              </React.Fragment>
+            );
+          })}
+        </div>
+      </div>
 
-      <span>Filters: <br></br> {
-        props.currentFilter.map((rating, index) => {
-          if (index === props.currentFilter.length - 1) {
-            return <span key={index}>{rating}</span>;
-          } else {
-            return <span key={index}>{rating}, </span>;
-          }
-        })
-      }</span><br></br>
+      <div id='stars-filter'>
+        <span>Filters: <br></br> {
+          props.currentFilter.map((rating, index) => {
+            if (index === props.currentFilter.length - 1) {
+              return <span key={index}>{rating}</span>;
+            } else {
+              return <span key={index}>{rating}, </span>;
+            }
+          })
+        }</span><br></br>
 
-      {
-        props.currentFilter.length > 0
-          ? <span onClick={onStarClick} id='0'>Remove</span>
-          : <span></span>
-      }
-    </div>
+        {
+          props.currentFilter.length > 0
+            ? <span onClick={onStarClick} id='0'>Remove</span>
+            : <span></span>
+        }
+      </div>
+    </React.Fragment>
   );
 };
 

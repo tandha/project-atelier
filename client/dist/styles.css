@@ -335,11 +335,31 @@
 /********************* Ratings & Reviews *******************/
 
 #ratings-and-reviews {
+  margin-top: 25px;
   display: flex;
 }
 
 #ratings-breakdown {
   width: 200px;
+}
+
+#ratings-breakdown-starlist {
+  display: flex;
+}
+
+#stars-left {
+  align-self: flex-start;
+  text-decoration: underline;
+  font-size: 19px;
+}
+
+#stars-right {
+  align-self: flex-start;
+  margin-top: 7px;
+  margin-left: 5px;
+}
+
+.star-label {
 }
 
 .star-bar {
@@ -349,12 +369,12 @@
   border: 0px solid;
   overflow: hidden;
   background-color: rgb(219, 219, 219);
+  margin-bottom: 12px;
 }
 
 .star-bar-fill {
   height: 10px;
   background-color: rgb(63, 63, 63);
-  display: block;
 }
 
 #review-list {
