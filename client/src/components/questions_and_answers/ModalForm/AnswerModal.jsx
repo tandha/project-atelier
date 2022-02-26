@@ -16,7 +16,7 @@ const AnswerModal = (props) => {
         <form id='submit-answer-form' onSubmit={props.submitAnswer}>
           <p id='QA-note'>*mandatory area</p>
           <p>Your Answer?*</p>
-          <textarea id='answer-body' name='answerbody' rows='5' cols='50' maxLength='1000' required></textarea>
+          <textarea id='answer-body' rows='5' cols='50' maxLength='1000' required></textarea>
           <p>What is your nickname?*</p>
           <input id='answer-nickname' type='text' size='61' placeholder='Example: jackson543!' maxLength='60' required></input>
           <p id='QA-note'>For privacy reasons, do not use your full name or email address</p>
