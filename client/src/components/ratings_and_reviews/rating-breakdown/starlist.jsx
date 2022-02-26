@@ -16,19 +16,18 @@ const StarList = (props) => {
     for (let key in ratings) {
       result[key] = (parseInt(ratings[key]) / total) * 100;
     }
-    return result;
+    return Object.values(result);
   };
 
   let ratings = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0};
+  let percentages = [0, 0, 0, 0, 0];
 
   if (props.metaData.data) {
     for (let key in props.metaData.data.ratings) {
       ratings[key] = props.metaData.data.ratings[key];
     }
-    ratings = calculatePercentage(ratings);
+    percentages = calculatePercentage(ratings);
   }
-
-  let percentages = Object.values(ratings);
 
   return (
     <div id='ratings-breakdown-starlist'>
@@ -55,6 +54,7 @@ const StarList = (props) => {
           }
         })
       }</span><br></br>
+
       {
         props.currentFilter.length > 0
           ? <span onClick={onStarClick} id='0'>Remove</span>
