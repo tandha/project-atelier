@@ -14,7 +14,7 @@ const StarList = (props) => {
       total += parseInt(ratings[key]);
     }
     for (let key in ratings) {
-      result[key] = Math.ceil(((parseInt(ratings[key]) / total) * 100) / 20 ) * 20;
+      result[key] = (parseInt(ratings[key]) / total) * 100;
     }
     return result;
   };
@@ -28,43 +28,23 @@ const StarList = (props) => {
     ratings = calculatePercentage(ratings);
   }
 
+  let percentages = Object.values(ratings);
+
   return (
     <div id='ratings-breakdown-starlist'>
 
-      <span onClick={onStarClick} className={'star-bar-' + ratings[5]}>5 stars
-        <div>
-          <span></span>
-        </div>
-      </span>
-      <br></br>
-
-      <span onClick={onStarClick} className={'star-bar-' + ratings[4]}>4 stars
-        <div>
-          <span></span>
-        </div>
-      </span>
-      <br></br>
-
-      <span onClick={onStarClick} className={'star-bar-' + ratings[3]}>3 stars
-        <div>
-          <span></span>
-        </div>
-      </span>
-      <br></br>
-
-      <span onClick={onStarClick} className={'star-bar-' + ratings[2]}>2 stars
-        <div>
-          <span></span>
-        </div>
-      </span>
-      <br></br>
-
-      <span onClick={onStarClick} className={'star-bar-' + ratings[1]}>1 stars
-        <div>
-          <span></span>
-        </div>
-      </span>
-      <br></br>
+      {percentages.map((percent, index) => {
+        let num = index + 1;
+        return (
+          <React.Fragment key={index}>
+            <span onClick={onStarClick}>{num} stars
+              <div className='star-bar'>
+                <span className='star-bar-fill' style={{width: percent}}></span>
+              </div>
+            </span>
+          </React.Fragment>
+        );
+      })}
 
       <span>Filters: <br></br> {
         props.currentFilter.map((rating, index) => {
