@@ -14,7 +14,7 @@ const StarList = (props) => {
       total += parseInt(ratings[key]);
     }
     for (let key in ratings) {
-      result[key] = ((parseInt(ratings[key]) / total) * 100).toFixed();
+      result[key] = Math.ceil(((parseInt(ratings[key]) / total) * 100) / 20 ) * 20;
     }
     return result;
   };
@@ -31,17 +31,47 @@ const StarList = (props) => {
   return (
     <div id='ratings-breakdown-starlist'>
 
-      <span onClick={onStarClick} id='star-list-1'>1 star
-        <div className='star-bar' id={ratings[1]}>
-          <span className='star-bar-fill'></span>
+      <span onClick={onStarClick} className={'star-bar-' + ratings[5]}>5 stars
+        <div>
+          <span></span>
         </div>
-      </span><br></br>
+      </span>
+      <br></br>
 
-      <span onClick={onStarClick} id='2'>2 Star: {ratings[2]}</span><br></br>
+      <span onClick={onStarClick} className={'star-bar-' + ratings[4]}>4 stars
+        <div>
+          <span></span>
+        </div>
+      </span>
+      <br></br>
+
+      <span onClick={onStarClick} className={'star-bar-' + ratings[3]}>3 stars
+        <div>
+          <span></span>
+        </div>
+      </span>
+      <br></br>
+
+      <span onClick={onStarClick} className={'star-bar-' + ratings[2]}>2 stars
+        <div>
+          <span></span>
+        </div>
+      </span>
+      <br></br>
+
+      <span onClick={onStarClick} className={'star-bar-' + ratings[1]}>1 stars
+        <div>
+          <span></span>
+        </div>
+      </span>
+      <br></br>
+
+      {/* <span onClick={onStarClick} id='2'>2 Star: {ratings[2]}</span><br></br>
       <span onClick={onStarClick} id='3'>3 Star: {ratings[3]}</span><br></br>
       <span onClick={onStarClick} id='4'>4 Star: {ratings[4]}</span><br></br>
       <span onClick={onStarClick} id='5'>5 Star: {ratings[5]}</span><br></br>
-      <br></br>
+      <br></br> */}
+
       <span>Filters: <br></br> {
         props.currentFilter.map((rating, index) => {
           if (index === props.currentFilter.length - 1) {

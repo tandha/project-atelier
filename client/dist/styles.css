@@ -315,7 +315,7 @@
   width: 200px;
 }
 
-.star-bar {
+.star-bar-0 div {
   width: 100px;
   height: 10px;
   border-radius: 2px;
@@ -324,11 +324,91 @@
   background-color: rgb(219, 219, 219);
 }
 
-.star-bar-fill {
-  height: 100%;
-  color: rgb(255, 251, 251);
-  padding-right: 50px;
+.star-bar-0 span {
+  height: 10px;
+  width: 0px;
   background-color: rgb(63, 63, 63);
+  display: block
+}
+
+.star-bar-20 div {
+  width: 100px;
+  height: 10px;
+  border-radius: 2px;
+  border: 0px solid;
+  overflow: hidden;
+  background-color: rgb(219, 219, 219);
+}
+
+.star-bar-20 span {
+  height: 10px;
+  width: 20px;
+  background-color: rgb(63, 63, 63);
+  display: block
+}
+
+.star-bar-40 div {
+  width: 100px;
+  height: 10px;
+  border-radius: 2px;
+  border: 0px solid;
+  overflow: hidden;
+  background-color: rgb(219, 219, 219);
+}
+
+.star-bar-40 span {
+  height: 10px;
+  width: 40px;
+  background-color: rgb(63, 63, 63);
+  display: block
+}
+
+.star-bar-60 div {
+  width: 100px;
+  height: 10px;
+  border-radius: 2px;
+  border: 0px solid;
+  overflow: hidden;
+  background-color: rgb(219, 219, 219);
+}
+
+.star-bar-60 span {
+  height: 10px;
+  width: 60px;
+  background-color: rgb(63, 63, 63);
+  display: block
+}
+
+.star-bar-80 div {
+  width: 100px;
+  height: 10px;
+  border-radius: 2px;
+  border: 0px solid;
+  overflow: hidden;
+  background-color: rgb(219, 219, 219);
+}
+
+.star-bar-80 span {
+  height: 10px;
+  width: 80px;
+  background-color: rgb(63, 63, 63);
+  display: block
+}
+
+.star-bar-100 div {
+  width: 100px;
+  height: 10px;
+  border-radius: 2px;
+  border: 0px solid;
+  overflow: hidden;
+  background-color: rgb(219, 219, 219);
+}
+
+.star-bar-100 span {
+  height: 10px;
+  width: 100px;
+  background-color: rgb(63, 63, 63);
+  display: block
 }
 
 #review-list {
