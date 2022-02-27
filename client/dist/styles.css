@@ -410,11 +410,38 @@
   width: 500px;
 }
 
-.review-list-tile-helpful {
+.review-tile {
+
+}
+
+.review-tile-top-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.review-tile-name-date {
+  font-size: 13px;
+  color: grey;
+}
+
+.review-tile-summary {
+  font-weight: bold;
+}
+
+.review-tile-body {
+  font-size: 18px;
+}
+
+.review-tile-recommend {
+  font-size: 18px;
+}
+
+.review-tile-helpful {
+  font-size: 18px;
   color: blue;
 }
 
-.review-list-tile-helpful:hover {
+.review-tile-helpful:hover {
   text-decoration: underline;
   cursor: pointer;
 }

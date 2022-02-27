@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import StarRating from '../../starRating.jsx';
 
 class Tile extends React.Component {
 
@@ -47,49 +48,49 @@ class Tile extends React.Component {
 
   render() {
     return (
-      <div className='review-list-tile'>
+      <div className='review-tile'>
 
-        <div className='review-list-tile-rating'>
-          <span>Rating: {this.props.review.rating}</span>
+        <div className='review-tile-top-row'>
+          <div className='review-tile-rating'>
+            <StarRating value={this.props.review.rating} />
+          </div>
+
+          <div className='review-tile-name-date'>
+            <span>{this.props.review.reviewer_name}, {renderDate(this.props.review.date)}</span>
+          </div>
         </div>
 
-        <div className='review-list-tile-name'>
-          <span>Name: {this.props.review.reviewer_name}</span>
+        <div className='review-tile-summary'>
+          <span>{this.props.review.summary}</span>
         </div>
 
-        <div className='review-list-tile-date'>
-          <span>Date: {renderDate(this.props.review.date)}</span>
+        <div className='review-tile-body'>
+          <span>{this.props.review.body}</span>
         </div>
 
-        <div className='review-list-tile-summary'>
-          <span>Summary: {this.props.review.summary}</span>
-        </div>
-
-        <div className='review-list-tile-body'>
-          <span>Body: {this.props.review.body}</span>
-        </div>
-
-        <div className='review-list-tile-photos'>
+        {/* <div className='review-tile-photos'>
           <span>Photos: None</span>
-        </div>
+        </div> */}
 
-        <div className='review-list-tile-recommend'>
-          <span>Recommended:
+        <div className='review-tile-recommend'>
+          <span>
             {
               this.props.review.recommend
-                ? <span> Yes</span>
-                : <span> No</span>
+                ? <span> I recommend this product</span>
+                : null
             }
           </span>
         </div>
 
-        <div className='review-list-tile-response'>
-          <span>Response: {this.props.review.response}</span>
-        </div>
+        <div className='review-tile-response'>{
+          this.props.review.response
+            ? <span>this.props.review.response</span>
+            : null
+        }</div>
 
-        <div className='review-list-tile-helpful-link'>
+        <div className='review-tile-helpful-link'>
           <span>
-            Helpful? <a className='review-list-tile-helpful'
+            Helpful? <a className='review-tile-helpful'
               onClick={this.onHelpfulClick}>Yes</a> ({this.state.helpfulness})
           </span>
         </div>
