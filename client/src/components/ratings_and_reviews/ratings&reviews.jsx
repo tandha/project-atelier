@@ -35,22 +35,26 @@ class RatingsAndReview extends React.Component {
 
   render() {
     return (
-      <div id="ratings-and-reviews">
-        <Breakdown
-          starRating={this.props.starRating}
-          updateStarRating={this.props.updateStarRating}
-          updateFilter={this.updateFilter.bind(this)}
-          productID={this.props.product.id}
-          currentFilter={this.state.currentFilter}
-          updateChars={this.updateChars.bind(this)}
-        />
-        <List
-          productID={this.props.product.id}
-          currentFilter={this.state.currentFilter}
-          product={this.props.product}
-          chars={this.state.chars}
-        />
-      </div>
+      <React.Fragment>
+        <div id='rr-title'>RATINGS & REVIEWS</div>
+        <div id="ratings-and-reviews">
+          <Breakdown
+            starRating={this.props.starRating}
+            updateStarRating={this.props.updateStarRating}
+            updateFilter={this.updateFilter.bind(this)}
+            productID={this.props.product.id}
+            currentFilter={this.state.currentFilter}
+            updateChars={this.updateChars.bind(this)}
+          />
+          <List
+            productID={this.props.product.id}
+            currentFilter={this.state.currentFilter}
+            product={this.props.product}
+            chars={this.state.chars}
+          />
+        </div>
+      </React.Fragment>
+
     );
   }
 }

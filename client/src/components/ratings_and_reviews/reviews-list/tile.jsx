@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import StarRating from '../../starRating.jsx';
+import { IoMdCheckmarkCircle, IoMdCheckmark } from 'react-icons/io';
 
 class Tile extends React.Component {
 
@@ -56,7 +57,7 @@ class Tile extends React.Component {
           </div>
 
           <div className='review-tile-name-date'>
-            <span>{this.props.review.reviewer_name}, {renderDate(this.props.review.date)}</span>
+            <span><IoMdCheckmarkCircle className='review-tile-checkmark'/>{this.props.review.reviewer_name}, {renderDate(this.props.review.date)}</span>
           </div>
         </div>
 
@@ -76,7 +77,7 @@ class Tile extends React.Component {
           <span>
             {
               this.props.review.recommend
-                ? <span> I recommend this product</span>
+                ? <span><IoMdCheckmark /> I recommend this product</span>
                 : null
             }
           </span>
@@ -88,14 +89,14 @@ class Tile extends React.Component {
             : null
         }</div>
 
-        <div className='review-tile-helpful-link'>
+        <div className='review-tile-helpful'>
           <span>
-            Helpful? <a className='review-tile-helpful'
+            Helpful? <a className='review-tile-helpful-link'
               onClick={this.onHelpfulClick}>Yes</a> ({this.state.helpfulness})
           </span>
         </div>
 
-        <br></br>
+        <hr className='review-tile-line'></hr>
       </div>
     );
   }

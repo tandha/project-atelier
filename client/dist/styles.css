@@ -334,8 +334,13 @@
 
 /********************* Ratings & Reviews *******************/
 
+#rr-title {
+  margin-top: 30px;
+  font-size: 16px;
+}
+
 #ratings-and-reviews {
-  margin-top: 25px;
+  margin-top: 0px;
   display: flex;
   font-size: 19px;
 }
@@ -416,7 +421,7 @@
 
 .chars-bar {
   width: 162px;
-  height: 12px;
+  height: 10px;
   border-radius: 2px;
   border: 0px solid;
   overflow: hidden;
@@ -426,7 +431,7 @@
 
 .chars-icon {
   position:relative;
-  top: 25px;
+  top: 24px;
   left: 0px;
   z-index:1;
 }
@@ -450,11 +455,17 @@
   width: 500px;
 }
 
+#reviews-sort-dropdown {
+  border: 0;
+  text-decoration: underline;
+}
+
 .review-tile {
 
 }
 
 .review-tile-top-row {
+  margin-top: 25px;
   display: flex;
   justify-content: space-between;
 }
@@ -464,7 +475,14 @@
   color: grey;
 }
 
+.review-tile-checkmark {
+  margin-right: 4px;
+  margin-bottom: -2px;
+}
+
 .review-tile-summary {
+  margin-top: 10px;
+  margin-bottom: 10px;
   font-weight: bold;
 }
 
@@ -474,16 +492,25 @@
 
 .review-tile-recommend {
   font-size: 18px;
+  margin-top: 10px;
+  margin-bottom: 15px;
 }
 
 .review-tile-helpful {
-  font-size: 18px;
-  color: blue;
+  font-size: 15px;
 }
 
-.review-tile-helpful:hover {
+.review-tile-helpful-link {
   text-decoration: underline;
+}
+
+.review-tile-helpful-link:hover {
+  text-decoration: none;
   cursor: pointer;
+}
+
+.review-tile-line {
+  border: 1px solid;
 }
 
 #new-review-modal {
