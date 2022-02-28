@@ -4,53 +4,125 @@ import Thumbnails from './imageThumbnails.jsx';
 import { IoMdArrowBack, IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from 'react-icons/bs';
 
-const ImageCarousel = (props) => {
+class ImageCarousel extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      mainPhotoIndex: 0,
+      mainPhoto: this.props.selectedStyle.photos[0],
+      thumbnailIndex: 0,
+      photos: this.props.selectedStyle.photos,
+      thumbnailSlice: [],
+      renderModal: true
+    };
+    this.changeSelectedPhoto = this.changeSelectedPhoto.bind(this);
+    this.handleLeftArrow = this.handleLeftArrow.bind(this);
+    this.handleRightArrow = this.handleRightArrow.bind(this);
+    this.advanceMainPhoto = this.advanceMainPhoto.bind(this);
+    this.handleUpArrow = this.handleUpArrow.bind(this);
+    this.handleDownArrow = this.handleDownArrow.bind(this);
+  }
 
-  const handleLeftArrow = (e) => {
-    let mainId = props.findImageId(props.photos[props.mainPhotoIndex].url);
-    let thumbnailId = props.findImageId(props.thumbnailPhotos[0].url);
+  componentDidMount() {
+    this.advanceThumbnails();
+    console.log(this.state.thumbnailSlice, this.state.photos);
+  }
+
+  changeSelectedPhoto(e) {
+    let index;
+    let srcId = this.findImageId(e.target.src);
+    this.state.photos.forEach((image, i) => {
+      let imgId = this.findImageId(image.url);
+      if (imgId === srcId) {
+        index = i;
+        return;
+      }
+    });
+    this.setState({
+      mainPhotoIndex: Number(index)
+    });
+  }
+
+  findImageId(img) {
+    let start = img.indexOf('-');
+    let end = img.indexOf('?') + 1;
+    return img.slice(start, end);
+  }
+
+  advanceMainPhoto() {
+    this.state.mainPhotoIndex === this.state.photos.length - 1 ? this.setState({ mainPhotoIndex: 0}) : this.setState({ mainPhotoIndex: this.state.mainPhotoIndex + 1});
+  }
+
+  reverseMainPhoto() {
+    this.state.mainPhotoIndex === 0 ? this.setState({ mainPhotoIndex: this.state.photos.length - 1}) : this.setState({ mainPhotoIndex: this.state.mainPhotoIndex - 1});
+  }
+
+  advanceThumbnails() {
+    let copyState = this.state.photos.slice(0);
+    let visibleThumbnails = copyState.splice(this.state.thumbnailIndex, 5);
+    this.setState({ thumbnailSlice: visibleThumbnails, thumbnailIndex: this.state.thumbnailIndex + 1 });
+  }
+
+  reverseThumbnails(num) {
+    let copyState = this.state.photos.slice(0);
+    let visibleThumbnails = copyState.splice(this.state.thumbnailIndex - 2, 5);
+    this.setState({ thumbnailSlice: visibleThumbnails, thumbnailIndex: this.state.thumbnailIndex - 1 });
+  }
+
+  handleLeftArrow () {
+    let mainId = this.findImageId(this.state.photos[this.state.mainPhotoIndex].url);
+    let thumbnailId = this.findImageId(this.state.thumbnailSlice[0].url);
     if (mainId === thumbnailId) {
-      props.reverseThumbnails();
+      this.reverseThumbnails();
     }
-    props.reverseMainPhoto();
-  };
+    this.reverseMainPhoto();
+  }
 
-  const handleRightArrow = () => {
-    let mainId = props.findImageId(props.photos[props.mainPhotoIndex].url);
-    let thumbnailId = props.findImageId(props.thumbnailPhotos[props.thumbnailPhotos.length - 1].url);
+  handleRightArrow () {
+    let mainId = this.findImageId(this.state.photos[this.state.mainPhotoIndex].url);
+    let thumbnailId = this.findImageId(this.state.thumbnailSlice[this.state.thumbnailSlice.length - 1].url);
     if (mainId === thumbnailId) {
-      props.advanceThumbnails();
+      this.advanceThumbnails();
     }
-    props.advanceMainPhoto();
-  };
+    this.advanceMainPhoto();
+  }
 
-  const handleDownArrow = (e) => {
-    props.advanceThumbnails();
-  };
+  handleDownArrow (e) {
+    this.advanceThumbnails();
+  }
 
-  const handleUpArrow = (e) => {
-    props.reverseThumbnails();
-  };
-  return (
-    <div id='image-gallery'>
-      {props.mainPhotoIndex !== 0 &&
-      <BsArrowLeftCircleFill id='image-gallery-left-arrow' onClick={handleLeftArrow.bind(this)}/>}
-      {props.mainPhotoIndex !== props.photos.length - 1 &&
-      <BsArrowRightCircleFill id='image-gallery-right-arrow' onClick={handleRightArrow.bind(this)} />}
+  handleUpArrow (e) {
+    this.reverseThumbnails();
+  }
 
-      <img data-testid="main-image" id='main-image' src={props.photos[props.mainPhotoIndex].url}></img>
-      <Thumbnails
-        photos={props.thumbnailPhotos}
-        mainPhotoUrl={props.photos[props.mainPhotoIndex].thumbnail_url}
-        mainIndex={props.mainPhotoIndex}
-        changePhoto={props.changePhoto}/>
-      {props.findImageId(props.thumbnailPhotos[0].url) !== props.findImageId(props.photos[0].url) && <IoIosArrowUp onClick={handleUpArrow.bind(this)} id='thumbnail-gallery-up-arrow'/>}
-      {props.thumbnailPhotos[props.thumbnailPhotos.length - 1] !== props.photos[props.photos.length - 1] && <IoIosArrowDown onClick={handleDownArrow.bind(this)} id='thumbnail-gallery-down-arrow'/>}
+  displayModal() {
+    this.setState({ renderModal: true });
+  }
 
+  hideModal() {
+    this.setState({ renderModal: false });
+  }
 
-    </div>
-  );
-};
+  render() {
+    return (
+      this.state.thumbnailSlice.length > 0 &&
+      <div id='image-gallery'>
+        {this.state.mainPhotoIndex !== 0 &&
+        <BsArrowLeftCircleFill id='image-gallery-left-arrow' onClick={this.handleLeftArrow}/>}
+        {this.state.mainPhotoIndex !== this.state.photos.length - 1 &&
+        <BsArrowRightCircleFill id='image-gallery-right-arrow' onClick={this.handleRightArrow} />}
+        <img data-testid="main-image" id='main-image' src={this.state.photos[this.state.mainPhotoIndex].url}></img>
+        <Thumbnails
+          photos={this.state.thumbnailSlice}
+          mainPhotoUrl={this.state.photos[this.state.mainPhotoIndex].thumbnail_url}
+          mainIndex={this.state.mainPhotoIndex}
+          changePhoto={this.changeSelectedPhoto}/>
+        {this.findImageId(this.state.thumbnailSlice[0].url) !== this.findImageId(this.state.photos[0].url) && <IoIosArrowUp onClick={this.handleUpArrow} id='thumbnail-gallery-up-arrow'/>}
+        {this.state.thumbnailSlice[this.state.thumbnailSlice.length - 1] !== this.state.photos[this.state.photos.length - 1] && <IoIosArrowDown onClick={this.handleDownArrow} id='thumbnail-gallery-down-arrow'/>}
+      </div>
+    );
+  }
+}
 
 export default ImageCarousel;
 
