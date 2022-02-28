@@ -69,7 +69,6 @@ class Question extends React.Component {
     let nickname = e.target[1].value;
     let email = e.target[2].value;
     let images = document.querySelectorAll('#QA-preview');
-    // const images = useRef....
 
     let imageURL = [];
     images.forEach((image) => (
