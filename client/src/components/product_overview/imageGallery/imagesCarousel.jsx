@@ -32,8 +32,6 @@ class ImageCarousel extends React.Component {
   }
 
   componentDidMount() {
-    //If expandedView is true
-    //Need to render modal
     if (this.state.expandedView) {
       this.displayModal();
     }
@@ -119,7 +117,27 @@ class ImageCarousel extends React.Component {
         <div id='expanded-view-modal'>
           <span onClick={this.collapsedView}>x</span>
           <div id='expanded-image-container'>
-            <img src={this.state.mainPhoto.url}></img>
+            {this.state.mainPhotoIndex !== 0 &&
+            <BsArrowLeftCircleFill
+              id='image-gallery-left-arrow'
+              onClick={this.handleLeftArrow}/>}
+            {this.state.mainPhotoIndex !== this.state.photos.length - 1 &&
+          <BsArrowRightCircleFill
+            id='image-gallery-right-arrow'
+            onClick={this.handleRightArrow} />}
+            <img src={this.state.photos[this.state.mainPhotoIndex].url}></img>
+            <Thumbnails
+              photos={this.state.thumbnailSlice}
+              mainPhotoUrl={this.state.photos[this.state.mainPhotoIndex].thumbnail_url}
+              mainIndex={this.state.mainPhotoIndex}
+              changePhoto={this.changeSelectedPhoto}/>
+            {this.findImageId(this.state.thumbnailSlice[0].url) !== this.findImageId(this.state.photos[0].url) && <IoIosArrowUp
+              onClick={this.handleUpArrow}
+              id='thumbnail-gallery-up-arrow'/>}
+            {this.state.thumbnailSlice[this.state.thumbnailSlice.length - 1] !== this.state.photos[this.state.photos.length - 1] &&
+          <IoIosArrowDown
+            onClick={this.handleDownArrow}
+            id='thumbnail-gallery-down-arrow'/>}
           </div>
         </div> :
         <div id='image-gallery'>
