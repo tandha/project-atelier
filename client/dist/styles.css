@@ -406,6 +406,46 @@
   height: 50px;
 }
 
+#ratings-breakdown-styles {
+}
+
+.chars-name {
+  margin-bottom: -32px;
+  margin-top: 7px;
+}
+
+.chars-bar {
+  width: 162px;
+  height: 12px;
+  border-radius: 2px;
+  border: 0px solid;
+  overflow: hidden;
+  background-color: rgb(230, 230, 230);
+  margin-bottom: -7px;
+}
+
+.chars-icon {
+  position:relative;
+  top: 25px;
+  left: 0px;
+  z-index:1;
+}
+
+.chars-list {
+  margin-top: 9px;
+  display: flex;
+  width: 162px;
+  justify-content: space-between;
+}
+
+.char-left {
+  font-size: 10px;
+}
+
+.char-right {
+  font-size: 10px;
+}
+
 #review-list {
   width: 500px;
 }
