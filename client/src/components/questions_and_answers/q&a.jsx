@@ -80,11 +80,24 @@ class QuestionsAndAnswers extends React.Component {
 
   submitQuestion(e) {
     e.preventDefault();
-    var body = document.getElementById('your-question').value;
-    var nickname = document.getElementById('question-nickname').value;
-    var email = document.getElementById('question-email').value;
-    
-    // to do: axios post request to API
+    let body = e.target[0].value;
+    let nickname = e.target[1].value;
+    let email = e.target[2].value;
+
+    axios({
+      method: 'post',
+      url: '/qa/questions',
+      data: {
+        body: body,
+        name: nickname,
+        email: email,
+        'product_id': this.props.product.id
+      }
+    }).then(()=> {
+      this.setState({ showQuestionModal: false }, this.getProductQuestions());
+    }).catch((err)=> {
+      console.log('error adding question', err);
+    });
   }
 
   render() {
@@ -93,11 +106,12 @@ class QuestionsAndAnswers extends React.Component {
         <p>QUESTIONS & ANSWERS</p>
         <SearchBar handleSearchBar={this.handleSearchBar}/>
         <QuestionList
-          questions={this.state.questions}
-          questionNumbers={this.state.questionNumbers}
-          searching={this.state.searching}
-          searchedQuestions={this.state.searchedQuestions}
+          questions = {this.state.questions}
+          questionNumbers = {this.state.questionNumbers}
+          searching = {this.state.searching}
+          searchedQuestions = {this.state.searchedQuestions}
           productName = {this.props.product.name}
+          getProductQuestions = {this.getProductQuestions}
         />
         {this.renderMoreQuestionBtn()}
         <button id='add-question-btn' onClick={this.clickAddQuestion}> ADD A QUESTION <IoMdAdd/> </button>

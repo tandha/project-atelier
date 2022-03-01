@@ -15,6 +15,7 @@ const QuestionList = (props) => {
         <Question
           question={question}
           productName = {props.productName}
+          getProductQuestions = {props.getProductQuestions}
           key={question.question_id}
         />
       ))}
