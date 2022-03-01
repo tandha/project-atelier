@@ -8,7 +8,8 @@ class Breakdown extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviewMetaData: {}
+      reviewMetaData: {},
+      recommendedPercent: 0
     };
   }
 
@@ -24,7 +25,9 @@ class Breakdown extends React.Component {
     })
       .then(response => {
         let ratings = response.data.data.ratings;
+        let recommended = response.data.data.recommended;
         this.calculateAverageScore(ratings);
+        this.calculateRecommendedPercent(recommended);
         this.setState({ reviewMetaData: response.data }, () => {
           this.props.updateChars(this.state.reviewMetaData.data.characteristics);
         });
@@ -50,10 +53,21 @@ class Breakdown extends React.Component {
     }
   }
 
+  calculateRecommendedPercent(recommended) {
+    let trueCount = parseInt(recommended.true);
+    let falseCount = parseInt(recommended.false);
+    let total = trueCount + falseCount;
+    let percent = ((trueCount / total) * 100).toFixed();
+    this.setState({ recommendedPercent: percent });
+  }
+
   render() {
     return (
       <div id='ratings-breakdown'>
-        <Average starRating={this.props.starRating}/>
+        <Average
+          starRating={this.props.starRating}
+          recommendedPercent={this.state.recommendedPercent}
+        />
         <StarList
           updateFilter={this.props.updateFilter}
           metaData={this.state.reviewMetaData}

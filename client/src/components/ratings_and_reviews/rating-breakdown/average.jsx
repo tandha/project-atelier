@@ -3,14 +3,19 @@ import StarRating from '../../starRating.jsx';
 
 const Average = (props) => {
   return (
-    <div id='ratings-breakdown-average'>
-      <div id='big-rating'>
-        {props.starRating}
+    <React.Fragment>
+      <div id='ratings-breakdown-average'>
+        <div id='big-rating'>
+          {props.starRating}
+        </div>
+        <div id='average-stars'>
+          <StarRating value={props.starRating} />
+        </div>
       </div>
-      <div id='average-stars'>
-        <StarRating value={props.starRating} />
+      <div id='recommended-percent'>
+        {props.recommendedPercent}% of reviews recommend this product
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 

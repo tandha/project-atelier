@@ -360,6 +360,13 @@
 
 #average-stars {
   margin-left: 13px;
+  margin-bottom: 5px;
+}
+
+#recommended-percent {
+  font-size: 14px;
+  margin-left: 5px;
+  margin-bottom: 5px;
 }
 
 #ratings-breakdown-starlist {
@@ -474,7 +481,7 @@
 }
 
 #review-tiles {
-  height: 400px;
+  max-height: 700px;
   overflow-y: auto;
 }
 
