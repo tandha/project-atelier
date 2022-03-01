@@ -80,7 +80,7 @@ describe('Q&A render tests', () => {
  * more widget feature tests
  */
 
-describe('Test on widget features', () => {
+describe.only('Test on widget features', () => {
 
   var props = {};
   beforeEach(() => {
@@ -99,7 +99,7 @@ describe('Test on widget features', () => {
 
   });
 
-  test('render searchBar component', () => {
+  test('test on searchBar component', () => {
     const setSearch = jest.fn((value) => {});
     const {queryByPlaceholderText} = render(<SearchBar handleSearchBar={setSearch}/>);
 
@@ -108,7 +108,7 @@ describe('Test on widget features', () => {
     expect(searchInput.value).toBe('test');
   });
 
-  test.only('render QuestionList component', () => {
+  test('test on QuestionList component', () => {
     const {rerender} = render(<QuestionList questions={props.questions} questionNumbers={2}/>);
     const list = screen.getByRole('qlist');
     expect(list.children.length).toEqual(2);
@@ -116,45 +116,44 @@ describe('Test on widget features', () => {
     rerender(<QuestionList questions={props.questions} questionNumbers={4}/>);
     const newlist = screen.getByRole('qlist');
     expect(newlist.children.length).toEqual(4);
+    // test on sort by helpfulness
   });
 
-  //   test('render Question component', () => {
-  //     render(<Question question={props.questions[1]}/>);
 
-  //     // test on sort by helpfulness
-  //     // test on click helpful event
-  //     // test on click more answers event
-  //   });
+  test('test on Question component', () => {
+    render(<Question question={props.questions[1]}/>);
+    // test on click more answers event
+  });
 
-  //   test('render AnswerList component', () => {
-  //     const answerArray = Object.values(props.questions[1].answers);
-  //     render(<AnswerList answers={answerArray} answerNumbers={answerArray.length}/>);
-  //   });
+  test('render AnswerList component', () => {
+    const answerArray = Object.values(props.questions[1].answers);
+    render(<AnswerList answers={answerArray} answerNumbers={answerArray.length}/>);
+  });
 
-  //   test('render Answer component', () => {
-  //     const answerArray = Object.values(props.questions[1].answers);
-  //     render(<Answer answer={answerArray[0]}/>);
+  test('render Answer component', () => {
+    const answerArray = Object.values(props.questions[1].answers);
+    render(<Answer answer={answerArray[0]}/>);
 
-  //     // test on sort by helpfulness
+    // test on sort by helpfulness
 
-  //     // test on click helpful event
-  //     // const helpfulBtn = screen.getByRole('help');
-  //     // expect(helpfulBtn).not.toBeDisabled();
-  //     // fireEvent.click(helpfulBtn);
-  //     // expect(helpfulBtn).toBeDisabled();
+    // test on click helpful event
+    // const helpfulBtn = screen.getByRole('help');
+    // expect(helpfulBtn).not.toBeDisabled();
+    // fireEvent.click(helpfulBtn);
+    // expect(helpfulBtn).toBeDisabled();
 
-  //     // test on click report event
-  //   });
+    // test on click report event
+  });
 
-  //   test('render Answer photo component', () => {
-  //     render(<QuestionModal productName={props.productName}/>);
-  //   });
+  test('render Answer photo component', () => {
+    render(<QuestionModal productName={props.productName}/>);
+  });
 
-  //   test('render Question modal form component', () => {
-  //     const answerArray = Object.values(props.questions[2].answers);
-  //     const photo = answerArray[0].photos[0];
-  //     render(<AnswerPhoto photo={photo}/>);
-  //   });
+  test('render Question modal form component', () => {
+    const answerArray = Object.values(props.questions[2].answers);
+    const photo = answerArray[0].photos[0];
+    render(<AnswerPhoto photo={photo}/>);
+  });
 
 });
 
@@ -163,7 +162,7 @@ describe('Test on widget features', () => {
  * Test on End points
  */
 
-xdescribe('Test on API end points', () => {
+describe('Test on API end points', () => {
 
   let testProductID = 64622;
   let testQuestionID = 573794;
