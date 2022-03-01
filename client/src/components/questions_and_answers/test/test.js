@@ -2,11 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import 'regenerator-runtime/runtime.js';
-const request = require('supertest');
-const { API_URL, API_KEY } = require('../../../../../server/config.js');
 import axios from 'axios';
-axios.defaults.baseURL = API_URL;
-
 import {exampleQuestions} from './exampleData.js';
 import QuestionsAndAnswers from '../q&a.jsx';
 import SearchBar from '../SearchBar.jsx';
@@ -17,6 +13,10 @@ import Answer from '../Answer.jsx';
 import AnswerPhoto from '../AnswerPhoto.jsx';
 import QuestionModal from '../ModalForm/QuestionModal.jsx';
 import AnswerModal from '../ModalForm/AnswerModal.jsx';
+
+const request = require('supertest');
+const { API_URL, API_KEY } = require('../../../../../server/config.js');
+axios.defaults.baseURL = API_URL;
 
 /**
  * Render tests
@@ -76,87 +76,94 @@ describe('Q&A render tests', () => {
   });
 });
 
+/**
+ * more widget feature tests
+ */
 
-// describe('Test on widget features', () => {
+describe('Test on widget features', () => {
 
-//   var props = {};
+  var props = {};
+  beforeEach(() => {
+    props = {
+      productID: exampleQuestions.product.id,
+      productName: exampleQuestions.product.name,
+      product: exampleQuestions.product,
+      questions: exampleQuestions.results
+    };
+  });
 
-//   beforeEach(() => {
-//     props = {
-//       productID: exampleQuestions.product.id,
-//       productName: exampleQuestions.product.name,
-//       product: exampleQuestions.product,
-//       questions: exampleQuestions.results
-//     };
-//   });
+  afterEach(cleanup);
 
-//   afterEach(cleanup);
+  test('render Q&A main page', () => {
+    render(<QuestionsAndAnswers {...props}/>);
 
-//   test('render Q&A main page', () => {
-//     render(<QuestionsAndAnswers {...props}/>);
+  });
 
-//     // test on first render of data
-//   });
+  test('render searchBar component', () => {
+    const setSearch = jest.fn((value) => {});
+    const {queryByPlaceholderText} = render(<SearchBar handleSearchBar={setSearch}/>);
 
-//   test('render searchBar component', () => {
-//     render(<SearchBar/>);
+    const searchInput = queryByPlaceholderText('HAVE A QUESTION? SEARCH FOR ANSWERS...');
+    fireEvent.change(searchInput, { target: { value: 'test'} });
+    expect(searchInput.value).toBe('test');
+  });
 
-//     // test on search event
-//     const searchBar = screen.getByPlaceholderText('HAVE A QUESTION? SEARCH FOR ANSWERS...');
-//   });
+  test.only('render QuestionList component', () => {
+    const {rerender} = render(<QuestionList questions={props.questions} questionNumbers={2}/>);
+    const list = screen.getByRole('qlist');
+    expect(list.children.length).toEqual(2);
 
-//   test('render QuestionList component', () => {
-//     render(<QuestionList questions={props.questions}/>);
+    rerender(<QuestionList questions={props.questions} questionNumbers={4}/>);
+    const newlist = screen.getByRole('qlist');
+    expect(newlist.children.length).toEqual(4);
+  });
 
-//     // test on click more questions event
-//   });
+  //   test('render Question component', () => {
+  //     render(<Question question={props.questions[1]}/>);
 
-//   test('render Question component', () => {
-//     render(<Question question={props.questions[1]}/>);
+  //     // test on sort by helpfulness
+  //     // test on click helpful event
+  //     // test on click more answers event
+  //   });
 
-//     // test on sort by helpfulness
-//     // test on click helpful event
-//     // test on click more answers event
-//   });
+  //   test('render AnswerList component', () => {
+  //     const answerArray = Object.values(props.questions[1].answers);
+  //     render(<AnswerList answers={answerArray} answerNumbers={answerArray.length}/>);
+  //   });
 
-//   test('render AnswerList component', () => {
-//     const answerArray = Object.values(props.questions[1].answers);
-//     render(<AnswerList answers={answerArray} answerNumbers={answerArray.length}/>);
-//   });
+  //   test('render Answer component', () => {
+  //     const answerArray = Object.values(props.questions[1].answers);
+  //     render(<Answer answer={answerArray[0]}/>);
 
-//   test('render Answer component', () => {
-//     const answerArray = Object.values(props.questions[1].answers);
-//     render(<Answer answer={answerArray[0]}/>);
+  //     // test on sort by helpfulness
 
-//     // test on sort by helpfulness
+  //     // test on click helpful event
+  //     // const helpfulBtn = screen.getByRole('help');
+  //     // expect(helpfulBtn).not.toBeDisabled();
+  //     // fireEvent.click(helpfulBtn);
+  //     // expect(helpfulBtn).toBeDisabled();
 
-//     // test on click helpful event
-//     // const helpfulBtn = screen.getByRole('help');
-//     // expect(helpfulBtn).not.toBeDisabled();
-//     // fireEvent.click(helpfulBtn);
-//     // expect(helpfulBtn).toBeDisabled();
+  //     // test on click report event
+  //   });
 
-//     // test on click report event
-//   });
+  //   test('render Answer photo component', () => {
+  //     render(<QuestionModal productName={props.productName}/>);
+  //   });
 
-//   test('render Answer photo component', () => {
-//     render(<QuestionModal productName={props.productName}/>);
-//   });
+  //   test('render Question modal form component', () => {
+  //     const answerArray = Object.values(props.questions[2].answers);
+  //     const photo = answerArray[0].photos[0];
+  //     render(<AnswerPhoto photo={photo}/>);
+  //   });
 
-//   test('render Question modal form component', () => {
-//     const answerArray = Object.values(props.questions[2].answers);
-//     const photo = answerArray[0].photos[0];
-//     render(<AnswerPhoto photo={photo}/>);
-//   });
-
-// });
+});
 
 
 /**
  * Test on End points
  */
 
-describe('Test on API end points', () => {
+xdescribe('Test on API end points', () => {
 
   let testProductID = 64622;
   let testQuestionID = 573794;
