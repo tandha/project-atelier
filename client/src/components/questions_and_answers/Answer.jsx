@@ -27,9 +27,9 @@ class Answer extends React.Component {
 
   renderAnswerHelpfulBtn() {
     if (this.state.AnswerHelpful) {
-      return ( <button id='answer-helpful' role="help" disabled > Yes ({this.props.answer.helpfulness + 1}) </button> );
+      return ( <button className='answer-helpful' role="help" disabled > Yes ({this.props.answer.helpfulness + 1}) </button> );
     } else {
-      return ( <button id='answer-helpful' role="help" onClick={this.markAnswerHelpful}> Yes ({this.props.answer.helpfulness}) </button> );
+      return ( <button className='answer-helpful' role="help" onClick={this.markAnswerHelpful}> Yes ({this.props.answer.helpfulness}) </button> );
     }
   }
 
@@ -47,9 +47,9 @@ class Answer extends React.Component {
 
   renderReportBtn() {
     if (this.state.reported) {
-      return ( <button id='answer-report' role="report" disabled> Reported </button> );
+      return ( <button className='answer-report' role="report" disabled> Reported </button> );
     } else {
-      return ( <button id='answer-report' role="report" onClick={this.reportAnswer}> Report </button> );
+      return ( <button className='answer-report' role="report" onClick={this.reportAnswer}> Report </button> );
     }
   }
 
@@ -67,14 +67,14 @@ class Answer extends React.Component {
 
   render() {
     return (
-      <div id='each-answer'>
-        <div id='answer-body'> {this.props.answer.body} </div>
-        <div id='answer-photo-box'>
+      <div className='each-answer'>
+        <div className='answer-body'> {this.props.answer.body} </div>
+        <div className='answer-photo-box'>
           {this.props.answer.photos.map((photo, index) => (
             <AnswerPhoto photo={photo} key={index}/>
           ))}
         </div>
-        <div id='answer-interaction'>
+        <div className='answer-interaction'>
           by {this.renderAnswererName()}, {renderDate(this.props.answer.date.toString())} | Helpful?
           {this.renderAnswerHelpfulBtn()} | {this.renderReportBtn()}
         </div>
