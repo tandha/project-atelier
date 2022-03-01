@@ -32,7 +32,7 @@ const Styles = (props) => {
             <React.Fragment key={index}>
               <div className='chars-name'>{style}</div>
               <VscTriangleDown size={28} color={'gray'} className='chars-icon'
-                style={{left: (32 * Number.parseFloat(styleVals[index])).toFixed()}}
+                style={{left: (45 * Number.parseFloat(styleVals[index])).toFixed()}}
               />
               <div className='chars-bar'></div>
               <div className='chars-list'>

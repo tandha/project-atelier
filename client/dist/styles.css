@@ -337,6 +337,7 @@
 #rr-title {
   margin-top: 30px;
   font-size: 16px;
+  margin-left: 5px;
 }
 
 #ratings-and-reviews {
@@ -347,13 +348,14 @@
 
 #ratings-breakdown {
   margin-top: 14px;
-  width: 200px;
+  width: 300px;
   font-size: 19px;
 }
 
 #ratings-breakdown-average {
   display: flex;
   font-size: 35px;
+  margin-left: 5px;
 }
 
 #average-stars {
@@ -364,18 +366,20 @@
   display: flex;
 }
 
-#stars-left {
-  align-self: flex-start;
-}
-
-#stars-right {
+#stars-list {
   align-self: flex-start;
   margin-top: 7px;
   margin-left: 5px;
 }
 
+.star-row {
+  display: flex;
+  height: 25px;
+}
+
 .star-label {
   text-decoration: underline;
+  font-size: 15px;
 }
 
 .star-label:hover {
@@ -384,18 +388,25 @@
 }
 
 .star-bar {
-  width: 100px;
-  height: 11px;
-  border-radius: 2px;
+  width: 200px;
+  height: 9px;
+  border-radius: 1px;
   border: 0px solid;
   overflow: hidden;
   background-color: rgb(230, 230, 230);
-  margin-bottom: 11px;
+  margin-top: 5px;
+  margin-left: 5px;
 }
 
 .star-bar-fill {
-  height: 11px;
-  background-color: gray;
+  height: 9px;
+  background-color: rgb(90, 90, 90);
+}
+
+#stars-filter {
+  margin-top: 5px;
+  font-size: 15px;
+  margin-left: 5px;
 }
 
 .remove-filter {
@@ -412,15 +423,18 @@
 }
 
 #ratings-breakdown-styles {
+  margin-top: -20px;
+  margin-left: 5px;
 }
 
 .chars-name {
+  font-size: 17px;
   margin-bottom: -32px;
-  margin-top: 7px;
+  margin-top: 15px;
 }
 
 .chars-bar {
-  width: 162px;
+  width: 250px;
   height: 10px;
   border-radius: 2px;
   border: 0px solid;
@@ -439,16 +453,16 @@
 .chars-list {
   margin-top: 9px;
   display: flex;
-  width: 162px;
+  width: 250px;
   justify-content: space-between;
 }
 
 .char-left {
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .char-right {
-  font-size: 10px;
+  font-size: 11px;
 }
 
 #review-list {
@@ -460,9 +474,7 @@
   text-decoration: underline;
 }
 
-.review-tile {
-
-}
+/* .review-tile {} */
 
 .review-tile-top-row {
   margin-top: 25px;

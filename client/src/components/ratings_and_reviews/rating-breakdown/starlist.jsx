@@ -14,7 +14,7 @@ const StarList = (props) => {
       total += parseInt(ratings[key]);
     }
     for (let key in ratings) {
-      result[key] = (parseInt(ratings[key]) / total) * 100;
+      result[key] = (parseInt(ratings[key]) / total) * 200;
     }
     return Object.values(result);
   };
@@ -32,23 +32,16 @@ const StarList = (props) => {
   return (
     <React.Fragment>
       <div id='ratings-breakdown-starlist'>
-        <div id='stars-left'>
-          <div className='star-label' id={'1-star-bar'} onClick={onStarClick}>1 stars</div>
-          <div className='star-label' id={'2-star-bar'} onClick={onStarClick}>2 stars</div>
-          <div className='star-label' id={'3-star-bar'} onClick={onStarClick}>3 stars</div>
-          <div className='star-label' id={'4-star-bar'} onClick={onStarClick}>4 stars</div>
-          <div className='star-label' id={'5-star-bar'} onClick={onStarClick}>5 stars</div>
-        </div>
-
-        <div id='stars-right'>
+        <div id='stars-list'>
           {percentages.map((percent, index) => {
             let num = index + 1;
             return (
-              <React.Fragment key={index}>
+              <div className='star-row' key={index}>
+                <div className='star-label' id={num + '-star-bar'} onClick={onStarClick}>{num} stars</div>
                 <div className='star-bar' id={`${num.toString()}-star-bar`}>
                   <div className='star-bar-fill' style={{width: percent}}></div>
                 </div>
-              </React.Fragment>
+              </div>
             );
           })}
         </div>
