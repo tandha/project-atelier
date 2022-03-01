@@ -466,7 +466,6 @@
 }
 
 #review-list {
-  width: 500px;
 }
 
 #reviews-sort-dropdown {
@@ -474,7 +473,10 @@
   text-decoration: underline;
 }
 
-/* .review-tile {} */
+#review-tiles {
+  height: 400px;
+  overflow-y: auto;
+}
 
 .review-tile-top-row {
   margin-top: 25px;
@@ -523,6 +525,7 @@
 
 .review-tile-line {
   border: 1px solid;
+  margin-top: 15px;
 }
 
 #new-review-modal {
