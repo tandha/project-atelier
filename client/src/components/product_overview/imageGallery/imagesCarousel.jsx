@@ -13,10 +13,6 @@ class ImageCarousel extends React.Component {
       photos: this.props.selectedStyle.photos,
       thumbnailSlice: [
         this.props.selectedStyle.photos[0],
-        this.props.selectedStyle.photos[1],
-        this.props.selectedStyle.photos[2],
-        this.props.selectedStyle.photos[3],
-        this.props.selectedStyle.photos[4]
       ],
       expandedView: false
     };
@@ -31,9 +27,8 @@ class ImageCarousel extends React.Component {
   }
 
   componentDidMount() {
-    if (this.state.expandedView) {
-      this.displayModal();
-    }
+    let thumbnailSlice;
+    this.state.photos.length < 5 ? this.setState({ thumbnailSlice: this.state.photos }) : this.setState({ thumbnailSlice: this.state.photos.slice(0, 5)});
   }
 
   //TODO: start the slice in the same place the previous thumbnail slice was started to prevent highlighted image from jumping to top of thumbnails when style is changed.
@@ -43,13 +38,7 @@ class ImageCarousel extends React.Component {
         mainPhotoIndex: prevState.mainPhotoIndex,
         thumbnailIndex: prevState.thumbnailIndex,
         photos: this.props.selectedStyle.photos,
-        thumbnailSlice: [
-          this.props.selectedStyle.photos[0],
-          this.props.selectedStyle.photos[1],
-          this.props.selectedStyle.photos[2],
-          this.props.selectedStyle.photos[3],
-          this.props.selectedStyle.photos[4]
-        ],
+        thumbnailSlice: prevState.photos.slice(0, 5),
         expandedView: false
       }, () => {
         this.advanceThumbnails(prevState.mainPhotoIndex - prevState.thumbnailIndex);
@@ -127,8 +116,15 @@ class ImageCarousel extends React.Component {
   expandedView(e) {
     this.setState({ expandedView: true});
   }
+
   collapsedView(e) {
     this.setState({ expandedView: false});
+  }
+
+  zoomView(e) {
+    let image = e.target;
+    image.id = 'image-zoom-state';
+    console.log(image);
   }
 
   render() {

@@ -3,6 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import data from '../../../sampleData/sampleData.js';
 import ProductOverview from '../overview.jsx';
+import Thumbnails from '../imageGallery/imageThumbnails.jsx';
 import ImagesCarousel from '../imageGallery/imagesCarousel.jsx';
 import Information from '../productInformation/information.jsx';
 import FeatureInformation from '../productInformation/featureInformation.jsx';
@@ -11,16 +12,15 @@ import StyleThumbnail from '../styleSelector/StyleThumbnail.jsx';
 import Cart from '../addToCart/cart.jsx';
 import Option from '../addToCart/option.jsx';
 
-
 //////////////// Render Tests ////////////////
 describe('Overview Widget Components Render', () => {
+
   test('Renders Image Gallery', () => {
     let props = {
-      photos: data.styles.results[0].photos,
-      mainPhotoIndex: 0,
-      changePhoto: function(e) { return e; }
+      selectedStyle: data.styles.results[0],
     };
-    render(<ImagesCarousel {...props}/>);
+    console.log('is this anything?', props.selectedStyle);
+    // render(<ImagesCarousel {...props}/>);
   });
   test('Renders Product Information', () => {
     let props = {
@@ -66,20 +66,16 @@ describe('Overview Widget Components Render', () => {
 describe('Image Gallery Component', () => {
   test('Renders Main Image', () => {
     let props = {
-      photos: data.styles.results[0].photos,
-      mainPhotoIndex: 0,
-      changePhoto: function(e) { return e; }
+      selectedStyle: data.styles.results[0]
     };
     render(<ImagesCarousel {...props}/>);
     const image = screen.getByTestId('main-image');
-    expect(image).toHaveAttribute('src', props.photos[0].url);
+    expect(image).toHaveAttribute('src', props.selectedStyle.photos[0].url);
   });
 
   test('Renders Correct Number of Image Thumbnails', () => {
     let props = {
-      photos: data.styles.results[0].photos,
-      mainPhotoIndex: 0,
-      changePhoto: function(e) { return e; }
+      selectedStyle: data.styles.results[0]
     };
     const { getAllByRole } = render(<ImagesCarousel {...props}/>);
     const thumbnailList = getAllByRole('listitem');
@@ -87,6 +83,13 @@ describe('Image Gallery Component', () => {
   });
   //TODO: expect thumbnails to be images
   //TODO: expect selecting a thumbnail to change main image that that thumbnail's corresponding url
+  //TODO: expect clicking right arrow to change main image correctly
+  //TODO: expect clicking left arrow to change main image correctly
+  //TODO: expect cliking down arrow to change thumbnail slice correctly
+  //TODO: expect clicking up arrow to change thumbnail slice correctly
+  //TODO: expect thumbnail corresponding to main image to be highlighted
+  //TODO: expect clicking main image to enter expanded mode
+  //TODO: expect clicking image in expanded mode to enter zoom mode
 });
 
 //////////////// Product Information Tests ////////////////
