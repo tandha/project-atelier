@@ -9,8 +9,7 @@ class ImageCarousel extends React.Component {
     super(props);
     this.state = {
       mainPhotoIndex: 0,
-      mainPhoto: this.props.selectedStyle.photos[0],
-      thumbnailIndex: 4,
+      thumbnailIndex: 0,
       photos: this.props.selectedStyle.photos,
       thumbnailSlice: [
         this.props.selectedStyle.photos[0],
@@ -34,6 +33,27 @@ class ImageCarousel extends React.Component {
   componentDidMount() {
     if (this.state.expandedView) {
       this.displayModal();
+    }
+  }
+
+  //TODO: start the slice in the same place the previous thumbnail slice was started to prevent highlighted image from jumping to top of thumbnails when style is changed.
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.selectedStyle !== this.props.selectedStyle) {
+      this.setState({
+        mainPhotoIndex: prevState.mainPhotoIndex,
+        thumbnailIndex: prevState.thumbnailIndex,
+        photos: this.props.selectedStyle.photos,
+        thumbnailSlice: [
+          this.props.selectedStyle.photos[0],
+          this.props.selectedStyle.photos[1],
+          this.props.selectedStyle.photos[2],
+          this.props.selectedStyle.photos[3],
+          this.props.selectedStyle.photos[4]
+        ],
+        expandedView: false
+      }, () => {
+        this.advanceThumbnails(prevState.mainPhotoIndex - prevState.thumbnailIndex);
+      });
     }
   }
 
@@ -66,23 +86,23 @@ class ImageCarousel extends React.Component {
     this.state.mainPhotoIndex === 0 ? this.setState({ mainPhotoIndex: this.state.photos.length - 1}) : this.setState({ mainPhotoIndex: this.state.mainPhotoIndex - 1});
   }
 
-  advanceThumbnails() {
+  advanceThumbnails(incrementer) {
     let copyState = this.state.photos.slice(0);
-    let visibleThumbnails = copyState.splice(this.state.thumbnailIndex, 5);
-    this.setState({ thumbnailSlice: visibleThumbnails, thumbnailIndex: this.state.thumbnailIndex + 1 });
+    let visibleThumbnails = copyState.splice(this.state.thumbnailIndex + incrementer, 5);
+    this.setState({ thumbnailSlice: visibleThumbnails, thumbnailIndex: this.state.thumbnailIndex + incrementer });
   }
 
-  reverseThumbnails(num) {
+  reverseThumbnails(decrementer) {
     let copyState = this.state.photos.slice(0);
-    let visibleThumbnails = copyState.splice(this.state.thumbnailIndex - 2, 5);
-    this.setState({ thumbnailSlice: visibleThumbnails, thumbnailIndex: this.state.thumbnailIndex - 1 });
+    let visibleThumbnails = copyState.splice(this.state.thumbnailIndex - decrementer, 5);
+    this.setState({ thumbnailSlice: visibleThumbnails, thumbnailIndex: this.state.thumbnailIndex - decrementer });
   }
 
   handleLeftArrow () {
     let mainId = this.findImageId(this.state.photos[this.state.mainPhotoIndex].url);
     let thumbnailId = this.findImageId(this.state.thumbnailSlice[0].url);
     if (mainId === thumbnailId) {
-      this.reverseThumbnails();
+      this.reverseThumbnails(1);
     }
     this.reverseMainPhoto();
   }
@@ -91,17 +111,17 @@ class ImageCarousel extends React.Component {
     let mainId = this.findImageId(this.state.photos[this.state.mainPhotoIndex].url);
     let thumbnailId = this.findImageId(this.state.thumbnailSlice[this.state.thumbnailSlice.length - 1].url);
     if (mainId === thumbnailId) {
-      this.advanceThumbnails();
+      this.advanceThumbnails(1);
     }
     this.advanceMainPhoto();
   }
 
   handleDownArrow (e) {
-    this.advanceThumbnails();
+    this.advanceThumbnails(1);
   }
 
   handleUpArrow (e) {
-    this.reverseThumbnails();
+    this.reverseThumbnails(1);
   }
 
   expandedView(e) {

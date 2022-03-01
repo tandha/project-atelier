@@ -20,16 +20,16 @@ class ProductOverview extends React.Component {
         index = i;
       }
     });
+    console.log(this.props.styles.results[index]);
     this.setState({
       selectedStyle: this.props.styles.results[index],
-      thumbnailIndex: 0}, () => {
-      this.advanceVisibleThumbnails();
+      // thumbnailIndex: 0}, () => {
+      // this.advanceVisibleThumbnails();
     });
   }
 
   render() {
     return (
-      // this.state.thumbnailSlice.length > 0 && //why do I need this?
       <div id='overview-container'>
         <ImageCarousel
           selectedStyle={this.state.selectedStyle}
