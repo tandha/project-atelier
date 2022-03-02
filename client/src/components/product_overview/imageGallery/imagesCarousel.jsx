@@ -124,14 +124,14 @@ class ImageCarousel extends React.Component {
 
   toggleZoom(e) {
     let image = e.target;
-    this.setState({ zoomView: !this.state.zoomView });
-    if (this.state.zoomView) {
-      image.id = 'image-zoom-state';
-    } else {
-      this.setState({ expandedView: false });
-      image.id = '';
-    }
-
+    this.setState({ zoomView: !this.state.zoomView }, () => {
+      if (this.state.zoomView) {
+        document.getElementById('expanded-image-container').className = 'zoom';
+      } else {
+        document.getElementById('expanded-image-container').className = '';
+        this.setState({ expandedView: false });
+      }
+    });
   }
 
   render() {
@@ -149,6 +149,7 @@ class ImageCarousel extends React.Component {
             id='image-gallery-right-arrow'
             onClick={this.handleRightArrow} />}
             <img onClick={this.toggleZoom.bind(this)}src={this.state.photos[this.state.mainPhotoIndex].url}></img>
+
             <Thumbnails
               photos={this.state.thumbnailSlice}
               mainPhotoUrl={this.state.photos[this.state.mainPhotoIndex].thumbnail_url}
