@@ -1,5 +1,6 @@
 import React from 'react';
 import Option from './option.jsx';
+import axios from 'axios';
 import { IoIosStarOutline, IoIosStar} from 'react-icons/io';
 
 
@@ -78,17 +79,43 @@ class Cart extends React.Component {
     this.props.toggleOutfit(this.props.productId);
   }
 
-  addToCart(e) {
-    //TODO: POST the selected size (but not quantity?) to the API
+  cartHandler(e) {
     e.preventDefault();
-    console.log('size', this.state.selectedSize, 'qty', this.state.selectedQuantity);
+    const skus = this.props.selectedStyle.skus;
+    let quantity = this.state.selectedQuantity;
+    let sku;
+    for (let key in skus) {
+      if (skus[key].size === this.state.selectedSize) {
+        sku = key;
+        console.log('should be the sku', key);
+      }
+    }
+    let promises = [];
+    while (quantity > 0) {
+      promises.push(this.addToCart(sku));
+      quantity--;
+    }
+    Promise.all(promises)
+      .then((res) => {
+        console.log('Success posting cart to API');
+        axios.get('/cart').then(() => { console.log('What is in the cart', res); });
+      })
+      .catch((err) => {
+        console.log('Error posting cart to API', err);
+      });
     this.resetForm();
   }
+
+  addToCart(sku, quantity) {
+    return axios.post('/cart', {'sku_id': sku});
+  }
+
+
 
   render() {
     return (
       <div id='cart'>
-        <form id='cart-form' onSubmit={this.addToCart.bind(this)}>
+        <form id='cart-form' onSubmit={this.cartHandler.bind(this)}>
           <div data-testid='select-size' id='select-size'>
             <select onChange={this.setSizeSelection.bind(this)} >
               <option>SELECT SIZE</option>
