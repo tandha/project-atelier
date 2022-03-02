@@ -19,8 +19,7 @@ describe('Overview Widget Components Render', () => {
     let props = {
       selectedStyle: data.styles.results[0],
     };
-    console.log('is this anything?', props.selectedStyle);
-    // render(<ImagesCarousel {...props}/>);
+    render(<ImagesCarousel {...props}/>);
   });
   test('Renders Product Information', () => {
     let props = {
@@ -79,14 +78,69 @@ describe('Image Gallery Component', () => {
     };
     const { getAllByRole } = render(<ImagesCarousel {...props}/>);
     const thumbnailList = getAllByRole('listitem');
-    expect(thumbnailList).toHaveLength(3);
+
+    expect(thumbnailList).toHaveLength(5);
   });
+
+  test('Advances Main Image by One When Right Arrow is Clicked', () => {
+    let props = {
+      selectedStyle: data.styles.results[0]
+    };
+    render(<ImagesCarousel {...props}/>);
+    fireEvent.click(document.querySelector('#image-gallery-right-arrow'));
+
+    let expectedImage = data.styles.results[0].photos[1].url;
+    let actualImage = document.querySelector('#main-image').src;
+
+    expect(expectedImage).toEqual(actualImage);
+  });
+
+  test('Reverses Main Image by One When Left Arrow is Clicked', () => {
+    let props = {
+      selectedStyle: data.styles.results[0]
+    };
+    render(<ImagesCarousel {...props}/>);
+    fireEvent.click(document.querySelector('#image-gallery-right-arrow'));
+    fireEvent.click(document.querySelector('#image-gallery-left-arrow'));
+
+    let expectedImage = data.styles.results[0].photos[0].url;
+    let actualImage = document.querySelector('#main-image').src;
+
+    expect(expectedImage).toEqual(actualImage);
+  });
+
+  test('Clicking Down Arrow Causes Thumbnail Slice to Advance By One', () => {
+    let props = {
+      selectedStyle: data.styles.results[0]
+    };
+    render(<ImagesCarousel {...props}/>);
+    fireEvent.click(document.querySelector('#thumbnail-gallery-down-arrow'));
+
+    let expectedImage = data.styles.results[0].photos[1].thumbnail_url;
+    let actualImage = document.querySelector('#thumbnail-0').src;
+
+    expect(expectedImage).toEqual(actualImage);
+  });
+
+  //TODO: expect clicking up arrow to change thumbnail slice correctly
+  test('Clicking Up Arrow Causes Thumbnail Slice to Reverse By One', () => {
+    let props = {
+      selectedStyle: data.styles.results[0]
+    };
+    render(<ImagesCarousel {...props}/>);
+    fireEvent.click(document.querySelector('#thumbnail-gallery-down-arrow'));
+    fireEvent.click(document.querySelector('#thumbnail-gallery-up-arrow'));
+
+    let expectedImage = data.styles.results[0].photos[0].thumbnail_url;
+    let actualImage = document.querySelector('#thumbnail-0').src;
+
+    expect(expectedImage).toEqual(actualImage);
+  });
+
+
   //TODO: expect thumbnails to be images
   //TODO: expect selecting a thumbnail to change main image that that thumbnail's corresponding url
-  //TODO: expect clicking right arrow to change main image correctly
   //TODO: expect clicking left arrow to change main image correctly
-  //TODO: expect cliking down arrow to change thumbnail slice correctly
-  //TODO: expect clicking up arrow to change thumbnail slice correctly
   //TODO: expect thumbnail corresponding to main image to be highlighted
   //TODO: expect clicking main image to enter expanded mode
   //TODO: expect clicking image in expanded mode to enter zoom mode
