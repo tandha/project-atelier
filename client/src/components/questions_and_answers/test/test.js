@@ -3,6 +3,7 @@ import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import 'regenerator-runtime/runtime.js';
 import axios from 'axios';
+jest.mock('axios');
 import {exampleQuestions} from './exampleData.js';
 import QuestionsAndAnswers from '../q&a.jsx';
 import SearchBar from '../SearchBar.jsx';
@@ -14,6 +15,11 @@ import AnswerPhoto from '../AnswerPhoto.jsx';
 import QuestionModal from '../ModalForm/QuestionModal.jsx';
 import AnswerModal from '../ModalForm/AnswerModal.jsx';
 
+import httpAdapter from 'axios/lib/adapters/http';
+axios.defaults.adapter = httpAdapter;
+const { API_URL, API_KEY } = require('../../../../../server/config.js');
+axios.defaults.baseURL = API_URL;
+axios.defaults.headers['Authorization'] = API_KEY;
 /**
  * Render tests
  */
@@ -29,6 +35,7 @@ describe('Q&A render tests', () => {
   afterEach(cleanup);
 
   test('render Q&A main page', () => {
+    axios.mockResolvedValueOnce({data: {data: {results: props.questions}}});
     render(<QuestionsAndAnswers {...props}/>);
   });
 
@@ -80,7 +87,7 @@ describe('Test on search bar component', () => {
       product: exampleQuestions.product,
       questions: exampleQuestions.results
     };
-
+    axios.mockResolvedValueOnce({data: {data: {results: props.questions}}});
     const {queryByPlaceholderText} = render(<QuestionsAndAnswers {...props}/>);
     const searchInput = queryByPlaceholderText('HAVE A QUESTION? SEARCH FOR ANSWERS...');
     fireEvent.change(searchInput, { target: { value: 'test'} });
@@ -153,7 +160,7 @@ describe('Test on Answer Features', () => {
   });
 });
 
-describe.only('Test on Modal Form Features', () => {
+describe('Test on Modal Form Features', () => {
 
   var props = {};
   beforeEach(() => {
@@ -161,7 +168,9 @@ describe.only('Test on Modal Form Features', () => {
       product: exampleQuestions.product,
       questions: exampleQuestions.results
     };
+    axios.mockResolvedValueOnce({data: {data: {results: props.questions}}});
   });
+  afterEach(cleanup);
 
   test('Test on click add question', () => {
     render(<QuestionsAndAnswers {...props}/>);
@@ -169,13 +178,50 @@ describe.only('Test on Modal Form Features', () => {
     fireEvent.click(btn);
     const form = document.querySelector('#new-question-modal');
     expect(form).toBeInTheDocument();
-
   });
 
   test('Test on question modal', () => {
-    const testData = {body: 'Can I wash it?', nickname: 'tobi', email: 'tobi@email.com'};
+    const testData = {body: 'Can I wash it', nickname: 'tobi', email: 'tobi@email.com'};
 
     render(<QuestionModal productName={props.productName}/>);
+    const testBody = document.querySelector('#your-question');
+    const testNickname = document.querySelector('#question-nickname');
+    const testEmail = document.querySelector('#question-email');
+
+    fireEvent.change(testBody, { target: { value: testData.body} });
+    fireEvent.change(testNickname, { target: { value: testData.nickname} });
+    fireEvent.change(testEmail, { target: { value: testData.email} });
+
+    expect(testBody.value).toBe(testData.body);
+    expect(testNickname.value).toBe(testData.nickname);
+    expect(testEmail.value).toBe(testData.email);
+  });
+
+  test('Test on submit add question', () => {
+    const testData = {body: 'Can I wash it', nickname: 'tobi', email: 'tobi@email.com'};
+
+    render(<QuestionsAndAnswers {...props}/>);
+
+    const btn = screen.getByText('ADD A QUESTION');
+    fireEvent.click(btn);
+
+    jest.clearAllMocks();
+    axios.mockResolvedValueOnce({status: 201});
+
+    const formInput = document.querySelector('#submit-question-form');
+    fireEvent.submit(formInput, {target: [{value: testData.body}, {value: testData.nickname}, {value: testData.email}]});
+
+    const form = document.querySelector('#new-answer-modal');
+    expect(form).not.toBeInTheDocument();
+  });
+
+  test('Test on click add answer', () => {
+    render(<Question question={props.questions[1]}/>);
+    const btn = screen.getByText('Add Answer');
+    fireEvent.click(btn);
+    const form = document.querySelector('#new-answer-modal');
+    expect(form).toBeInTheDocument();
+
   });
 
   test('Test on answer modal', () => {
