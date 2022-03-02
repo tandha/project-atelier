@@ -10,9 +10,10 @@ class Cart extends React.Component {
     this.state = {
       availableSizes: [],
       availableQuantities: [],
-      selectedSize: 'tbd',
+      selectedSize: 'TBD',
       selectedQuantity: '-',
     };
+    this.size = 'SELECT SIZE';
   }
 
   componentDidMount() {
@@ -34,12 +35,17 @@ class Cart extends React.Component {
   setAvailableSizes() {
     let skus = this.props.selectedStyle.skus;
     let sizes = [];
-    let quantities = [];
     for (let key in skus) {
-      sizes.push(skus[key].size);
+      if (skus[key].quantity && skus[key].quantity > 0) {
+        sizes.push(skus[key].size);
+      }
     }
-    this.setState({ availableSizes: sizes } );
-    return sizes;
+    if (sizes.length === 0) {
+      // let quantitySelectElement = document.getElementById('size').value = 'OUT OF STOCK';
+      this.size = 'OUT OF STOCK';
+    } else {
+      this.setState({ availableSizes: sizes } );
+    }
   }
 
   determineQuantityFromSelectedSize() {
@@ -58,10 +64,7 @@ class Cart extends React.Component {
     this.setAvailableQuantities(quantities);
     this.setState({ selectedQuantity: 1 });
 
-    console.log('hheeeelooooooooOOOW');
     let quantitySelectElement = document.getElementById('quantity').value = '1';
-    console.log(quantitySelectElement);
-
   }
 
   setAvailableQuantities(quantities) {
@@ -121,7 +124,7 @@ class Cart extends React.Component {
         <form id='cart-form' onSubmit={this.cartHandler.bind(this)}>
           <div data-testid='select-size' id='select-size'>
             <select required onChange={this.setSizeSelection.bind(this)} >
-              <option value="">SELECT SIZE</option>
+              <option id='size' value="">{this.size}</option>
               {
                 this.state.availableSizes.map((size, i) => {
                   return <Option key={i} type={'size'} option={size}/>;

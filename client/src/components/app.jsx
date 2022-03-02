@@ -25,8 +25,7 @@ class App extends React.Component {
       starRating: 0
     };
   }
-
-  //promise.allSettled?
+  // null values option for testing: 64621
   componentDidMount() {
     Promise.all([this.getProduct(64622),
       this.getStyles(64622),
