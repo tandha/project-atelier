@@ -27,7 +27,6 @@ class Cart extends React.Component {
     }
   }
 
-
   resetForm() {
     document.getElementById('cart-form').reset();
   }
@@ -41,7 +40,6 @@ class Cart extends React.Component {
       }
     }
     if (sizes.length === 0) {
-      // let quantitySelectElement = document.getElementById('size').value = 'OUT OF STOCK';
       this.size = 'OUT OF STOCK';
     } else {
       this.setState({ availableSizes: sizes } );
@@ -116,8 +114,6 @@ class Cart extends React.Component {
     return axios.post('/cart', {'sku_id': sku});
   }
 
-
-
   render() {
     return (
       <div id='cart'>
@@ -146,10 +142,14 @@ class Cart extends React.Component {
             </select>
 
           </div>
-          <div id='add-to-bag'>
-            <button>ADD TO BAG</button>
-            <span> + </span>
-          </div>
+          {
+            this.size !== 'OUT OF STOCK' &&
+            <div id='add-to-bag'>
+              <button>ADD TO BAG</button>
+              <span> + </span>
+            </div>
+
+          }
           <div id='add-to-myoutfit'>
             {
               this.props.currentProductInOutfit === false ?
