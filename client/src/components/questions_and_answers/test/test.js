@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor, cleanup } from '@testing-library/react';
+import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import 'regenerator-runtime/runtime.js';
 import axios from 'axios';
@@ -29,7 +29,7 @@ describe('Q&A render tests', () => {
   afterEach(cleanup);
 
   test('render Q&A main page', () => {
-    render(<QuestionsAndAnswers product={props.product} questions={props.questions}/>);
+    render(<QuestionsAndAnswers {...props}/>);
   });
 
   test('render searchBar component', () => {
