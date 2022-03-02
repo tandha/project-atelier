@@ -1,14 +1,187 @@
 // import React from 'react';
 import React, { useState, useEffect } from 'react';
 import Thumbnails from './imageThumbnails.jsx';
-const ImageCarousel = (props) => {
+import { IoMdArrowBack, IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from 'react-icons/bs';
 
-  return (
-    <div id='image-gallery'>
-      <img data-testid="main-image" id='main-image' src={props.photos[props.mainPhotoIndex].url}></img>
-      <Thumbnails photos={props.photos} mainIndex={props.mainPhotoIndex} changePhoto={props.changePhoto}/>
-    </div>
-  );
-};
+class ImageCarousel extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      mainPhotoIndex: 0,
+      thumbnailIndex: 0,
+      photos: this.props.selectedStyle.photos,
+      thumbnailSlice: [
+        this.props.selectedStyle.photos[0],
+      ],
+      expandedView: false
+    };
+    this.changeSelectedPhoto = this.changeSelectedPhoto.bind(this);
+    this.handleLeftArrow = this.handleLeftArrow.bind(this);
+    this.handleRightArrow = this.handleRightArrow.bind(this);
+    this.advanceMainPhoto = this.advanceMainPhoto.bind(this);
+    this.handleUpArrow = this.handleUpArrow.bind(this);
+    this.handleDownArrow = this.handleDownArrow.bind(this);
+    this.expandedView = this.expandedView.bind(this);
+    this.collapsedView = this.collapsedView.bind(this);
+  }
+
+  componentDidMount() {
+    let thumbnailSlice;
+    this.state.photos.length < 5 ? this.setState({ thumbnailSlice: this.state.photos }) : this.setState({ thumbnailSlice: this.state.photos.slice(0, 5)});
+  }
+
+  //TODO: start the slice in the same place the previous thumbnail slice was started to prevent highlighted image from jumping to top of thumbnails when style is changed.
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.selectedStyle !== this.props.selectedStyle) {
+      this.setState({
+        mainPhotoIndex: prevState.mainPhotoIndex,
+        thumbnailIndex: prevState.thumbnailIndex,
+        photos: this.props.selectedStyle.photos,
+        thumbnailSlice: prevState.photos.slice(0, 5),
+        expandedView: false
+      }, () => {
+        this.advanceThumbnails(prevState.mainPhotoIndex - prevState.thumbnailIndex);
+      });
+    }
+  }
+
+  changeSelectedPhoto(e) {
+    let index;
+    let srcId = this.findImageId(e.target.src);
+    this.state.photos.forEach((image, i) => {
+      let imgId = this.findImageId(image.url);
+      if (imgId === srcId) {
+        index = i;
+        return;
+      }
+    });
+    this.setState({
+      mainPhotoIndex: Number(index)
+    });
+  }
+
+  findImageId(img) {
+    let start = img.indexOf('-');
+    let end = img.indexOf('?') + 1;
+    return img.slice(start, end);
+  }
+
+  advanceMainPhoto() {
+    this.state.mainPhotoIndex === this.state.photos.length - 1 ? this.setState({ mainPhotoIndex: 0}) : this.setState({ mainPhotoIndex: this.state.mainPhotoIndex + 1});
+  }
+
+  reverseMainPhoto() {
+    this.state.mainPhotoIndex === 0 ? this.setState({ mainPhotoIndex: this.state.photos.length - 1}) : this.setState({ mainPhotoIndex: this.state.mainPhotoIndex - 1});
+  }
+
+  advanceThumbnails(incrementer) {
+    let copyState = this.state.photos.slice(0);
+    let visibleThumbnails = copyState.splice(this.state.thumbnailIndex + incrementer, 5);
+    this.setState({ thumbnailSlice: visibleThumbnails, thumbnailIndex: this.state.thumbnailIndex + incrementer });
+  }
+
+  reverseThumbnails(decrementer) {
+    let copyState = this.state.photos.slice(0);
+    let visibleThumbnails = copyState.splice(this.state.thumbnailIndex - decrementer, 5);
+    this.setState({ thumbnailSlice: visibleThumbnails, thumbnailIndex: this.state.thumbnailIndex - decrementer });
+  }
+
+  handleLeftArrow () {
+    let mainId = this.findImageId(this.state.photos[this.state.mainPhotoIndex].url);
+    let thumbnailId = this.findImageId(this.state.thumbnailSlice[0].url);
+    if (mainId === thumbnailId) {
+      this.reverseThumbnails(1);
+    }
+    this.reverseMainPhoto();
+  }
+
+  handleRightArrow () {
+    let mainId = this.findImageId(this.state.photos[this.state.mainPhotoIndex].url);
+    let thumbnailId = this.findImageId(this.state.thumbnailSlice[this.state.thumbnailSlice.length - 1].url);
+    if (mainId === thumbnailId) {
+      this.advanceThumbnails(1);
+    }
+    this.advanceMainPhoto();
+  }
+
+  handleDownArrow (e) {
+    this.advanceThumbnails(1);
+  }
+
+  handleUpArrow (e) {
+    this.reverseThumbnails(1);
+  }
+
+  expandedView(e) {
+    this.setState({ expandedView: true});
+  }
+
+  collapsedView(e) {
+    this.setState({ expandedView: false});
+  }
+
+  zoomView(e) {
+    let image = e.target;
+    image.id = 'image-zoom-state';
+    console.log(image);
+  }
+
+  render() {
+    return (
+      this.state.expandedView ?
+        <div id='expanded-view-modal'>
+          <span onClick={this.collapsedView}>x</span>
+          <div id='expanded-image-container'>
+            {this.state.mainPhotoIndex !== 0 &&
+            <BsArrowLeftCircleFill
+              id='image-gallery-left-arrow'
+              onClick={this.handleLeftArrow}/>}
+            {this.state.mainPhotoIndex !== this.state.photos.length - 1 &&
+          <BsArrowRightCircleFill
+            id='image-gallery-right-arrow'
+            onClick={this.handleRightArrow} />}
+            <img src={this.state.photos[this.state.mainPhotoIndex].url}></img>
+            <Thumbnails
+              photos={this.state.thumbnailSlice}
+              mainPhotoUrl={this.state.photos[this.state.mainPhotoIndex].thumbnail_url}
+              mainIndex={this.state.mainPhotoIndex}
+              changePhoto={this.changeSelectedPhoto}/>
+            {this.findImageId(this.state.thumbnailSlice[0].url) !== this.findImageId(this.state.photos[0].url) && <IoIosArrowUp
+              onClick={this.handleUpArrow}
+              id='thumbnail-gallery-up-arrow'/>}
+            {this.state.thumbnailSlice[this.state.thumbnailSlice.length - 1] !== this.state.photos[this.state.photos.length - 1] &&
+          <IoIosArrowDown
+            onClick={this.handleDownArrow}
+            id='thumbnail-gallery-down-arrow'/>}
+          </div>
+        </div> :
+        <div id='image-gallery'>
+          {this.state.mainPhotoIndex !== 0 &&
+          <BsArrowLeftCircleFill
+            id='image-gallery-left-arrow'
+            onClick={this.handleLeftArrow}/>}
+          {this.state.mainPhotoIndex !== this.state.photos.length - 1 &&
+          <BsArrowRightCircleFill
+            id='image-gallery-right-arrow'
+            onClick={this.handleRightArrow} />}
+          <img data-testid="main-image" id='main-image' onClick={this.expandedView} src={this.state.photos[this.state.mainPhotoIndex].url}></img>
+          <Thumbnails
+            photos={this.state.thumbnailSlice}
+            mainPhotoUrl={this.state.photos[this.state.mainPhotoIndex].thumbnail_url}
+            mainIndex={this.state.mainPhotoIndex}
+            changePhoto={this.changeSelectedPhoto}/>
+          {this.findImageId(this.state.thumbnailSlice[0].url) !== this.findImageId(this.state.photos[0].url) && <IoIosArrowUp
+            onClick={this.handleUpArrow}
+            id='thumbnail-gallery-up-arrow'/>}
+          {this.state.thumbnailSlice[this.state.thumbnailSlice.length - 1] !== this.state.photos[this.state.photos.length - 1] &&
+          <IoIosArrowDown
+            onClick={this.handleDownArrow}
+            id='thumbnail-gallery-down-arrow'/>}
+        </div>
+    );
+
+  }
+}
 
 export default ImageCarousel;
