@@ -243,6 +243,7 @@
   width: 100%;
 }
 .zoom {
+  overflow: hidden;
   transform: scale(2.5);
 }
 

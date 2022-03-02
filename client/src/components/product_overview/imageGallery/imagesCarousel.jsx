@@ -134,6 +134,12 @@ class ImageCarousel extends React.Component {
     });
   }
 
+  extractLocation(e) {
+    const x = e.clientX;
+    const y = e.clientY;
+    console.log('pixel coordinates', x, y);
+  }
+
   render() {
     return (
       this.state.expandedView ?
@@ -148,7 +154,7 @@ class ImageCarousel extends React.Component {
           <BsArrowRightCircleFill
             id='image-gallery-right-arrow'
             onClick={this.handleRightArrow} />}
-            <img onClick={this.toggleZoom.bind(this)}src={this.state.photos[this.state.mainPhotoIndex].url}></img>
+            <img onMouseMove={this.extractLocation.bind(this)} onClick={this.toggleZoom.bind(this)}src={this.state.photos[this.state.mainPhotoIndex].url}></img>
 
             <Thumbnails
               photos={this.state.thumbnailSlice}
