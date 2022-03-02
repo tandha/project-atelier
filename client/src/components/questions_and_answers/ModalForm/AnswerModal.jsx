@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import {IoIosCloseCircleOutline} from 'react-icons/io';
-import config from './config.js';
+import config from '../../../../../server/config.js';
 
 const AnswerModal = (props) => {
   if (props.showAnswerModal === false) {
@@ -50,7 +50,7 @@ const uploadFile = (e) => {
     axios({
       headers: { 'content-type': 'multipart/form-data' },
       method: 'post',
-      url: `https://api.imgbb.com/1/upload?key=${config.API_KEY}`,
+      url: `https://api.imgbb.com/1/upload?key=${config.IMG_KEY}`,
       data: bodyFormData
     }).then((res) => {
       img.src = res.data.data.url;
