@@ -11,7 +11,7 @@ class Cart extends React.Component {
       availableSizes: [],
       availableQuantities: [],
       selectedSize: 'tbd',
-      selectedQuantity: 'tbd',
+      selectedQuantity: '-',
     };
   }
 
@@ -56,6 +56,12 @@ class Cart extends React.Component {
       }
     }
     this.setAvailableQuantities(quantities);
+    this.setState({ selectedQuantity: 1 });
+
+    console.log('hheeeelooooooooOOOW');
+    let quantitySelectElement = document.getElementById('quantity').value = '1';
+    console.log(quantitySelectElement);
+
   }
 
   setAvailableQuantities(quantities) {
@@ -65,7 +71,6 @@ class Cart extends React.Component {
   setSizeSelection(e) {
     let selectedSize = e.target.value;
     this.setState( {selectedSize}, () => {
-      //Once a size has been selected quantity can be generated
       this.determineQuantityFromSelectedSize();
     } );
   }
@@ -87,7 +92,6 @@ class Cart extends React.Component {
     for (let key in skus) {
       if (skus[key].size === this.state.selectedSize) {
         sku = key;
-        console.log('should be the sku', key);
       }
     }
     let promises = [];
@@ -98,7 +102,6 @@ class Cart extends React.Component {
     Promise.all(promises)
       .then((res) => {
         console.log('Success posting cart to API');
-        axios.get('/cart').then(() => { console.log('What is in the cart', res); });
       })
       .catch((err) => {
         console.log('Error posting cart to API', err);
@@ -117,8 +120,8 @@ class Cart extends React.Component {
       <div id='cart'>
         <form id='cart-form' onSubmit={this.cartHandler.bind(this)}>
           <div data-testid='select-size' id='select-size'>
-            <select onChange={this.setSizeSelection.bind(this)} >
-              <option>SELECT SIZE</option>
+            <select required onChange={this.setSizeSelection.bind(this)} >
+              <option value="">SELECT SIZE</option>
               {
                 this.state.availableSizes.map((size, i) => {
                   return <Option key={i} type={'size'} option={size}/>;
@@ -129,10 +132,12 @@ class Cart extends React.Component {
           </div>
           <div data-testid='select-quantity' id='select-quantity'>
             <select onChange={this.setQuantitySelection.bind(this)}>
-              <option>-</option>
+              <option id='quantity'>{this.state.selectedQuantity}</option>
               {
                 this.state.availableQuantities.map((qty) => {
-                  return <Option key={qty} type={'quantity'} option={qty}/>;
+                  if (qty !== 1) {
+                    return <Option key={qty} type={'quantity'} option={qty}/>;
+                  }
                 })
               }
             </select>
