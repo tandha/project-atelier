@@ -14,7 +14,8 @@ class ImageCarousel extends React.Component {
       thumbnailSlice: [
         this.props.selectedStyle.photos[0],
       ],
-      expandedView: false
+      expandedView: false,
+      zoomView: false
     };
     this.changeSelectedPhoto = this.changeSelectedPhoto.bind(this);
     this.handleLeftArrow = this.handleLeftArrow.bind(this);
@@ -121,10 +122,16 @@ class ImageCarousel extends React.Component {
     this.setState({ expandedView: false});
   }
 
-  zoomView(e) {
+  toggleZoom(e) {
     let image = e.target;
-    image.id = 'image-zoom-state';
-    console.log(image);
+    this.setState({ zoomView: !this.state.zoomView });
+    if (this.state.zoomView) {
+      image.id = 'image-zoom-state';
+    } else {
+      this.setState({ expandedView: false });
+      image.id = '';
+    }
+
   }
 
   render() {
@@ -141,7 +148,7 @@ class ImageCarousel extends React.Component {
           <BsArrowRightCircleFill
             id='image-gallery-right-arrow'
             onClick={this.handleRightArrow} />}
-            <img src={this.state.photos[this.state.mainPhotoIndex].url}></img>
+            <img onClick={this.toggleZoom.bind(this)}src={this.state.photos[this.state.mainPhotoIndex].url}></img>
             <Thumbnails
               photos={this.state.thumbnailSlice}
               mainPhotoUrl={this.state.photos[this.state.mainPhotoIndex].thumbnail_url}

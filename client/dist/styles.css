@@ -242,6 +242,9 @@
   text-align: center;
   width: 100%;
 }
+#image-zoom-state{
+  transform:scale(2.5);
+}
 
 #cart {
   display: inline;
