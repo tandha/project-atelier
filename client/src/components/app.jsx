@@ -6,6 +6,7 @@ import ProductOverview from './product_overview/overview.jsx';
 import RelatedItemsOutfitCreation from './related_items_outfit_creation/related_items&outfit.jsx';
 import QuestionsAndAnswers from './questions_and_answers/q&a.jsx';
 import RatingsAndReviews from './ratings_and_reviews/ratings&reviews.jsx';
+import RelatedItemsAndMyOutfits from './related_items_outfit_creation/related_items&outfit.jsx';
 import AddInteractionsLogger from './interactions.jsx';
 const ProductOverviewWithLogger = AddInteractionsLogger(ProductOverview);
 const RelatedItemsOutfitCreationWithLogger = AddInteractionsLogger(RelatedItemsOutfitCreation);
@@ -24,12 +25,11 @@ class App extends React.Component {
       currentProductInOutfit: false,
       starRating: 0
     };
+    this.initialId = 64624;
   }
-  // null values option for testing: 64621
+
   componentDidMount() {
-    Promise.all([this.getProduct(64622),
-      this.getStyles(64622),
-      this.getOutfits()])
+    Promise.all([this.getProduct(this.initialId), this.getStyles(this.initialId), this.getOutfits()])
       .then((res) => {
         this.setState({
           product: res[0].data.data,
@@ -69,13 +69,15 @@ class App extends React.Component {
   }
 
   toggleOutfit(id) {
-    console.log(this.state.currentProductInOutfit);
     if (!this.state.currentProductInOutfit) {
       localStorage.setItem(id, id);
-      this.setState({ myOutfits: this.getOutfits(), currentProductInOutfit: true });
+      this.setState({ myOutfits: this.getOutfits(), currentProductInOutfit: true }, () => {
+        console.log(this.state.myOutfits);
+      });
     } else {
       localStorage.removeItem(id, id);
-      this.setState({ myOutfits: this.getOutfits(), currentProductInOutfit: false });
+      this.setState({ myOutfits: this.getOutfits(), currentProductInOutfit: false }, () =>{
+      });
     }
   }
 
@@ -97,7 +99,11 @@ class App extends React.Component {
           toggleOutfit={this.toggleOutfit.bind(this)}
         />
 
-        <RelatedItemsOutfitCreationWithLogger/>
+        <RelatedItemsOutfitCreationWithLogger
+          product={this.state.product}
+          myOutfits={this.state.myOutfits}
+          toggleOutfit={this.toggleOutfit.bind(this)}
+          starRating={this.state.starRating}/>
 
         <QuestionsAndAnswersWithLogger product={this.state.product}/>
 
