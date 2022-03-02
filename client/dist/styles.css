@@ -230,9 +230,9 @@
 
 #expanded-image-container, #zoom-image-container{
   position: absolute;
-  height: 900px;
+  height: 1200px;
   overflow: hidden;
-  width: 900px;
+  width: 1200px;
   z-index: 2;
 }
 
@@ -252,7 +252,17 @@
 }
 
 #zoom-image-container:hover img {
-  transform: scale(2);
+  transform: scale(2.5);
+}
+
+#expand-view-close {
+  color: white;
+  position: absolute;
+  top: 5px;
+  left: 1180px;
+}
+#expand-view-close:hover {
+  cursor: pointer;
 }
 
 #cart {

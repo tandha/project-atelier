@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Thumbnails from './imageThumbnails.jsx';
 import { IoMdArrowBack, IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from 'react-icons/bs';
+import { AiOutlineClose } from 'react-icons/ai';
 
 class ImageCarousel extends React.Component {
   constructor(props) {
@@ -144,8 +145,8 @@ class ImageCarousel extends React.Component {
     return (
       this.state.expandedView ?
         <div id='expanded-view-modal'>
-          <span onClick={this.collapsedView}>x</span>
           <div id='expanded-image-container'>
+            <span onClick={this.collapsedView}><AiOutlineClose id='expand-view-close'/></span>
             {this.state.mainPhotoIndex !== 0 &&
             <BsArrowLeftCircleFill
               id='image-gallery-left-arrow'
