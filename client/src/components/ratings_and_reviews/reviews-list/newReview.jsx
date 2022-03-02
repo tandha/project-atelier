@@ -1,10 +1,43 @@
 import React from 'react';
 import axios from 'axios';
+import { IMG_KEY } from '../../../../../server/config.js';
 
 const NewReview = (props) => {
 
   const onUpload = (event) => {
     event.preventDefault();
+
+    const container = document.querySelector('#QA-preview-container');
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    const img = new Image();
+
+    reader.onload = (event) => {
+      const body = event.target.result.split(',')[1];
+      const bodyFormData = new FormData();
+      bodyFormData.append('image', body);
+
+      axios({
+        headers: { 'content-type': 'multipart/form-data' },
+        method: 'post',
+        url: `https://api.imgbb.com/1/upload?key=${config.IMG_KEY}`,
+        data: bodyFormData
+      }).then((res) => {
+        img.src = res.data.data.url;
+      }).catch((err)=> {
+        console.log('err getting img url', err);
+      });
+
+      img.id = 'QA-preview';
+      img.height = 100;
+      container.appendChild(img);
+    };
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+    if (container.childElementCount >= 4) {
+      document.querySelector('#upload-answer-photo').style.visibility = 'hidden';
+    }
   };
 
   const onSubmit = (event) => {
@@ -169,11 +202,12 @@ const NewReview = (props) => {
             For authentication reasons, you will not be emailed
           </label>
           <br></br><br></br>
-
-          <button>Submit</button>
-
+          <div id='new-review-buttons'>
+            <button>Submit</button>
+            <button onClick={onClose}>Close</button>
+          </div>
         </form>
-        <button onClick={onClose}>Close</button>
+
       </div>
     </div>
   );

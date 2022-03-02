@@ -17,7 +17,8 @@ class List extends React.Component {
       listMaxed: false,
       currentSort: 'relevant',
       currentFilter: [],
-      renderModal: false
+      renderModal: false,
+      currentID: 64620
     };
   }
 
@@ -32,6 +33,11 @@ class List extends React.Component {
         this.updateDisplayedReviews();
       });
     }
+    if (this.props.productID !== this.state.currentID) {
+      this.setState({ currentID: this.props.productID }, () => {
+        this.getReviews();
+      });
+    }
   }
 
   getReviews() {
@@ -42,7 +48,7 @@ class List extends React.Component {
         'page': 1,
         'count': 100000,
         'sort': this.state.currentSort,
-        'product_id': this.props.productID
+        'product_id': this.state.currentID
       }
     }).then((response) => {
       this.setState({ reviews: response.data.data.results }, () => {
@@ -61,7 +67,7 @@ class List extends React.Component {
     if (currentFilter.length === 0) {
       displayedReviews = reviews.slice(0, this.state.listLength);
       displayedReviews.length >= reviews.length ? listMaxed = true : listMaxed = false;
-      this.setState({ displayedReviews, listMaxed });
+      this.setState({ displayedReviews, listMaxed }, () => document.getElementById('review-list-buttons').scrollIntoView());
 
     } else {
       reviews.forEach(review => {
@@ -71,7 +77,7 @@ class List extends React.Component {
       });
       displayedReviews = displayedReviews.slice(0, this.state.listLength);
       displayedReviews.length >= reviews.length ? listMaxed = true : listMaxed = false;
-      this.setState({ displayedReviews, listMaxed });
+      this.setState({ displayedReviews, listMaxed }, () => document.getElementById('review-list-buttons').scrollIntoView());
     }
   }
 
@@ -113,7 +119,7 @@ class List extends React.Component {
             chars={this.props.chars}
             getReviews={this.getReviews.bind(this)}
             hideModal={this.hideModal.bind(this)}/>
-          : <div></div>}
+          : null}
 
       </div>)
     ;

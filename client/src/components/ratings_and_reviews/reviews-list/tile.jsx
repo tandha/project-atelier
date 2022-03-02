@@ -69,9 +69,12 @@ class Tile extends React.Component {
           <span>{this.props.review.body}</span>
         </div>
 
-        {/* <div className='review-tile-photos'>
-          <span>Photos: None</span>
-        </div> */}
+        <div className='review-tile-photos'>
+          {
+            this.props.review.photos.length === 0 ? null
+              : this.props.review.photos.map(photo => <img className='review-image' src={photo.url} />)
+          }
+        </div>
 
         <div className='review-tile-recommend'>
           <span>

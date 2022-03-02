@@ -31,7 +31,7 @@ const Styles = (props) => {
           return (
             <React.Fragment key={index}>
               <div className='chars-name'>{style}</div>
-              <VscTriangleDown size={28} color={'gray'} className='chars-icon'
+              <VscTriangleDown size={28} color={'rgb(90, 90, 90)'} className='chars-icon'
                 style={{left: (45 * Number.parseFloat(styleVals[index])).toFixed()}}
               />
               <div className='chars-bar'></div>
@@ -39,7 +39,6 @@ const Styles = (props) => {
                 <span className='char-left'>{charsScale[style][0]}</span>
                 <span className='char-right'>{charsScale[style][4]}</span>
               </div>
-
             </React.Fragment>
           );
         })

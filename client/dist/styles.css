@@ -344,6 +344,7 @@
   margin-top: 0px;
   display: flex;
   font-size: 19px;
+  justify-content: flex-start;
 }
 
 #ratings-breakdown {
@@ -361,6 +362,10 @@
 #average-stars {
   margin-left: 13px;
   margin-bottom: 5px;
+}
+
+#average-stars .star-rating-star {
+  color: rgb(90, 90, 90);
 }
 
 #recommended-percent {
@@ -473,15 +478,19 @@
 }
 
 #review-list {
+  position: absolute;
+  left: 300px;
+  width: 650px;
 }
 
 #reviews-sort-dropdown {
   border: 0;
   text-decoration: underline;
+  cursor: pointer;
 }
 
 #review-tiles {
-  max-height: 700px;
+  max-height: 900px;
   overflow-y: auto;
 }
 
@@ -489,6 +498,10 @@
   margin-top: 25px;
   display: flex;
   justify-content: space-between;
+}
+
+.review-tile-rating .star-rating-star {
+  color: rgb(90, 90, 90);
 }
 
 .review-tile-name-date {
@@ -508,11 +521,18 @@
 }
 
 .review-tile-body {
-  font-size: 18px;
+  font-size: 15px;
+}
+
+.review-image {
+  max-height: 100px;
+  max-width: 100px;
+  margin: 10px 10px 10px 10px;
+  cursor: pointer;
 }
 
 .review-tile-recommend {
-  font-size: 18px;
+  font-size: 15px;
   margin-top: 10px;
   margin-bottom: 15px;
 }
@@ -533,6 +553,13 @@
 .review-tile-line {
   border: 1px solid;
   margin-top: 15px;
+}
+
+#review-list-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+  margin-top: 25px;
 }
 
 #new-review-modal {
@@ -560,7 +587,12 @@
   font-size: 30px;
 }
 
-#note {
+#new-review-note {
   font-size: 15px;
   font-style: italic;
+}
+
+#new-review-buttons {
+  display: flex;
+  justify-content: space-between;
 }

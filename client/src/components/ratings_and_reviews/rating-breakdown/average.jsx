@@ -12,9 +12,11 @@ const Average = (props) => {
           <StarRating value={props.starRating} />
         </div>
       </div>
-      <div id='recommended-percent'>
-        {props.recommendedPercent}% of reviews recommend this product
-      </div>
+      {
+        !isNaN(props.recommendedPercent)
+          ? <div id='recommended-percent'>{props.recommendedPercent}% of reviews recommend this product</div>
+          : null
+      }
     </React.Fragment>
   );
 };
