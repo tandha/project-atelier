@@ -170,7 +170,10 @@ describe('Test on Modal Form Features', () => {
     };
     axios.mockResolvedValueOnce({data: {data: {results: props.questions}}});
   });
-  afterEach(cleanup);
+  afterEach(() => {
+    cleanup;
+    jest.clearAllMocks();
+  });
 
   test('Test on click add question', () => {
     render(<QuestionsAndAnswers {...props}/>);
@@ -224,8 +227,37 @@ describe('Test on Modal Form Features', () => {
 
   });
 
-  test('Test on answer modal', () => {
+  test.only('Test on answer modal', () => {
+    const testData = {body: 'Not sure', nickname: 'tobi', email: 'tobi@email.com', photo: 'https://i.ibb.co/xXxgndP/30bfbeec39a9.jpg'};
+
+    jest.clearAllMocks();
+    axios.mockResolvedValueOnce({data: {data: {url: testData.photo}}});
+
     render(<AnswerModal productName={props.productName} question={props.questions[1]}/>);
+    const testBody = document.querySelector('#answer-body');
+    const testNickname = document.querySelector('#answer-nickname');
+    const testEmail = document.querySelector('#answer-email');
+    const uploadBtn = document.querySelector('#upload-answer-photo');
+
+    fireEvent.change(testBody, { target: { value: testData.body} });
+    fireEvent.change(testNickname, { target: { value: testData.nickname} });
+    fireEvent.change(testEmail, { target: { value: testData.email} });
+    fireEvent.change(uploadBtn, 'file1.jpg');
+
+    expect(testBody.value).toBe(testData.body);
+    expect(testNickname.value).toBe(testData.nickname);
+    expect(testEmail.value).toBe(testData.email);
+
+    // expect(uploadBtn).toHaveStyle('visibility: visible;');
+
+    // const container = document.querySelector('#QA-preview-container');
+    // const img = new Image();
+    // container.appendChild(img);
+    // container.appendChild(img);
+    // container.appendChild(img);
+    // container.appendChild(img);
+
+    // expect(uploadBtn).toHaveStyle('visibility: hidden');
   });
 });
 
