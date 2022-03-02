@@ -126,9 +126,9 @@ class ImageCarousel extends React.Component {
     let image = e.target;
     this.setState({ zoomView: !this.state.zoomView }, () => {
       if (this.state.zoomView) {
-        document.getElementById('expanded-image-container').className = 'zoom';
+        document.getElementById('expanded-image-container').id = 'zoom-image-container';
       } else {
-        document.getElementById('expanded-image-container').className = '';
+        document.getElementById('zoom-image-container').id = 'expanded-image-container';
         this.setState({ expandedView: false });
       }
     });
