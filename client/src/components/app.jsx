@@ -59,7 +59,6 @@ class App extends React.Component {
 
   getOutfits() {
     let localStorageOutfits = Object.keys(localStorage);
-    console.log(localStorageOutfits);
     return localStorageOutfits;
   }
 
@@ -72,7 +71,6 @@ class App extends React.Component {
     } else {
       localStorage.removeItem(id, id);
       this.setState({ myOutfits: this.getOutfits(), currentProductInOutfit: false }, () =>{
-        console.log(this.state.myOutfits);
       });
     }
   }
