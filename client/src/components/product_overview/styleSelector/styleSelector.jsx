@@ -5,7 +5,8 @@ const StyleSelector = (props) => {
 
   return (
     <div id='selected-styles'>
-      <div id='selected-style-name'><strong>Style</strong> {props.name}</div>
+      <strong>{'Style > '}</strong>
+      <span data-testid="selected-style-name" id='selected-style-name'>{props.name}</span>
       <div id='styles-thumbnails-container'>
         <StyleThumbnail changeStyle={props.changeStyle} styles={props.styles} />
       </div>
