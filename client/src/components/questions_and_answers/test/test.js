@@ -24,41 +24,67 @@ axios.defaults.headers['Authorization'] = API_KEY;
  * Render tests
  */
 describe('Q&A render tests', () => {
-  var props = {};
+  let props = {};
   beforeEach(() => {
     props = {
       product: exampleQuestions.product,
       questions: exampleQuestions.results
     };
   });
-
   afterEach(cleanup);
 
   test('render Q&A main page', () => {
     axios.mockResolvedValueOnce({data: {data: {results: props.questions}}});
     render(<QuestionsAndAnswers {...props}/>);
+    const container = document.querySelector('#QA-container');
+    const btn = screen.getByText('ADD A QUESTION');
+    expect(container).toBeInTheDocument();
+    expect(btn).toBeInTheDocument();
   });
 
   test('render searchBar component', () => {
-    render(<SearchBar/>);
+    const {queryByPlaceholderText} = render(<SearchBar/>);
+    const searchInput = queryByPlaceholderText('HAVE A QUESTION? SEARCH FOR ANSWERS...');
+    expect(searchInput).toBeInTheDocument();
   });
 
   test('render QuestionList component', () => {
-    render(<QuestionList {...props}/>);
+    const {rerender} = render(<QuestionList questions={props.questions} questionNumbers={2}/>);
+    const list = screen.getByRole('qlist');
+    expect(list.children.length).toEqual(2);
+
+    rerender(<QuestionList questions={props.questions} questionNumbers={4}/>);
+    const newlist = screen.getByRole('qlist');
+    expect(newlist.children.length).toEqual(4);
   });
 
   test('render Question component', () => {
     render(<Question question={props.questions[1]}/>);
+    const container = document.querySelector('#each-question');
+    const btn = screen.getAllByText('Add Answer')[0];
+    expect(container).toBeInTheDocument();
+    expect(btn).toBeInTheDocument();
   });
 
   test('render AnswerList component', () => {
-    const answerArray = Object.values(props.questions[1].answers);
-    render(<AnswerList answers={answerArray} answerNumbers={answerArray.length}/>);
+    const answerArray = Object.values(props.questions[0].answers);
+    const {rerender} = render(<AnswerList answers={answerArray} answerNumbers={2}/>);
+    const list = screen.getByRole('alist');
+    expect(list.children.length).toEqual(2);
+
+    rerender(<AnswerList answers={answerArray} answerNumbers={4}/>);
+    const newList = screen.getByRole('alist');
+    expect(newList.children.length).toEqual(4);
   });
 
   test('render Answer component', () => {
     const answerArray = Object.values(props.questions[1].answers);
     render(<Answer answer={answerArray[0]}/>);
+    const container = document.querySelector('#each-answer');
+    const helpfulBtn = screen.getAllByRole('help')[0];
+    const reportBtn = screen.getAllByText('Report')[0];
+    expect(container).toBeInTheDocument();
+    expect(helpfulBtn).toBeInTheDocument();
   });
 
   test('render Answer photo form component', () => {
@@ -81,93 +107,88 @@ describe('Q&A render tests', () => {
  */
 
 describe('Test on search bar component', () => {
-
   test('test on searchBar component', () => {
     let props = {
       product: exampleQuestions.product,
       questions: exampleQuestions.results
     };
+    jest.clearAllMocks();
     axios.mockResolvedValueOnce({data: {data: {results: props.questions}}});
     const {queryByPlaceholderText} = render(<QuestionsAndAnswers {...props}/>);
     const searchInput = queryByPlaceholderText('HAVE A QUESTION? SEARCH FOR ANSWERS...');
     fireEvent.change(searchInput, { target: { value: 'test'} });
     expect(searchInput.value).toBe('test');
   });
-
 });
 
 describe('Test on Question Features', () => {
-
-  var props = {};
+  let props = {};
   beforeEach(() => {
     props = {
       product: exampleQuestions.product,
       questions: exampleQuestions.results
     };
+    jest.clearAllMocks();
   });
-
-  test('test on QuestionList component', () => {
-    const {rerender} = render(<QuestionList questions={props.questions} questionNumbers={2}/>);
-    const list = screen.getByRole('qlist');
-    expect(list.children.length).toEqual(2);
-
-    rerender(<QuestionList questions={props.questions} questionNumbers={4}/>);
-    const newlist = screen.getByRole('qlist');
-    expect(newlist.children.length).toEqual(4);
-    // test on sort by helpfulness
-  });
+  afterEach(cleanup);
 
   test('test on Question component', () => {
     render(<Question question={props.questions[1]}/>);
-    // test on click more answers event
-  });
-
-});
-
-describe('Test on Answer Features', () => {
-  var props = {};
-  beforeEach(() => {
-    props = {
-      product: exampleQuestions.product,
-      questions: exampleQuestions.results
-    };
-  });
-
-  test('render AnswerList component', () => {
-    const answerArray = Object.values(props.questions[1].answers);
-    render(<AnswerList answers={answerArray} answerNumbers={answerArray.length}/>);
-  });
-
-  test('render Answer component', () => {
-    const answerArray = Object.values(props.questions[1].answers);
-    render(<Answer answer={answerArray[0]}/>);
-
-    // test on sort by helpfulness
-
-    // test on click helpful event
     // const helpfulBtn = screen.getByRole('help');
     // expect(helpfulBtn).not.toBeDisabled();
     // fireEvent.click(helpfulBtn);
     // expect(helpfulBtn).toBeDisabled();
 
-    // test on click report event
   });
 
-  test('render Answer photo form component', () => {
-    const answerArray = Object.values(props.questions[2].answers);
-    const photo = answerArray[0].photos[0];
-    render(<AnswerPhoto photo={photo}/>);
-  });
 });
 
-describe('Test on Modal Form Features', () => {
-
-  var props = {};
+describe('Test on Answer Features', () => {
+  let props = {};
   beforeEach(() => {
     props = {
       product: exampleQuestions.product,
       questions: exampleQuestions.results
     };
+    jest.clearAllMocks();
+  });
+  afterEach(cleanup);
+
+  test('test on click more answers', () => {
+    const answerArray = Object.values(props.questions[1].answers);
+
+    const {rerender} = render(<Question question={props.questions[1]}/>);
+    const list = screen.getByRole('alist');
+    expect(list.children.length).toEqual(2);
+
+    const moreBtn = screen.getByText('LOAD MORE ANSWERS');
+    fireEvent.click(moreBtn);
+
+    rerender(<Question question={props.questions[1]}/>);
+    const collapseBtn = screen.getByText('COLLAPSE ANSWERS');
+    expect(collapseBtn).toBeInTheDocument();
+
+    const newlist = screen.getByRole('alist');
+    expect(newlist.children.length).toEqual(answerArray.length);
+  });
+
+  test('test answer interactions', () => {
+    const answerArray = Object.values(props.questions[1].answers);
+    const {rerender} = render(<Answer answer={answerArray[1]}/>);
+
+  });
+
+});
+
+describe.only('Test on Modal Form Features', () => {
+
+  let props = {};
+  beforeEach(() => {
+    props = {
+      product: exampleQuestions.product,
+      questions: exampleQuestions.results
+    };
+    jest.clearAllMocks();
     axios.mockResolvedValueOnce({data: {data: {results: props.questions}}});
   });
   afterEach(() => {
@@ -224,10 +245,9 @@ describe('Test on Modal Form Features', () => {
     fireEvent.click(btn);
     const form = document.querySelector('#new-answer-modal');
     expect(form).toBeInTheDocument();
-
   });
 
-  test.only('Test on answer modal', () => {
+  test('Test on answer modal', () => {
     const testData = {body: 'Not sure', nickname: 'tobi', email: 'tobi@email.com', photo: 'https://i.ibb.co/xXxgndP/30bfbeec39a9.jpg'};
 
     jest.clearAllMocks();
@@ -247,17 +267,23 @@ describe('Test on Modal Form Features', () => {
     expect(testBody.value).toBe(testData.body);
     expect(testNickname.value).toBe(testData.nickname);
     expect(testEmail.value).toBe(testData.email);
+  });
 
-    // expect(uploadBtn).toHaveStyle('visibility: visible;');
+  test('Test on submit add answer', () => {
+    const testData = {body: 'Not sure', nickname: 'tobi', email: 'tobi@email.com', images: []};
 
-    // const container = document.querySelector('#QA-preview-container');
-    // const img = new Image();
-    // container.appendChild(img);
-    // container.appendChild(img);
-    // container.appendChild(img);
-    // container.appendChild(img);
+    render(<Question question={props.questions[1]}/>);
+    const btn = screen.getByText('Add Answer');
+    fireEvent.click(btn);
 
-    // expect(uploadBtn).toHaveStyle('visibility: hidden');
+    jest.clearAllMocks();
+    axios.mockResolvedValueOnce({status: 201});
+
+    const formInput = document.querySelector('#submit-answer-form');
+    fireEvent.submit(formInput, {target: [{value: testData.body}, {value: testData.nickname}, {value: testData.email}]});
+
+    const form = document.querySelector('#new-answer-modal');
+    // expect(form).not.toBeInTheDocument();
   });
 });
 
