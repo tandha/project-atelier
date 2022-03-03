@@ -145,30 +145,36 @@ class ImageCarousel extends React.Component {
     return (
       this.state.expandedView ?
         <div id='expanded-view-modal'>
-          <div id='expanded-image-container'>
-            <span onClick={this.collapsedView}><AiOutlineClose id='expand-view-close'/></span>
-            {this.state.mainPhotoIndex !== 0 &&
-            <BsArrowLeftCircleFill
-              id='image-gallery-left-arrow'
-              onClick={this.handleLeftArrow}/>}
-            {this.state.mainPhotoIndex !== this.state.photos.length - 1 &&
-          <BsArrowRightCircleFill
-            id='image-gallery-right-arrow'
-            onClick={this.handleRightArrow} />}
-            <img onMouseMove={this.extractLocation.bind(this)} onClick={this.toggleZoom.bind(this)}src={this.state.photos[this.state.mainPhotoIndex].url}></img>
 
-            <Thumbnails
-              photos={this.state.thumbnailSlice}
-              mainPhotoUrl={this.state.photos[this.state.mainPhotoIndex].thumbnail_url}
-              mainIndex={this.state.mainPhotoIndex}
-              changePhoto={this.changeSelectedPhoto}/>
-            {this.findImageId(this.state.thumbnailSlice[0].url) !== this.findImageId(this.state.photos[0].url) && <IoIosArrowUp
-              onClick={this.handleUpArrow}
-              id='thumbnail-gallery-up-arrow'/>}
-            {this.state.thumbnailSlice[this.state.thumbnailSlice.length - 1] !== this.state.photos[this.state.photos.length - 1] &&
-          <IoIosArrowDown
-            onClick={this.handleDownArrow}
-            id='thumbnail-gallery-down-arrow'/>}
+          <div id='expanded-image-container'>
+            <img onMouseMove={this.extractLocation.bind(this)} onClick={this.toggleZoom.bind(this)}src={this.state.photos[this.state.mainPhotoIndex].url}></img>
+            {!this.state.zoomView &&
+            <div>
+              <span onClick={this.collapsedView}><AiOutlineClose id='expand-view-close'/></span>
+              {this.state.mainPhotoIndex !== 0 &&
+              <BsArrowLeftCircleFill
+                id='image-gallery-left-arrow'
+                onClick={this.handleLeftArrow}/>}
+              {this.state.mainPhotoIndex !== this.state.photos.length - 1 &&
+            <BsArrowRightCircleFill
+              id='image-gallery-right-arrow'
+              onClick={this.handleRightArrow} />}
+              <Thumbnails
+                expandedView={this.state.expandedView}
+                photos={this.state.thumbnailSlice}
+                mainPhotoUrl={this.state.photos[this.state.mainPhotoIndex].thumbnail_url}
+                mainIndex={this.state.mainPhotoIndex}
+                changePhoto={this.changeSelectedPhoto}/>
+              {this.findImageId(this.state.thumbnailSlice[0].url) !== this.findImageId(this.state.photos[0].url) && <IoIosArrowUp
+                onClick={this.handleUpArrow}
+                id='thumbnail-gallery-up-arrow'/>}
+              {this.state.thumbnailSlice[this.state.thumbnailSlice.length - 1] !== this.state.photos[this.state.photos.length - 1] &&
+            <IoIosArrowDown
+              onClick={this.handleDownArrow}
+              id='thumbnail-gallery-down-arrow'/>}
+
+            </div> }
+
           </div>
         </div> :
         <div id='image-gallery'>

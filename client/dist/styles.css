@@ -247,12 +247,9 @@
 #zoom-image-container {
   overflow: hidden;
 }
-#zoom-image-container img {
-  transition:1s ease-in-out;
-}
 
-#zoom-image-container:hover img {
-  transform: scale(2.5);
+#zoom-image-container img {
+  transform: scale(2.5) translate(200px, 0px);
 }
 
 #expand-view-close {
@@ -263,6 +260,10 @@
 }
 #expand-view-close:hover {
   cursor: pointer;
+}
+
+.expanded-view-true {
+  opacity: 0%;
 }
 
 #cart {
