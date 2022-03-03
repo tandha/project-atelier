@@ -7,8 +7,8 @@ const NewReview = (props) => {
   const onUpload = (event) => {
     event.preventDefault();
 
-    const container = document.querySelector('#QA-preview-container');
-    const file = e.target.files[0];
+    const container = document.querySelector('#new-review-photos-preview');
+    const file = event.target.files[0];
     const reader = new FileReader();
     const img = new Image();
 
@@ -20,28 +20,30 @@ const NewReview = (props) => {
       axios({
         headers: { 'content-type': 'multipart/form-data' },
         method: 'post',
-        url: `https://api.imgbb.com/1/upload?key=${config.IMG_KEY}`,
+        url: `https://api.imgbb.com/1/upload?key=${IMG_KEY}`,
         data: bodyFormData
       }).then((res) => {
         img.src = res.data.data.url;
       }).catch((err)=> {
         console.log('err getting img url', err);
       });
-
-      img.id = 'QA-preview';
-      img.height = 100;
-      container.appendChild(img);
     };
+
+    img.className = 'new-review-photo';
+    img.height = 100;
+    container.appendChild(img);
+
     if (file) {
       reader.readAsDataURL(file);
     }
     if (container.childElementCount >= 4) {
-      document.querySelector('#upload-answer-photo').style.visibility = 'hidden';
+      document.querySelector('#new-review-photos').style.visibility = 'hidden';
     }
   };
 
   const onSubmit = (event) => {
     event.preventDefault();
+
     let starRating = document.querySelector('input[name="star-rating"]:checked').value;
     let recommended = document.querySelector('input[name="recommend"]:checked').value;
     let summary = document.querySelector('input[name="summary"]').value;
@@ -49,10 +51,14 @@ const NewReview = (props) => {
     let nickname = document.querySelector('input[name="nickname"]').value;
     let email = document.querySelector('input[name="email"]').value;
 
+    let images = document.querySelectorAll('#new-review-photos-preview');
+    images = images[0].childNodes;
+    let imageURLs = [];
+    images.forEach(image => imageURLs.push(image.getAttribute('src')));
+
     recommended === 'true' ? recommended = true : recommended = false;
 
     let reviewChars = {};
-
     chars.forEach(char => {
       let rating = document.querySelector(`input[name=${char}]:checked`).value;
       reviewChars[props.chars[char].id] = parseInt(rating);
@@ -62,14 +68,14 @@ const NewReview = (props) => {
       method: 'post',
       url: '/reviews',
       data: {
-        'product_id': props.product.id,
+        'product_id': 64620, //change this
         'rating': parseInt(starRating),
         'summary': summary,
         'body': body,
         'recommend': recommended,
         'name': nickname,
         'email': email,
-        'photos': [],
+        'photos': imageURLs,
         'characteristics': reviewChars
       }
     }).then((response) => {
@@ -183,6 +189,11 @@ const NewReview = (props) => {
           <textarea id='new-review-body' name='body' rows='10'
             cols='51' minLength='51' maxLength='1000' required
             placeholder='Why did you like the product or not?'></textarea>
+          <br></br><br></br>
+
+          <label>Upload your photos</label><br></br>
+          <input id='new-review-photos' type='file' accept='image/*' multiple onChange={(e) => onUpload(e)}></input>
+          <div id='new-review-photos-preview'></div>
           <br></br><br></br>
 
           <label>Nickname</label>

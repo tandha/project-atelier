@@ -652,6 +652,14 @@
   font-size: 30px;
 }
 
+#new-review-photos-preview {
+  overflow-y: auto;
+  overscroll-behavior-block: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
 #new-review-note {
   font-size: 15px;
   font-style: italic;
