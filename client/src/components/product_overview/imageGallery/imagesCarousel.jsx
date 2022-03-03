@@ -139,14 +139,24 @@ class ImageCarousel extends React.Component {
   }
 
   extractLocation(e) {
-    const x = e.clientX;
-    const y = e.clientY;
-    this.setState({ xClient: x, yClient: y });
-    //this is not working
-    // zoomPanTranslate = {
-    //   transform: `scale(2.5) translate(${this.state.xClient}px, ${this.state.yClient}px)`
-    // };
-    console.log('pixel coordinates', x, y);
+    if (this.state.zoomView) {
+      const x = e.clientX;
+      const y = e.clientY;
+      this.setState({ xClient: x, yClient: y }, () => {
+        //This is not working
+        //Need to figure out how big the buffer should be
+        //It is moving, but not moving well
+        let trimY = this.state.yClient + 5;
+        let trimX = this.state.xClient - 5;
+
+        let image = document.getElementById('expanded-image');
+        let transformed = `scale(2.5) translate(${trimX}px, ${trimY}px)`;
+        image.style.transform = transformed;
+
+      });
+      console.log('pixel coordinates', x, y);
+
+    }
   }
 
   render() {
@@ -154,8 +164,8 @@ class ImageCarousel extends React.Component {
       this.state.expandedView ?
         <div id='expanded-view-modal'>
 
-          <div style={zoomPanTranslate} id='expanded-image-container'>
-            <img
+          <div id='expanded-image-container'>
+            <img id='expanded-image'
               onMouseMove={this.extractLocation.bind(this)}
               onClick={this.toggleZoom.bind(this)}src={this.state.photos[this.state.mainPhotoIndex].url}>
             </img>
