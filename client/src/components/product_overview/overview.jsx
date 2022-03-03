@@ -3,6 +3,8 @@ import ImageCarousel from './imageGallery/imagesCarousel.jsx';
 import Information from './productInformation/information.jsx';
 import StyleSelector from './styleSelector/styleSelector.jsx';
 import Cart from './addToCart/cart.jsx';
+import Feature from './productInformation/featureInformation.jsx';
+import Description from './productInformation/descriptionSlogan.jsx';
 
 class ProductOverview extends React.Component {
   constructor(props) {
@@ -50,6 +52,10 @@ class ProductOverview extends React.Component {
           selectedStyle={this.state.selectedStyle}
           toggleOutfit={this.props.toggleOutfit}
         />
+        <div id='slogan-description-features'>
+          <Feature features={this.props.product.features}/>
+          <Description product={this.props.product} />
+        </div>
       </div>
     );
   }

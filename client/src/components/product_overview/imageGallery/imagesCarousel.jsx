@@ -143,7 +143,7 @@ class ImageCarousel extends React.Component {
       let image = document.getElementById('expanded-image');
       let windowHeight = window.innerHeight;
       let windowWidth = window.innerWidth;
-      let imageHeight = image.clientHeight;
+      let imageHeight = image.clientHeight; //But the image is actually bigger than this?Needs to be bigger
       let imageWidth = image.clientWidth;
       let mouseX = e.pageX;
       let mouseY = e.pageY;
