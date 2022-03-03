@@ -3,9 +3,9 @@ import React from 'react';
 const Buttons = (props) => {
 
   const onMoreClick = (event) => {
-    let element = document.getElementById('review-list-buttons');
-    element.scrollIntoView();
-    props.updateLength();
+    // let element = document.getElementById('review-list-buttons');
+    // element.scrollIntoView();
+    props.updateLength(true);
   };
 
   const onAddReviewClick = (event) => {

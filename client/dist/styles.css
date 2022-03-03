@@ -646,10 +646,11 @@
   border: 1px solid #888;
   width: 550px;
   height: auto;
+  font-size: 20px;
 }
 
 #new-review-heading {
-  font-size: 30px;
+  font-size: 25px;
 }
 
 #new-review-photos-preview {

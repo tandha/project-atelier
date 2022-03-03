@@ -23,24 +23,24 @@ class List extends React.Component {
   }
 
   componentDidMount() {
-    this.getReviews();
+    this.getReviews(false);
   }
 
   componentDidUpdate() {
     if (this.state.currentFilter.length !== this.props.currentFilter.length) {
       let newFilter = this.props.currentFilter.slice();
       this.setState({ currentFilter: newFilter }, () => {
-        this.updateDisplayedReviews();
+        this.updateDisplayedReviews(false);
       });
     }
     if (this.props.productID !== this.state.currentID) {
       this.setState({ currentID: this.props.productID }, () => {
-        this.getReviews();
+        this.getReviews(false);
       });
     }
   }
 
-  getReviews() {
+  getReviews(scroll) {
     axios({
       method: 'get',
       url: '/reviews',
@@ -52,13 +52,13 @@ class List extends React.Component {
       }
     }).then((response) => {
       this.setState({ reviews: response.data.data.results }, () => {
-        this.updateDisplayedReviews();
+        this.updateDisplayedReviews(scroll);
       });
     })
       .catch((err) => console.log(err));
   }
 
-  updateDisplayedReviews() {
+  updateDisplayedReviews(scroll) {
     let displayedReviews = [];
     let listMaxed;
     let currentFilter = this.state.currentFilter;
@@ -67,8 +67,11 @@ class List extends React.Component {
     if (currentFilter.length === 0) {
       displayedReviews = reviews.slice(0, this.state.listLength);
       displayedReviews.length >= reviews.length ? listMaxed = true : listMaxed = false;
-      this.setState({ displayedReviews, listMaxed }, () => document.getElementById('review-list-buttons').scrollIntoView());
-
+      if (scroll) {
+        this.setState({ displayedReviews, listMaxed }, () => document.getElementById('review-list-buttons').scrollIntoView());
+      } else {
+        this.setState({ displayedReviews, listMaxed });
+      }
     } else {
       reviews.forEach(review => {
         if (currentFilter.includes(review.rating.toString())) {
@@ -77,7 +80,11 @@ class List extends React.Component {
       });
       displayedReviews = displayedReviews.slice(0, this.state.listLength);
       displayedReviews.length >= reviews.length ? listMaxed = true : listMaxed = false;
-      this.setState({ displayedReviews, listMaxed }, () => document.getElementById('review-list-buttons').scrollIntoView());
+      if (scroll) {
+        this.setState({ displayedReviews, listMaxed }, () => document.getElementById('review-list-buttons').scrollIntoView());
+      } else {
+        this.setState({ displayedReviews, listMaxed });
+      }
     }
   }
 
@@ -85,9 +92,9 @@ class List extends React.Component {
     this.setState({ currentSort: sort }, () => this.getReviews());
   }
 
-  updateLength() {
+  updateLength(scroll) {
     let newLength = this.state.listLength + 2;
-    this.setState({ listLength: newLength }, () => this.updateDisplayedReviews());
+    this.setState({ listLength: newLength }, () => this.updateDisplayedReviews(scroll));
   }
 
   displayModal() {
