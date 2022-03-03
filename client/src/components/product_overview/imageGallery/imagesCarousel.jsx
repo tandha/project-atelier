@@ -16,8 +16,11 @@ class ImageCarousel extends React.Component {
         this.props.selectedStyle.photos[0],
       ],
       expandedView: false,
-      zoomView: false
+      zoomView: false,
+      clientX: 0,
+      clientY: 0
     };
+
     this.changeSelectedPhoto = this.changeSelectedPhoto.bind(this);
     this.handleLeftArrow = this.handleLeftArrow.bind(this);
     this.handleRightArrow = this.handleRightArrow.bind(this);
@@ -138,6 +141,11 @@ class ImageCarousel extends React.Component {
   extractLocation(e) {
     const x = e.clientX;
     const y = e.clientY;
+    this.setState({ xClient: x, yClient: y });
+    //this is not working
+    // zoomPanTranslate = {
+    //   transform: `scale(2.5) translate(${this.state.xClient}px, ${this.state.yClient}px)`
+    // };
     console.log('pixel coordinates', x, y);
   }
 
@@ -146,8 +154,11 @@ class ImageCarousel extends React.Component {
       this.state.expandedView ?
         <div id='expanded-view-modal'>
 
-          <div id='expanded-image-container'>
-            <img onMouseMove={this.extractLocation.bind(this)} onClick={this.toggleZoom.bind(this)}src={this.state.photos[this.state.mainPhotoIndex].url}></img>
+          <div style={zoomPanTranslate} id='expanded-image-container'>
+            <img
+              onMouseMove={this.extractLocation.bind(this)}
+              onClick={this.toggleZoom.bind(this)}src={this.state.photos[this.state.mainPhotoIndex].url}>
+            </img>
             {!this.state.zoomView &&
             <div>
               <span onClick={this.collapsedView}><AiOutlineClose id='expand-view-close'/></span>
@@ -206,3 +217,5 @@ class ImageCarousel extends React.Component {
 }
 
 export default ImageCarousel;
+
+let zoomPanTranslate;

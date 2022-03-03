@@ -249,7 +249,7 @@
 }
 
 #zoom-image-container img {
-  transform: scale(2.5) translate(200px, 0px);
+  transform: scale(2.5) translate(275px, -275px);
 }
 
 #expand-view-close {
