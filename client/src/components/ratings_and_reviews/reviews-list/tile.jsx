@@ -10,7 +10,9 @@ class Tile extends React.Component {
 
     this.state = {
       helpfulClicked: false,
-      helpfulness: 0
+      helpfulness: 0,
+      photoModal: false,
+      photoURL: ''
     };
 
     this.onHelpfulClick = this.onHelpfulClick.bind(this);
@@ -43,8 +45,12 @@ class Tile extends React.Component {
     }
   }
 
-  onThumbnailClick() {
+  onThumbnailClick(url) {
+    this.setState({ photoModal: true, photoURL: url });
+  }
 
+  closePhotoModal() {
+    this.setState({ photoModal: false, photoURL: '' });
   }
 
   render() {
@@ -72,7 +78,9 @@ class Tile extends React.Component {
         <div className='review-tile-photos'>
           {
             this.props.review.photos.length === 0 ? null
-              : this.props.review.photos.map(photo => <img className='review-image' src={photo.url} />)
+              : this.props.review.photos.map((photo, index) => {
+                return <img className='review-image' src={photo.url} onClick={this.onThumbnailClick.bind(this, photo.url)} />;
+              })
           }
         </div>
 
@@ -100,6 +108,17 @@ class Tile extends React.Component {
         </div>
 
         <hr className='review-tile-line'></hr>
+
+        {
+          this.state.photoModal
+            ? <div id='review-photo-modal'>
+              <div id='review-photo-content'>
+                <img src={this.state.photoURL}></img><br></br>
+                <button onClick={this.closePhotoModal.bind(this)}>Close</button>
+              </div>
+            </div>
+            : null
+        }
       </div>
     );
   }
