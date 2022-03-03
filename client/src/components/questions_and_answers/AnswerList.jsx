@@ -12,9 +12,9 @@ const AnswerList = (props) => {
   let displayList = answerBySeller.concat(sortedAnswersByOther).slice(0, props.answerNumbers);
 
   return (
-    <div id='answer-list'>
-      <div id='answer-title'> A: </div>
-      <div id='answer-box' role='alist'>
+    <div className='answer-list'>
+      <div className='answer-title'> A: </div>
+      <div className='answer-box' role='alist'>
         {displayList.map((answer) => (
           <Answer answer={answer} key={answer.id}/>
         ))}

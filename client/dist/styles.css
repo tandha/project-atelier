@@ -274,13 +274,13 @@
   overscroll-behavior-block: auto;
 }
 
-#question-body, #answer-title {
+.question-body, .answer-title {
   font-weight: 600;
   font-size: 16px;
   display: inline;
 }
 
-#question-interaction, #question-helpful, #add-answer {
+.question-interaction, .question-helpful, .add-answer {
   width:auto;
   background: none;
   border: none;
@@ -290,12 +290,12 @@
   float: right;
 }
 
-#question-helpful:disabled {
+.question-helpful:disabled {
   text-decoration: underline;
   font-weight: bold;
 }
 
-#answer-list {
+.answer-list {
   display: grid;
   grid-template-columns: 24px auto;
   max-height: 38vh;
@@ -303,7 +303,7 @@
   overscroll-behavior-block: auto;
 }
 
-#answer-interaction, #answer-helpful, #answer-report {
+.answer-interaction, .answer-helpful, .answer-report {
   width:auto;
   background: none;
   border: none;
@@ -312,28 +312,28 @@
   display: inline;
 }
 
-#answer-helpful:disabled, #answer-report:disabled {
+.answer-helpful:disabled, .answer-report:disabled {
   text-decoration: underline;
   font-weight: bold;
 }
 
-#load-more-answer, #collapse-answer {
+.load-more-answer, .collapse-answer {
   font-size: 12px;
   font-weight: bold;
   margin-left: 24px;
 }
 
-#answer-photo-box {
+.answer-photo-box {
   display: flex;
   flex-direction: row;
   gap: 16px;
 }
 
-#answer-photo {
+.answer-photo {
   height: 100px;
 }
 
-#QA-form-head {
+.QA-form-head {
   display: inline;
 }
 
@@ -369,7 +369,7 @@
   height: auto;
 }
 
-#QA-note {
+.QA-note {
   font-size: 12px;
   font-style: italic;
   color:grey;
@@ -383,14 +383,14 @@
   gap: 16px;
 }
 
-#QA-close-btn {
+.QA-close-btn {
   font-size: 16px;
   float: right;
   background: none;
   border: none;
 }
 
-#QA-submit-btn {
+.QA-submit-btn {
   background: none;
   border: 1.5px solid grey;
   color:grey;
