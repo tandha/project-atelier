@@ -17,8 +17,8 @@ class ImageCarousel extends React.Component {
       ],
       expandedView: false,
       zoomView: false,
-      clientX: 0,
-      clientY: 0
+      mouseX: 0,
+      mouseY: 0
     };
 
     this.changeSelectedPhoto = this.changeSelectedPhoto.bind(this);
@@ -138,24 +138,25 @@ class ImageCarousel extends React.Component {
     });
   }
 
-  extractLocation(e) {
+  imagePan(e) {
     if (this.state.zoomView) {
-      const x = e.clientX;
-      const y = e.clientY;
-      this.setState({ xClient: x, yClient: y }, () => {
-        //This is not working
-        //Need to figure out how big the buffer should be
-        //It is moving, but not moving well
-        let trimY = this.state.yClient + 5;
-        let trimX = this.state.xClient - 5;
+      let image = document.getElementById('expanded-image');
+      let windowHeight = window.innerHeight;
+      let windowWidth = window.innerWidth;
+      let imageHeight = image.clientHeight;
+      let imageWidth = image.clientWidth;
+      let mouseX = e.pageX;
+      let mouseY = e.pageY;
+      let panWidth = imageWidth - windowWidth;
+      let panHeight = imageHeight - windowHeight;
+      let percentageX = mouseX / windowWidth;
+      let percentageY = mouseY / windowHeight;
+      let aimX = -1 * panWidth * percentageX;
+      let aimY = -1 * panHeight * percentageY;
 
-        let image = document.getElementById('expanded-image');
-        let transformed = `scale(2.5) translate(${trimX}px, ${trimY}px)`;
-        image.style.transform = transformed;
-
-      });
-      console.log('pixel coordinates', x, y);
-
+      console.log('height and width of image', imageHeight, imageWidth);
+      image.style.left = aimX + 'px';
+      image.style.top = aimY + 'px';
     }
   }
 
@@ -166,7 +167,7 @@ class ImageCarousel extends React.Component {
 
           <div id='expanded-image-container'>
             <img id='expanded-image'
-              onMouseMove={this.extractLocation.bind(this)}
+              onMouseMove={this.imagePan.bind(this)}
               onClick={this.toggleZoom.bind(this)}src={this.state.photos[this.state.mainPhotoIndex].url}>
             </img>
             {!this.state.zoomView &&
