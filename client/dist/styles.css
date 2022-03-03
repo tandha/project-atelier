@@ -258,8 +258,8 @@
 #expand-view-close {
   color: white;
   position: absolute;
-  top: 5px;
-  left: 1180px;
+  top: 1%;
+  left: 98%;
 }
 
 #expand-view-close:hover {
