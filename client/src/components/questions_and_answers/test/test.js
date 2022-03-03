@@ -81,24 +81,30 @@ describe('Q&A render tests', () => {
     const answerArray = Object.values(props.questions[1].answers);
     render(<Answer answer={answerArray[0]}/>);
     const container = document.querySelector('#each-answer');
-    const helpfulBtn = screen.getAllByRole('help')[0];
+    const helpfulBtn = screen.getAllByRole('answer-help')[0];
     const reportBtn = screen.getAllByText('Report')[0];
     expect(container).toBeInTheDocument();
     expect(helpfulBtn).toBeInTheDocument();
   });
 
   test('render Answer photo form component', () => {
-    const answerArray = Object.values(props.questions[2].answers);
-    const photo = answerArray[0].photos[0];
+    const photo = 'https://i.ibb.co/xXxgndP/30bfbeec39a9.jpg';
     render(<AnswerPhoto photo={photo}/>);
+
+    const image = document.querySelector('img');
+    expect(image.src).toBe(photo);
   });
 
   test('render Question modal component', () => {
     render(<QuestionModal productName={props.productName}/>);
+    const formContent = document.querySelector('#new-question-content');
+    expect(formContent).toBeInTheDocument();
   });
 
   test('render Anwer modal form component', () => {
     render(<AnswerModal productName={props.productName} question={props.questions[1]}/>);
+    const formContent = document.querySelector('#new-answer-content');
+    expect(formContent).toBeInTheDocument();
   });
 });
 
@@ -133,11 +139,14 @@ describe('Test on Question Features', () => {
   afterEach(cleanup);
 
   test('test on Question component', () => {
-    render(<Question question={props.questions[1]}/>);
-    // const helpfulBtn = screen.getByRole('help');
-    // expect(helpfulBtn).not.toBeDisabled();
-    // fireEvent.click(helpfulBtn);
-    // expect(helpfulBtn).toBeDisabled();
+    const {rerender} = render(<Question question={props.questions[1]}/>);
+    const helpfulBtn = screen.getByRole('question-help');
+
+    jest.clearAllMocks();
+    axios.mockResolvedValueOnce({status: 204});
+
+    const helpfulNum = Number(helpfulBtn.textContent.slice(6, 7));
+    fireEvent.click(helpfulBtn);
 
   });
 
@@ -172,15 +181,33 @@ describe('Test on Answer Features', () => {
     expect(newlist.children.length).toEqual(answerArray.length);
   });
 
-  test('test answer interactions', () => {
+  test('test answer marking helpful', () => {
     const answerArray = Object.values(props.questions[1].answers);
     const {rerender} = render(<Answer answer={answerArray[1]}/>);
+    const helpfulBtn = screen.getByRole('answer-help');
+
+    jest.clearAllMocks();
+    axios.mockResolvedValueOnce({status: 204});
+
+    fireEvent.click(helpfulBtn);
+
+  });
+
+  test('test answer report', () => {
+    const answerArray = Object.values(props.questions[1].answers);
+    const {rerender} = render(<Answer answer={answerArray[1]}/>);
+    const reportBtn = screen.getByRole('report');
+
+    jest.clearAllMocks();
+    axios.mockResolvedValueOnce({status: 204});
+
+    fireEvent.click(reportBtn);
 
   });
 
 });
 
-describe.only('Test on Modal Form Features', () => {
+describe('Test on Modal Form Features', () => {
 
   let props = {};
   beforeEach(() => {
@@ -273,8 +300,8 @@ describe.only('Test on Modal Form Features', () => {
     const testData = {body: 'Not sure', nickname: 'tobi', email: 'tobi@email.com', images: []};
 
     render(<Question question={props.questions[1]}/>);
-    const btn = screen.getByText('Add Answer');
-    fireEvent.click(btn);
+    const addBtn = screen.getByText('Add Answer');
+    fireEvent.click(addBtn);
 
     jest.clearAllMocks();
     axios.mockResolvedValueOnce({status: 201});
@@ -282,8 +309,10 @@ describe.only('Test on Modal Form Features', () => {
     const formInput = document.querySelector('#submit-answer-form');
     fireEvent.submit(formInput, {target: [{value: testData.body}, {value: testData.nickname}, {value: testData.email}]});
 
+    const closeBtn = document.querySelector('#QA-close-btn');
+    fireEvent.click(closeBtn);
     const form = document.querySelector('#new-answer-modal');
-    // expect(form).not.toBeInTheDocument();
+    expect(form).not.toBeInTheDocument();
   });
 });
 

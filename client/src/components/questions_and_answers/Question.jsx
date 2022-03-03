@@ -23,9 +23,9 @@ class Question extends React.Component {
 
   renderQuestionHelpfulBtn() {
     if (this.state.QuestionHelpful) {
-      return ( <button id='question-helpful' disabled> Yes ({this.props.question.question_helpfulness + 1}) </button> );
+      return ( <button id='question-helpful' role='question-help' disabled> Yes ({this.props.question.question_helpfulness + 1}) </button> );
     } else {
-      return ( <button id='question-helpful' onClick={this.markQuestionHelpful}> Yes ({this.props.question.question_helpfulness}) </button> );
+      return ( <button id='question-helpful' role='question-help' onClick={this.markQuestionHelpful}> Yes ({this.props.question.question_helpfulness}) </button> );
     }
   }
 
