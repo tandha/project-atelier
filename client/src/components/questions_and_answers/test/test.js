@@ -4,6 +4,7 @@ import '@testing-library/jest-dom';
 import 'regenerator-runtime/runtime.js';
 import axios from 'axios';
 jest.mock('axios');
+
 import {exampleQuestions} from './exampleData.js';
 import QuestionsAndAnswers from '../q&a.jsx';
 import SearchBar from '../SearchBar.jsx';
@@ -60,7 +61,7 @@ describe('Q&A render tests', () => {
 
   test('render Question component', () => {
     render(<Question question={props.questions[1]}/>);
-    const container = document.querySelector('#each-question');
+    const container = document.querySelector('.each-question');
     const btn = screen.getAllByText('Add Answer')[0];
     expect(container).toBeInTheDocument();
     expect(btn).toBeInTheDocument();
@@ -80,7 +81,7 @@ describe('Q&A render tests', () => {
   test('render Answer component', () => {
     const answerArray = Object.values(props.questions[1].answers);
     render(<Answer answer={answerArray[0]}/>);
-    const container = document.querySelector('#each-answer');
+    const container = document.querySelector('.each-answer');
     const helpfulBtn = screen.getAllByRole('answer-help')[0];
     const reportBtn = screen.getAllByText('Report')[0];
     expect(container).toBeInTheDocument();
@@ -113,8 +114,9 @@ describe('Q&A render tests', () => {
  */
 
 describe('Test on search bar component', () => {
+  let props = {};
   test('test on searchBar component', () => {
-    let props = {
+    props = {
       product: exampleQuestions.product,
       questions: exampleQuestions.results
     };
@@ -139,15 +141,15 @@ describe('Test on Question Features', () => {
   afterEach(cleanup);
 
   test('test on Question component', () => {
-    const {rerender} = render(<Question question={props.questions[1]}/>);
-    const helpfulBtn = screen.getByRole('question-help');
-
     jest.clearAllMocks();
     axios.mockResolvedValueOnce({status: 204});
 
-    const helpfulNum = Number(helpfulBtn.textContent.slice(6, 7));
-    fireEvent.click(helpfulBtn);
+    const {rerender} = render(<Question question={props.questions[1]}/>);
+    const helpfulBtn = screen.getByRole('question-help');
 
+    expect(helpfulBtn).not.toBeDisabled();
+    fireEvent.click(helpfulBtn);
+    // expect(helpfulBtn).toBeDisabled();
   });
 
 });
@@ -183,32 +185,35 @@ describe('Test on Answer Features', () => {
 
   test('test answer marking helpful', () => {
     const answerArray = Object.values(props.questions[1].answers);
-    const {rerender} = render(<Answer answer={answerArray[1]}/>);
-    const helpfulBtn = screen.getByRole('answer-help');
 
     jest.clearAllMocks();
     axios.mockResolvedValueOnce({status: 204});
 
-    fireEvent.click(helpfulBtn);
+    const {rerender} = render(<Answer answer={answerArray[1]}/>);
+    const helpfulBtn = screen.getByRole('answer-help');
 
+    expect(helpfulBtn).not.toBeDisabled();
+    fireEvent.click(helpfulBtn);
+    // expect(helpfulBtn).toBeDisabled();
   });
 
   test('test answer report', () => {
     const answerArray = Object.values(props.questions[1].answers);
-    const {rerender} = render(<Answer answer={answerArray[1]}/>);
-    const reportBtn = screen.getByRole('report');
 
     jest.clearAllMocks();
     axios.mockResolvedValueOnce({status: 204});
 
-    fireEvent.click(reportBtn);
+    const {rerender} = render(<Answer answer={answerArray[1]}/>);
+    const reportBtn = screen.getByRole('report');
 
+    expect(reportBtn).not.toBeDisabled();
+    fireEvent.click(reportBtn);
+  // expect(reportBtn).toBeDisabled();
   });
 
 });
 
 describe('Test on Modal Form Features', () => {
-
   let props = {};
   beforeEach(() => {
     props = {
@@ -299,17 +304,17 @@ describe('Test on Modal Form Features', () => {
   test('Test on submit add answer', () => {
     const testData = {body: 'Not sure', nickname: 'tobi', email: 'tobi@email.com', images: []};
 
+    jest.clearAllMocks();
+    axios.mockResolvedValueOnce({status: 201});
+
     render(<Question question={props.questions[1]}/>);
     const addBtn = screen.getByText('Add Answer');
     fireEvent.click(addBtn);
 
-    jest.clearAllMocks();
-    axios.mockResolvedValueOnce({status: 201});
-
     const formInput = document.querySelector('#submit-answer-form');
     fireEvent.submit(formInput, {target: [{value: testData.body}, {value: testData.nickname}, {value: testData.email}]});
 
-    const closeBtn = document.querySelector('#QA-close-btn');
+    const closeBtn = document.querySelector('.QA-close-btn');
     fireEvent.click(closeBtn);
     const form = document.querySelector('#new-answer-modal');
     expect(form).not.toBeInTheDocument();

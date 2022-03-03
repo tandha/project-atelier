@@ -68,7 +68,7 @@ class Question extends React.Component {
     let answerbody = e.target[0].value;
     let nickname = e.target[1].value;
     let email = e.target[2].value;
-    let images = document.querySelectorAll('#QA-preview');
+    let images = document.querySelectorAll('.QA-preview');
 
     let imageURL = [];
     images.forEach((image) => (
@@ -87,10 +87,11 @@ class Question extends React.Component {
         'photos': imageURL
       }
     }).then((res)=> {
-      this.setState({ showAnswerModal: false }, this.props.getProductQuestions());
+      this.setState({ showAnswerModal: false }, () => { this.props.getProductQuestions(); });
     }).catch((err)=> {
       console.log('error adding answer', err);
     });
+
   }
 
   render() {

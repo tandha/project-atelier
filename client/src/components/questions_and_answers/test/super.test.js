@@ -23,7 +23,7 @@ axios.defaults.baseURL = API_URL;
  * Test on End points
  */
 
-xdescribe('Test on API end points', () => {
+describe('Test on API end points', () => {
 
   let testProductID = 64622;
   let testQuestionID = 573794;
