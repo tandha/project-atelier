@@ -26,7 +26,15 @@ module.exports.exampleQuestions = {
           'answerer_name': 'asdsasad',
           'helpfulness': 1,
           'photos': []
-        }
+        },
+        '5270002': {
+          'id': 5270002,
+          'body': 'I\'ve thrown it in the wash and it seems fine',
+          'date': '2018-02-08T00:00:00.000Z',
+          'answerer_name': 'marcanthony',
+          'helpfulness': 9,
+          'photos': []
+        },
       }
     },
     {'question_id': 563777,
@@ -102,6 +110,14 @@ module.exports.exampleQuestions = {
           'date': '2019-09-06T00:00:00.000Z',
           'answerer_name': 'sillyguy',
           'helpfulness': 8,
+          'photos': []
+        },
+        '5270063': {
+          'id': 5270063,
+          'body': 'Yes',
+          'date': '2018-03-08T00:00:00.000Z',
+          'answerer_name': 'Seller',
+          'helpfulness': 4,
           'photos': []
         }
       }
