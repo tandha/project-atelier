@@ -5,7 +5,6 @@ const StyleThumbnail = (props) => {
   let selected = props.selectedStyle.photos[0].thumbnail_url;
   return (
     <div>
-
       {
         props.styles.results.map((style, i) => {
           return <div data-testid='thumbnail' key={`thumbnail-${i}`} className='style-thumbnail-container'>

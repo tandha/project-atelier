@@ -127,7 +127,6 @@ class Cart extends React.Component {
                 })
               }
             </select>
-
           </div>
           <div data-testid='select-quantity' id='select-quantity'>
             <select onChange={this.setQuantitySelection.bind(this)}>
@@ -140,7 +139,6 @@ class Cart extends React.Component {
                 })
               }
             </select>
-
           </div>
           {
             this.size !== 'OUT OF STOCK' &&
@@ -148,7 +146,6 @@ class Cart extends React.Component {
               <button>ADD TO BAG</button>
               <span> + </span>
             </div>
-
           }
           <div id='add-to-myoutfit'>
             {

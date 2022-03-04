@@ -36,7 +36,6 @@ class ImageCarousel extends React.Component {
     this.state.photos.length < 5 ? this.setState({ thumbnailSlice: this.state.photos }) : this.setState({ thumbnailSlice: this.state.photos.slice(0, 5)});
   }
 
-  //TODO: start the slice in the same place the previous thumbnail slice was started to prevent highlighted image from jumping to top of thumbnails when style is changed.
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.selectedStyle !== this.props.selectedStyle) {
       this.setState({
@@ -143,7 +142,7 @@ class ImageCarousel extends React.Component {
       let image = document.getElementById('expanded-image');
       let windowHeight = window.innerHeight;
       let windowWidth = window.innerWidth;
-      let imageHeight = image.clientHeight; //But the image is actually bigger than this?Needs to be bigger
+      let imageHeight = image.clientHeight;
       let imageWidth = image.clientWidth;
       let mouseX = e.pageX;
       let mouseY = e.pageY;
@@ -154,7 +153,6 @@ class ImageCarousel extends React.Component {
       let aimX = -1 * panWidth * percentageX;
       let aimY = -1 * panHeight * percentageY;
 
-      // console.log('height and width of image', imageHeight, imageWidth);
       image.style.left = aimX + 'px';
       image.style.top = aimY + 'px';
     }
@@ -164,7 +162,6 @@ class ImageCarousel extends React.Component {
     return (
       this.state.expandedView ?
         <div id='expanded-view-modal'>
-
           <div id='expanded-image-container'>
             <img id='expanded-image'
               onMouseMove={this.imagePan.bind(this)}
@@ -194,9 +191,7 @@ class ImageCarousel extends React.Component {
             <IoIosArrowDown
               onClick={this.handleDownArrow}
               id='thumbnail-gallery-down-arrow'/>}
-
             </div> }
-
           </div>
         </div> :
         <div id='image-gallery'>
