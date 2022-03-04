@@ -99,11 +99,11 @@ class App extends React.Component {
           toggleOutfit={this.toggleOutfit.bind(this)}
         />
 
-        {/* <RelatedItemsOutfitCreationWithLogger
+        <RelatedItemsOutfitCreationWithLogger
           product={this.state.product}
           myOutfits={this.state.myOutfits}
           toggleOutfit={this.toggleOutfit.bind(this)}
-          starRating={this.state.starRating}/> */}
+          starRating={this.state.starRating}/>
 
         <QuestionsAndAnswersWithLogger product={this.state.product}/>
 
