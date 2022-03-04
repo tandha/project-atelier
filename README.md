@@ -13,13 +13,13 @@
 - Server
   - Node.js, Express
 - Test Suite
-  - Jest.io, Mocha, Chai, etc
+  - Jest, Supertest, React-Testing-Library, etc
 
 ## Milestones
 
 -   [ ] **Mar 12** Project presentation
 -   [ ] **Mar 05** Ship functional version and share with friends
--   [ ] **Mar 01** Test code coverage
+-   [x] **Mar 01** Test code coverage
 -   [x] **Feb 19** Progress demo
 -   [x] **Feb 12** Initial Skeleton
 -   [x] **Feb 03** Start developing process

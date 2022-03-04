@@ -97,7 +97,8 @@ class Question extends React.Component {
   render() {
     return (
       <div className='each-question'>
-        <div className='question-body'> Q: {this.props.question.question_body} </div>
+        <div className='question-title'>Q:</div>
+        <div className='question-body'>{this.props.question.question_body}</div>
         <div className='question-interaction'>
           Helpful? {this.renderQuestionHelpfulBtn()} |
           <button className='add-answer' onClick={this.clickAddAnswer}>Add Answer</button>
