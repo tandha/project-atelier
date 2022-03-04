@@ -3,7 +3,6 @@ import React from 'react';
 const Thumbnail = (props) => {
   let id = `thumbnail-${props.i}`;
   let className = 'gallery-thumbnail';
-  console.log('what is this?', props.expandedView);
   if (props.expandedView) {
     className = 'expanded-view-true';
   }

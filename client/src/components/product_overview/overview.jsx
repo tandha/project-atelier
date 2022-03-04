@@ -22,11 +22,8 @@ class ProductOverview extends React.Component {
         index = i;
       }
     });
-    console.log(this.props.styles.results[index]);
     this.setState({
       selectedStyle: this.props.styles.results[index],
-      // thumbnailIndex: 0}, () => {
-      // this.advanceVisibleThumbnails();
     });
   }
 
@@ -43,8 +40,8 @@ class ProductOverview extends React.Component {
         />
         <StyleSelector
           changeStyle={this.changeSelectedStyle.bind(this)}
-          name={this.state.selectedStyle.name}
           styles={this.props.styles}
+          selectedStyle={this.state.selectedStyle}
         />
         <Cart
           currentProductInOutfit={this.props.currentProductInOutfit}
@@ -52,10 +49,8 @@ class ProductOverview extends React.Component {
           selectedStyle={this.state.selectedStyle}
           toggleOutfit={this.props.toggleOutfit}
         />
-        <div id='slogan-description-features'>
-          <Feature features={this.props.product.features}/>
-          <Description product={this.props.product} />
-        </div>
+        <Description product={this.props.product} />
+        <Feature features={this.props.product.features}/>
       </div>
     );
   }

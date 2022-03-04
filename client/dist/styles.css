@@ -66,18 +66,15 @@
 
 /******************** Product Overview ********************/
 #overview-container {
-  border: 5px solid red;
   display: inline-grid;
   grid-template-columns: [first] 8.3% [second] 8.3% [third] 8.3% [fourth] 8.3% [fifth] 8.3% [sixth] 8.3% [seventh] 8.3% [eighth] 8.3% [ninth] 8.3% [tenth] 8.3% [eleventh] 8.3% [twelfth] 8.3%[end];
-  /* [first] 40px [line2] 50px [line3] auto [col4-start] 50px [five] 40px [end] */
-  /* [row1-start] 25% [row1-end row2-start] 25% [row2-end] */
-  /* grid-template-rows: [first] 8.3% [second] 8.3% [third] 8.3% [fourth] 8.3% [fifth] 8.3% [sixth] 8.3% [seventh] 8.3% [eighth] 8.3% [ninth] 8.3% [tenth] 8.3% [eleventh] 8.3% [twelfth] 8.3%[end]; */
+  /* height: 100%; */
   grid-template-rows: auto;
+  /* width: 100%; */
 }
 
 #image-gallery {
   /* grid-template-columns: 12em 1fr; <-- can set how each line behaves separately */
-  border: 5px solid blue;
   grid-column-start: first;
   grid-column-end: span eighth;
   grid-row-start: 1;
@@ -85,16 +82,15 @@
 }
 
 #product-information {
-  border: 5px solid green;
   grid-column-start: eighth;
   grid-column-end: span end;
+  padding-left: 1em;
   /* grid-row-start: 1;
   grid-row-end: span 1; */
   /* padding-left: 1em; */
 }
 
 #price {
-  border: 5px solid yellow;
   grid-column-start: eighth;
   grid-column-end: span end;
   /* grid-row-start: 1;
@@ -103,7 +99,6 @@
 }
 
 #selected-styles {
-  border: 5px solid orange;
   grid-column-start: eighth;
   grid-column-end: span end;
   padding-left: 1em;
@@ -112,7 +107,6 @@
 }
 
 #cart {
-  border: 5px solid pink;
   grid-column-start: eighth;
   grid-column-end: span end;
   padding-left: 1em;
@@ -120,34 +114,52 @@
   grid-row-end: span 1; */
 }
 
-#features-container{
-  border: 5px solid lime;
-  grid-column-start: eight;
-  grid-column-end: span end;
-  /* grid-row-start: eleventh;
-  grid-row-end: span end; */
-  padding-top: 4em;
-}
-
-#slogan-description-features {
-  border: 5px solid purple;
+#slogan-description-container{
+  border-right: 2px solid #000;
   grid-column-start: first;
   grid-column-end: span eighth;
-  /* grid-row-start: 2;
-  grid-row-end: span 2; */
+  /* grid-row-start: eleventh;
+  grid-row-end: span end; */
+  grid-row-start: 5;
+  grid-row-end: 7;
+  margin: 3em 0 3em 6.5em;
+  padding-right: 1em;
+}
+
+#features-container{
+  grid-column-start: eighth;
+  grid-column-end: span end;
+  grid-row-start: 5;
+  grid-row-end: 7;
+  margin:3em 0;
+  padding: 0 0 0 3em;
+}
+
+#features-container li{
+  list-style: none;
+  margin-bottom: .75em;
+}
+
+#features-container svg{
+  padding-right: .5em;
+}
+
+#styles-thumbnails-container{
+  max-width: 400px;
 }
 
 #styles-thumbnails-container ul{
-  display: flex;
-  flex-wrap: wrap;
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
 
+
 .style-thumbnail-container {
+  display: inline-block;
   height: 70px;
-  margin: 10px;
+  margin: 1em 1em 1em 0;
+  position: relative;
   width: 70px;
 }
 
@@ -164,7 +176,7 @@
   background-color: black;
   height: 800px;
   position: relative;
-  width: 800px;
+  max-width: 800px;
 }
 
 #main-image{
@@ -291,10 +303,38 @@
   width: 100%;
 }
 
+#star-rating, #reviews{
+  display: inline-block;
+  margin: .75em .75em .75em 0em;
+}
+
+#product-category, #price, #selected-style-name{
+  color: #888;
+  text-transform: uppercase;
+}
+
+#price{
+  margin-bottom: 1em;
+}
+
+#product-name{
+  margin: 0 0 .5em 0;
+}
+
+#style-title{
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+#product-slogan{
+  font-size: 1.25em;
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+
 #zoom-image-container {
   overflow: hidden;
 }
-
 
 #zoom-image-container img {
   position: absolute;
@@ -316,10 +356,23 @@
   opacity: 0%;
 }
 
+#style-checkmark{
+  background-color: white;
+  border-radius: 50%;
+  border: 1px solid black;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
 #cart {
   display: inline;
   /* display: flex;
   flex-wrap: wrap; */
+}
+
+#cart-form{
+  max-width: 300px;
 }
 
 #select-size select,
@@ -343,10 +396,21 @@
   display: inline-block;
   height: 20px;
   padding: .75em;
-  margin: .5em;
+  margin: .5em .5em .5em 0em;
   vertical-align: middle;
   width: 200px;
 }
+
+#select-size{
+  width: 150px;
+}
+#select-quantity{
+  width: 70px;
+}
+#add-to-bag{
+  width: 200px;
+}
+
 #add-to-myoutfit{
   text-align: center;
   width: 20px;

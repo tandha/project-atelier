@@ -11,7 +11,7 @@ class Cart extends React.Component {
       availableSizes: [],
       availableQuantities: [],
       selectedSize: 'TBD',
-      selectedQuantity: '-',
+      selectedQuantity: 'TBD',
     };
     this.size = 'SELECT SIZE';
   }
@@ -62,7 +62,7 @@ class Cart extends React.Component {
     this.setAvailableQuantities(quantities);
     this.setState({ selectedQuantity: 1 });
 
-    let quantitySelectElement = document.getElementById('quantity').value = '1';
+    let quantitySelectElement = document.getElementById('quantity').innerHTML = '1';
   }
 
   setAvailableQuantities(quantities) {
@@ -73,7 +73,7 @@ class Cart extends React.Component {
     let selectedSize = e.target.value;
     this.setState( {selectedSize}, () => {
       this.determineQuantityFromSelectedSize();
-    } );
+    });
   }
 
   setQuantitySelection(e) {
@@ -131,7 +131,7 @@ class Cart extends React.Component {
           </div>
           <div data-testid='select-quantity' id='select-quantity'>
             <select onChange={this.setQuantitySelection.bind(this)}>
-              <option id='quantity'>{this.state.selectedQuantity}</option>
+              <option id='quantity'>-</option>
               {
                 this.state.availableQuantities.map((qty) => {
                   if (qty !== 1) {
