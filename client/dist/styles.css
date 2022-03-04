@@ -124,6 +124,7 @@
   background-color: black;
   height: 500px;
   position: relative;
+  overflow: scroll;
   width: 500px;
 }
 
@@ -159,7 +160,6 @@
   flex-wrap: wrap; */
 }
 
-/* Make Not Global */
 #select-size select, #select-quantity select, #add-to-bag button {
   background: none;
   border: none;
@@ -201,6 +201,63 @@
 
 
 /****************** Related Items & Outfit ****************/
+
+#related-items-and-my-outfits{
+  margin-top: 3em;
+  margin-left: 7em;
+}
+#related-items-container, #my-outfits-container{
+  margin: .5em, .5em, 0em, .5em;
+  padding: .5em, .5em, 0em, .5em;
+}
+
+#add-to-outfit{
+  color: darkgray;
+  height:180px;
+  width:100%;
+  margin:0 auto;
+  padding-top: 5em;
+  vertical-align: middle;
+}
+
+.remove-from-outfit, .related-item-outfit-toggle-button {
+  display: inline-block;
+  text-align: right;
+  width: 100%;
+}
+.remove-from-outfit svg, .related-item-outfit-toggle-button svg, .outfit-details, .related-items-details{
+  padding: .25em;
+}
+
+#add-to-outfit:hover, .related-item-outfit-toggle-button svg:hover, .related-item-container img:hover, .related-items-details:hover, .remove-from-outfit svg:hover, .my-outfit-container img:hover,  .outfit-details:hover{
+  cursor: pointer;
+}
+
+
+.related-item-container, .my-outfit-container{
+  border: 1px solid black;
+  display: inline-block;
+  height: 360px;
+  margin: 15px 15px 15px 0px;
+  width: 200px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.related-item-image, .outfit-image{
+  height: 250px;
+  width: 100%;
+}
+
+.related-item-image img, .outfit-image img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.related-items-details span, .outfit-details span{
+  display: block;
+}
 
 
 

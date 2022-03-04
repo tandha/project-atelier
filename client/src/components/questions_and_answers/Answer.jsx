@@ -27,9 +27,9 @@ class Answer extends React.Component {
 
   renderAnswerHelpfulBtn() {
     if (this.state.AnswerHelpful) {
-      return ( <button className='answer-helpful' role="help" disabled > Yes ({this.props.answer.helpfulness + 1}) </button> );
+      return ( <button className='answer-helpful' role='answer-help' disabled > Yes ({this.props.answer.helpfulness + 1}) </button> );
     } else {
-      return ( <button className='answer-helpful' role="help" onClick={this.markAnswerHelpful}> Yes ({this.props.answer.helpfulness}) </button> );
+      return ( <button className='answer-helpful' role='answer-help' onClick={this.markAnswerHelpful}> Yes ({this.props.answer.helpfulness}) </button> );
     }
   }
 

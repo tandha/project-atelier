@@ -23,9 +23,9 @@ class Question extends React.Component {
 
   renderQuestionHelpfulBtn() {
     if (this.state.QuestionHelpful) {
-      return ( <button className='question-helpful' disabled> Yes ({this.props.question.question_helpfulness + 1}) </button> );
+      return ( <button className='question-helpful' role='question-help' disabled> Yes ({this.props.question.question_helpfulness + 1}) </button> );
     } else {
-      return ( <button className='question-helpful' onClick={this.markQuestionHelpful}> Yes ({this.props.question.question_helpfulness}) </button> );
+      return ( <button className='question-helpful' role='question-help' onClick={this.markQuestionHelpful}> Yes ({this.props.question.question_helpfulness}) </button> );
     }
   }
 
@@ -68,7 +68,7 @@ class Question extends React.Component {
     let answerbody = e.target[0].value;
     let nickname = e.target[1].value;
     let email = e.target[2].value;
-    let images = document.querySelectorAll('#QA-preview');
+    let images = document.querySelectorAll('.QA-preview');
 
     let imageURL = [];
     images.forEach((image) => (
@@ -87,10 +87,11 @@ class Question extends React.Component {
         'photos': imageURL
       }
     }).then((res)=> {
-      this.setState({ showAnswerModal: false }, this.props.getProductQuestions());
+      this.setState({ showAnswerModal: false }, () => { this.props.getProductQuestions(); });
     }).catch((err)=> {
       console.log('error adding answer', err);
     });
+
   }
 
   render() {
