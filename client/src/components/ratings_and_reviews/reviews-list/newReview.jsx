@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { IMG_KEY } from '../../../../../server/config.js';
+const IMG_KEY = process.env.IMG_KEY;
 
 const NewReview = (props) => {
 
