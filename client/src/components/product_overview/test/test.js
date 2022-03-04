@@ -3,6 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import data from '../../../sampleData/sampleData.js';
 import ProductOverview from '../overview.jsx';
+import Thumbnails from '../imageGallery/imageThumbnails.jsx';
 import ImagesCarousel from '../imageGallery/imagesCarousel.jsx';
 import Information from '../productInformation/information.jsx';
 import FeatureInformation from '../productInformation/featureInformation.jsx';
@@ -11,14 +12,12 @@ import StyleThumbnail from '../styleSelector/StyleThumbnail.jsx';
 import Cart from '../addToCart/cart.jsx';
 import Option from '../addToCart/option.jsx';
 
-
 //////////////// Render Tests ////////////////
 describe('Overview Widget Components Render', () => {
+
   test('Renders Image Gallery', () => {
     let props = {
-      photos: data.styles.results[0].photos,
-      mainPhotoIndex: 0,
-      changePhoto: function(e) { return e; }
+      selectedStyle: data.styles.results[0],
     };
     render(<ImagesCarousel {...props}/>);
   });
@@ -66,27 +65,85 @@ describe('Overview Widget Components Render', () => {
 describe('Image Gallery Component', () => {
   test('Renders Main Image', () => {
     let props = {
-      photos: data.styles.results[0].photos,
-      mainPhotoIndex: 0,
-      changePhoto: function(e) { return e; }
+      selectedStyle: data.styles.results[0]
     };
     render(<ImagesCarousel {...props}/>);
     const image = screen.getByTestId('main-image');
-    expect(image).toHaveAttribute('src', props.photos[0].url);
+    expect(image).toHaveAttribute('src', props.selectedStyle.photos[0].url);
   });
 
   test('Renders Correct Number of Image Thumbnails', () => {
     let props = {
-      photos: data.styles.results[0].photos,
-      mainPhotoIndex: 0,
-      changePhoto: function(e) { return e; }
+      selectedStyle: data.styles.results[0]
     };
     const { getAllByRole } = render(<ImagesCarousel {...props}/>);
     const thumbnailList = getAllByRole('listitem');
-    expect(thumbnailList).toHaveLength(3);
+
+    expect(thumbnailList).toHaveLength(5);
   });
+
+  test('Advances Main Image by One When Right Arrow is Clicked', () => {
+    let props = {
+      selectedStyle: data.styles.results[0]
+    };
+    render(<ImagesCarousel {...props}/>);
+    fireEvent.click(document.querySelector('#image-gallery-right-arrow'));
+
+    let expectedImage = data.styles.results[0].photos[1].url;
+    let actualImage = document.querySelector('#main-image').src;
+
+    expect(expectedImage).toEqual(actualImage);
+  });
+
+  test('Reverses Main Image by One When Left Arrow is Clicked', () => {
+    let props = {
+      selectedStyle: data.styles.results[0]
+    };
+    render(<ImagesCarousel {...props}/>);
+    fireEvent.click(document.querySelector('#image-gallery-right-arrow'));
+    fireEvent.click(document.querySelector('#image-gallery-left-arrow'));
+
+    let expectedImage = data.styles.results[0].photos[0].url;
+    let actualImage = document.querySelector('#main-image').src;
+
+    expect(expectedImage).toEqual(actualImage);
+  });
+
+  test('Clicking Down Arrow Causes Thumbnail Slice to Advance By One', () => {
+    let props = {
+      selectedStyle: data.styles.results[0]
+    };
+    render(<ImagesCarousel {...props}/>);
+    fireEvent.click(document.querySelector('#thumbnail-gallery-down-arrow'));
+
+    let expectedImage = data.styles.results[0].photos[1].thumbnail_url;
+    let actualImage = document.querySelector('#thumbnail-0').src;
+
+    expect(expectedImage).toEqual(actualImage);
+  });
+
+  //TODO: expect clicking up arrow to change thumbnail slice correctly
+  test('Clicking Up Arrow Causes Thumbnail Slice to Reverse By One', () => {
+    let props = {
+      selectedStyle: data.styles.results[0]
+    };
+    render(<ImagesCarousel {...props}/>);
+    fireEvent.click(document.querySelector('#thumbnail-gallery-down-arrow'));
+    fireEvent.click(document.querySelector('#thumbnail-gallery-up-arrow'));
+
+    let expectedImage = data.styles.results[0].photos[0].thumbnail_url;
+    let actualImage = document.querySelector('#thumbnail-0').src;
+
+    expect(expectedImage).toEqual(actualImage);
+  });
+
+
   //TODO: expect thumbnails to be images
   //TODO: expect selecting a thumbnail to change main image that that thumbnail's corresponding url
+  //TODO: expect clicking left arrow to change main image correctly
+  //TODO: expect thumbnail corresponding to main image to be highlighted
+  //TODO: expect clicking main image to enter expanded mode
+  //TODO: expect clicking image in expanded mode to enter zoom mode
 });
 
 //////////////// Product Information Tests ////////////////
