@@ -31,7 +31,6 @@ class ImageCarousel extends React.Component {
     this.state.photos.length < 5 ? this.setState({ thumbnailSlice: this.state.photos }) : this.setState({ thumbnailSlice: this.state.photos.slice(0, 5)});
   }
 
-  //TODO: start the slice in the same place the previous thumbnail slice was started to prevent highlighted image from jumping to top of thumbnails when style is changed.
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.selectedStyle !== this.props.selectedStyle) {
       this.setState({
@@ -124,7 +123,6 @@ class ImageCarousel extends React.Component {
   zoomView(e) {
     let image = e.target;
     image.id = 'image-zoom-state';
-    console.log(image);
   }
 
   render() {

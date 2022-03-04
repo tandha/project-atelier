@@ -20,11 +20,8 @@ class ProductOverview extends React.Component {
         index = i;
       }
     });
-    console.log(this.props.styles.results[index]);
     this.setState({
       selectedStyle: this.props.styles.results[index],
-      // thumbnailIndex: 0}, () => {
-      // this.advanceVisibleThumbnails();
     });
   }
 
