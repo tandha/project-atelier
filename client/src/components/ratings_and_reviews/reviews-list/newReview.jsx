@@ -68,7 +68,7 @@ const NewReview = (props) => {
       method: 'post',
       url: '/reviews',
       data: {
-        'product_id': 64620, //change this
+        'product_id': props.product.id,
         'rating': parseInt(starRating),
         'summary': summary,
         'body': body,

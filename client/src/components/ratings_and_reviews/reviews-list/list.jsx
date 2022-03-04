@@ -17,8 +17,7 @@ class List extends React.Component {
       listMaxed: false,
       currentSort: 'relevant',
       currentFilter: [],
-      renderModal: false,
-      currentID: 64620
+      renderModal: false
     };
   }
 
@@ -33,11 +32,6 @@ class List extends React.Component {
         this.updateDisplayedReviews(false);
       });
     }
-    if (this.props.productID !== this.state.currentID) {
-      this.setState({ currentID: this.props.productID }, () => {
-        this.getReviews(false);
-      });
-    }
   }
 
   getReviews(scroll) {
@@ -48,7 +42,7 @@ class List extends React.Component {
         'page': 1,
         'count': 100000,
         'sort': this.state.currentSort,
-        'product_id': this.state.currentID
+        'product_id': this.props.productID
       }
     }).then((response) => {
       this.setState({ reviews: response.data.data.results }, () => {

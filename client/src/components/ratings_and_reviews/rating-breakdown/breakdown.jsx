@@ -9,8 +9,7 @@ class Breakdown extends React.Component {
     super(props);
     this.state = {
       reviewMetaData: {},
-      recommendedPercent: 0,
-      currentID: 64620
+      recommendedPercent: 0
     };
   }
 
@@ -18,19 +17,11 @@ class Breakdown extends React.Component {
     this.getReviewMetaData();
   }
 
-  componentDidUpdate() {
-    if (this.props.productID !== this.state.currentID) {
-      this.setState({ currentID: this.props.productID }, () => {
-        this.getReviewMetaData();
-      });
-    }
-  }
-
   getReviewMetaData() {
     axios({
       method: 'get',
       url: '/reviews/meta',
-      params: { 'product_id': this.state.currentID }
+      params: { 'product_id': this.props.productID }
     })
       .then(response => {
         let ratings = response.data.data.ratings;

@@ -3,8 +3,6 @@ import React from 'react';
 const Buttons = (props) => {
 
   const onMoreClick = (event) => {
-    // let element = document.getElementById('review-list-buttons');
-    // element.scrollIntoView();
     props.updateLength(true);
   };
 
@@ -15,7 +13,7 @@ const Buttons = (props) => {
   if (props.listMaxed) {
     return (
       <div id='review-list-buttons'>
-        <div></div>
+        {/* <div></div> Did I need this div for something? */}
         <button onClick={onAddReviewClick}>Add A Review +</button>
       </div>
     );
