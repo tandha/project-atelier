@@ -5,7 +5,9 @@ const bodyParser = require('body-parser');
 const axios = require('axios');
 const cors = require('cors');
 const port = 3000;
-const { API_URL, API_KEY } = require('./config.js');
+require('dotenv').config();
+const API_KEY = process.env.API_KEY;
+const API_URL = process.env.API_URL;
 
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
