@@ -39,6 +39,22 @@ module.exports = {
             'thumbnail_url': 'https://i.ibb.co/0fhKxDv/image-188d1988-d6be-4a43-8a74-8ff7b5633a92-110x110-2x.jpg',
             'url': 'https://cdn.shopify.com/s/files/1/2325/0327/products/image_188d1988-d6be-4a43-8a74-8ff7b5633a92_110x110@2x.jpg?v=1623509962'
           },
+          {
+            'thumbnail_url': 'https://oldnavy.gap.com/webcontent/0020/287/088/cn20287088.jpg',
+            'url': 'https://oldnavy.gap.com/webcontent/0020/287/088/cn20287088.jpg'
+          },
+          {
+            'thumbnail_url': 'https://oldnavy.gap.com/webcontent/0020/216/397/cn20216397.jpg',
+            'url': 'https://oldnavy.gap.com/webcontent/0020/216/397/cn20216397.jpg'
+          },
+          {
+            'thumbnail_url': 'https://oldnavy.gap.com/webcontent/0019/706/885/cn19706885.jpg',
+            'url': 'https://oldnavy.gap.com/webcontent/0019/706/885/cn19706885.jpg'
+          },
+          {
+            'thumbnail_url': 'https://oldnavy.gap.com/webcontent/0019/937/659/cn19937659.jpg',
+            'url': 'https://oldnavy.gap.com/webcontent/0019/937/659/cn19937659.jpg'
+          }
         ],
         'skus': {
           '37': {

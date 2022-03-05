@@ -9,8 +9,6 @@ class ProductOverview extends React.Component {
     super(props);
     this.state = {
       selectedStyle: this.props.styles.results[0],
-      mainPhotoIndex: 0,
-      photos: this.props.styles.results[0].photos
     };
   }
 
@@ -22,23 +20,33 @@ class ProductOverview extends React.Component {
         index = i;
       }
     });
-    this.setState({ selectedStyle: this.props.styles.results[index], mainPhotoIndex: 0 });
-  }
-
-  changeSelectedPhoto(e) {
-    let index = e.target.id;
     this.setState({
-      mainPhotoIndex: Number(index)
+      selectedStyle: this.props.styles.results[index],
     });
   }
 
   render() {
     return (
       <div id='overview-container'>
-        <ImageCarousel changePhoto={this.changeSelectedPhoto.bind(this)} mainPhotoIndex={this.state.mainPhotoIndex} photos={this.state.selectedStyle.photos} selectedStyle={this.state.selectedStyle}/>
-        <Information product={this.props.product} selectedStyle={this.state.selectedStyle} starRating={this.props.starRating}/>
-        <StyleSelector changeStyle={this.changeSelectedStyle.bind(this)} name={this.state.selectedStyle.name} styles={this.props.styles}/>
-        <Cart productId={this.props.product.id} toggleOutfit={this.props.toggleOutfit} currentProductInOutfit={this.props.currentProductInOutfit} selectedStyle={this.state.selectedStyle}/>
+        <ImageCarousel
+          selectedStyle={this.state.selectedStyle}
+        />
+        <Information
+          product={this.props.product}
+          selectedStyle={this.state.selectedStyle}
+          starRating={this.props.starRating}
+        />
+        <StyleSelector
+          changeStyle={this.changeSelectedStyle.bind(this)}
+          name={this.state.selectedStyle.name}
+          styles={this.props.styles}
+        />
+        <Cart
+          currentProductInOutfit={this.props.currentProductInOutfit}
+          productId={this.props.product.id}
+          selectedStyle={this.state.selectedStyle}
+          toggleOutfit={this.props.toggleOutfit}
+        />
       </div>
     );
   }
