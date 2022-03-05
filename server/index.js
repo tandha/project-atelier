@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 const axios = require('axios');
 const cors = require('cors');
 const port = 3000;
-require('dotenv').config();
 const API_URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 const API_KEY = process.env.API_KEY;
 
