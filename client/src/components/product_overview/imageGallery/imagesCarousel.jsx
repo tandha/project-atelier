@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Thumbnails from './imageThumbnails.jsx';
 import { IoMdArrowBack, IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from 'react-icons/bs';
+import { AiOutlineClose } from 'react-icons/ai';
 
 class ImageCarousel extends React.Component {
   constructor(props) {
@@ -14,8 +15,12 @@ class ImageCarousel extends React.Component {
       thumbnailSlice: [
         this.props.selectedStyle.photos[0],
       ],
-      expandedView: false
+      expandedView: false,
+      zoomView: false,
+      mouseX: 0,
+      mouseY: 0
     };
+
     this.changeSelectedPhoto = this.changeSelectedPhoto.bind(this);
     this.handleLeftArrow = this.handleLeftArrow.bind(this);
     this.handleRightArrow = this.handleRightArrow.bind(this);
@@ -120,38 +125,73 @@ class ImageCarousel extends React.Component {
     this.setState({ expandedView: false});
   }
 
-  zoomView(e) {
+  toggleZoom(e) {
     let image = e.target;
-    image.id = 'image-zoom-state';
+    this.setState({ zoomView: !this.state.zoomView }, () => {
+      if (this.state.zoomView) {
+        document.getElementById('expanded-image-container').id = 'zoom-image-container';
+      } else {
+        document.getElementById('zoom-image-container').id = 'expanded-image-container';
+        this.setState({ expandedView: false });
+      }
+    });
+  }
+
+  imagePan(e) {
+    if (this.state.zoomView) {
+      let image = document.getElementById('expanded-image');
+      let windowHeight = window.innerHeight;
+      let windowWidth = window.innerWidth;
+      let imageHeight = image.clientHeight;
+      let imageWidth = image.clientWidth;
+      let mouseX = e.pageX;
+      let mouseY = e.pageY;
+      let panWidth = imageWidth - windowWidth;
+      let panHeight = imageHeight - windowHeight;
+      let percentageX = mouseX / windowWidth;
+      let percentageY = mouseY / windowHeight;
+      let aimX = -1 * panWidth * percentageX;
+      let aimY = -1 * panHeight * percentageY;
+
+      image.style.left = aimX + 'px';
+      image.style.top = aimY + 'px';
+    }
   }
 
   render() {
     return (
       this.state.expandedView ?
         <div id='expanded-view-modal'>
-          <span onClick={this.collapsedView}>x</span>
           <div id='expanded-image-container'>
-            {this.state.mainPhotoIndex !== 0 &&
-            <BsArrowLeftCircleFill
-              id='image-gallery-left-arrow'
-              onClick={this.handleLeftArrow}/>}
-            {this.state.mainPhotoIndex !== this.state.photos.length - 1 &&
-          <BsArrowRightCircleFill
-            id='image-gallery-right-arrow'
-            onClick={this.handleRightArrow} />}
-            <img src={this.state.photos[this.state.mainPhotoIndex].url}></img>
-            <Thumbnails
-              photos={this.state.thumbnailSlice}
-              mainPhotoUrl={this.state.photos[this.state.mainPhotoIndex].thumbnail_url}
-              mainIndex={this.state.mainPhotoIndex}
-              changePhoto={this.changeSelectedPhoto}/>
-            {this.findImageId(this.state.thumbnailSlice[0].url) !== this.findImageId(this.state.photos[0].url) && <IoIosArrowUp
-              onClick={this.handleUpArrow}
-              id='thumbnail-gallery-up-arrow'/>}
-            {this.state.thumbnailSlice[this.state.thumbnailSlice.length - 1] !== this.state.photos[this.state.photos.length - 1] &&
-          <IoIosArrowDown
-            onClick={this.handleDownArrow}
-            id='thumbnail-gallery-down-arrow'/>}
+            <img id='expanded-image'
+              onMouseMove={this.imagePan.bind(this)}
+              onClick={this.toggleZoom.bind(this)}src={this.state.photos[this.state.mainPhotoIndex].url}>
+            </img>
+            {!this.state.zoomView &&
+            <div>
+              <span onClick={this.collapsedView}><AiOutlineClose id='expand-view-close'/></span>
+              {this.state.mainPhotoIndex !== 0 &&
+              <BsArrowLeftCircleFill
+                id='image-gallery-left-arrow'
+                onClick={this.handleLeftArrow}/>}
+              {this.state.mainPhotoIndex !== this.state.photos.length - 1 &&
+            <BsArrowRightCircleFill
+              id='image-gallery-right-arrow'
+              onClick={this.handleRightArrow} />}
+              <Thumbnails
+                expandedView={this.state.expandedView}
+                photos={this.state.thumbnailSlice}
+                mainPhotoUrl={this.state.photos[this.state.mainPhotoIndex].thumbnail_url}
+                mainIndex={this.state.mainPhotoIndex}
+                changePhoto={this.changeSelectedPhoto}/>
+              {this.findImageId(this.state.thumbnailSlice[0].url) !== this.findImageId(this.state.photos[0].url) && <IoIosArrowUp
+                onClick={this.handleUpArrow}
+                id='thumbnail-gallery-up-arrow'/>}
+              {this.state.thumbnailSlice[this.state.thumbnailSlice.length - 1] !== this.state.photos[this.state.photos.length - 1] &&
+            <IoIosArrowDown
+              onClick={this.handleDownArrow}
+              id='thumbnail-gallery-down-arrow'/>}
+            </div> }
           </div>
         </div> :
         <div id='image-gallery'>
@@ -183,3 +223,5 @@ class ImageCarousel extends React.Component {
 }
 
 export default ImageCarousel;
+
+let zoomPanTranslate;

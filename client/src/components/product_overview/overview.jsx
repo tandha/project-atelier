@@ -3,6 +3,8 @@ import ImageCarousel from './imageGallery/imagesCarousel.jsx';
 import Information from './productInformation/information.jsx';
 import StyleSelector from './styleSelector/styleSelector.jsx';
 import Cart from './addToCart/cart.jsx';
+import Feature from './productInformation/featureInformation.jsx';
+import Description from './productInformation/descriptionSlogan.jsx';
 
 class ProductOverview extends React.Component {
   constructor(props) {
@@ -38,8 +40,8 @@ class ProductOverview extends React.Component {
         />
         <StyleSelector
           changeStyle={this.changeSelectedStyle.bind(this)}
-          name={this.state.selectedStyle.name}
           styles={this.props.styles}
+          selectedStyle={this.state.selectedStyle}
         />
         <Cart
           currentProductInOutfit={this.props.currentProductInOutfit}
@@ -47,6 +49,8 @@ class ProductOverview extends React.Component {
           selectedStyle={this.state.selectedStyle}
           toggleOutfit={this.props.toggleOutfit}
         />
+        <Description product={this.props.product} />
+        <Feature features={this.props.product.features}/>
       </div>
     );
   }

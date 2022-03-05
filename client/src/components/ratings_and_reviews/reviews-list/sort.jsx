@@ -10,10 +10,10 @@ const Sort = (props) => {
     <div id='review-list-sort'>
       <p>
         {props.numReviews} reviews, sorted by&nbsp;
-        <select onChange={onSortSelect}>
-          <option value='relevant'>Relevant</option>
-          <option value='newest'>Newest</option>
-          <option value='helpful'>Helpful</option>
+        <select id='reviews-sort-dropdown' onChange={onSortSelect}>
+          <option value='relevant'>relevance</option>
+          <option value='newest'>newest</option>
+          <option value='helpful'>helpful</option>
         </select>
       </p>
     </div>

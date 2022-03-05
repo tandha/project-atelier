@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import StarRating from '../../starRating.jsx';
+import { IoMdCheckmarkCircle, IoMdCheckmark } from 'react-icons/io';
 
 class Tile extends React.Component {
 
@@ -8,7 +10,9 @@ class Tile extends React.Component {
 
     this.state = {
       helpfulClicked: false,
-      helpfulness: 0
+      helpfulness: 0,
+      photoModal: false,
+      photoURL: ''
     };
 
     this.onHelpfulClick = this.onHelpfulClick.bind(this);
@@ -41,60 +45,80 @@ class Tile extends React.Component {
     }
   }
 
-  onThumbnailClick() {
+  onThumbnailClick(url) {
+    this.setState({ photoModal: true, photoURL: url });
+  }
 
+  closePhotoModal() {
+    this.setState({ photoModal: false, photoURL: '' });
   }
 
   render() {
     return (
-      <div className='review-list-tile'>
+      <div className='review-tile'>
 
-        <div className='review-list-tile-rating'>
-          <span>Rating: {this.props.review.rating}</span>
+        <div className='review-tile-top-row'>
+          <div className='review-tile-rating'>
+            <StarRating value={this.props.review.rating} />
+          </div>
+
+          <div className='review-tile-name-date'>
+            <span><IoMdCheckmarkCircle className='review-tile-checkmark'/>{this.props.review.reviewer_name}, {renderDate(this.props.review.date)}</span>
+          </div>
         </div>
 
-        <div className='review-list-tile-name'>
-          <span>Name: {this.props.review.reviewer_name}</span>
+        <div className='review-tile-summary'>
+          <span>{this.props.review.summary}</span>
         </div>
 
-        <div className='review-list-tile-date'>
-          <span>Date: {renderDate(this.props.review.date)}</span>
+        <div className='review-tile-body'>
+          <span>{this.props.review.body}</span>
         </div>
 
-        <div className='review-list-tile-summary'>
-          <span>Summary: {this.props.review.summary}</span>
+        <div className='review-tile-photos'>
+          {
+            this.props.review.photos.length === 0 ? null
+              : this.props.review.photos.map((photo, index) => {
+                return <img className='review-image' src={photo.url} onClick={this.onThumbnailClick.bind(this, photo.url)} />;
+              })
+          }
         </div>
 
-        <div className='review-list-tile-body'>
-          <span>Body: {this.props.review.body}</span>
-        </div>
-
-        <div className='review-list-tile-photos'>
-          <span>Photos: None</span>
-        </div>
-
-        <div className='review-list-tile-recommend'>
-          <span>Recommended:
+        <div className='review-tile-recommend'>
+          <span>
             {
               this.props.review.recommend
-                ? <span> Yes</span>
-                : <span> No</span>
+                ? <span><IoMdCheckmark /> I recommend this product</span>
+                : null
             }
           </span>
         </div>
 
-        <div className='review-list-tile-response'>
-          <span>Response: {this.props.review.response}</span>
-        </div>
+        <div className='review-tile-response'>{
+          this.props.review.response
+            ? <span>this.props.review.response</span>
+            : null
+        }</div>
 
-        <div className='review-list-tile-helpful-link'>
+        <div className='review-tile-helpful'>
           <span>
-            Helpful? <a className='review-list-tile-helpful'
+            Helpful? <a className='review-tile-helpful-link'
               onClick={this.onHelpfulClick}>Yes</a> ({this.state.helpfulness})
           </span>
         </div>
 
-        <br></br>
+        <hr className='review-tile-line'></hr>
+
+        {
+          this.state.photoModal
+            ? <div id='review-photo-modal'>
+              <div id='review-photo-content'>
+                <img src={this.state.photoURL}></img><br></br>
+                <button onClick={this.closePhotoModal.bind(this)}>Close</button>
+              </div>
+            </div>
+            : null
+        }
       </div>
     );
   }

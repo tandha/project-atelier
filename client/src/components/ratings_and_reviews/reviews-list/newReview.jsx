@@ -1,14 +1,49 @@
 import React from 'react';
 import axios from 'axios';
+import { IMG_KEY } from '../../../../../server/config.js';
 
 const NewReview = (props) => {
 
   const onUpload = (event) => {
     event.preventDefault();
+
+    const container = document.querySelector('#new-review-photos-preview');
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    const img = new Image();
+
+    reader.onload = (event) => {
+      const body = event.target.result.split(',')[1];
+      const bodyFormData = new FormData();
+      bodyFormData.append('image', body);
+
+      axios({
+        headers: { 'content-type': 'multipart/form-data' },
+        method: 'post',
+        url: `https://api.imgbb.com/1/upload?key=${IMG_KEY}`,
+        data: bodyFormData
+      }).then((res) => {
+        img.src = res.data.data.url;
+      }).catch((err)=> {
+        console.log('err getting img url', err);
+      });
+    };
+
+    img.className = 'new-review-photo';
+    img.height = 100;
+    container.appendChild(img);
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+    if (container.childElementCount >= 4) {
+      document.querySelector('#new-review-photos').style.visibility = 'hidden';
+    }
   };
 
   const onSubmit = (event) => {
     event.preventDefault();
+
     let starRating = document.querySelector('input[name="star-rating"]:checked').value;
     let recommended = document.querySelector('input[name="recommend"]:checked').value;
     let summary = document.querySelector('input[name="summary"]').value;
@@ -16,10 +51,14 @@ const NewReview = (props) => {
     let nickname = document.querySelector('input[name="nickname"]').value;
     let email = document.querySelector('input[name="email"]').value;
 
+    let images = document.querySelectorAll('#new-review-photos-preview');
+    images = images[0].childNodes;
+    let imageURLs = [];
+    images.forEach(image => imageURLs.push(image.getAttribute('src')));
+
     recommended === 'true' ? recommended = true : recommended = false;
 
     let reviewChars = {};
-
     chars.forEach(char => {
       let rating = document.querySelector(`input[name=${char}]:checked`).value;
       reviewChars[props.chars[char].id] = parseInt(rating);
@@ -36,7 +75,7 @@ const NewReview = (props) => {
         'recommend': recommended,
         'name': nickname,
         'email': email,
-        'photos': [],
+        'photos': imageURLs,
         'characteristics': reviewChars
       }
     }).then((response) => {
@@ -152,6 +191,11 @@ const NewReview = (props) => {
             placeholder='Why did you like the product or not?'></textarea>
           <br></br><br></br>
 
+          <label>Upload your photos</label><br></br>
+          <input id='new-review-photos' type='file' accept='image/*' multiple onChange={(e) => onUpload(e)}></input>
+          <div id='new-review-photos-preview'></div>
+          <br></br><br></br>
+
           <label>Nickname</label>
 
           <input type='text' name='nickname' id='new-review-nickname' required
@@ -169,11 +213,12 @@ const NewReview = (props) => {
             For authentication reasons, you will not be emailed
           </label>
           <br></br><br></br>
-
-          <button>Submit</button>
-
+          <div id='new-review-buttons'>
+            <button>Submit</button>
+            <button onClick={onClose}>Close</button>
+          </div>
         </form>
-        <button onClick={onClose}>Close</button>
+
       </div>
     </div>
   );
