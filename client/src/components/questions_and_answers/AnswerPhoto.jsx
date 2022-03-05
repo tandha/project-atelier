@@ -2,7 +2,7 @@ import React from 'react';
 
 const AnswerPhoto = (props) => {
   return (
-    <img className='answer-photo' src={props.photo} alt='photo'/>
+    <img className='answer-photo' src={props.photo} alt='photo' onClick={() => props.answerPhotoClick(props.photo)}/>
   );
 };
 
