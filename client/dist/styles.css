@@ -357,11 +357,24 @@
 
 
 /******************* Questions & Answers ******************/
+.search-wrapper {
+  position: relative;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  border: 1px solid black;
+}
+
 #QA-search-bar {
   height: 50px;
-  width: 100%;
+  width: 99%;
   font-weight: bold;
-  margin-bottom: 1em;
+  border: none;
+}
+
+#search-icon {
+  position: absolute;
+  top: 40%;
+  right: 20px;
 }
 
 #question-list {
