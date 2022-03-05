@@ -1,13 +1,14 @@
 import React from 'react';
+import { IoMdCheckmark } from 'react-icons/io';
 
 const Feature = (props) => {
   return (
-    <div>
+    <ul id='features-container'>
       {props.features.map((feature, i) => {
         let id = 'feature-' + i;
-        return <div key={id} id={id} className='features'>{feature.feature}: {feature.value}</div>;
+        return <li key={id} id={id} className='features'><IoMdCheckmark />{feature.feature}: {feature.value}</li>;
       })}
-    </div>
+    </ul>
   );
 };
 
