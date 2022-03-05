@@ -5,10 +5,10 @@ const StyleSelector = (props) => {
 
   return (
     <div id='selected-styles'>
-      <strong>{'Style > '}</strong>
-      <span data-testid="selected-style-name" id='selected-style-name'>{props.name}</span>
+      <span id='style-title'>{'Style > '}</span>
+      <span data-testid="selected-style-name" id='selected-style-name'>{props.selectedStyle.name}</span>
       <div id='styles-thumbnails-container'>
-        <StyleThumbnail changeStyle={props.changeStyle} styles={props.styles} />
+        <StyleThumbnail changeStyle={props.changeStyle} selectedStyle={props.selectedStyle} styles={props.styles} />
       </div>
     </div>
   );

@@ -11,6 +11,8 @@ import StyleSelector from '../styleSelector/styleSelector.jsx';
 import StyleThumbnail from '../styleSelector/StyleThumbnail.jsx';
 import Cart from '../addToCart/cart.jsx';
 import Option from '../addToCart/option.jsx';
+import Description from '../productInformation/descriptionSlogan.jsx';
+import Feature from '../productInformation/featureInformation.jsx';
 
 //////////////// Render Tests ////////////////
 describe('Overview Widget Components Render', () => {
@@ -31,7 +33,7 @@ describe('Overview Widget Components Render', () => {
   });
   test('Renders Style Selector', () => {
     let props = {
-      name: data.styles.results[0].name,
+      selectedStyle: data.styles.results[0],
       styles: data.styles,
       changeStyle: function(e) { return e; }
     };
@@ -151,38 +153,46 @@ describe('Product Information Component', () => {
   let props = {
     product: {
       name: 'Kai Onesie',
-      slogan: 'Best onsie ever',
-      description: 'It is a onsie',
       category: 'Clothes',
-      features: [{feature: 'Fabric', value: '100% cotton'}, {feature: 'Care', value: 'Machine Wash'}, {feature: 'Warranty', value: 'Lifetime'}, {feature: 'Made In', value: 'USA'}]
+      description: 'It is a onsie',
+      slogan: 'Best onsie ever'
     },
+    features: [{feature: 'Fabric', value: '100% cotton'}, {feature: 'Care', value: 'Machine Wash'}, {feature: 'Warranty', value: 'Lifetime'}, {feature: 'Made In', value: 'USA'}],
     selectedStyle: data.styles.results[0]
   };
   test('Renders All Product Information Properties to the Screen', () => {
     render(<Information {...props}/>);
     expect(screen.getByText('Kai Onesie')).toBeInTheDocument();
-    expect(screen.getByText('Best onsie ever')).toBeInTheDocument();
-    expect(screen.getByText('It is a onsie')).toBeInTheDocument();
     expect(screen.getByText('Clothes')).toBeInTheDocument();
   });
   test('Dynamically Renders Product Features', () => {
-    render(<Information {...props}/>);
-    props.product.features.forEach((feature) => {
+    render(<Feature {...props}/>);
+    props.features.forEach((feature) => {
       let formattedFeature = `${feature.feature}: ${feature.value}`;
       expect(screen.getByText(formattedFeature)).toBeInTheDocument();
     });
 
   });
-  //TODO: Anchor works
-  //TODO: Renders Price and Sale Price
-  //TODO: renders star svgs
-  //TODO: add to outfit button works
+  test('It Renders Product Slogan And Description to the Screen', () => {
+    render(<Description {...props}/>);
+    expect(screen.getByText('Best onsie ever')).toBeInTheDocument();
+    expect(screen.getByText('It is a onsie')).toBeInTheDocument();
+  });
 });
+
+//TODO: Anchor works
+//TODO: Renders Price and Sale Price
+//TODO: renders star svgs
+//TODO: add to outfit button works
+
 
 //////////////// Style Selector Tests ////////////////
 describe('Style Selector Component', () => {
   let props = {
-    name: 'Some Name',
+    selectedStyle: {
+      name: 'Some Name',
+      photos: data.styles.results[0].photos
+    },
     styles: data.styles,
     changeStyle: function(e) { return e; }
   };
@@ -193,8 +203,8 @@ describe('Style Selector Component', () => {
 
   });
   test('Renders The Correct Number of Styles', () => {
-    const { getAllByRole } = render(<StyleSelector {...props}/>);
-    const thumbnailList = getAllByRole('listitem');
+    const { getAllByTestId } = render(<StyleSelector {...props}/>);
+    const thumbnailList = getAllByTestId('thumbnail');
     expect(thumbnailList).toHaveLength(2);
 
   });
@@ -227,7 +237,7 @@ describe('Cart Component', () => {
     let selectSize = getByTestId('select-size').querySelector('select');
     fireEvent.change(selectSize, {target: { value: 'S'}});
     let options = getAllByTestId('select-option-quantity');
-    expect(options).toHaveLength(15);
+    expect(options).toHaveLength(14);
   });
   test('When Add To Bag is Clicked The Form Should Reset', () => {
     let props = {
