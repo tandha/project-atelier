@@ -3,8 +3,13 @@ import { IoIosStarOutline, IoIosStar} from 'react-icons/io';
 
 const RelatedItem = (props) => {
 
+  const handleClick = (e) => {
+    let productId = props.relatedItem.id;
+    props.updateProduct(productId);
+  };
+
   return (
-    <div className='related-item-container'>
+    <div onClick={handleClick.bind(this)} className='related-item-container'>
       <span className='related-item-outfit-toggle-button'><IoIosStarOutline /></span>
       <div className='related-item-image'>
         <img src={props.relatedItem.image}></img>

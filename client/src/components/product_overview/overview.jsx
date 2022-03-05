@@ -12,6 +12,12 @@ class ProductOverview extends React.Component {
     };
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.styles.results[0] !== this.props.styles.results[0]) {
+      this.setState({ selectedStyle: this.props.styles.results[0] });
+    }
+  }
+
   changeSelectedStyle(e) {
     let index;
     let id = Number(e.target.getAttribute('id'));
