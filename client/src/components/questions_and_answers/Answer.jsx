@@ -1,13 +1,16 @@
 import React from 'react';
 import axios from 'axios';
 import AnswerPhoto from './AnswerPhoto.jsx';
+import {IoIosCloseCircleOutline} from 'react-icons/io';
 
 class Answer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       AnswerHelpful: false,
-      reported: false
+      reported: false,
+      showPhotoModal: false,
+      expandImageURL: ''
     };
 
     this.renderAnswererName = this.renderAnswererName.bind(this);
@@ -15,6 +18,8 @@ class Answer extends React.Component {
     this.markAnswerHelpful = this.markAnswerHelpful.bind(this);
     this.renderReportBtn = this.renderReportBtn.bind(this);
     this.reportAnswer = this.reportAnswer.bind(this);
+    this.answerPhotoClick = this.answerPhotoClick.bind(this);
+    this.renderPhotoModal = this.renderPhotoModal.bind(this);
   }
 
   renderAnswererName() {
@@ -65,15 +70,36 @@ class Answer extends React.Component {
     });
   }
 
+  answerPhotoClick(url) {
+    this.setState(prevState => ({showPhotoModal: !prevState.showPhotoModal}));
+    this.setState({
+      expandImageURL: url
+    });
+  }
+
+  renderPhotoModal() {
+    if (this.state.showPhotoModal) {
+      return (
+        <div id='answer-photo-modal'>
+          <div id='answer-photo-content'>
+            <button className='QA-close-btn' onClick={this.answerPhotoClick}><IoIosCloseCircleOutline/></button>
+            <img id='answer-photo-content' src={this.state.expandImageURL} alt='expandPhoto'/>
+          </div>
+        </div>
+      );
+    } else { return null; }
+  }
+
   render() {
     return (
       <div className='each-answer'>
         <div className='answer-body'> {this.props.answer.body} </div>
         <div className='answer-photo-box'>
           {this.props.answer.photos.map((photo, index) => (
-            <AnswerPhoto photo={photo} key={index}/>
+            <AnswerPhoto photo={photo} key={index} answerPhotoClick={this.answerPhotoClick} />
           ))}
         </div>
+        {this.renderPhotoModal()}
         <div className='answer-interaction'>
           by {this.renderAnswererName()}, {renderDate(this.props.answer.date.toString())} | Helpful?
           {this.renderAnswerHelpfulBtn()} | {this.renderReportBtn()}
