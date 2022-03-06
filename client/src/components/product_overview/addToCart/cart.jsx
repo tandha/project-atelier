@@ -1,5 +1,6 @@
 import React from 'react';
 import Option from './option.jsx';
+import axios from 'axios';
 import { IoIosStarOutline, IoIosStar} from 'react-icons/io';
 
 
@@ -9,9 +10,10 @@ class Cart extends React.Component {
     this.state = {
       availableSizes: [],
       availableQuantities: [],
-      selectedSize: 'tbd',
-      selectedQuantity: 'tbd',
+      selectedSize: 'TBD',
+      selectedQuantity: 'TBD',
     };
+    this.size = 'SELECT SIZE';
   }
 
   componentDidMount() {
@@ -25,7 +27,6 @@ class Cart extends React.Component {
     }
   }
 
-
   resetForm() {
     document.getElementById('cart-form').reset();
   }
@@ -33,12 +34,16 @@ class Cart extends React.Component {
   setAvailableSizes() {
     let skus = this.props.selectedStyle.skus;
     let sizes = [];
-    let quantities = [];
     for (let key in skus) {
-      sizes.push(skus[key].size);
+      if (skus[key].quantity && skus[key].quantity > 0) {
+        sizes.push(skus[key].size);
+      }
     }
-    this.setState({ availableSizes: sizes } );
-    return sizes;
+    if (sizes.length === 0) {
+      this.size = 'OUT OF STOCK';
+    } else {
+      this.setState({ availableSizes: sizes } );
+    }
   }
 
   determineQuantityFromSelectedSize() {
@@ -55,6 +60,9 @@ class Cart extends React.Component {
       }
     }
     this.setAvailableQuantities(quantities);
+    this.setState({ selectedQuantity: 1 });
+
+    let quantitySelectElement = document.getElementById('quantity').innerHTML = '1';
   }
 
   setAvailableQuantities(quantities) {
@@ -64,9 +72,8 @@ class Cart extends React.Component {
   setSizeSelection(e) {
     let selectedSize = e.target.value;
     this.setState( {selectedSize}, () => {
-      //Once a size has been selected quantity can be generated
       this.determineQuantityFromSelectedSize();
-    } );
+    });
   }
 
   setQuantitySelection(e) {
@@ -78,43 +85,68 @@ class Cart extends React.Component {
     this.props.toggleOutfit(this.props.productId);
   }
 
-  addToCart(e) {
-    //TODO: POST the selected size (but not quantity?) to the API
+  cartHandler(e) {
     e.preventDefault();
-    console.log('size', this.state.selectedSize, 'qty', this.state.selectedQuantity);
+    const skus = this.props.selectedStyle.skus;
+    let quantity = this.state.selectedQuantity;
+    let sku;
+    for (let key in skus) {
+      if (skus[key].size === this.state.selectedSize) {
+        sku = key;
+      }
+    }
+    let promises = [];
+    while (quantity > 0) {
+      promises.push(this.addToCart(sku));
+      quantity--;
+    }
+    Promise.all(promises)
+      .then((res) => {
+        console.log('Success posting cart to API');
+      })
+      .catch((err) => {
+        console.log('Error posting cart to API', err);
+      });
     this.resetForm();
+  }
+
+  addToCart(sku, quantity) {
+    return axios.post('/cart', {'sku_id': sku});
   }
 
   render() {
     return (
       <div id='cart'>
-        <form id='cart-form' onSubmit={this.addToCart.bind(this)}>
+        <form id='cart-form' onSubmit={this.cartHandler.bind(this)}>
           <div data-testid='select-size' id='select-size'>
-            <select onChange={this.setSizeSelection.bind(this)} >
-              <option>SELECT SIZE</option>
+            <select required onChange={this.setSizeSelection.bind(this)} >
+              <option id='size' value="">{this.size}</option>
               {
                 this.state.availableSizes.map((size, i) => {
                   return <Option key={i} type={'size'} option={size}/>;
                 })
               }
             </select>
-
           </div>
           <div data-testid='select-quantity' id='select-quantity'>
             <select onChange={this.setQuantitySelection.bind(this)}>
-              <option>-</option>
+              <option id='quantity'>-</option>
               {
                 this.state.availableQuantities.map((qty) => {
-                  return <Option key={qty} type={'quantity'} option={qty}/>;
+                  if (qty !== 1) {
+                    return <Option key={qty} type={'quantity'} option={qty}/>;
+                  }
                 })
               }
             </select>
-
           </div>
-          <div id='add-to-bag'>
-            <button>ADD TO BAG</button>
-            <span> + </span>
-          </div>
+          {
+            this.size !== 'OUT OF STOCK' &&
+            <div id='add-to-bag'>
+              <button>ADD TO BAG</button>
+              <span> + </span>
+            </div>
+          }
           <div id='add-to-myoutfit'>
             {
               this.props.currentProductInOutfit === false ?
