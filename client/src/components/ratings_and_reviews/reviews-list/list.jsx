@@ -25,12 +25,15 @@ class List extends React.Component {
     this.getReviews(false);
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     if (this.state.currentFilter.length !== this.props.currentFilter.length) {
       let newFilter = this.props.currentFilter.slice();
       this.setState({ currentFilter: newFilter }, () => {
         this.updateDisplayedReviews(false);
       });
+    }
+    if (prevProps.productID !== this.props.productID) {
+      this.getReviews();
     }
   }
 
