@@ -806,7 +806,7 @@
 
 .star-bar-fill {
   height: 9px;
-  background-color: rgb(90, 90, 90);
+  background-color: rgb(37, 119, 75); /* rgb(90, 90, 90) */
 }
 
 #stars-filter {
@@ -990,11 +990,38 @@
   cursor: pointer;
 }
 
+/* #review-list-buttons button {
+  background: none;
+  border: none;
+  font-size: 1em;
+  outline: none;
+  padding-right: none;
+  text-align: left;
+  width: 100%;
+} */
+
 #review-list-buttons {
   display: flex;
   justify-content: space-between;
   margin-bottom: 25px;
   margin-top: 25px;
+}
+
+#button-1, #button-2 {
+  background-color: white;
+  border: 1px solid black;
+  display: inline-block;
+  height: 50px;
+  padding: .75em;
+  margin: .5em .5em .5em 0em;
+  vertical-align: middle;
+  width: 200px;
+}
+
+#button-1:hover, #button-2:hover {
+  cursor: pointer;
+  background-color: #000;
+  color: #fefefe;
 }
 
 #new-review-modal {

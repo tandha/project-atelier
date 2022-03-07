@@ -60,7 +60,7 @@ const StarList = (props) => {
 
         {
           props.currentFilter.length > 0
-            ? <span onClick={onStarClick} id='0-star-bar' className='remove-filter'>Remove</span>
+            ? <span onClick={onStarClick} id='0-star-bar' className='remove-filter'>Remove all filters</span>
             : <span></span>
         }
       </div>

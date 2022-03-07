@@ -103,7 +103,7 @@ class Tile extends React.Component {
         <div className='review-tile-helpful'>
           <span>
             Helpful? <a className='review-tile-helpful-link'
-              onClick={this.onHelpfulClick}>Yes</a> ({this.state.helpfulness})
+              onClick={this.onHelpfulClick}>Yes</a> ({this.state.helpfulness})&nbsp;&nbsp;|&nbsp;&nbsp;<span className='review-tile-helpful-link'>Report</span>
           </span>
         </div>
 
