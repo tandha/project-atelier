@@ -107,6 +107,7 @@ class Answer extends React.Component {
       </div>
     );
   }
+  
 }
 
 export default Answer;
