@@ -14,14 +14,14 @@ const Buttons = (props) => {
     return (
       <div id='review-list-buttons'>
         {/* <div></div> Did I need this div for something? */}
-        <button onClick={onAddReviewClick}>Add A Review +</button>
+        <button id='button-2' onClick={onAddReviewClick}>Add A Review +</button>
       </div>
     );
   } else {
     return (
       <div id='review-list-buttons'>
-        <button id='button-1' onClick={onMoreClick}>More Reviews</button>&nbsp;&nbsp;
-        <button id='button-2' onClick={onAddReviewClick}>Add A Review +</button>
+        <button className='review-button' onClick={onMoreClick}>More Reviews</button>&nbsp;&nbsp;
+        <button className='review-button' onClick={onAddReviewClick}>Add A Review +</button>
       </div>
     );
   }

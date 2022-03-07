@@ -114,7 +114,7 @@ class Tile extends React.Component {
             ? <div id='review-photo-modal'>
               <div id='review-photo-content'>
                 <img src={this.state.photoURL}></img><br></br>
-                <button onClick={this.closePhotoModal.bind(this)}>Close</button>
+                <button className='review-button' onClick={this.closePhotoModal.bind(this)}>Close</button>
               </div>
             </div>
             : null

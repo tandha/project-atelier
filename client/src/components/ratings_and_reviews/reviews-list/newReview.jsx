@@ -214,8 +214,8 @@ const NewReview = (props) => {
           </label>
           <br></br><br></br>
           <div id='new-review-buttons'>
-            <button>Submit</button>
-            <button onClick={onClose}>Close</button>
+            <button className='review-button'>Submit</button>
+            <button className='review-button' onClick={onClose}>Close</button>
           </div>
         </form>
 
