@@ -637,9 +637,8 @@
 
 #answer-photo-content {
   background-color: #fefefe;
-  margin: auto;
+  margin: 250px auto;
   padding: 10px;
-  border: 1px solid #888;
   width: fit-content;
   height: auto;
   font-size: 20px;
@@ -716,7 +715,7 @@
 }
 
 .QA-close-btn {
-  font-size: 16px;
+  font-size: 20px;
   float: right;
   background: none;
   border: none;
