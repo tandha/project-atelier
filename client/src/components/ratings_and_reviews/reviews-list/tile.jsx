@@ -94,9 +94,9 @@ class Tile extends React.Component {
           </span>
         </div>
 
-        <div className='review-tile-response'>{
+        <div id='review-respone'>{
           this.props.review.response
-            ? <span>this.props.review.response</span>
+            ? <div className='review-tile-response'><strong>Reponse from seller:</strong><br></br>{this.props.review.response}</div>
             : null
         }</div>
 

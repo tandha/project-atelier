@@ -931,6 +931,15 @@
   margin-bottom: 15px;
 }
 
+.review-tile-response {
+  background-color: rgb(238, 238, 238);
+  margin-bottom: 15px;
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 15px;
+  line-height: 25px;
+}
+
 .review-tile-helpful {
   font-size: 15px;
 }

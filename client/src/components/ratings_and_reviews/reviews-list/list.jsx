@@ -45,7 +45,7 @@ class List extends React.Component {
         'page': 1,
         'count': 100000,
         'sort': this.state.currentSort,
-        'product_id': this.props.productID
+        'product_id': 65052 //this.props.productID
       }
     }).then((response) => {
       this.setState({ reviews: response.data.data.results }, () => {
