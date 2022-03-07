@@ -113,8 +113,10 @@ class QuestionsAndAnswers extends React.Component {
           productName = {this.props.product.name}
           getProductQuestions = {this.getProductQuestions}
         />
-        {this.renderMoreQuestionBtn()}
-        <button id='add-question-btn' onClick={this.clickAddQuestion}> ADD A QUESTION <IoMdAdd/> </button>
+        <div id='QA-buttons'>
+          {this.renderMoreQuestionBtn()}
+          <button id='add-question-btn' onClick={this.clickAddQuestion}> ADD A QUESTION <IoMdAdd/> </button>
+        </div>
         <QuestionModal
           clickAddQuestion = {this.clickAddQuestion}
           submitQuestion = {this.submitQuestion}
