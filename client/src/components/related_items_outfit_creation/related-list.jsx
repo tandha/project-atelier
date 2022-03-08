@@ -7,7 +7,7 @@ const RelatedItems = (props) => {
     <div id='related-items-container'>
       {props.relatedItems.map((item, i) => {
         let key = 'related-item-' + i;
-        return <RelatedItem key={key} starRating={props.starRating} relatedItem={item}/>;
+        return <RelatedItem key={key} updateProduct={props.updateProduct} starRating={props.starRating} relatedItem={item}/>;
       })}
     </div>
   );
