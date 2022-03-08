@@ -21,6 +21,7 @@ class Cart extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    // console.log(this.props.currentProductInOutfit); //should be false
     if (prevProps.selectedStyle !== this.props.selectedStyle) {
       this.setAvailableSizes();
       this.resetForm();

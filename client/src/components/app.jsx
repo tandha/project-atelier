@@ -41,7 +41,8 @@ class App extends React.Component {
           productIsFetched: true,
           stylesAreFetched: true,
           styles: res[1].data.data,
-          myOutfits: res[2]
+          myOutfits: res[2],
+          currentProductInOutfit: false
         });
       })
       .then((res) => {
