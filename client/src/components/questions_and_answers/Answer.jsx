@@ -83,7 +83,7 @@ class Answer extends React.Component {
         <div id='answer-photo-modal'>
           <div id='answer-photo-content'>
             <button className='QA-close-btn' onClick={this.answerPhotoClick}><IoIosCloseCircleOutline/></button>
-            <img id='answer-photo-content' src={this.state.expandImageURL} alt='expandPhoto'/>
+            <img src={this.state.expandImageURL} alt='expandPhoto'/>
           </div>
         </div>
       );

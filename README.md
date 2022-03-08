@@ -18,7 +18,7 @@
 ## Milestones
 
 -   [ ] **Mar 12** Project presentation
--   [ ] **Mar 05** Ship functional version and share with friends
+-   [x] **Mar 05** Ship functional version and share with friends
 -   [x] **Mar 01** Test code coverage
 -   [x] **Feb 19** Progress demo
 -   [x] **Feb 12** Initial Skeleton
