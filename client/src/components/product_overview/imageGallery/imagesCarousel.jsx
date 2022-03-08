@@ -32,7 +32,6 @@ class ImageCarousel extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('what is this', this.props.selectedStyle);
     if (prevProps.selectedStyle !== this.props.selectedStyle) {
       this.setState({
         mainPhotoIndex: prevState.mainPhotoIndex,
