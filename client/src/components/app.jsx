@@ -26,11 +26,15 @@ class App extends React.Component {
       currentProductInOutfit: false,
       starRating: 0
     };
-    this.initialId = 64624;
+    this.productId = 64624;
   }
 
   componentDidMount() {
-    Promise.all([this.getProduct(this.initialId), this.getStyles(this.initialId), this.getOutfits()])
+    this.updateProduct(this.productId);
+  }
+
+  updateProduct(id) {
+    Promise.all([this.getProduct(id), this.getStyles(id), this.getOutfits()])
       .then((res) => {
         this.setState({
           product: res[0].data.data,
@@ -65,6 +69,7 @@ class App extends React.Component {
   }
 
   getOutfits() {
+    //TODO: Handle if local storage has more than just my outfits in it
     let localStorageOutfits = Object.keys(localStorage);
     return localStorageOutfits;
   }
@@ -97,14 +102,14 @@ class App extends React.Component {
           product={this.state.product}
           styles={this.state.styles}
           starRating={<StarRating value={this.state.starRating}/>}
-          toggleOutfit={this.toggleOutfit.bind(this)}
-        />
+          toggleOutfit={this.toggleOutfit.bind(this)}/>
 
         <RelatedItemsOutfitCreationWithLogger
           product={this.state.product}
           myOutfits={this.state.myOutfits}
+          starRating={this.state.starRating}
           toggleOutfit={this.toggleOutfit.bind(this)}
-          starRating={this.state.starRating}/>
+          updateProduct={this.updateProduct.bind(this)} />
 
         <QuestionsAndAnswersWithLogger product={this.state.product}/>
 
