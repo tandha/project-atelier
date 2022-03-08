@@ -816,7 +816,7 @@
 
 .star-bar:hover {
   border: solid 1px black;
-  border-radius: 3px;
+  border-radius: 2px;
   cursor: pointer;
 }
 

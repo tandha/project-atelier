@@ -45,10 +45,13 @@ class List extends React.Component {
         'page': 1,
         'count': 100000,
         'sort': this.state.currentSort,
-        'product_id': 65052 //this.props.productID
+        'product_id': this.props.productID // 65052
       }
     }).then((response) => {
-      this.setState({ reviews: response.data.data.results }, () => {
+      if (response.data.data.results.length >= 2) {
+        this.setState({ listMaxed: true, listLength: 2 });
+      }
+      this.setState({ reviews: response.data.data.results, listLength: 2 }, () => {
         this.updateDisplayedReviews(scroll);
       });
     })
@@ -90,8 +93,8 @@ class List extends React.Component {
   }
 
   updateLength(scroll) {
-    let newLength = this.state.listLength + 2;
-    this.setState({ listLength: newLength }, () => this.updateDisplayedReviews(scroll));
+    // let newLength = this.state.listLength + 2;
+    this.setState({ listLength: this.state.reviews.length }, () => this.updateDisplayedReviews(scroll));
   }
 
   displayModal() {
