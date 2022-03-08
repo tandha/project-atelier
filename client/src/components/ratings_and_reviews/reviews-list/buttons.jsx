@@ -13,7 +13,7 @@ const Buttons = (props) => {
   if (props.listMaxed) {
     return (
       <div id='review-list-buttons'>
-        <button id='review-2' onClick={onAddReviewClick}>Add A Review +</button>
+        <button className='review-button' onClick={onAddReviewClick}>Add A Review +</button>
       </div>
     );
   } else {

@@ -127,7 +127,10 @@ class Tile extends React.Component {
 export default Tile;
 
 const renderDate = (string) => {
-  const date = new Date(string);
-  const render = new Intl.DateTimeFormat('en-GB', { dateStyle: 'long' }).format(date);
+  const isoString = new Date().toISOString();
+  const date = new Date(isoString);
+  const render = new Intl.DateTimeFormat('en-US', {
+    month: 'long', day: 'numeric', year: 'numeric'
+  }).format(date);
   return render;
 };
