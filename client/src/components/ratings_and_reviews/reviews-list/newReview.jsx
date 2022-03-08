@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
+import { IoIosStar} from 'react-icons/io';
 const IMG_KEY = process.env.IMG_KEY;
 
 const NewReview = (props) => {
@@ -92,6 +93,30 @@ const NewReview = (props) => {
 
   let chars = Object.keys(props.chars);
 
+  const stars = [0, 1, 2, 3, 4];
+  const [star, setStar] = useState(0);
+
+  const renderStars = (star) => {
+
+    let percentage = Math.round((star / 5) * 100);
+
+    return (
+      <div className='star-rating-container' id='new-review-stars'>
+        <div id='star-block-1' onClick={() => setStar(1)}/>
+        <div id='star-block-2' onClick={() => setStar(2)}/>
+        <div id='star-block-3' onClick={() => setStar(3)}/>
+        <div id='star-block-4' onClick={() => setStar(4)}/>
+        <div id='star-block-5' onClick={() => setStar(5)}/>
+        {
+          stars.map((index) => {
+            return <IoIosStar className='star-rating-star' key={index} />;
+          })
+        }
+        <div className='star-rating-overlay' style={{width: `${100 - percentage}%`}} />
+      </div>
+    );
+  };
+
   return (
     <div id='new-review-modal'>
       <div id='new-review-content'>
@@ -101,6 +126,10 @@ const NewReview = (props) => {
         <br></br>
 
         <form onSubmit={onSubmit}>
+
+          {renderStars(star)}
+
+          <br></br><br></br>
 
           <input type='radio' id='new-review-1star'
             name='star-rating' value='1' required></input>

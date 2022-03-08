@@ -42,5 +42,3 @@ package-lock.json
 .floobit
 .floo
 .flooignore
-.env
-fec.pem

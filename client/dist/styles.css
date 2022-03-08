@@ -1054,6 +1054,58 @@
   font-size: 25px;
 }
 
+#new-review-stars {
+  cursor: pointer;
+}
+
+#star-block-1 {
+  position: absolute;
+  z-index: 3;
+  width: 18px;
+  height: 20px;
+  margin-right: 2px;
+  background-color: rgba(0, 0, 0, 0.007);
+}
+
+#star-block-2 {
+  position: absolute;
+  z-index: 3;
+  width: 18px;
+  height: 20px;
+  left: 20px;
+  margin-right: 2px;
+  background-color: rgba(0, 0, 0, 0.007);
+}
+
+#star-block-3 {
+  position: absolute;
+  z-index: 3;
+  width: 18px;
+  height: 20px;
+  left: 40px;
+  margin-right: 2px;
+  background-color: rgba(0, 0, 0, 0.007);
+}
+
+#star-block-4 {
+  position: absolute;
+  z-index: 3;
+  width: 18px;
+  height: 20px;
+  left: 60px;
+  margin-right: 2px;
+  background-color: rgba(0, 0, 0, 0.007);
+}
+
+#star-block-5 {
+  position: absolute;
+  z-index: 3;
+  width: 18px;
+  height: 20px;
+  left: 80px;
+  background-color: rgba(0, 0, 0, 0.007);
+}
+
 #new-review-photos-preview {
   overflow-y: auto;
   overscroll-behavior-block: auto;
