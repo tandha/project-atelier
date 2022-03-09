@@ -146,8 +146,9 @@ class ImageCarousel extends React.Component {
         let image = document.getElementById('expanded-image');
         let xPos = e.clientX;
         let yPos = e.clientY;
-        let containerHeight = 1000;
-        let containerWidth = 1500;
+        let containerHeight = 1000; //will always be this high
+        // let containerWidth = window.innerWidth;
+        let containerWidth = 1500; //need to get window width
 
         let percentHeight = (xPos - containerWidth);
         let percentWidth = (yPos - containerHeight);

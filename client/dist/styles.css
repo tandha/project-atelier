@@ -1,8 +1,11 @@
 /************************* Global *************************/
-
+/* body { margin: 0; padding: 0; } */
+#centeredDiv { margin-right: auto; margin-left: auto; width: 800px; }
 #app {
   font-family: Arial, Helvetica, sans-serif;
   padding: .15em;
+  margin-left: auto;
+  margin-right: auto;
   max-width: 1500px;
 }
 
@@ -135,7 +138,7 @@ button{
 }
 
 #main-image{
-  cursor: url("https://img.icons8.com/ios-glyphs/30/000000/search--v1.png"), auto;
+  cursor: url("https://img.icons8.com/material-outlined/24/000000/search--v1.png"), auto;
   object-fit: cover;
   position: absolute;
   height: 100%;
@@ -232,7 +235,7 @@ button{
 }
 
 #expanded-view-modal {
-  cursor: url("https://img.icons8.com/external-tanah-basah-detailed-outline-tanah-basah/48/000000/external-plus-user-interface-tanah-basah-detailed-outline-tanah-basah-2.png"), auto;
+  cursor: url("https://img.icons8.com/material/24/000000/plus--v1.png"), auto;
   position: fixed;
   z-index: 2;
   left: 0;
@@ -243,9 +246,18 @@ button{
   background-color: rgba(0,0,0,0.4);
 }
 
-#expanded-image-container, #zoom-image-container{
+#zoom-image-container{
+  position: relative;
   height: 1000px;
   width: 1500px;
+  overflow: hidden;
+  z-index: 2;
+}
+
+#expanded-image-container{
+  position: relative;
+  height: 1000px;
+  width: 100%;
   overflow: hidden;
   z-index: 2;
 }
@@ -262,9 +274,6 @@ button{
   position: absolute;
 }
 
-#image-window {
-  position: absolute;
-}
 
 #zoom-image-container img {
   cursor: url("https://img.icons8.com/material-outlined/24/000000/minus.png"), auto;
