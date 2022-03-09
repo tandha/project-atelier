@@ -45,7 +45,6 @@ const NewReview = (props) => {
   const onSubmit = (event) => {
     event.preventDefault();
 
-    let starRating = document.querySelector('input[name="star-rating"]:checked').value;
     let recommended = document.querySelector('input[name="recommend"]:checked').value;
     let summary = document.querySelector('input[name="summary"]').value;
     let body = document.querySelector('textarea[name="body"]').value;
@@ -70,7 +69,7 @@ const NewReview = (props) => {
       url: '/reviews',
       data: {
         'product_id': props.product.id,
-        'rating': parseInt(starRating),
+        'rating': star,
         'summary': summary,
         'body': body,
         'recommend': recommended,
@@ -94,6 +93,10 @@ const NewReview = (props) => {
   let chars = Object.keys(props.chars);
 
   const stars = [0, 1, 2, 3, 4];
+  const ratings = [
+    '1 star - "Poor"', '2 stars - "Fair"', '3 stars - "Average"',
+    '4 stars - "Good"', '5 stars - "Great"'
+  ];
   const [star, setStar] = useState(0);
 
   const renderStars = (star) => {
@@ -101,19 +104,22 @@ const NewReview = (props) => {
     let percentage = Math.round((star / 5) * 100);
 
     return (
-      <div className='star-rating-container' id='new-review-stars'>
-        <div id='star-block-1' onClick={() => setStar(1)}/>
-        <div id='star-block-2' onClick={() => setStar(2)}/>
-        <div id='star-block-3' onClick={() => setStar(3)}/>
-        <div id='star-block-4' onClick={() => setStar(4)}/>
-        <div id='star-block-5' onClick={() => setStar(5)}/>
-        {
-          stars.map((index) => {
-            return <IoIosStar className='star-rating-star' key={index} />;
-          })
-        }
-        <div className='star-rating-overlay' style={{width: `${100 - percentage}%`}} />
-      </div>
+      <React.Fragment>
+        <div className='star-rating-container' id='new-review-stars'>
+          <div id='star-block-1' onClick={() => setStar(1)}/>
+          <div id='star-block-2' onClick={() => setStar(2)}/>
+          <div id='star-block-3' onClick={() => setStar(3)}/>
+          <div id='star-block-4' onClick={() => setStar(4)}/>
+          <div id='star-block-5' onClick={() => setStar(5)}/>
+          {
+            stars.map((index) => {
+              return <IoIosStar className='star-rating-star' key={index} />;
+            })
+          }
+          <div className='star-rating-overlay' style={{width: `${100 - percentage}%`}} />
+        </div>
+        {star === 0 ? <div id='new-review-star-text'></div> : <div id='new-review-star-text'>{ratings[star - 1]}</div>}
+      </React.Fragment>
     );
   };
 
@@ -127,39 +133,8 @@ const NewReview = (props) => {
 
         <form onSubmit={onSubmit}>
 
+          <label>Overall rating</label><br></br>
           {renderStars(star)}
-
-          <br></br><br></br>
-
-          <input type='radio' id='new-review-1star'
-            name='star-rating' value='1' required></input>
-
-          <label> 1 star - "Poor"</label>
-          <br></br>
-
-          <input type='radio' id='new-review-2star'
-            name='star-rating' value='2' required></input>
-
-          <label> 2 star - "Fair"</label>
-          <br></br>
-
-          <input type='radio' id='new-review-3star'
-            name='star-rating' value='3' required></input>
-
-          <label> 3 star - "Average"</label>
-          <br></br>
-
-          <input type='radio' id='new-review-4star'
-            name='star-rating' value='4' required></input>
-
-          <label> 4 star - "Good"</label>
-          <br></br>
-
-          <input type='radio' id='new-review-5star'
-            name='star-rating' value='5' required></input>
-
-          <label> 5 star - "Great"</label>
-          <br></br>
 
           <p>Do you recommend this product?</p>
 
