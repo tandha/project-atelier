@@ -161,31 +161,40 @@ const NewReview = (props) => {
           {
             chars.map((char, index) => {
               return (
-                <div key={index}>
+                <div className='new-review-chars-container' key={index}>
                   <span>{char}</span><br></br>
 
-                  <input type='radio' className='new-review-chars'
-                    id={`new-review-${char}1`} name={char} value='1' required></input>
+                  <div className='new-review-char-radios'>
+                    <input type='radio' className='new-review-chars'
+                      id={`new-review-${char}1`} name={char} value='1' required></input>
 
-                  <input type='radio' className='new-review-chars'
-                    id={`new-review-${char}2`} name={char} value='2' required></input>
+                    <input type='radio' className='new-review-chars'
+                      id={`new-review-${char}2`} name={char} value='2' required></input>
 
-                  <input type='radio' className='new-review-chars'
-                    id={`new-review-${char}3`} name={char} value='3' required></input>
+                    <input type='radio' className='new-review-chars'
+                      id={`new-review-${char}3`} name={char} value='3' required></input>
 
-                  <input type='radio' className='new-review-chars'
-                    id={`new-review-${char}4`} name={char} value='4' required></input>
+                    <input type='radio' className='new-review-chars'
+                      id={`new-review-${char}4`} name={char} value='4' required></input>
 
-                  <input type='radio' className='new-review-chars'
-                    id={`new-review-${char}5`} name={char} value='5' required></input>
+                    <input type='radio' className='new-review-chars'
+                      id={`new-review-${char}5`} name={char} value='5' required></input>
+                  </div>
+
+                  <div className='new-review-char-nums'>
+                    <span>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                    <span>5</span>
+                  </div>
+
+                  <div className='new-review-char-meanings'>
+                    <span>{charsScale[char][0]}</span>
+                    <span>{charsScale[char][4]}</span>
+                  </div>
 
                   <br></br>
-                  &nbsp;<label>1</label>
-                  &nbsp;&nbsp;<label>2</label>
-                  &nbsp;&nbsp;<label>3</label>
-                  &nbsp;&nbsp;<label>4</label>
-                  &nbsp;&nbsp;<label>5</label>
-                  <br></br><br></br>
                 </div>
               );
             })
