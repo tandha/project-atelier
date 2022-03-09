@@ -13,24 +13,34 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.all('/*', (req, res) => {
-  console.log('req.url?', req.url);
-  axios({
-    headers: { 'Authorization': API_KEY },
-    baseURL: API_URL,
-    url: req.url,
-    method: req.method,
-    data: req.body
-  })
-    .then((apiResponse) => {
-      res.send({
-        data: apiResponse.data,
-        status: apiResponse.status
-      });
+
+  const apiPaths = ['/products', '/reviews', '/qa', '/cart', '/interactions'];
+
+  let isApiPath = apiPaths.some(apiPath => req.url.startsWith(apiPath));
+
+  if (isApiPath) {
+    axios({
+      headers: { 'Authorization': API_KEY },
+      baseURL: API_URL,
+      url: req.url,
+      method: req.method,
+      data: req.body
     })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).send('Something broke!');
-    });
+      .then((apiResponse) => {
+        res.send({
+          data: apiResponse.data,
+          status: apiResponse.status
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(404).send('Product not found');
+      });
+
+  } else {
+    let productID = req.url.substring(1);
+    res.redirect(`/?${productID}`);
+  }
 });
 
 app.listen(port, ()=> {
