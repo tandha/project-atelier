@@ -136,9 +136,9 @@ button{
 #image-gallery {
   display: block;
   background-color: black;
-  height: 800px;
+  height: 696px;
   position: relative;
-  max-width: 800px;
+  max-width: 696px;
 }
 
 #main-image{
@@ -251,6 +251,7 @@ button{
 
 
 #expanded-image-container{
+  cursor: url("https://img.icons8.com/material/24/000000/plus--v1.png"), auto;
   position: relative;
   height: 1000px;
   margin: 0 auto;
@@ -260,28 +261,32 @@ button{
 }
 
 #zoom-image-container{
+  cursor: url("https://img.icons8.com/material-outlined/24/000000/minus.png"), auto;
   position: relative;
   height: 1000px;
   margin: 0 auto;
-  width: 1200px;
   overflow: hidden;
+  width: 1200px;
   z-index: 2;
 }
 
 #expanded-image-container img{
-  cursor: url("https://img.icons8.com/material/24/000000/plus--v1.png"), auto;
   height: 100%;
-  /* margin: 0 auto; */
   object-fit: cover;
   text-align: center;
   width: 100%;
 }
 
+#image-wrapper{
+  position: relative;
+  margin:0 auto;
+  height: 100%;
+  width: 100%;
+}
 
-#zoom-image-container img {
-  cursor: url("https://img.icons8.com/material-outlined/24/000000/minus.png"), auto;
-  position: absolute;
+#image-wrapper img{
   height: 2000px;
+  object-fit: cover;
   width: 3000px;
 }
 
@@ -346,8 +351,6 @@ button{
 
 #cart {
   display: inline;
-  /* display: flex;
-  flex-wrap: wrap; */
 }
 
 #cart-form{
