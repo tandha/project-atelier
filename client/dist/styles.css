@@ -563,7 +563,7 @@
   cursor: pointer;
 }
 
-.question-helpful :disabled {
+.question-helpful:disabled {
   text-decoration: none;
   font-weight: bold;
 }
