@@ -30,10 +30,15 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.updateProduct(this.productId);
+    // slice and parseint
+    // number is integer
+    const currentID = this.state.product.id || this.productId;
+    window.history.pushState({}, '', currentID);
+    this.updateProduct(currentID);
   }
 
   updateProduct(id) {
+    window.history.pushState({}, '', id);
     Promise.all([this.getProduct(id), this.getStyles(id), this.getOutfits()])
       .then((res) => {
         this.setState({
