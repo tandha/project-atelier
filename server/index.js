@@ -15,7 +15,6 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 app.all('/*', (req, res) => {
 
   const apiPaths = ['/products', '/reviews', '/qa', '/cart', '/interactions'];
-
   let isApiPath = apiPaths.some(apiPath => req.url.startsWith(apiPath));
 
   if (isApiPath) {
@@ -34,12 +33,24 @@ app.all('/*', (req, res) => {
       })
       .catch((err) => {
         console.log(err);
-        res.status(404).send('Product not found');
+        res.status(err.response.status).send(err.response.data);
       });
 
   } else {
-    let productID = req.url.substring(1);
-    res.redirect(`/?${productID}`);
+    axios({
+      headers: { 'Authorization': API_KEY },
+      baseURL: API_URL,
+      url: `/products${req.url}`,
+      method: req.method,
+    })
+      .then(() => {
+        let productID = req.url.substring(1);
+        res.redirect(`/?${productID}`);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(err.response.status).send(err.response.data);
+      });
   }
 });
 

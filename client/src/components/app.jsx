@@ -26,17 +26,17 @@ class App extends React.Component {
       currentProductInOutfit: false,
       starRating: 0
     };
-    this.productId = 64624;
+    this.defaultProductId = 64624;
   }
 
   componentDidMount() {
-    let currentID = this.productId;
+    let productID = this.defaultProductId;
 
     if (window.location.search.length > 1) {
-      currentID = window.location.search.substring(1);
+      productID = window.location.search.substring(1);
     }
-    window.history.pushState({}, '', currentID);
-    this.updateProduct(currentID);
+    window.history.pushState({}, '', productID);
+    this.updateProduct(productID);
   }
 
   updateProduct(id) {
