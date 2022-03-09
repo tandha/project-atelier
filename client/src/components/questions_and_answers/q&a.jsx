@@ -28,6 +28,12 @@ class QuestionsAndAnswers extends React.Component {
     this.getProductQuestions();
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.product.id !== prevProps.product.id) {
+      this.getProductQuestions();
+    }
+  }
+
   getProductQuestions() {
     axios({
       method: 'get',
