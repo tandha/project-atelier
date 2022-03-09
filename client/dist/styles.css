@@ -6,6 +6,7 @@ body{
 }
 #app{
   background-color: white;
+  color: #565756;
   font-family: Arial, Helvetica, sans-serif;
   padding: .25em;
   margin-left: auto;
@@ -38,8 +39,8 @@ body{
   bottom: 0;
   z-index: 1;
 }
-button{
-  color: black;
+button, select, option{
+  color: #565756;
 }
 
 /******************** Product Overview ********************/
@@ -246,7 +247,7 @@ button{
   height: 100%;
   width: 100%;
   background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0,0,0,0.9);
 }
 
 
@@ -374,7 +375,9 @@ button{
 #add-to-bag,
 #add-to-myoutfit{
   background-color: white;
-  border: 1px solid black;
+  border: 1px solid #565756;
+  border-radius: 1px;
+  color: #565756;
   display: inline-block;
   height: 20px;
   padding: .75em;
@@ -456,7 +459,8 @@ button{
 
 
 .related-item-container, .my-outfit-container{
-  border: 1px solid black;
+  border: 1px solid #999;
+  border-radius: 2px;
   display: inline-block;
   height: 360px;
   margin: 15px 15px 15px 0px;
@@ -477,9 +481,17 @@ button{
 }
 
 .related-items-details span, .outfit-details span{
+  color: #888;
   display: block;
 }
+.related-item-category{
+  text-transform: uppercase;
+}
 
+.related-item-name{
+  color: #565756 !important;
+  font-weight: bold;
+}
 
 
 /******************* Questions & Answers ******************/
@@ -492,14 +504,16 @@ button{
 .search-wrapper {
   position: relative;
   margin-top: 1em;
-  margin-bottom: 1em;
-  border: 1px solid black;
+  margin-bottom: 1.5em;
+  border: 1px solid #565756;
+  border-radius: 1px;
 }
 
 #QA-search-bar {
   height: 50px;
   width: 90%;
   font-weight: bold;
+  padding-left: 1em;
   border: none;
   font-size: 1em;
 }
@@ -627,7 +641,7 @@ button{
   height: 100%;
   overflow: auto;
   background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0,0,0,0.9);
 }
 
 #answer-photo-content {
@@ -649,7 +663,7 @@ button{
   font-size: 15px;
   font-weight: bold;
   margin-left: 2.2em;
-  margin-bottom: 1em;
+  /* margin-bottom: 1em; */
 }
 
 .QA-form-head {
@@ -665,11 +679,12 @@ button{
 
 #more-question-btn, #add-question-btn {
   height: 50px;
-  width:auto;
-  border: 1px solid black;
+  width: auto;
+  border: 1px solid #565756;
+  border-radius: 1px;
   background: none;
-  color: black;
-  font-weight: bold;
+  color: #565756;
+  /* font-weight: bold; */
   padding: 0.75em;
   font-size: 1em;
 }
@@ -683,7 +698,7 @@ button{
   height: 100%;
   overflow: auto;
   background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0,0,0,0.9);
 }
 
 #new-question-content, #new-answer-content {
@@ -747,7 +762,8 @@ button{
 
 #ratings-breakdown-average {
   display: flex;
-  font-size: 35px;
+  font-size: 50px;
+  font-weight: bold;
   margin-left: 5px;
 }
 
@@ -870,7 +886,7 @@ button{
 }
 
 #review-list {
-  padding-left: 2em;
+  padding-left: 1em;
   width: 625px;
 }
 
@@ -955,7 +971,7 @@ button{
   height: 100%;
   overflow: auto;
   background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0,0,0,0.9);
 }
 
 #review-photo-content {
@@ -994,7 +1010,7 @@ button{
   height: 100%;
   overflow: auto;
   background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0,0,0,0.9);
 }
 
 #new-review-content {
