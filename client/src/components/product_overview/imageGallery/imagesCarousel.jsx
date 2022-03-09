@@ -155,6 +155,7 @@ class ImageCarousel extends React.Component {
         let x = xPos - trim;
         let y = yPos;
 
+        console.log('coordinates', -x, -y);
         imageWrapper.style.left = -x + 'px';
         imageWrapper.style.top = -y + 'px';
       };
