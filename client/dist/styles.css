@@ -1,7 +1,9 @@
 /************************* Global *************************/
-/* body { margin: 0; padding: 0; } */
-#centeredDiv { margin-right: auto; margin-left: auto; width: 800px; }
-#app {
+body{
+  margin: 0;
+  padding: 0;
+}
+#app{
   font-family: Arial, Helvetica, sans-serif;
   padding: .15em;
   margin-left: auto;
@@ -419,6 +421,13 @@ button{
   padding: .5em, .5em, 0em, .5em;
 }
 
+#related-items-container{
+  padding-bottom: 4em;
+}
+#my-outfits-container{
+  padding-bottom: 1em;
+}
+
 #add-to-outfit{
   color: darkgray;
   height:180px;
@@ -470,6 +479,11 @@ button{
 
 
 /******************* Questions & Answers ******************/
+#QA-container{
+  margin-top: 3em;
+  margin-left: 7em;
+}
+
 .search-wrapper {
   position: relative;
   margin-top: 1em;
@@ -708,16 +722,16 @@ button{
 /********************* Ratings & Reviews *******************/
 
 #rr-title {
-  margin-top: 30px;
   font-size: 16px;
-  margin-left: 5px;
+  margin-top: 5em;
+  margin-left: 7em;
 }
 
 #ratings-and-reviews {
-  margin-top: 0px;
   display: flex;
   font-size: 19px;
   justify-content: flex-start;
+  margin-left: 6em;
 }
 
 #ratings-breakdown {
@@ -851,8 +865,6 @@ button{
 }
 
 #review-list {
-  position: absolute;
-  left: 300px;
   width: 650px;
 }
 
