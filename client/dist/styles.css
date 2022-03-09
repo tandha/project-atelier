@@ -135,7 +135,7 @@ button{
 }
 
 #main-image{
-  cursor: zoom-in;
+  cursor: url("https://img.icons8.com/ios-glyphs/30/000000/search--v1.png"), auto;
   object-fit: cover;
   position: absolute;
   height: 100%;
@@ -232,6 +232,7 @@ button{
 }
 
 #expanded-view-modal {
+  cursor: url("https://img.icons8.com/external-tanah-basah-detailed-outline-tanah-basah/48/000000/external-plus-user-interface-tanah-basah-detailed-outline-tanah-basah-2.png"), auto;
   position: fixed;
   z-index: 2;
   left: 0;
@@ -246,7 +247,6 @@ button{
   height: 1000px;
   width: 1500px;
   overflow: hidden;
-  /* overflow: scroll; */
   z-index: 2;
 }
 
@@ -267,14 +267,11 @@ button{
 }
 
 #zoom-image-container img {
+  cursor: url("https://img.icons8.com/material-outlined/24/000000/minus.png"), auto;
   position: absolute;
   height: 2000px;
   width: 3000px;
 }
-
-#zoom-image-container img:hover{
-}
-
 
 #star-rating, #reviews{
   display: inline-block;

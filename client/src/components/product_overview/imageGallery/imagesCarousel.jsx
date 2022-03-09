@@ -130,7 +130,7 @@ class ImageCarousel extends React.Component {
     this.setState({ zoomView: !this.state.zoomView }, () => {
       if (this.state.zoomView) {
         document.getElementById('expanded-image-container').id = 'zoom-image-container';
-        this.setBackgroundImage();
+        this.enterZoomMode();
       } else {
         document.getElementById('zoom-image-container').id = 'expanded-image-container';
         this.setState({ expandedView: false });
@@ -138,7 +138,7 @@ class ImageCarousel extends React.Component {
     });
   }
 
-  setBackgroundImage() {
+  enterZoomMode() {
     if (this.state.expandedView) {
       let container = document.getElementById('zoom-image-container');
 
