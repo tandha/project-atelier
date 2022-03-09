@@ -10,7 +10,7 @@ body{
   padding: .25em;
   margin-left: auto;
   margin-right: auto;
-  max-width: 1500px;
+  max-width: 1200px;
 }
 
 .star-rating-container {
@@ -239,7 +239,6 @@ button{
 }
 
 #expanded-view-modal {
-  cursor: url("https://img.icons8.com/material/24/000000/plus--v1.png"), auto;
   position: fixed;
   z-index: 2;
   left: 0;
@@ -250,32 +249,32 @@ button{
   background-color: rgba(0,0,0,0.4);
 }
 
-#zoom-image-container{
-  position: relative;
-  height: 1000px;
-  width: 1500px;
-  overflow: hidden;
-  z-index: 2;
-}
 
 #expanded-image-container{
   position: relative;
   height: 1000px;
-  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  width: 1200px;
+  z-index: 2;
+}
+
+#zoom-image-container{
+  position: relative;
+  height: 1000px;
+  margin: 0 auto;
+  width: 1200px;
   overflow: hidden;
   z-index: 2;
 }
 
-#expanded-image-container img, #expanded-image-container img{
+#expanded-image-container img{
+  cursor: url("https://img.icons8.com/material/24/000000/plus--v1.png"), auto;
   height: 100%;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   object-fit: cover;
   text-align: center;
   width: 100%;
-}
-
-#zoom-image-container {
-  position: absolute;
 }
 
 
@@ -868,7 +867,8 @@ button{
 }
 
 #review-list {
-  width: 650px;
+  padding-left: 2em;
+  width: 625px;
 }
 
 #reviews-sort-dropdown {
