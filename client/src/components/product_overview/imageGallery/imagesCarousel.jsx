@@ -151,7 +151,6 @@ class ImageCarousel extends React.Component {
 
         let percentHeight = (xPos - containerWidth);
         let percentWidth = (yPos - containerHeight);
-        console.log(percentHeight, percentWidth);
 
         image.style.top = percentWidth + 'px';
         image.style.left = percentHeight + 'px';
