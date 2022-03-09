@@ -41,7 +41,8 @@ class App extends React.Component {
           productIsFetched: true,
           stylesAreFetched: true,
           styles: res[1].data.data,
-          myOutfits: res[2]
+          myOutfits: res[2],
+          currentProductInOutfit: false
         });
       })
       .then((res) => {
@@ -107,7 +108,7 @@ class App extends React.Component {
         <RelatedItemsOutfitCreationWithLogger
           product={this.state.product}
           myOutfits={this.state.myOutfits}
-          starRating={this.state.starRating}
+          starRating={<StarRating value={this.state.starRating}/>}
           toggleOutfit={this.toggleOutfit.bind(this)}
           updateProduct={this.updateProduct.bind(this)} />
 

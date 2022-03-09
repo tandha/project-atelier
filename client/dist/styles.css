@@ -1,42 +1,18 @@
 /************************* Global *************************/
-
-#app {
+body{
+  background-color: lightgrey;
+  margin: 0;
+  padding: 0;
+}
+#app{
+  background-color: white;
+  color: #565756;
   font-family: Arial, Helvetica, sans-serif;
-  /* border: 1px solid black;
-  display: inline-grid;
-  grid-template-columns: auto; */
-  /* grid-template-columns: 12em 1fr; <-- can set how each line behaves separately */
-  /* grid-template-rows: auto; */
-  padding: .15em;
-  width: 90%;
+  padding: .25em;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px;
 }
-/* nav {
-  display: inline;
-  padding: .15em;
-}
-#search-bar {
-  float: right;
-}
-#product-images{
-  grid-area: image;
-}
-
-#details{
-  grid-area: sidebar;
-}
-
-#description {
-  grid-area: footer;
-}
-#product-overview {
-  display: grid;
-  grid-template-columns: 5% 45% 50%;
-  grid-template-rows: auto;
-  grid-template-areas:
-  "image image sidebar "
-  ". footer footer "
-} */
-
 
 .star-rating-container {
   display: inline-flex;
@@ -63,18 +39,18 @@
   bottom: 0;
   z-index: 1;
 }
+button, select, option{
+  color: #565756;
+}
 
 /******************** Product Overview ********************/
 #overview-container {
   display: inline-grid;
   grid-template-columns: [first] 8.3% [second] 8.3% [third] 8.3% [fourth] 8.3% [fifth] 8.3% [sixth] 8.3% [seventh] 8.3% [eighth] 8.3% [ninth] 8.3% [tenth] 8.3% [eleventh] 8.3% [twelfth] 8.3%[end];
-  /* height: 100%; */
   grid-template-rows: auto;
-  /* width: 100%; */
 }
 
 #image-gallery {
-  /* grid-template-columns: 12em 1fr; <-- can set how each line behaves separately */
   grid-column-start: first;
   grid-column-end: span eighth;
   grid-row-start: 1;
@@ -85,41 +61,29 @@
   grid-column-start: eighth;
   grid-column-end: span end;
   padding-left: 1em;
-  /* grid-row-start: 1;
-  grid-row-end: span 1; */
-  /* padding-left: 1em; */
 }
 
 #price {
   grid-column-start: eighth;
   grid-column-end: span end;
-  /* grid-row-start: 1;
-  grid-row-end: span 1; */
-  /* padding-left: 1em; */
 }
 
 #selected-styles {
   grid-column-start: eighth;
   grid-column-end: span end;
   padding-left: 1em;
-  /* grid-row-start: 1;
-  grid-row-end: span 1; */
 }
 
 #cart {
   grid-column-start: eighth;
   grid-column-end: span end;
   padding-left: 1em;
-  /* grid-row-start: 1;
-  grid-row-end: span 1; */
 }
 
 #slogan-description-container{
   border-right: 2px solid #000;
   grid-column-start: first;
   grid-column-end: span eighth;
-  /* grid-row-start: eleventh;
-  grid-row-end: span end; */
   grid-row-start: 5;
   grid-row-end: 7;
   margin: 3em 0 3em 6.5em;
@@ -154,7 +118,6 @@
   margin: 0;
 }
 
-
 .style-thumbnail-container {
   display: inline-block;
   height: 70px;
@@ -174,13 +137,13 @@
 #image-gallery {
   display: block;
   background-color: black;
-  height: 800px;
+  height: 696px;
   position: relative;
-  max-width: 800px;
+  max-width: 696px;
 }
 
 #main-image{
-  cursor: zoom-in;
+  cursor: url("https://img.icons8.com/material-outlined/24/000000/search--v1.png"), auto;
   object-fit: cover;
   position: absolute;
   height: 100%;
@@ -198,6 +161,7 @@
   width: 30px;
   z-index: 3;
 }
+
 #image-gallery-right-arrow{
   color: white;
   opacity: .7;
@@ -234,6 +198,7 @@
   height: 3px;
   width: 60px;
 }
+
 #image-gallery-left-arrow:hover,
 #image-gallery-right-arrow:hover,
 #thumbnail-highlight-bar:hover,
@@ -279,33 +244,62 @@
   z-index: 2;
   left: 0;
   top: 0;
-  /* width: 100%; */
-  width: 100vw;
-  /* height: 100%; */
-  height: 100vh;
-  /* overflow: auto; */
-  overflow: hidden;
+  height: 100%;
+  width: 100%;
   background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0,0,0,0.9);
 }
 
-#expanded-image-container, #zoom-image-container{
-  /* position: absolute; */
-  /* overflow: hidden; */
+
+#expanded-image-container{
+  cursor: url("https://img.icons8.com/material/24/000000/plus--v1.png"), auto;
+  position: relative;
+  height: 1000px;
+  margin: 0 auto;
+  overflow: hidden;
+  width: 1200px;
   z-index: 2;
 }
 
-#expanded-image-container img, #expanded-image-container img{
-  height: 100%;
+#zoom-image-container{
+  cursor: url("https://img.icons8.com/material-outlined/24/000000/minus.png"), auto;
+  position: relative;
+  height: 1000px;
   margin: 0 auto;
+  overflow: hidden;
+  width: 1200px;
+  z-index: 2;
+}
+
+#expanded-image-container img{
+  height: 100%;
   object-fit: cover;
   text-align: center;
   width: 100%;
 }
 
+#image-wrapper{
+  position: relative;
+  margin:0 auto;
+  height: 100%;
+  width: 100%;
+}
+
+#image-wrapper img{
+  height: 2000px;
+  object-fit: cover;
+  width: 3000px;
+}
+
 #star-rating, #reviews{
   display: inline-block;
   margin: .75em .75em .75em 0em;
+}
+
+#reviews{
+  font-size: 15px;
+  color: grey;
+  text-decoration: underline;
 }
 
 #product-category, #price, #selected-style-name{
@@ -330,15 +324,6 @@
   font-size: 1.25em;
   font-weight: bold;
   margin-bottom: 1em;
-}
-
-#zoom-image-container {
-  overflow: hidden;
-}
-
-#zoom-image-container img {
-  position: absolute;
-  transform: scale(2.5);
 }
 
 #expand-view-close {
@@ -367,8 +352,6 @@
 
 #cart {
   display: inline;
-  /* display: flex;
-  flex-wrap: wrap; */
 }
 
 #cart-form{
@@ -392,7 +375,9 @@
 #add-to-bag,
 #add-to-myoutfit{
   background-color: white;
-  border: 1px solid black;
+  border: 1px solid #565756;
+  border-radius: 1px;
+  color: #565756;
   display: inline-block;
   height: 20px;
   padding: .75em;
@@ -443,6 +428,13 @@
   padding: .5em, .5em, 0em, .5em;
 }
 
+#related-items-container{
+  padding-bottom: 4em;
+}
+#my-outfits-container{
+  padding-bottom: 1em;
+}
+
 #add-to-outfit{
   color: darkgray;
   height:180px;
@@ -467,7 +459,8 @@
 
 
 .related-item-container, .my-outfit-container{
-  border: 1px solid black;
+  border: 1px solid #999;
+  border-radius: 2px;
   display: inline-block;
   height: 360px;
   margin: 15px 15px 15px 0px;
@@ -488,23 +481,39 @@
 }
 
 .related-items-details span, .outfit-details span{
+  color: #888;
   display: block;
+}
+.related-item-category{
+  text-transform: uppercase;
+}
+
+.related-item-name{
+  color: #565756 !important;
+  font-weight: bold;
 }
 
 
-
 /******************* Questions & Answers ******************/
+#QA-container{
+  margin-left: 7em;
+  margin-right: 7em;
+  margin-top: 3em;
+}
+
 .search-wrapper {
   position: relative;
   margin-top: 1em;
-  margin-bottom: 1em;
-  border: 1px solid black;
+  margin-bottom: 1.5em;
+  border: 1px solid #565756;
+  border-radius: 1px;
 }
 
 #QA-search-bar {
   height: 50px;
   width: 90%;
   font-weight: bold;
+  padding-left: 1em;
   border: none;
   font-size: 1em;
 }
@@ -632,7 +641,7 @@
   height: 100%;
   overflow: auto;
   background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0,0,0,0.9);
 }
 
 #answer-photo-content {
@@ -654,7 +663,7 @@
   font-size: 15px;
   font-weight: bold;
   margin-left: 2.2em;
-  margin-bottom: 1em;
+  /* margin-bottom: 1em; */
 }
 
 .QA-form-head {
@@ -670,11 +679,12 @@
 
 #more-question-btn, #add-question-btn {
   height: 50px;
-  width:auto;
-  border: 1px solid black;
+  width: auto;
+  border: 1px solid #565756;
+  border-radius: 1px;
   background: none;
-  color: black;
-  font-weight: bold;
+  color: #565756;
+  /* font-weight: bold; */
   padding: 0.75em;
   font-size: 1em;
 }
@@ -688,7 +698,7 @@
   height: 100%;
   overflow: auto;
   background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0,0,0,0.9);
 }
 
 #new-question-content, #new-answer-content {
@@ -732,16 +742,16 @@
 /********************* Ratings & Reviews *******************/
 
 #rr-title {
-  margin-top: 30px;
   font-size: 16px;
-  margin-left: 5px;
+  margin-top: 5em;
+  margin-left: 7em;
 }
 
 #ratings-and-reviews {
-  margin-top: 0px;
   display: flex;
   font-size: 19px;
   justify-content: flex-start;
+  margin-left: 6em;
 }
 
 #ratings-breakdown {
@@ -752,7 +762,8 @@
 
 #ratings-breakdown-average {
   display: flex;
-  font-size: 35px;
+  font-size: 50px;
+  font-weight: bold;
   margin-left: 5px;
 }
 
@@ -875,9 +886,8 @@
 }
 
 #review-list {
-  position: absolute;
-  left: 300px;
-  width: 650px;
+  padding-left: 1em;
+  width: 625px;
 }
 
 #reviews-sort-dropdown {
@@ -961,7 +971,7 @@
   height: 100%;
   overflow: auto;
   background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0,0,0,0.9);
 }
 
 #review-photo-content {
@@ -1000,7 +1010,7 @@
   height: 100%;
   overflow: auto;
   background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0,0,0,0.9);
 }
 
 #new-review-content {
