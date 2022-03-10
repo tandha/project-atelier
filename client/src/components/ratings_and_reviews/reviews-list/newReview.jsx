@@ -192,6 +192,25 @@ const NewReview = (props) => {
     Fit: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long']
   };
 
+  const renderTextArea = () => {
+    const [characterCount, setCharacterCount] = useState(0);
+    return (
+      <React.Fragment>
+        <textarea onChange={(e) => setCharacterCount(e.target.value.length)}
+          id='new-review-body' name='body' rows='10'
+          cols='51' minLength='50' maxLength='1000' required
+          placeholder='Why did you like the product or not?'>
+        </textarea>
+        <br></br>
+        {characterCount >= 50
+          ? <span>Minimum reached</span>
+          : <span>Minimum required characters left: {50 - characterCount}</span>
+        }
+      </React.Fragment>
+    );
+  };
+
+
   return (
     <div id='new-review-modal'>
       <div id='new-review-content'>
@@ -229,9 +248,8 @@ const NewReview = (props) => {
 
           <label><strong>Review body</strong></label>
 
-          <textarea id='new-review-body' name='body' rows='10'
-            cols='51' minLength='51' maxLength='1000' required
-            placeholder='Why did you like the product or not?'></textarea>
+          {renderTextArea()}
+
           <br></br><br></br>
 
           <label><strong>Upload your photos</strong></label><br></br>

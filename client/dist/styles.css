@@ -1016,16 +1016,9 @@ button, select, option{
 }
 
 #review-photo-content button {
-  cursor: pointer;
-  height: 50px;
-  width: 100px;
-  border: 1px solid #565756;
-  border-radius: 1px;
   background: none;
-  color: #565756;
-  padding: 0.75em;
-  margin-right: .5em;
-  font-size: 1em;
+  border: 1.5px solid grey;
+  color: rgb(65, 65, 65);
 }
 
 #review-photo-content button:hover{
@@ -1098,7 +1091,7 @@ button, select, option{
   width: 18px;
   height: 20px;
   margin-right: 2px;
-  background-color: rgba(0, 0, 0, 0.007);
+  background-color: rgba(0, 0, 0, 0.001);
 }
 
 #star-block-2 {
@@ -1108,7 +1101,7 @@ button, select, option{
   height: 20px;
   left: 20px;
   margin-right: 2px;
-  background-color: rgba(0, 0, 0, 0.007);
+  background-color: rgba(0, 0, 0, 0.001);
 }
 
 #star-block-3 {
@@ -1118,7 +1111,7 @@ button, select, option{
   height: 20px;
   left: 40px;
   margin-right: 2px;
-  background-color: rgba(0, 0, 0, 0.007);
+  background-color: rgba(0, 0, 0, 0.001);
 }
 
 #star-block-4 {
@@ -1128,7 +1121,7 @@ button, select, option{
   height: 20px;
   left: 60px;
   margin-right: 2px;
-  background-color: rgba(0, 0, 0, 0.007);
+  background-color: rgba(0, 0, 0, 0.001);
 }
 
 #star-block-5 {
@@ -1137,7 +1130,7 @@ button, select, option{
   width: 18px;
   height: 20px;
   left: 80px;
-  background-color: rgba(0, 0, 0, 0.007);
+  background-color: rgba(0, 0, 0, 0.001);
 }
 
 #new-review-star-text {
@@ -1175,14 +1168,14 @@ button, select, option{
   margin-top: 5px;
   display: flex;
   justify-content: space-between;
-  font-size: 15px;
+  font-size: 12px;
   margin-left: 7px;
   margin-right: 5px;
 }
 
 .new-review-char-meanings {
   margin-top: 5px;
-  margin-left: 3px;
+  margin-left: 5px;
   display: flex;
   justify-content: space-between;
   font-size: 10px;
@@ -1212,18 +1205,6 @@ button, select, option{
   color: rgb(65, 65, 65);
   margin-top: 1em;
 }
-
-/* #review-list-buttons button{
-  height: 50px;
-  width: auto;
-  border: 1px solid #565756;
-  border-radius: 1px;
-  background: none;
-  color: #565756;
-  padding: 0.75em;
-  margin-right: .5em;
-  font-size: 1em;
-} */
 
 #new-review-buttons button:hover{
   background-color: #000;
