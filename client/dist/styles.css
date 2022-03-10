@@ -261,6 +261,13 @@ button, select, option{
   z-index: 2;
 }
 
+#expanded-image-container img{
+  height: 100%;
+  object-fit: cover;
+  text-align: center;
+  width: 100%;
+}
+
 #zoom-image-container{
   cursor: url("https://img.icons8.com/material-outlined/24/000000/minus.png"), auto;
   position: relative;
@@ -269,13 +276,6 @@ button, select, option{
   overflow: hidden;
   width: 1200px;
   z-index: 2;
-}
-
-#expanded-image-container img{
-  height: 100%;
-  object-fit: cover;
-  text-align: center;
-  width: 100%;
 }
 
 #image-wrapper{
@@ -752,6 +752,7 @@ button, select, option{
   font-size: 19px;
   justify-content: flex-start;
   margin-left: 6em;
+  margin-bottom: 3em;
 }
 
 #ratings-breakdown {
@@ -994,11 +995,25 @@ button, select, option{
   cursor: pointer;
 }
 
-#review-list-buttons {
-  display: flex;
-  justify-content: space-between;
+#review-list-buttons{
+  /* display: flex;
+  justify-content: space-between; */
+  display: inline-block;
   margin-bottom: 25px;
   margin-top: 25px;
+}
+
+#review-list-buttons button{
+  height: 50px;
+  width: auto;
+  border: 1px solid #565756;
+  border-radius: 1px;
+  background: none;
+  color: #565756;
+  padding: 0.75em;
+  margin-right: .5em;
+  font-size: 1em;
+
 }
 
 #new-review-modal {
