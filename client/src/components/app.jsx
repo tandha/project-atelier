@@ -101,7 +101,7 @@ class App extends React.Component {
 
   render() {
     if (!this.state.productIsFetched || !this.state.stylesAreFetched) {
-      return <div>Loading</div>;
+      return <img src='https://thumbs.gfycat.com/GeneralUnpleasantApisdorsatalaboriosa-size_restricted.gif'></img>;
     }
     return (
       <React.Fragment>

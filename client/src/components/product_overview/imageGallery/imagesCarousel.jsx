@@ -66,9 +66,11 @@ class ImageCarousel extends React.Component {
   }
 
   findImageId(img) {
-    let start = img.indexOf('-');
-    let end = img.indexOf('?') + 1;
-    return img.slice(start, end);
+    if (img) {
+      let start = img.indexOf('-');
+      let end = img.indexOf('?') + 1;
+      return img.slice(start, end);
+    }
   }
 
   advanceMainPhoto() {
@@ -169,7 +171,7 @@ class ImageCarousel extends React.Component {
           <div id='expanded-image-container'>
             <div id='target'>
               <img
-                onClick={this.toggleExpand.bind(this)}src={this.state.photos[this.state.mainPhotoIndex].url}>
+                onClick={this.toggleExpand.bind(this)} src={this.state.photos[this.state.mainPhotoIndex].url}>
               </img>
             </div>
             {!this.state.zoomView &&

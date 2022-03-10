@@ -136,7 +136,8 @@ button, select, option{
 
 #image-gallery {
   display: block;
-  background-color: black;
+  background-image: url('https://www.phswarnerhoward.co.uk/assets/images/no_img_avaliable.jpg');
+  background-size: cover;
   height: 696px;
   position: relative;
   max-width: 696px;
@@ -1058,4 +1059,11 @@ button, select, option{
 #new-review-buttons {
   display: flex;
   justify-content: space-between;
+}
+
+#new-review-buttons button{
+  background: none;
+  border: 1.5px solid grey;
+  color:grey;
+  margin-top: 1em;
 }
