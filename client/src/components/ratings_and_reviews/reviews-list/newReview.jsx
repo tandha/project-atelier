@@ -123,6 +123,66 @@ const NewReview = (props) => {
     );
   };
 
+  let initialChars = {};
+  chars.forEach(char => initialChars[char] = 'none selected');
+
+  const [selectedChars, setChars] = useState(initialChars);
+
+  const updateChars = (char, num) => {
+    let newChars = Object.assign({}, selectedChars);
+    newChars[char] = charsScale[char][num - 1];
+    setChars(newChars);
+  };
+
+  const renderChars = (selectChars) => {
+    return (
+      <React.Fragment>
+        {
+          chars.map((char, index) => {
+            return (
+              <div className='new-review-chars-container' key={index}>
+                <span><strong>{char}:</strong>&nbsp;&nbsp;{selectChars[char]}</span>
+
+                <div className='new-review-char-radios'>
+                  <input onClick={updateChars.bind(this, char, 1)} type='radio' className='new-review-chars'
+                    id={`new-review-${char}1`} name={char} value='1' required></input>
+
+                  <input onClick={updateChars.bind(this, char, 2)} type='radio' className='new-review-chars'
+                    id={`new-review-${char}2`} name={char} value='2' required></input>
+
+                  <input onClick={updateChars.bind(this, char, 3)} type='radio' className='new-review-chars'
+                    id={`new-review-${char}3`} name={char} value='3' required></input>
+
+                  <input onClick={updateChars.bind(this, char, 4)} type='radio' className='new-review-chars'
+                    id={`new-review-${char}4`} name={char} value='4' required></input>
+
+                  <input onClick={updateChars.bind(this, char, 5)} type='radio' className='new-review-chars'
+                    id={`new-review-${char}5`} name={char} value='5' required></input>
+                </div>
+
+                <div className='new-review-char-nums'>
+                  <span>1</span>
+                  <span>2</span>
+                  <span>3</span>
+                  <span>4</span>
+                  <span>5</span>
+                </div>
+
+                <div className='new-review-char-meanings'>
+                  <span>{charsScale[char][0]}</span>
+                  <span>{charsScale[char][4]}</span>
+                </div>
+
+                <br></br>
+              </div>
+            );
+          })
+        }
+      </React.Fragment>
+    );
+
+  };
+
   let charsScale = {
     Size: ['A size too small', '½ a size too small', 'Perfect', '½ a size too big', 'A size too wide'],
     Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
@@ -152,53 +212,15 @@ const NewReview = (props) => {
 
           <label>Yes</label>
 
+          &nbsp;&nbsp;
+
           <input type='radio' value='false' name='recommend'
             id='new-review-not-recommended' required></input>
 
           <label>No</label>
           <br></br><br></br>
 
-          {
-            chars.map((char, index) => {
-              return (
-                <div className='new-review-chars-container' key={index}>
-                  <span>{char}</span><br></br>
-
-                  <div className='new-review-char-radios'>
-                    <input type='radio' className='new-review-chars'
-                      id={`new-review-${char}1`} name={char} value='1' required></input>
-
-                    <input type='radio' className='new-review-chars'
-                      id={`new-review-${char}2`} name={char} value='2' required></input>
-
-                    <input type='radio' className='new-review-chars'
-                      id={`new-review-${char}3`} name={char} value='3' required></input>
-
-                    <input type='radio' className='new-review-chars'
-                      id={`new-review-${char}4`} name={char} value='4' required></input>
-
-                    <input type='radio' className='new-review-chars'
-                      id={`new-review-${char}5`} name={char} value='5' required></input>
-                  </div>
-
-                  <div className='new-review-char-nums'>
-                    <span>1</span>
-                    <span>2</span>
-                    <span>3</span>
-                    <span>4</span>
-                    <span>5</span>
-                  </div>
-
-                  <div className='new-review-char-meanings'>
-                    <span>{charsScale[char][0]}</span>
-                    <span>{charsScale[char][4]}</span>
-                  </div>
-
-                  <br></br>
-                </div>
-              );
-            })
-          }
+          {renderChars(selectedChars)}
 
           <label>Review summary</label>
 

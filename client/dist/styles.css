@@ -1115,14 +1115,27 @@
   margin-top: 7px;
 }
 
+#recommend-input {
+  cursor: pointer;
+}
+
 .new-review-chars-container {
   width: 300px;
+}
+
+.selected-text {
+  display: flex;
+  justify-content: space-between;
 }
 
 .new-review-char-radios {
   margin-top: 5px;
   display: flex;
   justify-content: space-between;
+}
+
+.new-review-char-radios input {
+  cursor: pointer;
 }
 
 .new-review-char-nums {
@@ -1136,6 +1149,7 @@
 
 .new-review-char-meanings {
   margin-top: 5px;
+  margin-left: 3px;
   display: flex;
   justify-content: space-between;
   font-size: 10px;
