@@ -1051,12 +1051,12 @@
 }
 
 #new-review-heading {
-  font-size: 25px;
+  font-size: 23px;
 }
 
 #new-review-stars {
   cursor: pointer;
-  margin-top: 5px;
+  margin-top: 12px;
 }
 
 #star-block-1 {
@@ -1115,7 +1115,7 @@
   margin-top: 7px;
 }
 
-#recommend-input {
+#new-review-recommended, #new-review-not-recommended {
   cursor: pointer;
 }
 

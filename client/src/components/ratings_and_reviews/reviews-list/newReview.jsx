@@ -197,56 +197,55 @@ const NewReview = (props) => {
       <div id='new-review-content'>
 
         <span id='new-review-heading'>Write Your Review</span><br></br>
-        <span>about the {props.product.name}</span><br></br>
+        <span>&nbsp;about the {props.product.name}</span><br></br>
         <br></br>
 
         <form onSubmit={onSubmit}>
 
-          <label>Overall rating</label><br></br>
+          <label><strong>Overall rating</strong></label><br></br>
           {renderStars(star)}
 
-          <p>Do you recommend this product?</p>
+          <p><strong>Do you recommend this product?</strong></p>
 
           <input type='radio' value='true' name='recommend'
             id='new-review-recommended' required></input>
-
           <label>Yes</label>
 
           &nbsp;&nbsp;
 
           <input type='radio' value='false' name='recommend'
             id='new-review-not-recommended' required></input>
-
           <label>No</label>
+
           <br></br><br></br>
 
           {renderChars(selectedChars)}
 
-          <label>Review summary</label>
+          <label><strong>Review summary</strong></label>
 
           <input type='text' id='new-review-summary' name='summary' required
             maxLength='60' size='60' placeholder='Example: Best purchase ever!'></input>
           <br></br><br></br>
 
-          <label>Review body</label>
+          <label><strong>Review body</strong></label>
 
           <textarea id='new-review-body' name='body' rows='10'
             cols='51' minLength='51' maxLength='1000' required
             placeholder='Why did you like the product or not?'></textarea>
           <br></br><br></br>
 
-          <label>Upload your photos</label><br></br>
+          <label><strong>Upload your photos</strong></label><br></br>
           <input id='new-review-photos' type='file' accept='image/*' multiple onChange={(e) => onUpload(e)}></input>
           <div id='new-review-photos-preview'></div>
           <br></br><br></br>
 
-          <label>Nickname</label>
+          <label><strong>Nickname</strong></label>
 
           <input type='text' name='nickname' id='new-review-nickname' required
             maxLength='60' size='60' placeholder='Example: jackson11!'></input>
           <br></br><br></br>
 
-          <label>Email</label>
+          <label><strong>Email</strong></label>
           <br></br>
 
           <input type='email' name='email' id='new-review-email' required
