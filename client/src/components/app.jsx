@@ -26,7 +26,7 @@ class App extends React.Component {
       currentProductInOutfit: false,
       starRating: 0
     };
-    this.defaultProductId = 64624;
+    this.defaultProductId = 64627;
   }
 
   componentDidMount() {
@@ -48,7 +48,8 @@ class App extends React.Component {
           productIsFetched: true,
           stylesAreFetched: true,
           styles: res[1].data.data,
-          myOutfits: res[2]
+          myOutfits: res[2],
+          currentProductInOutfit: false
         });
       })
       .then((res) => {
@@ -100,7 +101,7 @@ class App extends React.Component {
 
   render() {
     if (!this.state.productIsFetched || !this.state.stylesAreFetched) {
-      return <div>Loading</div>;
+      return <img src='https://thumbs.gfycat.com/GeneralUnpleasantApisdorsatalaboriosa-size_restricted.gif'></img>;
     }
     return (
       <React.Fragment>
@@ -114,7 +115,7 @@ class App extends React.Component {
         <RelatedItemsOutfitCreationWithLogger
           product={this.state.product}
           myOutfits={this.state.myOutfits}
-          starRating={this.state.starRating}
+          starRating={<StarRating value={this.state.starRating}/>}
           toggleOutfit={this.toggleOutfit.bind(this)}
           updateProduct={this.updateProduct.bind(this)} />
 
