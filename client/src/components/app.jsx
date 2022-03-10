@@ -26,14 +26,21 @@ class App extends React.Component {
       currentProductInOutfit: false,
       starRating: 0
     };
-    this.productId = 64624;
+    this.defaultProductId = 64624;
   }
 
   componentDidMount() {
-    this.updateProduct(this.productId);
+    let productID = this.defaultProductId;
+
+    if (window.location.search.length > 1) {
+      productID = window.location.search.substring(1);
+    }
+    window.history.pushState({}, '', productID);
+    this.updateProduct(productID);
   }
 
   updateProduct(id) {
+    window.history.pushState({}, '', id);
     Promise.all([this.getProduct(id), this.getStyles(id), this.getOutfits()])
       .then((res) => {
         this.setState({
