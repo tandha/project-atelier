@@ -49,7 +49,7 @@ app.all('/*', (req, res) => {
       })
       .catch((err) => {
         console.log(err);
-        res.status(err.response.status).send('Product does not exist.');
+        res.redirect('/');
       });
   }
 });
