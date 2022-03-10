@@ -743,15 +743,9 @@ button, select, option{
 /********************* Ratings & Reviews *******************/
 
 #rr-title {
-<<<<<<< HEAD
-  margin-top: 30px;
   font-size: 20px;
-  margin-left: 5px;
-=======
-  font-size: 16px;
   margin-top: 5em;
   margin-left: 7em;
->>>>>>> origin/finalize-gallery-zoom
 }
 
 #ratings-and-reviews {
@@ -905,11 +899,10 @@ button, select, option{
 }
 
 #review-list {
-  position: absolute;
   left: 300px;
-  height: 1040px;
   padding-left: 1em;
   width: 625px;
+  height: 1000px;
 }
 
 #reviews-sort-dropdown {
@@ -1024,37 +1017,31 @@ button, select, option{
 
 #review-photo-content button {
   cursor: pointer;
+  height: 50px;
+  width: 100px;
+  border: 1px solid #565756;
+  border-radius: 1px;
+  background: none;
+  color: #565756;
+  padding: 0.75em;
+  margin-right: .5em;
+  font-size: 1em;
 }
 
-<<<<<<< HEAD
-#review-list-buttons {
-  display: flex;
-=======
+#review-photo-content button:hover{
+  background-color: #000;
+  color: white;
+  cursor: pointer;
+}
+
 #review-list-buttons{
   /* display: flex;
   justify-content: space-between; */
   display: inline-block;
->>>>>>> origin/finalize-gallery-zoom
   margin-bottom: 25px;
   margin-top: 25px;
 }
 
-<<<<<<< HEAD
-.review-button {
-  background-color: white;
-  border: 1px solid black;
-  display: inline-block;
-  height: 50px;
-  padding: .75em;
-  vertical-align: middle;
-  width: 150px;
-}
-
-.review-button:hover {
-  cursor: pointer;
-  background-color: #000;
-  color: #fefefe;
-=======
 #review-list-buttons button{
   height: 50px;
   width: auto;
@@ -1065,8 +1052,12 @@ button, select, option{
   padding: 0.75em;
   margin-right: .5em;
   font-size: 1em;
+}
 
->>>>>>> origin/finalize-gallery-zoom
+#review-list-buttons button:hover{
+  background-color: #000;
+  color: white;
+  cursor: pointer;
 }
 
 #new-review-modal {
@@ -1218,6 +1209,24 @@ button, select, option{
 #new-review-buttons button{
   background: none;
   border: 1.5px solid grey;
-  color:grey;
+  color: rgb(65, 65, 65);
   margin-top: 1em;
+}
+
+/* #review-list-buttons button{
+  height: 50px;
+  width: auto;
+  border: 1px solid #565756;
+  border-radius: 1px;
+  background: none;
+  color: #565756;
+  padding: 0.75em;
+  margin-right: .5em;
+  font-size: 1em;
+} */
+
+#new-review-buttons button:hover{
+  background-color: #000;
+  color: white;
+  cursor: pointer;
 }
