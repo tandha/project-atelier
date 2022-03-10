@@ -462,9 +462,9 @@ button, select, option{
   border: 1px solid #999;
   border-radius: 2px;
   display: inline-block;
-  height: 360px;
+  height: 375px;
   margin: 15px 15px 15px 0px;
-  width: 200px;
+  width: 220px;
   text-align: left;
   vertical-align: middle;
 }

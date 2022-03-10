@@ -26,7 +26,7 @@ class App extends React.Component {
       currentProductInOutfit: false,
       starRating: 0
     };
-    this.defaultProductId = 64624;
+    this.defaultProductId = 64627;
   }
 
   componentDidMount() {
