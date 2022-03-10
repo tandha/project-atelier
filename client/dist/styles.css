@@ -1137,8 +1137,8 @@ button, select, option{
   position: absolute;
   display: inline;
   margin-left: 10px;
-  font-size: 17px;
-  margin-top: 7px;
+  font-size: 15px;
+  margin-top: 11px;
 }
 
 #new-review-recommended, #new-review-not-recommended {

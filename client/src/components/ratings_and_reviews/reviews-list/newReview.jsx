@@ -197,7 +197,7 @@ const NewReview = (props) => {
     return (
       <React.Fragment>
         <textarea onChange={(e) => setCharacterCount(e.target.value.length)}
-          id='new-review-body' name='body' rows='10'
+          id='new-review-body' name='body' rows='5'
           cols='51' minLength='50' maxLength='1000' required
           placeholder='Why did you like the product or not?'>
         </textarea>
