@@ -15,7 +15,17 @@ class RelatedItemsAndMyOutfits extends React.Component {
   }
 
   componentDidMount() {
-    this.generateRelatedItemsData()
+    this.initializeWithData();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.product !== prevProps.product) {
+      this.initializeWithData();
+    }
+  }
+
+  initializeWithData() {
+    return this.generateRelatedItemsData()
       .then((res) => {
         this.setState({ relatedItemsData: res });
       })

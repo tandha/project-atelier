@@ -24,13 +24,17 @@ class App extends React.Component {
       styles: {},
       myOutfits: [],
       currentProductInOutfit: false,
-      starRating: 0
+      starRating: 0,
+      defaultProductId: 64627
     };
-    this.defaultProductId = 64627;
   }
 
   componentDidMount() {
-    let productID = this.defaultProductId;
+    this.initializeProduct();
+  }
+
+  initializeProduct() {
+    let productID = this.state.defaultProductId;
 
     if (window.location.search.length > 1) {
       productID = window.location.search.substring(1);
@@ -101,7 +105,9 @@ class App extends React.Component {
 
   render() {
     if (!this.state.productIsFetched || !this.state.stylesAreFetched) {
-      return <img src='https://thumbs.gfycat.com/GeneralUnpleasantApisdorsatalaboriosa-size_restricted.gif'></img>;
+      return <div id='loading-img'>
+        <img src='https://thumbs.gfycat.com/GeneralUnpleasantApisdorsatalaboriosa-size_restricted.gif'></img>;
+      </div>;
     }
     return (
       <React.Fragment>

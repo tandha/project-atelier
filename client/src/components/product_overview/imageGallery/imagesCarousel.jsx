@@ -171,7 +171,7 @@ class ImageCarousel extends React.Component {
           <div id='expanded-image-container'>
             <div id='target'>
               <img
-                onClick={this.toggleExpand.bind(this)} src={this.state.photos[this.state.mainPhotoIndex].url}>
+                onClick={this.toggleExpand.bind(this)} src={this.state.photos[this.state.mainPhotoIndex].url || 'https://www.phswarnerhoward.co.uk/assets/images/no_img_avaliable.jpg'}>
               </img>
             </div>
             {!this.state.zoomView &&
@@ -213,7 +213,7 @@ class ImageCarousel extends React.Component {
           <img data-testid="main-image" id='main-image' onClick={this.expandedView} src={this.state.photos[this.state.mainPhotoIndex].url}></img>
           <Thumbnails
             photos={this.state.thumbnailSlice}
-            mainPhotoUrl={this.state.photos[this.state.mainPhotoIndex].thumbnail_url}
+            mainPhotoUrl={this.state.photos[this.state.mainPhotoIndex].thumbnail_url || 'https://www.phswarnerhoward.co.uk/assets/images/no_img_avaliable.jpg'}
             mainIndex={this.state.mainPhotoIndex}
             changePhoto={this.changeSelectedPhoto}/>
           {this.findImageId(this.state.thumbnailSlice[0].url) !== this.findImageId(this.state.photos[0].url) && <IoIosArrowUp
