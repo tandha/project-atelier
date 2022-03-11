@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { IoIosStar} from 'react-icons/io';
-const IMG_KEY = process.env.IMG_KEY;
+import { IMG_KEY } from '../../../../../server/config.js';
 
 const NewReview = (props) => {
 
@@ -124,7 +124,7 @@ const NewReview = (props) => {
   };
 
   let initialChars = {};
-  chars.forEach(char => initialChars[char] = 'none selected');
+  chars.forEach(char => initialChars[char] = 'None selected');
 
   const [selectedChars, setChars] = useState(initialChars);
 
