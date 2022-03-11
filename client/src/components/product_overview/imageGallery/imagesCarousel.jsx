@@ -66,9 +66,11 @@ class ImageCarousel extends React.Component {
   }
 
   findImageId(img) {
-    let start = img.indexOf('-');
-    let end = img.indexOf('?') + 1;
-    return img.slice(start, end);
+    if (img) {
+      let start = img.indexOf('-');
+      let end = img.indexOf('?') + 1;
+      return img.slice(start, end);
+    }
   }
 
   advanceMainPhoto() {
@@ -125,11 +127,12 @@ class ImageCarousel extends React.Component {
     this.setState({ expandedView: false});
   }
 
-  toggleZoom(e) {
+  toggleExpand(e) {
     let image = e.target;
     this.setState({ zoomView: !this.state.zoomView }, () => {
       if (this.state.zoomView) {
         document.getElementById('expanded-image-container').id = 'zoom-image-container';
+        this.enterZoomMode();
       } else {
         document.getElementById('zoom-image-container').id = 'expanded-image-container';
         this.setState({ expandedView: false });
@@ -137,24 +140,27 @@ class ImageCarousel extends React.Component {
     });
   }
 
-  imagePan(e) {
-    if (this.state.zoomView) {
-      let image = document.getElementById('expanded-image');
-      let windowHeight = window.innerHeight;
-      let windowWidth = window.innerWidth;
-      let imageHeight = image.clientHeight;
-      let imageWidth = image.clientWidth;
-      let mouseX = e.pageX;
-      let mouseY = e.pageY;
-      let panWidth = imageWidth - windowWidth;
-      let panHeight = imageHeight - windowHeight;
-      let percentageX = mouseX / windowWidth;
-      let percentageY = mouseY / windowHeight;
-      let aimX = -1 * panWidth * percentageX;
-      let aimY = -1 * panHeight * percentageY;
+  enterZoomMode() {
+    if (this.state.expandedView) {
+      let imageWrapper = document.getElementById('target');
+      imageWrapper.id = 'image-wrapper';
+      let container = document.getElementById('zoom-image-container');
 
-      image.style.left = aimX + 'px';
-      image.style.top = aimY + 'px';
+      container.onmousemove = (e) => {
+        let image = document.getElementById('image-wrapper');
+        let xPos = e.clientX;
+        let yPos = e.clientY;
+        let windowWidth = window.innerWidth;
+        let containerWidth = 1200;
+        let trim = (windowWidth - containerWidth) / 2;
+
+        let x = xPos - trim;
+        let y = yPos;
+
+        imageWrapper.style.left = -x + 'px';
+        imageWrapper.style.top = -y + 'px';
+      };
+
     }
   }
 
@@ -163,10 +169,11 @@ class ImageCarousel extends React.Component {
       this.state.expandedView ?
         <div id='expanded-view-modal'>
           <div id='expanded-image-container'>
-            <img id='expanded-image'
-              onMouseMove={this.imagePan.bind(this)}
-              onClick={this.toggleZoom.bind(this)}src={this.state.photos[this.state.mainPhotoIndex].url}>
-            </img>
+            <div id='target'>
+              <img
+                onClick={this.toggleExpand.bind(this)} src={this.state.photos[this.state.mainPhotoIndex].url || 'https://www.phswarnerhoward.co.uk/assets/images/no_img_avaliable.jpg'}>
+              </img>
+            </div>
             {!this.state.zoomView &&
             <div>
               <span onClick={this.collapsedView}><AiOutlineClose id='expand-view-close'/></span>
@@ -206,7 +213,7 @@ class ImageCarousel extends React.Component {
           <img data-testid="main-image" id='main-image' onClick={this.expandedView} src={this.state.photos[this.state.mainPhotoIndex].url}></img>
           <Thumbnails
             photos={this.state.thumbnailSlice}
-            mainPhotoUrl={this.state.photos[this.state.mainPhotoIndex].thumbnail_url}
+            mainPhotoUrl={this.state.photos[this.state.mainPhotoIndex].thumbnail_url || 'https://www.phswarnerhoward.co.uk/assets/images/no_img_avaliable.jpg'}
             mainIndex={this.state.mainPhotoIndex}
             changePhoto={this.changeSelectedPhoto}/>
           {this.findImageId(this.state.thumbnailSlice[0].url) !== this.findImageId(this.state.photos[0].url) && <IoIosArrowUp

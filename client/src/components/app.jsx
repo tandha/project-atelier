@@ -24,16 +24,27 @@ class App extends React.Component {
       styles: {},
       myOutfits: [],
       currentProductInOutfit: false,
-      starRating: 0
+      starRating: 0,
+      defaultProductId: 64627
     };
-    this.productId = 64624;
   }
 
   componentDidMount() {
-    this.updateProduct(this.productId);
+    this.initializeProduct();
+  }
+
+  initializeProduct() {
+    let productID = this.state.defaultProductId;
+
+    if (window.location.search.length > 1) {
+      productID = window.location.search.substring(1);
+    }
+    window.history.pushState({}, '', productID);
+    this.updateProduct(productID);
   }
 
   updateProduct(id) {
+    window.history.pushState({}, '', id);
     Promise.all([this.getProduct(id), this.getStyles(id), this.getOutfits()])
       .then((res) => {
         this.setState({
@@ -41,7 +52,8 @@ class App extends React.Component {
           productIsFetched: true,
           stylesAreFetched: true,
           styles: res[1].data.data,
-          myOutfits: res[2]
+          myOutfits: res[2],
+          currentProductInOutfit: false
         });
       })
       .then((res) => {
@@ -93,7 +105,9 @@ class App extends React.Component {
 
   render() {
     if (!this.state.productIsFetched || !this.state.stylesAreFetched) {
-      return <div>Loading</div>;
+      return <div id='loading-img'>
+        <img src='https://thumbs.gfycat.com/GeneralUnpleasantApisdorsatalaboriosa-size_restricted.gif'></img>;
+      </div>;
     }
     return (
       <React.Fragment>
@@ -107,7 +121,7 @@ class App extends React.Component {
         <RelatedItemsOutfitCreationWithLogger
           product={this.state.product}
           myOutfits={this.state.myOutfits}
-          starRating={this.state.starRating}
+          starRating={<StarRating value={this.state.starRating}/>}
           toggleOutfit={this.toggleOutfit.bind(this)}
           updateProduct={this.updateProduct.bind(this)} />
 
