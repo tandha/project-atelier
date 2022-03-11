@@ -536,6 +536,9 @@ button, select, option{
   overscroll-behavior-block: auto;
 }
 
+.each-question {
+  margin-bottom: 1em;
+}
 
 .question-title, .answer-title {
   font-weight: 600;
@@ -553,7 +556,7 @@ button, select, option{
   margin-left: 0.5em;
 }
 
-.question-interaction{
+.question-interaction {
   width:auto;
   background: none;
   border: none;
