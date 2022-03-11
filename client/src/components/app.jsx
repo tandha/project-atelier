@@ -24,16 +24,27 @@ class App extends React.Component {
       styles: {},
       myOutfits: [],
       currentProductInOutfit: false,
-      starRating: 0
+      starRating: 0,
+      defaultProductId: 64627
     };
-    this.productId = 64624;
   }
 
   componentDidMount() {
-    this.updateProduct(this.productId);
+    this.initializeProduct();
+  }
+
+  initializeProduct() {
+    let productID = this.state.defaultProductId;
+
+    if (window.location.search.length > 1) {
+      productID = window.location.search.substring(1);
+    }
+    window.history.pushState({}, '', productID);
+    this.updateProduct(productID);
   }
 
   updateProduct(id) {
+    window.history.pushState({}, '', id);
     Promise.all([this.getProduct(id), this.getStyles(id), this.getOutfits()])
       .then((res) => {
         this.setState({
@@ -94,7 +105,9 @@ class App extends React.Component {
 
   render() {
     if (!this.state.productIsFetched || !this.state.stylesAreFetched) {
-      return <div>Loading</div>;
+      return <div id='loading-img'>
+        <img src='https://thumbs.gfycat.com/GeneralUnpleasantApisdorsatalaboriosa-size_restricted.gif'></img>;
+      </div>;
     }
     return (
       <React.Fragment>

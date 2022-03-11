@@ -14,6 +14,10 @@ body{
   max-width: 1200px;
 }
 
+#loading-img{
+  text-align: center;
+}
+
 .star-rating-container {
   display: inline-flex;
   align-items: center;
@@ -41,6 +45,10 @@ body{
 }
 button, select, option{
   color: #565756;
+}
+
+.widget-title {
+  font-size: 20px;
 }
 
 /******************** Product Overview ********************/
@@ -136,7 +144,8 @@ button, select, option{
 
 #image-gallery {
   display: block;
-  background-color: black;
+  background-image: url('https://www.phswarnerhoward.co.uk/assets/images/no_img_avaliable.jpg');
+  background-size: cover;
   height: 696px;
   position: relative;
   max-width: 696px;
@@ -261,6 +270,13 @@ button, select, option{
   z-index: 2;
 }
 
+#expanded-image-container img{
+  height: 100%;
+  object-fit: cover;
+  text-align: center;
+  width: 100%;
+}
+
 #zoom-image-container{
   cursor: url("https://img.icons8.com/material-outlined/24/000000/minus.png"), auto;
   position: relative;
@@ -269,13 +285,6 @@ button, select, option{
   overflow: hidden;
   width: 1200px;
   z-index: 2;
-}
-
-#expanded-image-container img{
-  height: 100%;
-  object-fit: cover;
-  text-align: center;
-  width: 100%;
 }
 
 #image-wrapper{
@@ -423,6 +432,7 @@ button, select, option{
   margin-top: 3em;
   margin-left: 7em;
 }
+
 #related-items-container, #my-outfits-container{
   margin: .5em, .5em, 0em, .5em;
   padding: .5em, .5em, 0em, .5em;
@@ -462,9 +472,9 @@ button, select, option{
   border: 1px solid #999;
   border-radius: 2px;
   display: inline-block;
-  height: 360px;
+  height: 375px;
   margin: 15px 15px 15px 0px;
-  width: 200px;
+  width: 220px;
   text-align: left;
   vertical-align: middle;
 }
@@ -495,13 +505,13 @@ button, select, option{
 
 
 /******************* Questions & Answers ******************/
-#QA-container{
+#QA-container {
   margin-left: 7em;
-  margin-right: 7em;
+  margin-right: 8em;
   margin-top: 3em;
 }
 
-.search-wrapper {
+#search-wrapper {
   position: relative;
   margin-top: 1em;
   margin-bottom: 1.5em;
@@ -512,6 +522,7 @@ button, select, option{
 #QA-search-bar {
   height: 50px;
   width: 90%;
+  opacity: .6;
   font-weight: bold;
   padding-left: 1em;
   border: none;
@@ -530,6 +541,9 @@ button, select, option{
   overscroll-behavior-block: auto;
 }
 
+.each-question {
+  margin-bottom: 1em;
+}
 
 .question-title, .answer-title {
   font-weight: 600;
@@ -547,7 +561,7 @@ button, select, option{
   margin-left: 0.5em;
 }
 
-.question-interaction,.question-helpful, .add-answer {
+.question-interaction {
   width:auto;
   background: none;
   border: none;
@@ -559,7 +573,7 @@ button, select, option{
   align-items: flex-end;
 }
 
-.question-helpful {
+.question-helpful, .add-answer {
   width:auto;
   background: none;
   border: none;
@@ -569,6 +583,7 @@ button, select, option{
   float: right;
   text-decoration: underline;
   align-items: flex-end;
+  cursor: pointer;
 }
 
 .question-helpful:disabled {
@@ -613,6 +628,7 @@ button, select, option{
   color: grey;
   display: inline;
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .answer-helpful:disabled, .answer-report:disabled {
@@ -628,8 +644,9 @@ button, select, option{
 
 .answer-photo {
   max-height: 100px;
-  max-width: 100px;
+  max-width: 150px;
   margin: 10px 10px 10px 10px;
+  cursor: pointer;
 }
 
 #answer-photo-modal {
@@ -663,7 +680,7 @@ button, select, option{
   font-size: 15px;
   font-weight: bold;
   margin-left: 2.2em;
-  /* margin-bottom: 1em; */
+  cursor: pointer;
 }
 
 .QA-form-head {
@@ -675,6 +692,7 @@ button, select, option{
   margin-bottom: 25px;
   margin-top: 25px;
   gap: 1em;
+  align-items: center;
 }
 
 #more-question-btn, #add-question-btn {
@@ -687,6 +705,12 @@ button, select, option{
   /* font-weight: bold; */
   padding: 0.75em;
   font-size: 1em;
+  cursor: pointer;
+}
+
+#more-question-btn:hover, #add-question-btn:hover {
+  background-color: black;
+  color: white;
 }
 
 #new-question-modal, #new-answer-modal {
@@ -732,19 +756,26 @@ button, select, option{
 }
 
 .QA-submit-btn {
+  border: 1px solid black;
   background: none;
-  border: 1.5px solid grey;
-  color:grey;
+  color: black;
   margin-top: 1em;
+  padding: 0.75em;
+  font-size: 1em;
+  cursor: pointer;
 }
 
+.QA-submit-btn:hover {
+  background-color: black;
+  color: white;
+}
 
 /********************* Ratings & Reviews *******************/
 
 #rr-title {
-  font-size: 16px;
+  font-size: 20px;
   margin-top: 5em;
-  margin-left: 7em;
+  margin-left: 6em;
 }
 
 #ratings-and-reviews {
@@ -752,6 +783,7 @@ button, select, option{
   font-size: 19px;
   justify-content: flex-start;
   margin-left: 6em;
+  margin-bottom: 3em;
 }
 
 #ratings-breakdown {
@@ -820,7 +852,18 @@ button, select, option{
 
 .star-bar-fill {
   height: 9px;
-  background-color: rgb(90, 90, 90);
+  background-color: rgb(37, 119, 75); /* rgb(90, 90, 90) */
+}
+
+.star-label:hover + .star-bar {
+  border: solid 1px black;
+  border-radius: 3px;
+}
+
+.star-bar:hover {
+  border: solid 1px black;
+  border-radius: 2px;
+  cursor: pointer;
 }
 
 #stars-filter {
@@ -886,8 +929,10 @@ button, select, option{
 }
 
 #review-list {
+  left: 300px;
   padding-left: 1em;
   width: 625px;
+  height: 1000px;
 }
 
 #reviews-sort-dropdown {
@@ -944,6 +989,15 @@ button, select, option{
   margin-bottom: 15px;
 }
 
+.review-tile-response {
+  background-color: rgb(238, 238, 238);
+  margin-bottom: 15px;
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 15px;
+  line-height: 25px;
+}
+
 .review-tile-helpful {
   font-size: 15px;
 }
@@ -977,12 +1031,13 @@ button, select, option{
 #review-photo-content {
   background-color: #fefefe;
   margin: 250px auto;
-  padding: 10px;
+  padding: 5px;
   border: 1px solid #888;
   width: fit-content;
   height: auto;
   font-size: 20px;
   text-align: center;
+  border-radius: 5px;
 }
 
 #review-photo-content img {
@@ -991,14 +1046,41 @@ button, select, option{
 }
 
 #review-photo-content button {
+  background: none;
+  border: 1.5px solid grey;
+  color: rgb(65, 65, 65);
+}
+
+#review-photo-content button:hover{
+  background-color: #000;
+  color: white;
   cursor: pointer;
 }
 
-#review-list-buttons {
-  display: flex;
-  justify-content: space-between;
+#review-list-buttons{
+  /* display: flex;
+  justify-content: space-between; */
+  display: inline-block;
   margin-bottom: 25px;
   margin-top: 25px;
+}
+
+#review-list-buttons button{
+  height: 50px;
+  width: auto;
+  border: 1px solid #565756;
+  border-radius: 1px;
+  background: none;
+  color: #565756;
+  padding: 0.75em;
+  margin-right: .5em;
+  font-size: 1em;
+}
+
+#review-list-buttons button:hover{
+  background-color: #000;
+  color: white;
+  cursor: pointer;
 }
 
 #new-review-modal {
@@ -1020,11 +1102,113 @@ button, select, option{
   border: 1px solid #888;
   width: 550px;
   height: auto;
-  font-size: 20px;
+  font-size: 15px;
+  border-radius: 5px;
 }
 
 #new-review-heading {
-  font-size: 25px;
+  font-size: 23px;
+}
+
+#new-review-stars {
+  cursor: pointer;
+  margin-top: 12px;
+}
+
+#star-block-1 {
+  position: absolute;
+  z-index: 3;
+  width: 18px;
+  height: 20px;
+  margin-right: 2px;
+  background-color: rgba(0, 0, 0, 0.001);
+}
+
+#star-block-2 {
+  position: absolute;
+  z-index: 3;
+  width: 18px;
+  height: 20px;
+  left: 20px;
+  margin-right: 2px;
+  background-color: rgba(0, 0, 0, 0.001);
+}
+
+#star-block-3 {
+  position: absolute;
+  z-index: 3;
+  width: 18px;
+  height: 20px;
+  left: 40px;
+  margin-right: 2px;
+  background-color: rgba(0, 0, 0, 0.001);
+}
+
+#star-block-4 {
+  position: absolute;
+  z-index: 3;
+  width: 18px;
+  height: 20px;
+  left: 60px;
+  margin-right: 2px;
+  background-color: rgba(0, 0, 0, 0.001);
+}
+
+#star-block-5 {
+  position: absolute;
+  z-index: 3;
+  width: 18px;
+  height: 20px;
+  left: 80px;
+  background-color: rgba(0, 0, 0, 0.001);
+}
+
+#new-review-star-text {
+  position: absolute;
+  display: inline;
+  margin-left: 10px;
+  font-size: 15px;
+  margin-top: 11px;
+}
+
+#new-review-recommended, #new-review-not-recommended {
+  cursor: pointer;
+}
+
+.new-review-chars-container {
+  width: 300px;
+}
+
+.selected-text {
+  display: flex;
+  justify-content: space-between;
+}
+
+.new-review-char-radios {
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.new-review-char-radios input {
+  cursor: pointer;
+}
+
+.new-review-char-nums {
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-left: 7px;
+  margin-right: 5px;
+}
+
+.new-review-char-meanings {
+  margin-top: 5px;
+  margin-left: 5px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
 }
 
 #new-review-photos-preview {
@@ -1043,4 +1227,17 @@ button, select, option{
 #new-review-buttons {
   display: flex;
   justify-content: space-between;
+}
+
+#new-review-buttons button{
+  background: none;
+  border: 1.5px solid grey;
+  color: rgb(65, 65, 65);
+  margin-top: 1em;
+}
+
+#new-review-buttons button:hover{
+  background-color: #000;
+  color: white;
+  cursor: pointer;
 }

@@ -94,16 +94,16 @@ class Tile extends React.Component {
           </span>
         </div>
 
-        <div className='review-tile-response'>{
+        <div id='review-respone'>{
           this.props.review.response
-            ? <span>this.props.review.response</span>
+            ? <div className='review-tile-response'><strong>Reponse from seller:</strong><br></br>{this.props.review.response}</div>
             : null
         }</div>
 
         <div className='review-tile-helpful'>
           <span>
             Helpful? <a className='review-tile-helpful-link'
-              onClick={this.onHelpfulClick}>Yes</a> ({this.state.helpfulness})
+              onClick={this.onHelpfulClick}>Yes</a> ({this.state.helpfulness})&nbsp;&nbsp;|&nbsp;&nbsp;<span className='review-tile-helpful-link'>Report</span>
           </span>
         </div>
 
@@ -114,7 +114,7 @@ class Tile extends React.Component {
             ? <div id='review-photo-modal'>
               <div id='review-photo-content'>
                 <img src={this.state.photoURL}></img><br></br>
-                <button onClick={this.closePhotoModal.bind(this)}>Close</button>
+                <button className='review-button' onClick={this.closePhotoModal.bind(this)}>Close</button>
               </div>
             </div>
             : null
@@ -127,7 +127,10 @@ class Tile extends React.Component {
 export default Tile;
 
 const renderDate = (string) => {
-  const date = new Date(string);
-  const render = new Intl.DateTimeFormat('en-GB', { dateStyle: 'long' }).format(date);
+  const isoString = new Date().toISOString();
+  const date = new Date(isoString);
+  const render = new Intl.DateTimeFormat('en-US', {
+    month: 'long', day: 'numeric', year: 'numeric'
+  }).format(date);
   return render;
 };

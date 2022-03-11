@@ -17,6 +17,12 @@ class Breakdown extends React.Component {
     this.getReviewMetaData();
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.productID !== this.props.productID) {
+      this.getReviewMetaData();
+    }
+  }
+
   getReviewMetaData() {
     axios({
       method: 'get',

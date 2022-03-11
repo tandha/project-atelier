@@ -12,8 +12,8 @@ class Cart extends React.Component {
       availableQuantities: [],
       selectedSize: 'TBD',
       selectedQuantity: 'TBD',
+      size: 'SELECT SIZE'
     };
-    this.size = 'SELECT SIZE';
   }
 
   componentDidMount() {
@@ -21,10 +21,11 @@ class Cart extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    // console.log(this.props.currentProductInOutfit); //should be false
     if (prevProps.selectedStyle !== this.props.selectedStyle) {
-      this.setAvailableSizes();
-      this.resetForm();
+      this.setState({size: 'SELECT SIZE'}, () => {
+        this.setAvailableSizes();
+        this.resetForm();
+      });
     }
   }
 
@@ -41,9 +42,10 @@ class Cart extends React.Component {
       }
     }
     if (sizes.length === 0) {
-      this.size = 'OUT OF STOCK';
+      this.setState({ size: 'OUT OF STOCK'});
     } else {
       this.setState({ availableSizes: sizes } );
+      document.getElementById('quantity').innerHTML = '-';
     }
   }
 
@@ -54,7 +56,7 @@ class Cart extends React.Component {
       if (skus[key].size === this.state.selectedSize) {
         for (var i = 1; i <= skus[key].quantity; i++) {
           if (i > 15) {
-            return this.setAvailableQuantities(quantities);
+            break;
           }
           quantities.push(i);
         }
@@ -63,7 +65,9 @@ class Cart extends React.Component {
     this.setAvailableQuantities(quantities);
     this.setState({ selectedQuantity: 1 });
 
-    let quantitySelectElement = document.getElementById('quantity').innerHTML = '1';
+    let quantitySelectElement = document.getElementById('quantity');
+    quantitySelectElement.innerHTML = '1';
+    return this.setAvailableQuantities(quantities);
   }
 
   setAvailableQuantities(quantities) {
@@ -72,7 +76,7 @@ class Cart extends React.Component {
 
   setSizeSelection(e) {
     let selectedSize = e.target.value;
-    this.setState( {selectedSize}, () => {
+    this.setState({ selectedSize }, () => {
       this.determineQuantityFromSelectedSize();
     });
   }
@@ -88,6 +92,7 @@ class Cart extends React.Component {
 
   cartHandler(e) {
     e.preventDefault();
+    document.getElementById('select-target');
     const skus = this.props.selectedStyle.skus;
     let quantity = this.state.selectedQuantity;
     let sku;
@@ -108,7 +113,6 @@ class Cart extends React.Component {
       .catch((err) => {
         console.log('Error posting cart to API', err);
       });
-    this.resetForm();
   }
 
   addToCart(sku, quantity) {
@@ -120,8 +124,8 @@ class Cart extends React.Component {
       <div id='cart'>
         <form id='cart-form' onSubmit={this.cartHandler.bind(this)}>
           <div data-testid='select-size' id='select-size'>
-            <select required onChange={this.setSizeSelection.bind(this)} >
-              <option id='size' value="">{this.size}</option>
+            <select id='select-target' required onChange={this.setSizeSelection.bind(this)} >
+              <option id='size' value="">{this.state.size}</option>
               {
                 this.state.availableSizes.map((size, i) => {
                   return <Option key={i} type={'size'} option={size}/>;
@@ -142,9 +146,9 @@ class Cart extends React.Component {
             </select>
           </div>
           {
-            this.size !== 'OUT OF STOCK' &&
+            this.state.size !== 'OUT OF STOCK' &&
             <div id='add-to-bag'>
-              <button>ADD TO BAG</button>
+              <button id='bag-button'>ADD TO BAG</button>
               <span> + </span>
             </div>
           }

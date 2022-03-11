@@ -15,7 +15,17 @@ class RelatedItemsAndMyOutfits extends React.Component {
   }
 
   componentDidMount() {
-    this.generateRelatedItemsData()
+    this.initializeWithData();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.product !== prevProps.product) {
+      this.initializeWithData();
+    }
+  }
+
+  initializeWithData() {
+    return this.generateRelatedItemsData()
       .then((res) => {
         this.setState({ relatedItemsData: res });
       })
@@ -117,9 +127,9 @@ class RelatedItemsAndMyOutfits extends React.Component {
   render() {
     return (
       <div id='related-items-and-my-outfits'>
-        <span>RELATED PRODUCTS</span>
+        <span className='widget-title'>RELATED PRODUCTS</span>
         <RelatedItems updateProduct={this.props.updateProduct} toggleOutfit={this.props.toggleOutfit} relatedItems={this.state.relatedItemsData} starRating={this.props.starRating}/>
-        <span>YOUR OUTFIT</span>
+        <span className='widget-title'>YOUR OUTFIT</span>
         <MyOutfits myOutfits={this.state.myOutfitsData} starRating={this.props.starRating} toggleOutfit={this.props.toggleOutfit}/>
       </div>
     );

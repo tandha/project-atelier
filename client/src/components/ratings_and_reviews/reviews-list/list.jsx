@@ -13,6 +13,7 @@ class List extends React.Component {
     this.state = {
       reviews: [],
       displayedReviews: [],
+      filteredLength: 0,
       listLength: 2,
       listMaxed: false,
       currentSort: 'relevant',
@@ -25,12 +26,15 @@ class List extends React.Component {
     this.getReviews(false);
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     if (this.state.currentFilter.length !== this.props.currentFilter.length) {
       let newFilter = this.props.currentFilter.slice();
       this.setState({ currentFilter: newFilter }, () => {
         this.updateDisplayedReviews(false);
       });
+    }
+    if (prevProps.productID !== this.props.productID) {
+      this.getReviews();
     }
   }
 
@@ -42,10 +46,13 @@ class List extends React.Component {
         'page': 1,
         'count': 100000,
         'sort': this.state.currentSort,
-        'product_id': this.props.productID
+        'product_id': this.props.productID // 65052
       }
     }).then((response) => {
-      this.setState({ reviews: response.data.data.results }, () => {
+      if (response.data.data.results.length >= 2) {
+        this.setState({ listMaxed: true, listLength: 2 });
+      }
+      this.setState({ reviews: response.data.data.results, listLength: 2 }, () => {
         this.updateDisplayedReviews(scroll);
       });
     })
@@ -59,6 +66,7 @@ class List extends React.Component {
     let reviews = this.state.reviews;
 
     if (currentFilter.length === 0) {
+      this.setState({ filteredLength: reviews.length });
       displayedReviews = reviews.slice(0, this.state.listLength);
       displayedReviews.length >= reviews.length ? listMaxed = true : listMaxed = false;
       if (scroll) {
@@ -72,8 +80,9 @@ class List extends React.Component {
           displayedReviews.push(review);
         }
       });
+      this.setState({ filteredLength: displayedReviews.length });
       displayedReviews = displayedReviews.slice(0, this.state.listLength);
-      displayedReviews.length >= reviews.length ? listMaxed = true : listMaxed = false;
+      this.state.listLength >= reviews.length ? listMaxed = true : listMaxed = false;
       if (scroll) {
         this.setState({ displayedReviews, listMaxed }, () => document.getElementById('review-list-buttons').scrollIntoView());
       } else {
@@ -87,8 +96,8 @@ class List extends React.Component {
   }
 
   updateLength(scroll) {
-    let newLength = this.state.listLength + 2;
-    this.setState({ listLength: newLength }, () => this.updateDisplayedReviews(scroll));
+    // let newLength = this.state.listLength + 2;
+    this.setState({ listLength: this.state.reviews.length }, () => this.updateDisplayedReviews(scroll));
   }
 
   displayModal() {
@@ -103,7 +112,7 @@ class List extends React.Component {
     return (
       <div id='review-list'>
         <Sort updateSort={this.updateSort.bind(this)}
-          numReviews={this.state.reviews.length}/>
+          numReviews={this.state.filteredLength}/>
 
         <div id='review-tiles'>
           {this.state.displayedReviews.map((review, index) => {

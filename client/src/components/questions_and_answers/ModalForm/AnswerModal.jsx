@@ -3,8 +3,6 @@ import axios from 'axios';
 import {IoIosCloseCircleOutline} from 'react-icons/io';
 // import config from '../../../../../.env';
 
-// const IMG_KEY = process.env.REACT_APP_IMG_KEY;
-
 const AnswerModal = (props) => {
   if (props.showAnswerModal === false) {
     return null;

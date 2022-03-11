@@ -15,23 +15,45 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.all('/*', (req, res) => {
-  axios({
-    headers: { 'Authorization': API_KEY },
-    baseURL: API_URL,
-    url: req.url,
-    method: req.method,
-    data: req.body
-  })
-    .then((apiResponse) => {
-      res.send({
-        data: apiResponse.data,
-        status: apiResponse.status
-      });
+
+  const apiPaths = ['/products', '/reviews', '/qa', '/cart', '/interactions'];
+  let isApiPath = apiPaths.some(apiPath => req.url.startsWith(apiPath));
+
+  if (isApiPath) {
+    axios({
+      headers: { 'Authorization': API_KEY },
+      baseURL: API_URL,
+      url: req.url,
+      method: req.method,
+      data: req.body
     })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).send('Something broke!');
-    });
+      .then((apiResponse) => {
+        res.send({
+          data: apiResponse.data,
+          status: apiResponse.status
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(err.response.status).send('API request error.');
+      });
+
+  } else {
+    axios({
+      headers: { 'Authorization': API_KEY },
+      baseURL: API_URL,
+      url: `/products${req.url}`,
+      method: req.method,
+    })
+      .then(() => {
+        let productID = req.url.substring(1);
+        res.redirect(`/?${productID}`);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.redirect('/');
+      });
+  }
 });
 
 app.listen(port, ()=> {
