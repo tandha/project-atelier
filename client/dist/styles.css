@@ -47,6 +47,10 @@ button, select, option{
   color: #565756;
 }
 
+.widget-title {
+  font-size: 20px;
+}
+
 /******************** Product Overview ********************/
 #overview-container {
   display: inline-grid;
@@ -428,6 +432,7 @@ button, select, option{
   margin-top: 3em;
   margin-left: 7em;
 }
+
 #related-items-container, #my-outfits-container{
   margin: .5em, .5em, 0em, .5em;
   padding: .5em, .5em, 0em, .5em;
@@ -500,13 +505,13 @@ button, select, option{
 
 
 /******************* Questions & Answers ******************/
-#QA-container{
+#QA-container {
   margin-left: 7em;
-  margin-right: 7em;
+  margin-right: 8em;
   margin-top: 3em;
 }
 
-.search-wrapper {
+#search-wrapper {
   position: relative;
   margin-top: 1em;
   margin-bottom: 1.5em;
@@ -536,6 +541,9 @@ button, select, option{
   overscroll-behavior-block: auto;
 }
 
+.each-question {
+  margin-bottom: 1em;
+}
 
 .question-title, .answer-title {
   font-weight: 600;
@@ -553,7 +561,7 @@ button, select, option{
   margin-left: 0.5em;
 }
 
-.question-interaction,.question-helpful, .add-answer {
+.question-interaction {
   width:auto;
   background: none;
   border: none;
@@ -565,7 +573,7 @@ button, select, option{
   align-items: flex-end;
 }
 
-.question-helpful {
+.question-helpful, .add-answer {
   width:auto;
   background: none;
   border: none;
@@ -575,6 +583,7 @@ button, select, option{
   float: right;
   text-decoration: underline;
   align-items: flex-end;
+  cursor: pointer;
 }
 
 .question-helpful:disabled {
@@ -619,6 +628,7 @@ button, select, option{
   color: grey;
   display: inline;
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .answer-helpful:disabled, .answer-report:disabled {
@@ -634,8 +644,9 @@ button, select, option{
 
 .answer-photo {
   max-height: 100px;
-  max-width: 100px;
+  max-width: 150px;
   margin: 10px 10px 10px 10px;
+  cursor: pointer;
 }
 
 #answer-photo-modal {
@@ -669,7 +680,7 @@ button, select, option{
   font-size: 15px;
   font-weight: bold;
   margin-left: 2.2em;
-  /* margin-bottom: 1em; */
+  cursor: pointer;
 }
 
 .QA-form-head {
@@ -681,6 +692,7 @@ button, select, option{
   margin-bottom: 25px;
   margin-top: 25px;
   gap: 1em;
+  align-items: center;
 }
 
 #more-question-btn, #add-question-btn {
@@ -693,6 +705,12 @@ button, select, option{
   /* font-weight: bold; */
   padding: 0.75em;
   font-size: 1em;
+  cursor: pointer;
+}
+
+#more-question-btn:hover, #add-question-btn:hover {
+  background-color: black;
+  color: white;
 }
 
 #new-question-modal, #new-answer-modal {
@@ -738,12 +756,19 @@ button, select, option{
 }
 
 .QA-submit-btn {
+  border: 1px solid black;
   background: none;
-  border: 1.5px solid grey;
-  color:grey;
+  color: black;
   margin-top: 1em;
+  padding: 0.75em;
+  font-size: 1em;
+  cursor: pointer;
 }
 
+.QA-submit-btn:hover {
+  background-color: black;
+  color: white;
+}
 
 /********************* Ratings & Reviews *******************/
 
