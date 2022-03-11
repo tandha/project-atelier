@@ -1258,7 +1258,8 @@ button, select, option{
 .dark-mode-app,
 .dark-mode-app .star-rating-overlay,
 .dark-mode-app #review-list-buttons button,
-#review-list-sort select{
+.dark-mode-app #review-list-sort select,
+.dark-mode-app .review-tile-response{
   background-color: #212922 !important;
 }
 
@@ -1275,7 +1276,8 @@ button, select, option{
 .dark-mode-app .answer-report,
 .dark-mode-app .add-answer,
 .dark-mode-app #reviews-sort-dropdown,
-.dark-mode-app span{
+.dark-mode-app span,
+.dark-mode-app .review-tile-response{
   color: white !important;
 }
 
