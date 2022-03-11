@@ -98,6 +98,7 @@ class Cart extends React.Component {
     let sku;
     for (let key in skus) {
       if (skus[key].size === this.state.selectedSize) {
+        console.log('You have added sku: ' + key + ' to your cart');
         sku = key;
       }
     }
