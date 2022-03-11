@@ -6,11 +6,19 @@ const axios = require('axios');
 const cors = require('cors');
 const port = 3000;
 const { API_URL, API_KEY } = require('./config.js');
+const compression = require('compression');
 
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../client/dist')));
+app.use(compression());
+
+app.get('*.js', function (req, res, next) {
+  req.url = req.url + '.gz';
+  res.set('Content-Encoding', 'gzip');
+  next();
+});
 
 app.all('/*', (req, res) => {
 

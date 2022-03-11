@@ -36,6 +36,7 @@ config.js
 .vscode
 .env
 package-lock.json
+bundle.js.gz
 
 # Floobits
 .floo
