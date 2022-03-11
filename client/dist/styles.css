@@ -47,6 +47,10 @@ button, select, option{
   color: #565756;
 }
 
+.widget-title {
+  font-size: 20px;
+}
+
 /******************** Product Overview ********************/
 #overview-container {
   display: inline-grid;
@@ -428,6 +432,7 @@ button, select, option{
   margin-top: 3em;
   margin-left: 7em;
 }
+
 #related-items-container, #my-outfits-container{
   margin: .5em, .5em, 0em, .5em;
   padding: .5em, .5em, 0em, .5em;
@@ -500,9 +505,9 @@ button, select, option{
 
 
 /******************* Questions & Answers ******************/
-#QA-container{
+#QA-container {
   margin-left: 7em;
-  margin-right: 7em;
+  margin-right: 8em;
   margin-top: 3em;
 }
 
@@ -675,7 +680,6 @@ button, select, option{
   font-size: 15px;
   font-weight: bold;
   margin-left: 2.2em;
-  /* margin-bottom: 1em; */
   cursor: pointer;
 }
 

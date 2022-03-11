@@ -109,7 +109,7 @@ class QuestionsAndAnswers extends React.Component {
   render() {
     return (
       <div id='QA-container'>
-        <p>QUESTIONS & ANSWERS</p>
+        <p className='widget-title'>QUESTIONS & ANSWERS</p>
         <SearchBar handleSearchBar={this.handleSearchBar}/>
         <QuestionList
           questions = {this.state.questions}
