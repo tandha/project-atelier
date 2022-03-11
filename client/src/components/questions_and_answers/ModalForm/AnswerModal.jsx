@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import {IoIosCloseCircleOutline} from 'react-icons/io';
-// import config from '../../../../../.env';
+// import config from '../../../../../server/config.js';
 
 const AnswerModal = (props) => {
   if (props.showAnswerModal === false) {
