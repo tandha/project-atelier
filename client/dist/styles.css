@@ -301,6 +301,12 @@ button, select, option{
   margin: .75em .75em .75em 0em;
 }
 
+#toggle-mode svg{
+  float: right;
+  height: 3em;
+  margin-left: 2em;
+  width: 3em;
+}
 #reviews{
   font-size: 15px;
   color: grey;
@@ -1215,4 +1221,29 @@ button, select, option{
   background-color: #000;
   color: white;
   cursor: pointer;
+}
+
+
+/********************* Dark Mode *******************/
+
+.dark-mode-app, .dark-mode-app .star-rating-overlay{
+  background-color: #4c5052 !important;
+  border-color: white;
+  color: white !important;
+}
+
+.dark-mode.app .star-rating-star,
+.dark-mode.app .star-rating-container,
+.dark-mode.app #product-category,
+.dark-mode.app #reviews,
+.dark-mode.app #price,
+.dark-mode.app #selected-style-name{
+  color: white;
+}
+.dark-mode.app #style-checkmark{
+  color: #4c5052;
+}
+
+.dark-mode.app .style-thumbnail-image{
+  border: 1px solid white;
 }
