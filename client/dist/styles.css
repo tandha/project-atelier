@@ -1274,7 +1274,8 @@ button, select, option{
 .dark-mode-app .question-helpful,
 .dark-mode-app .answer-report,
 .dark-mode-app .add-answer,
-.dark-mode-app #reviews-sort-dropdown{
+.dark-mode-app #reviews-sort-dropdown,
+.dark-mode-app span{
   color: white !important;
 }
 
