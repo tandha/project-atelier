@@ -36,10 +36,10 @@ const StarList = (props) => {
           {percentages.map((percent, index) => {
             let num = index + 1;
             return (
-              <div className='star-row' key={index}>
-                <div className='star-label' id={num + '-star-bar'} onClick={onStarClick}>{num} stars</div>
-                <div className='star-bar' id={`${num.toString()}-star-bar`}>
-                  <div className='star-bar-fill' style={{width: percent}}></div>
+              <div className='star-row' id={num + '-star-row-1'} key={index} onClick={onStarClick}>
+                <div className='star-label' id={num + '-star-row-2'}>{num} stars</div>
+                <div className='star-bar' id={num + '-star-row-3'}>
+                  <div className='star-bar-fill' id={num + '-star-row-4'} style={{width: percent}}></div>
                 </div>
               </div>
             );
@@ -60,7 +60,7 @@ const StarList = (props) => {
 
         {
           props.currentFilter.length > 0
-            ? <span onClick={onStarClick} id='0-star-bar' className='remove-filter'>Remove</span>
+            ? <span onClick={onStarClick} id='0-star-bar' className='remove-filter'>Remove all filters</span>
             : <span></span>
         }
       </div>
