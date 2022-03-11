@@ -42,6 +42,7 @@ class Cart extends React.Component {
       }
     }
     if (sizes.length === 0) {
+      document.getElementById('select-target').options.length = 1;
       this.setState({ size: 'OUT OF STOCK'});
     } else {
       this.setState({ availableSizes: sizes } );
