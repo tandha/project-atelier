@@ -14,6 +14,10 @@ body{
   max-width: 1200px;
 }
 
+#loading-img{
+  text-align: center;
+}
+
 .star-rating-container {
   display: inline-flex;
   align-items: center;
@@ -513,6 +517,7 @@ button, select, option{
 #QA-search-bar {
   height: 50px;
   width: 90%;
+  opacity: .6;
   font-weight: bold;
   padding-left: 1em;
   border: none;
