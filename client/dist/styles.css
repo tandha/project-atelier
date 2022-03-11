@@ -309,7 +309,7 @@ button, select, option{
 }
 #reviews{
   font-size: 15px;
-  color: grey;
+  color: #888;
   text-decoration: underline;
 }
 
@@ -699,6 +699,10 @@ button, select, option{
   /* font-weight: bold; */
   padding: 0.75em;
   font-size: 1em;
+}
+#QA-buttons button:hover{
+  background-color: black;
+  color: white;
 }
 
 #new-question-modal, #new-answer-modal {
@@ -1226,24 +1230,61 @@ button, select, option{
 
 /********************* Dark Mode *******************/
 
-.dark-mode-app, .dark-mode-app .star-rating-overlay{
-  background-color: #4c5052 !important;
-  border-color: white;
+.dark-mode-app,
+.dark-mode-app .star-rating-overlay,
+.dark-mode-app #review-list-buttons button,
+#review-list-sort select{
+  background-color: #212922 !important;
+}
+
+.dark-mode-app .star-rating-star,
+.dark-mode-app .star-rating-container,
+.dark-mode-app #product-category,
+.dark-mode-app #reviews,
+.dark-mode-app #price,
+.dark-mode-app #selected-style-name,
+.dark-mode-app h1,
+.dark-mode-app div,
+.dark-mode-app .answer-helpful,
+.dark-mode-app .question-helpful,
+.dark-mode-app .answer-report,
+.dark-mode-app .add-answer,
+.dark-mode-app #reviews-sort-dropdown{
   color: white !important;
 }
 
-.dark-mode.app .star-rating-star,
-.dark-mode.app .star-rating-container,
-.dark-mode.app #product-category,
-.dark-mode.app #reviews,
-.dark-mode.app #price,
-.dark-mode.app #selected-style-name{
-  color: white;
+/* .dark-mode-app #add-to-my-outfit{
+  color: #212922 !important;
+} */
+
+.dark-mode-app #outfit-star-outline,
+.dark-mode-app #outfit-star,
+.dark-mode-app #style-checkmark{
+  color: #212922 !important;
 }
-.dark-mode.app #style-checkmark{
-  color: #4c5052;
+
+.dar-mode-app #AQ-search-bar,
+.dark-mode-app #more-question-btn,
+.dark-mode-app #add-question-btn,
+.dark-mode-app #review-list-buttons button{
+  background-color: white !important;
 }
+
+.dark-mode-app #review-list-buttons button:hover{
+  background-color: black !important;
+  color: white !important;
+}
+
+.dark-mode-app #QA-buttons button:hover{
+  background-color: black !important;
+  color: white !important;
+}
+/* .dark-mode-app #add-question-button:hover */
 
 .dark-mode.app .style-thumbnail-image{
   border: 1px solid white;
+}
+
+.dark-mode.app #reviews{
+  color: lightskyblue;
 }

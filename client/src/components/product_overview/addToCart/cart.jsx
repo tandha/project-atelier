@@ -155,8 +155,8 @@ class Cart extends React.Component {
           <div id='add-to-myoutfit'>
             {
               this.props.currentProductInOutfit === false ?
-                <span onClick={this.handleAddToMyOutfit.bind(this)}><IoIosStarOutline /></span> :
-                <span onClick={this.handleAddToMyOutfit.bind(this)}><IoIosStar /></span>
+                <span onClick={this.handleAddToMyOutfit.bind(this)}><IoIosStarOutline id='outfit-star-outline'/></span> :
+                <span onClick={this.handleAddToMyOutfit.bind(this)}><IoIosStar id='outfit-star'/></span>
             }
           </div>
         </form>

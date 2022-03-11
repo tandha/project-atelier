@@ -2,7 +2,9 @@ import React from 'react';
 import { BsToggleOff, BsToggleOn } from 'react-icons/bs';
 
 const Information = (props) => {
+  //use a hook? right now toggle isn't conditionally rendering
   let darkMode = false;
+
   const toggleMode = () => {
     const app = document.getElementById('app');
     darkMode = !darkMode;
