@@ -7,7 +7,7 @@ const StyleThumbnail = (props) => {
       {
         props.styles.results.map((style, i) => {
           return <div data-testid='thumbnail' key={`thumbnail-${i}`} className='style-thumbnail-container'>
-            <img className='style-thumbnail-image' onClick={props.changeStyle} key={i} id={style.style_id} src={style.photos[0].thumbnail_url || 'https://www.phswarnerhoward.co.uk/assets/images/no_img_avaliable.jpg'}></img>
+            <img className='style-thumbnail-image' onClick={props.changeStyle} key={i} id={style.style_id} src={style.photos[0].thumbnail_url || 'https://www.phswarnerhoward.co.uk/assets/images/no_img_avaliable.jpg'} alt='style'></img>
             {props.selectedStyle.style_id === style.style_id && <IoMdCheckmark id='style-checkmark' />}
           </div>;
         })

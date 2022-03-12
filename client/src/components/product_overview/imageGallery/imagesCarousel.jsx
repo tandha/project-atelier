@@ -210,7 +210,7 @@ class ImageCarousel extends React.Component {
           <BsArrowRightCircleFill
             id='image-gallery-right-arrow'
             onClick={this.handleRightArrow} />}
-          <img data-testid="main-image" id='main-image' onClick={this.expandedView} src={this.state.photos[this.state.mainPhotoIndex].url}></img>
+          <img data-testid="main-image" id='main-image' onClick={this.expandedView} src={this.state.photos[this.state.mainPhotoIndex].url} alt='main-img'></img>
           <Thumbnails
             photos={this.state.thumbnailSlice}
             mainPhotoUrl={this.state.photos[this.state.mainPhotoIndex].thumbnail_url || 'https://www.phswarnerhoward.co.uk/assets/images/no_img_avaliable.jpg'}

@@ -12,7 +12,7 @@ const RelatedItem = (props) => {
     <div onClick={handleClick.bind(this)} className='related-item-container'>
       <span className='related-item-outfit-toggle-button'><IoIosStarOutline /></span>
       <div className='related-item-image'>
-        <img src={props.relatedItem.image || 'https://www.phswarnerhoward.co.uk/assets/images/no_img_avaliable.jpg'}></img>
+        <img src={props.relatedItem.image || 'https://www.phswarnerhoward.co.uk/assets/images/no_img_avaliable.jpg'} alt='related-items'></img>
       </div>
       <div className='related-items-details'>
         <span className='related-item-category'>{props.relatedItem.category}</span>
