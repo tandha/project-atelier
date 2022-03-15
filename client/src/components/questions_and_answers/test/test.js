@@ -82,7 +82,7 @@ describe('Q&A render tests', () => {
     const answerArray = Object.values(props.questions[1].answers);
     render(<Answer answer={answerArray[0]}/>);
     const container = document.querySelector('.each-answer');
-    const helpfulBtn = screen.getByAllTestId('answer-help')[0];
+    const helpfulBtn = screen.getAllByTestId('answer-help')[0];
     const reportBtn = screen.getAllByText('Report')[0];
     expect(container).toBeInTheDocument();
     expect(helpfulBtn).toBeInTheDocument();
