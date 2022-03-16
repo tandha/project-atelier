@@ -32,3 +32,7 @@
 From within the root directory:
 - install node package manager (if needed)
 - run `npm install`
+- add a .env file to the root of the project
+- to the .env add the following keys: API_URL=atelier-project-endpoint , API_KEY=github-key , IMG_KEY=key-from-IMGBB
+- run `npm run build` to build bundle.js
+- run `npm start` to start server
