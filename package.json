@@ -32,6 +32,7 @@
     "jest": "^27.5.0",
     "nodemon": "^2.0.15",
     "path": "^0.12.7",
+    "pre-commit": "^1.2.2",
     "react-icons": "^4.3.1",
     "react-test-renderer": "^17.0.2",
     "webpack": "^5.68.0"
