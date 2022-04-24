@@ -16,6 +16,7 @@ class RelatedItemsAndMyOutfits extends React.Component {
 
   componentDidMount() {
     this.initializeWithData();
+    console.log('product id is: ', this.props.product.id);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -74,6 +75,7 @@ class RelatedItemsAndMyOutfits extends React.Component {
         product.sale = results.sale_price;
         product.price = results.original_price;
         product.image = results.photos[0].thumbnail_url;
+        console.log('product out of getStyleInfo: ', product);
         return product;
       })
       .catch((err) => {
