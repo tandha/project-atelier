@@ -72,6 +72,7 @@ class RelatedItemsAndMyOutfits extends React.Component {
       url: 'products/' + product.id + '/styles',
     })
       .then((res) => {
+        console.log('res inside getStyleInfo: ', res);
         let results = res.data.data.results[0];
         product.sale = results.sale_price;
         product.price = results.original_price;
