@@ -53,10 +53,12 @@ class RelatedItemsAndMyOutfits extends React.Component {
       url: 'products/' + id
     })
       .then((res) => {
+        console.log('res in getProductInfo is: ', res);
         let item = {};
         item.id = id;
         item.name = res.data.data.name;
         item.category = res.data.data.category;
+        console.log('item in getProductInfo is: ', item);
         return item;
       })
       .catch((err) => {
@@ -74,6 +76,7 @@ class RelatedItemsAndMyOutfits extends React.Component {
         product.sale = results.sale_price;
         product.price = results.original_price;
         product.image = results.photos[0].thumbnail_url;
+        console.log('product out of getStyleInfo: ', product);
         return product;
       })
       .catch((err) => {
