@@ -28,6 +28,8 @@ class RelatedItemsAndMyOutfits extends React.Component {
     return this.generateRelatedItemsData()
       .then((res) => {
         this.setState({ relatedItemsData: res });
+        console.log('relatedItemsData inside initializWithData is: ', res);
+        console.log('this.state.relatedItemsData is: ', this.state.relatedItemsData);
       })
       .then((res) => {
         return this.generateMyOufitsData();
@@ -73,16 +75,28 @@ class RelatedItemsAndMyOutfits extends React.Component {
     })
       .then((res) => {
         console.log('res inside getStyleInfo: ', res);
+        console.log('product coming into getStyleInfo: ', product);
         let results = res.data.data.results[0];
-        product.sale = results.sale_price;
-        product.price = results.original_price;
-        product.image = results.photos[0].thumbnail_url;
-        console.log('product out of getStyleInfo: ', product);
+        console.log('results inside getStyleInfo is: ', results);
+        if (results === undefined) {
+          product.sale = null;
+          product.price = '0';
+          product.image = 'https://www.phswarnerhoward.co.uk/assets/images/no_img_avaliable.jpg';
+        } else {
+          product.sale = results.sale_price === undefined ? null : results.sale_price;
+          product.price = results.original_price === undefined ? '0' : results.original_price;
+          if (results.photos[0] === undefined) {
+            product.image = 'https://www.phswarnerhoward.co.uk/assets/images/no_img_avaliable.jpg';
+          } else {
+            product.image = results.photos[0].thumbnail_url === undefined ? 'https://www.phswarnerhoward.co.uk/assets/images/no_img_avaliable.jpg' : results.photos[0].thumbnail_url;
+          }
+        }
         return product;
       })
       .catch((err) => {
         console.log('Error Getting Style Info', err);
       });
+    console.log('product out of getStyleInfo: ', product);
     return product;
   }
 
@@ -97,17 +111,21 @@ class RelatedItemsAndMyOutfits extends React.Component {
   addStyleInfo(products) {
     let relatedItemsPromises = products.map((product) => {
       let styleInfoAdded = this.getStyleInfo(product);
+      console.log('styleInfoAdded inside addStyleInfo: ', styleInfoAdded);
       return styleInfoAdded;
     });
+    console.log('relatedItemsPromises inside addStyleInfo is: ', relatedItemsPromises);
     return Promise.all(relatedItemsPromises);
   }
 
   generateRelatedItemsData() {
     return this.getRelatedItems()
       .then((res) => {
-        return this.addProductInfo(res.data.data);
+        console.log('related items are: ', res);
+        return this.addProductInfo(res.data.data); // check here
       })
       .then((res) => {
+        console.log('res inside generateRelatedItemsData is: ', res);
         return this.addStyleInfo(res);
       })
       .catch((err) => {
@@ -129,6 +147,7 @@ class RelatedItemsAndMyOutfits extends React.Component {
   }
 
   render() {
+    console.log('this.props.relatedItemsData is: ', this.state.relatedItemsData);
     return (
       <div id='related-items-and-my-outfits'>
         <span className='widget-title'>RELATED PRODUCTS</span>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { IoIosStarOutline, IoIosStar} from 'react-icons/io';
+import { IoIosStarOutline, IoIosStar } from 'react-icons/io';
 
 const RelatedItem = (props) => {
 
@@ -7,6 +7,8 @@ const RelatedItem = (props) => {
     let productId = props.relatedItem.id;
     props.updateProduct(productId);
   };
+
+  console.log('props in RelatedItem.jsx is: ', props);
 
   return (
     <div onClick={handleClick.bind(this)} className='related-item-container'>

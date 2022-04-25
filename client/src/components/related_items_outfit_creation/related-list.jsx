@@ -2,7 +2,7 @@ import React from 'react';
 import RelatedItem from './relatedItem.jsx';
 
 const RelatedItems = (props) => {
-
+  console.log('props inside RelatedItems: ', props);
   return (
     <div id='related-items-container'>
       {props.relatedItems.map((item, i) => {
